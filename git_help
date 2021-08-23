@@ -1,0 +1,39 @@
+# clone repository locally
+# when you clone repo, complete mirror of remote repo is saved locally
+git clone https://kudinovfedor@bitbucket.org/kudinovfedor/python-core-training.git
+
+# update repository from remote
+# sometimes you need to update local mirror from remote to be in sync
+git fetch
+
+# show all branches
+git branch
+
+# create new branch based on other branch
+git checkout -b <new_branch_name> <base_branch_name>
+
+# switch to another branch 
+git checkout <branch_name>
+
+# update current branch from remote branch with same name
+# get commits from remote branch, which are not present localy in current branch
+git pull
+
+# update current branch from specific remote branch
+# get commits from remote branch, which are not present localy in current branch
+git pull origin <branch_name>
+
+# after applied changes, check what files are changed
+git status
+
+# add specific file to be commited
+git add <file_path>
+
+# add all changed files to be commited
+git add .
+
+# commit files
+git commit -m "<commit_message>"
+
+# push changes to remote
+git push origin <current_branch_name>
