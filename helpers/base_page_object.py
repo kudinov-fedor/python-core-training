@@ -15,6 +15,7 @@ class BaseElement:
         return WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
 
     def get_elements(self, by_locator) -> List[WebElement]:
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(by_locator))
         return self.driver.find_elements(*by_locator)
 
     def get_element_text(self, by_locator):
@@ -31,7 +32,7 @@ class BaseElement:
 
 
 class BasePage(BaseElement):
-    host = "https://en.wikipedia.org/"
+    host = None
     url = None
     title = None
 

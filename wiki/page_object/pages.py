@@ -1,7 +1,12 @@
+from typing import List
+
 from selenium.webdriver.common.by import By
 
-from ui_testing.page_object.base_element import BaseElement
-from ui_testing.page_object.base_page import BasePage
+from helpers.base_page_object import BaseElement, BasePage as _BasePage
+
+
+class BasePage(_BasePage):
+    host = "https://en.wikipedia.org/"
 
 
 class MainPage(BasePage):

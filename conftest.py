@@ -1,6 +1,6 @@
 import pytest
 
-from ui_testing.selenium_helpers.session import create_session
+from helpers.session import create_session
 
 
 @pytest.fixture(scope="session")
