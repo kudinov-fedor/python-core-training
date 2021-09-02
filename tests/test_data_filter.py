@@ -1,5 +1,4 @@
 import pytest
-import time
 
 from selenium.webdriver.remote.webdriver import WebDriver, By
 
