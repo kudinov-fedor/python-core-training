@@ -1,6 +1,3 @@
-
-import time
-
 from selenium.webdriver.remote.webdriver import WebDriver, By
 from selenium.webdriver import ActionChains as AC
 from selenium.webdriver.common.keys import Keys

@@ -35,7 +35,6 @@ def test_drag_and_drop(session: WebDriver):
 
 
 def test_drag_and_drop_jquery(session: WebDriver):
-    from helpers.utills import wait_element
 
     session.get("https://jqueryui.com/draggable")
     session.switch_to.frame(0)
