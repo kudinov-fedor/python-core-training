@@ -1,5 +1,5 @@
 from selenium.webdriver.remote.webdriver import WebDriver, By
-import time
+
 
 def test_simple_form(session: WebDriver):
 

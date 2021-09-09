@@ -1,10 +1,4 @@
-import pytest
-import time
-
 from selenium.webdriver.remote.webdriver import WebDriver, WebElement, By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import TimeoutException
 
 
 class DatePickerBootstrap:
@@ -27,32 +21,32 @@ class DatePickerBootstrap:
 
     # interaction with active panel
 
-    def get_active(self) -> WebElement:
+    def get_active_panel(self) -> WebElement:
         for active_element in self.driver.find_elements(*self.pannels):
             if active_element.value_of_css_property("display") == "block":
                 return active_element
         raise AssertionError("No active element found")
 
     def up(self):
-        self.get_active().find_element(By.CSS_SELECTOR, ".datepicker-switch").click()
+        self.get_active_panel().find_element(By.CSS_SELECTOR, ".datepicker-switch").click()
 
     def left(self):
-        self.get_active().find_element(By.CSS_SELECTOR, "th.prev").click()
+        self.get_active_panel().find_element(By.CSS_SELECTOR, "th.prev").click()
 
     def right(self):
-        self.get_active().find_element(By.CSS_SELECTOR, "th.prev").click()
+        self.get_active_panel().find_element(By.CSS_SELECTOR, "th.prev").click()
 
     def get_header(self) -> str:
-        return self.get_active().find_element(By.CSS_SELECTOR, ".datepicker-switch").text
+        return self.get_active_panel().find_element(By.CSS_SELECTOR, ".datepicker-switch").text
 
     def today(self):
-        self.get_active().find_element(By.CSS_SELECTOR, ".today").click()
+        self.get_active_panel().find_element(By.CSS_SELECTOR, ".today").click()
 
     def clear(self):
-        self.get_active().find_element(By.CSS_SELECTOR, ".clear").click()
+        self.get_active_panel().find_element(By.CSS_SELECTOR, ".clear").click()
 
     def get_rows(self):
-        return self.get_active().find_elements(By.CSS_SELECTOR, "table.table-condensed tbody tr")
+        return self.get_active_panel().find_elements(By.CSS_SELECTOR, "table.table-condensed tbody tr")
 
     def get_cells(self, *, value: str = None, class_name: str = ""):
         from itertools import chain
