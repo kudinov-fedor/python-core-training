@@ -14,8 +14,7 @@ def test_simple_dialog(session: WebDriver):
     simple_script = SHOW_AND_HIDE_SCRIPT.format(script="waitingDialog.show();", timeout=2)
     session.execute_script(simple_script)
 
-    assert WebDriverWait(session, 1).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".modal.fade.in")))
+    assert WebDriverWait(session, 2).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".modal.fade.in")))
     time.sleep(1)
     assert session.find_elements(By.CSS_SELECTOR, ".modal.fade.in")
-    time.sleep(1)
-    assert not session.find_elements(By.CSS_SELECTOR, ".modal.fade.in")
+    assert WebDriverWait(session, 2).until(EC.invisibility_of_element_located((By.CSS_SELECTOR, ".modal.fade.in")))
