@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver
 from selenium.webdriver import ActionChains as AC
 from selenium.webdriver.support import expected_conditions as EC
@@ -73,3 +75,40 @@ def execute_script(web_driver, script_name=None, css="", value=""):
     }
     script = scripts[script_name]
     web_driver.execute_script(script)
+
+
+def retry(times: int = 1, exceptions=Exception, timeout: int = 0):
+    """
+    Retry Decorator
+    Retries the wrapped function/method `times` times if the exceptions listed
+    in ``exceptions`` are thrown
+    :param times: The number of times to repeat the wrapped function/method
+    :type times: Int
+    :param exceptions: Lists of exceptions that trigger a retry attempt
+    :type exceptions: Tuple of Exceptions
+    :param timeout: Timeout beetween retries
+    :type timeout: Int
+    """
+    def decorator(func):
+        def newfn(*args, **kwargs):
+            attempt = 0
+            while attempt < times:
+                try:
+                    return func(*args, **kwargs)
+                except exceptions:
+                    print(
+                        'Exception thrown when attempting to run %s, attempt '
+                        '%d of %d' % (func, attempt, times)
+                    )
+                    attempt += 1
+                    time.sleep(timeout)
+            return func(*args, **kwargs)
+        return newfn
+    return decorator
+
+
+# read file with retries
+@retry(5, FileNotFoundError, timeout=1)
+def read_file(path, **kwargs):
+    with open(path, **kwargs) as file:
+        return file.read()
