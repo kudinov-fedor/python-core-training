@@ -44,8 +44,7 @@ class ApiClient:
 
     def create_list(self, *, name, board_id):
         res = self.client.post(self.host + "/1/lists".format(board_id),
-                               json={"boardId": board_id,
-                                     "name": name})
+                               json={"idBoard": board_id, "name": name})
         res.raise_for_status()
         return res.json()
 
@@ -71,6 +70,11 @@ class ApiClient:
 
     def get_card(self, card_id):
         res = self.client.get(self.host + "/1/cards/{}".format(card_id))
+        res.raise_for_status()
+        return res.json()
+
+    def create_card(self, *, name, list_id):
+        res = self.client.post(self.host + "/1/cards", json={"name": name, "idList": list_id})
         res.raise_for_status()
         return res.json()
 
