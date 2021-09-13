@@ -1,11 +1,8 @@
-import time
 import os
 
 from selenium.webdriver.remote.webdriver import WebDriver, By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import WebDriverWait
 
-from helpers.utills import read_file
+from selenium_testing.helpers.utills import read_file
 
 
 VALUE = "abcd\n12345"

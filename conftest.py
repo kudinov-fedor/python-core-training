@@ -1,15 +1,6 @@
 import pytest
 import os
 
-from helpers.session import create_session
-
-
-@pytest.fixture(scope="session")
-def session():
-    session = create_session()
-    yield session
-    session.close()
-
 
 @pytest.fixture(scope="session")
 def tmp_dir():

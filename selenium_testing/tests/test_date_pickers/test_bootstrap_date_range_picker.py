@@ -1,7 +1,5 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from selenium_tests.test_date_pickers.helpers import FromDatePickerBootstrap, ToDatePickerBootstrap
-
 
 def test_date_range_picker(session: WebDriver):
     """
