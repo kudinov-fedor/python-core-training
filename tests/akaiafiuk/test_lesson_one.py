@@ -2,6 +2,13 @@ from akaiafiuk.AcceptablePasswordI import is_acceptable_password
 from akaiafiuk.backward_string import backward_string
 from akaiafiuk.beginning_zeros import beginning_zeros
 from akaiafiuk.end_zeros import end_zeros
+from akaiafiuk.first_word_simplified import first_word
+from akaiafiuk.max_digit import max_digit
+from akaiafiuk.multiply import multiply_two
+from akaiafiuk.nearest_value import nearest_value
+from akaiafiuk.number_length import number_length
+from akaiafiuk.remove_all_before import remove_all_before
+from akaiafiuk.replace_first import replace_first
 
 
 def test_is_acceptable_password():
@@ -35,3 +42,53 @@ def test_end_zeros():
     assert end_zeros(100100) == 2
 
 
+def test_first_word():
+    assert first_word("Hello world") == "Hello"
+    assert first_word("a word") == "a"
+    assert first_word("hi") == "hi"
+
+
+def test_max_digit():
+    assert max_digit(0) == 0
+    assert max_digit(52) == 5
+    assert max_digit(634) == 6
+    assert max_digit(1) == 1
+    assert max_digit(10000) == 1
+
+
+def test_multiply_two():
+    assert multiply_two(3, 2) == 6
+    assert multiply_two(1, 0) == 0
+
+
+def test_nearest_value():
+    assert nearest_value({4, 7, 10, 11, 12, 17}, 9) == 10
+    assert nearest_value({4, 7, 10, 11, 12, 17}, 8) == 7
+    assert nearest_value({4, 8, 10, 11, 12, 17}, 9) == 8
+    assert nearest_value({4, 9, 10, 11, 12, 17}, 9) == 9
+    assert nearest_value({4, 7, 10, 11, 12, 17}, 0) == 4
+    assert nearest_value({4, 7, 10, 11, 12, 17}, 100) == 17
+    assert nearest_value({5, 10, 8, 12, 89, 100}, 7) == 8
+    assert nearest_value({-1, 2, 3}, 0) == -1
+
+
+def test_number_length():
+    assert number_length(10) == 2
+    assert number_length(0) == 1
+    assert number_length(4) == 1
+    assert number_length(44) == 2
+
+
+def test_remove_all_before():
+    assert list(remove_all_before([1, 2, 3, 4, 5], 3)) == [3, 4, 5]
+    assert list(remove_all_before([1, 1, 2, 2, 3, 3], 2)) == [2, 2, 3, 3]
+    assert list(remove_all_before([1, 1, 2, 4, 2, 3, 4], 2)) == [2, 4, 2, 3, 4]
+    assert list(remove_all_before([1, 1, 5, 6, 7], 2)) == [1, 1, 5, 6, 7]
+    assert list(remove_all_before([], 0)) == []
+    assert list(remove_all_before([7, 7, 7, 7, 7, 7, 7, 7, 7], 7)) == [7, 7, 7, 7, 7, 7, 7, 7, 7]
+
+
+def test_replace_first():
+    assert list(replace_first([1, 2, 3, 4])) == [2, 3, 4, 1]
+    assert list(replace_first([1])) == [1]
+    assert list(replace_first([])) == []

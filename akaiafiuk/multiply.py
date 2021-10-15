@@ -18,8 +18,3 @@ def multiply_two(a, b):
 if __name__ == '__main__':
     print("Example:")
     print(multiply_two(3, 2))
-
-    # These "asserts" are used for self-checking and not for an auto-testing
-    assert multiply_two(3, 2) == 6
-    assert multiply_two(1, 0) == 0
-    print("Coding complete? Click 'Check' to earn cool rewards!")
