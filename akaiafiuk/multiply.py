@@ -11,10 +11,5 @@ mult_two(1, 0) == 0
 """
 
 
-def multiply_two(a, b):
+def multiply_two(a: int, b: int) -> int:
     return a * b
-
-
-if __name__ == '__main__':
-    print("Example:")
-    print(multiply_two(3, 2))

@@ -13,13 +13,15 @@ replace_first([1]) == [1]
 from typing import Iterable
 
 
-def replace_first(items: list) -> Iterable:
+def replace_first(items: list) -> list:
     if not items:
         return items
     items.append(items.pop(0))
     return items
 
 
-if __name__ == "__main__":
-    print("Example:")
-    print(list(replace_first([1, 2, 3, 4])))
+def replace_last(items: list) -> list:
+    if not items:
+        return items
+    items.insert(0, items.pop(-1))
+    return items

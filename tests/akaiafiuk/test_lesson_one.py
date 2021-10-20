@@ -1,4 +1,4 @@
-from akaiafiuk.AcceptablePasswordI import is_acceptable_password
+from akaiafiuk.acceptable_password import is_acceptable_password
 from akaiafiuk.backward_string import backward_string
 from akaiafiuk.beginning_zeros import beginning_zeros
 from akaiafiuk.end_zeros import end_zeros
@@ -92,3 +92,19 @@ def test_replace_first():
     assert list(replace_first([1, 2, 3, 4])) == [2, 3, 4, 1]
     assert list(replace_first([1])) == [1]
     assert list(replace_first([])) == []
+
+
+"""
+try to use parametrise in your tests:
+
+ 
+
+import pytest
+
+@pytest.mark.parametrize("a, b, expected", [
+    (1, 0, 0),
+    (2, 3, 6)
+])
+def test_multiply_two(a, b, expected):
+    assert multiply_two(a, b) == expected
+    """

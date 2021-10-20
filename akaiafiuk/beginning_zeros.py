@@ -25,6 +25,6 @@ def beginning_zeros(number: str) -> int:
     return number_of_zeros
 
 
-if __name__ == '__main__':
-    print("Example:")
-    print(beginning_zeros('100'))
+def beginning_zeros_using_split(number: str) -> int:
+    number_list = number.split('1')
+    return len(number_list[0])

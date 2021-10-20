@@ -27,6 +27,8 @@ def nearest_value(values: set, one: int) -> int:
     return min(d, key=d.get)
 
 
-if __name__ == '__main__':
-    print("Example:")
-    print(nearest_value({4, 7, 10, 11, 12, 17}, 9))
+"""todo: 
+try using sorted and additional key parameter
+
+sorted(items, key= lambda i: ……)
+"""

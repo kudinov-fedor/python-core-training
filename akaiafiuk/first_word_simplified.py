@@ -19,6 +19,6 @@ def first_word(text: str) -> str:
         return text[0:text.index(' ')]
 
 
-if __name__ == '__main__':
-    print("Example:")
-    print(first_word("Hello world"))
+def first_word_using_split(text: str) -> str:
+    text_list = text.split(' ')
+    return text_list[0]

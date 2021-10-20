@@ -23,6 +23,6 @@ def end_zeros(num: int) -> int:
     return number_of_zeroes
 
 
-if __name__ == '__main__':
-    print("Example:")
-    print(end_zeros(0))
+def end_zeros_using_split(num: int) -> int:
+    number_list = num.split('1')
+    return len(number_list[-1])

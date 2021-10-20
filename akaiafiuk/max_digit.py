@@ -22,7 +22,8 @@ def max_digit(number: int) -> int:
     return max_d
 
 
-if __name__ == '__main__':
-    print("Example:")
-    print(max_digit(0))
+def max_digit_using_max(number: int) -> int:
+    x = list(str(number))
+    y = [int(d) for d in x]
+    return max(y)
 
