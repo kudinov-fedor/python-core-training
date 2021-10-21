@@ -15,9 +15,6 @@ remove_all_before([1, 1, 2, 2, 3, 3], 2) == [2, 2, 3, 3]
 """
 
 
-from typing import Iterable
-
-
 def remove_all_before(items: list, border: int) -> list:
     start_index = items.index(border) if border in items else 0
     return items[start_index:]

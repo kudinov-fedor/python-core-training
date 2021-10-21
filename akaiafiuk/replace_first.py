@@ -10,9 +10,6 @@ replace_first([1]) == [1]
 """
 
 
-from typing import Iterable
-
-
 def replace_first(items: list) -> list:
     if not items:
         return items

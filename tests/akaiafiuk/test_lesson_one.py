@@ -9,6 +9,7 @@ from akaiafiuk.nearest_value import nearest_value
 from akaiafiuk.number_length import number_length
 from akaiafiuk.remove_all_before import remove_all_before
 from akaiafiuk.replace_first import replace_first
+import pytest
 
 
 def test_is_acceptable_password():
@@ -56,9 +57,14 @@ def test_max_digit():
     assert max_digit(10000) == 1
 
 
-def test_multiply_two():
-    assert multiply_two(3, 2) == 6
-    assert multiply_two(1, 0) == 0
+@pytest.mark.parametrize("a, b, expected",
+                         [
+                             (3, 2, 6),
+                             (2, 2, 4),
+                             (1, 0, 0)
+                         ])
+def test_multiply_two(a, b, expected):
+    assert multiply_two(a, b) == expected
 
 
 def test_nearest_value():
@@ -72,39 +78,26 @@ def test_nearest_value():
     assert nearest_value({-1, 2, 3}, 0) == -1
 
 
-def test_number_length():
-    assert number_length(10) == 2
-    assert number_length(0) == 1
-    assert number_length(4) == 1
-    assert number_length(44) == 2
+@pytest.mark.parametrize("number, result", [
+    (10, 2),
+    (0, 1),
+    (4, 1),
+    (44, 2)
+])
+def test_number_length(number, result):
+    assert number_length(number) == result
 
 
 def test_remove_all_before():
-    assert list(remove_all_before([1, 2, 3, 4, 5], 3)) == [3, 4, 5]
-    assert list(remove_all_before([1, 1, 2, 2, 3, 3], 2)) == [2, 2, 3, 3]
-    assert list(remove_all_before([1, 1, 2, 4, 2, 3, 4], 2)) == [2, 4, 2, 3, 4]
-    assert list(remove_all_before([1, 1, 5, 6, 7], 2)) == [1, 1, 5, 6, 7]
-    assert list(remove_all_before([], 0)) == []
-    assert list(remove_all_before([7, 7, 7, 7, 7, 7, 7, 7, 7], 7)) == [7, 7, 7, 7, 7, 7, 7, 7, 7]
+    assert remove_all_before([1, 2, 3, 4, 5], 3) == [3, 4, 5]
+    assert remove_all_before([1, 1, 2, 2, 3, 3], 2) == [2, 2, 3, 3]
+    assert remove_all_before([1, 1, 2, 4, 2, 3, 4], 2) == [2, 4, 2, 3, 4]
+    assert remove_all_before([1, 1, 5, 6, 7], 2) == [1, 1, 5, 6, 7]
+    assert remove_all_before([], 0) == []
+    assert remove_all_before([7, 7, 7, 7, 7, 7, 7, 7, 7], 7) == [7, 7, 7, 7, 7, 7, 7, 7, 7]
 
 
 def test_replace_first():
     assert list(replace_first([1, 2, 3, 4])) == [2, 3, 4, 1]
     assert list(replace_first([1])) == [1]
     assert list(replace_first([])) == []
-
-
-"""
-try to use parametrise in your tests:
-
- 
-
-import pytest
-
-@pytest.mark.parametrize("a, b, expected", [
-    (1, 0, 0),
-    (2, 3, 6)
-])
-def test_multiply_two(a, b, expected):
-    assert multiply_two(a, b) == expected
-    """
