@@ -27,5 +27,6 @@ def nearest_value(values: set, one: int) -> int:
     return min(d, key=d.get)
 
 
-# todo: try using sorted and additional key parameter sorted(items, key= lambda i: ……)
-# for now I don't know how to do this. Will try to update on weekend.
+def nearest_value(values: set, one: int) -> int:
+    result = sorted(values, key=lambda i: abs(i-one))
+    return result[0]
