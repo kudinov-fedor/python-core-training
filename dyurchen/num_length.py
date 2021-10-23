@@ -1,0 +1,13 @@
+def number_length(number: int) -> int:
+    return len(str(number))
+
+
+if __name__ == '__main__':
+    print("Example:")
+    print(number_length(10))
+
+    # These "asserts" are used for self-checking and not for an auto-testing
+    assert number_length(10) == 2
+    assert number_length(0) == 1
+    assert number_length(4) == 1
+    assert number_length(44) == 2
