@@ -20,13 +20,9 @@ nearest_value({4, 7, 10, 11, 12, 17}, 8) == 7
 
 
 def nearest_value(values: set, one: int) -> int:
-    d = dict()
-    values_list = list(values)
-    for i in range(len(values_list)):
-        d[values_list[i]] = abs(values_list[i]-one)
-    return min(d, key=d.get)
-
-
-def nearest_value(values: set, one: int) -> int:
-    result = sorted(values, key=lambda i: abs(i-one))
+    sorted_ascending = sorted(values)
+    result = sorted(sorted_ascending, key=lambda i: abs(i - one))
     return result[0]
+
+# todo: try method 2. lambda can return tuple where abs is on 1 place and actual item is on second,
+#  so it can be taken in account if abs is equal within several items lambda i: (abs(i - one), i)
