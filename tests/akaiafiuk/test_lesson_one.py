@@ -57,12 +57,11 @@ def test_max_digit():
     assert max_digit(10000) == 1
 
 
-@pytest.mark.parametrize("a, b, expected",
-                         [
-                             (3, 2, 6),
-                             (2, 2, 4),
-                             (1, 0, 0)
-                         ])
+@pytest.mark.parametrize("a, b, expected", [
+    (3, 2, 6),
+    (2, 2, 4),
+    (1, 0, 0)
+])
 def test_multiply_two(a, b, expected):
     assert multiply_two(a, b) == expected
 
