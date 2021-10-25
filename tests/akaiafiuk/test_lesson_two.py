@@ -45,9 +45,9 @@ def test_dir():
 
 
 @pytest.mark.parametrize("number1, number2, result", [
-    (10, 3, (3,1)),
-    (10, 2, (5,0)),
-    (0, 5,(0,0))
+    (10, 3, (3, 1)),
+    (10, 2, (5, 0)),
+    (0, 5, (0, 0))
 ])
 def test_div_mod(number1, number2, result):
     assert divmod(number1, number2) == result
