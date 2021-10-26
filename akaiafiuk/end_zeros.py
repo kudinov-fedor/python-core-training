@@ -25,7 +25,31 @@ def end_zeros(num: int) -> int:
 
 def end_zeros_using_split(num: int) -> int:
     num_str = str(num)
-    convert_to_ones = num_str.replace('2', '1').replace('3', '1').replace('4', '1').\
-        replace('5', '1').replace('6', '1').replace('7', '1').replace('8', '1').replace('9', '1')
-    number_list = convert_to_ones.split('1')
+    to_be_replaced = ['2', '3', '4', '5', '6', '7', '8', '9']
+    for item in to_be_replaced:
+        num_str = num_str.replace(item, '1')
+    number_list = num_str.split('1')
+    return len(number_list[-1])
+
+
+def end_zeros_using_zip(num: int) -> int:
+    num_str = str(num)
+    for left, right in zip('23456789', '11111111'):
+        num_str = num_str.replace(left, right)
+    number_list = num_str.split('1')
+    return len(number_list[-1])
+
+
+def end_zeros_using_generator(num: int) -> int:
+    num_str = str(num)
+    num_str_replaced = ''.join(i if i == '0' else '1' for i in num_str)
+    number_list = num_str_replaced.split('1')
+    return len(number_list[-1])
+
+
+def end_zeros_using_translate(num: int) -> int:
+    num_str = str(num)
+    my_table = num_str.maketrans('23456789', '11111111')
+    num_str = num_str.translate(my_table)
+    number_list = num_str.split('1')
     return len(number_list[-1])
