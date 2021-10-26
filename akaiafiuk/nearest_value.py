@@ -28,11 +28,3 @@ def nearest_value(values: set, one: int) -> int:
 def nearest_value_solution_two(values: set, one: int) -> int:
     result = sorted(values, key=lambda i: (abs(i-one), i))
     return result[0]
-
-
-# todo: try method 2. lambda can return tuple where abs is on 1 place and actual item is on second,
-#  so it can be taken in account if abs is equal within several items lambda i: (abs(i - one), i)
-
-if __name__ == '__main__':
-    nearest_value_solution_two({4, 7, 10, 11, 12, 17}, 9)
-    nearest_value_solution_two([12, 10], 11)
