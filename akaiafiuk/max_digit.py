@@ -15,7 +15,7 @@ max_digit(10000) == 1
 
 def max_digit(number: int) -> int:
     max_d = 0
-    x = list(str(number))
+    x = str(number)
     for digit in x:
         if int(digit) > max_d:
             max_d = int(digit)
@@ -24,6 +24,5 @@ def max_digit(number: int) -> int:
 
 def max_digit_using_max(number: int) -> int:
     x = str(number)
-    y = [d for d in x]
-    return int(max(y))
+    return int(max(x))
 
