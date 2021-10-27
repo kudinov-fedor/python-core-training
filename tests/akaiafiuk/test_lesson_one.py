@@ -4,7 +4,7 @@ from akaiafiuk.beginning_zeros import beginning_zeros
 from akaiafiuk.end_zeros import end_zeros, end_zeros_using_split, end_zeros_using_zip, end_zeros_using_generator, \
     end_zeros_using_translate
 from akaiafiuk.first_word_simplified import first_word
-from akaiafiuk.max_digit import max_digit
+from akaiafiuk.max_digit import max_digit, max_digit_using_max
 from akaiafiuk.multiply import multiply_two
 from akaiafiuk.nearest_value import nearest_value, nearest_value_solution_two
 from akaiafiuk.number_length import number_length
@@ -97,6 +97,14 @@ def test_max_digit():
     assert max_digit(634) == 6
     assert max_digit(1) == 1
     assert max_digit(10000) == 1
+
+
+def test_max_digit_using_max():
+    assert max_digit_using_max(0) == 0
+    assert max_digit_using_max(52) == 5
+    assert max_digit_using_max(634) == 6
+    assert max_digit_using_max(1) == 1
+    assert max_digit_using_max(10000) == 1
 
 
 @pytest.mark.parametrize("a, b, expected", [

@@ -23,7 +23,7 @@ def max_digit(number: int) -> int:
 
 
 def max_digit_using_max(number: int) -> int:
-    x = list(str(number))
-    y = [int(d) for d in x]
-    return max(y)
+    x = str(number)
+    y = [d for d in x]
+    return int(max(y))
 
