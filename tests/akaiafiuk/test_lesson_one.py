@@ -9,7 +9,7 @@ from akaiafiuk.multiply import multiply_two
 from akaiafiuk.nearest_value import nearest_value, nearest_value_solution_two
 from akaiafiuk.number_length import number_length
 from akaiafiuk.remove_all_before import remove_all_before
-from akaiafiuk.replace_first import replace_first
+from akaiafiuk.replace_first import replace_first, replace_last
 import pytest
 
 
@@ -163,3 +163,9 @@ def test_replace_first():
     assert list(replace_first([1, 2, 3, 4])) == [2, 3, 4, 1]
     assert list(replace_first([1])) == [1]
     assert list(replace_first([])) == []
+
+
+def test_replace_last():
+    assert list(replace_last([1, 2, 3, 4])) == [4, 1, 2, 3, ]
+    assert list(replace_last([1])) == [1]
+    assert list(replace_last([])) == []

@@ -11,14 +11,12 @@ replace_first([1]) == [1]
 
 
 def replace_first(items: list) -> list:
-    if not items:
-        return items
-    items.append(items.pop(0))
+    if items:
+        items.append(items.pop(0))
     return items
 
 
 def replace_last(items: list) -> list:
-    if not items:
-        return items
-    items.insert(0, items.pop(-1))
+    if items:
+        items.insert(0, items.pop(-1))
     return items
