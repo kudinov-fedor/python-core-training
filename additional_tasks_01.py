@@ -16,15 +16,22 @@ salary = "90 000"
 # list -----------------------------------------------------------
 # 1. Создайте пустой список, определите его тип и выведите в консоль.
 # данный код:
-gift_list=
-answer_1=
-print(answer_1)
+# gift_list=
+# answer_1=
+# print(answer_1)
 # требуемый вывод:
 # <class 'list'>
 # solution
-gift_list=[]
-answer_1= type(gift_list)
-print(answer_1)
+def test_list_type():
+    gift_list = []
+
+    assert type(gift_list) is list
+    assert isinstance(gift_list, list)
+    assert issubclass(type(gift_list), list)
+
+    return type(gift_list)
+
+print(test_list_type())
 
 # 2. Допишите код, чтобы gift_list был заполненным кортежем. Порядок элементов значения не имеет.
 gifts=
