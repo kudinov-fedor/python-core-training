@@ -5,7 +5,7 @@ def demo_feature() -> int:
     return 1
 
 
-def demo_division(a:  int, b: int) -> float:
+def demo_division(a: int, b: int) -> float:
     """
     divide a by b
     """
