@@ -26,5 +26,5 @@ def nearest_value(values: set, one: int) -> int:
 
 
 def nearest_value_solution_two(values: set, one: int) -> int:
-    result = sorted(values, key=lambda i: (abs(i-one), i))
+    result = sorted(values, key=lambda i: (abs(i - one), i))
     return result[0]
