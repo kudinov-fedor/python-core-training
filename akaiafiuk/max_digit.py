@@ -25,4 +25,3 @@ def max_digit(number: int) -> int:
 def max_digit_using_max(number: int) -> int:
     x = str(number)
     return int(max(x))
-
