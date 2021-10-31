@@ -3,6 +3,9 @@ import pytest
 from vpavly.m1.acceptable_password import is_acceptable_password
 from vpavly.m1.backward_string import backward_string
 from vpavly.m1.begin_zeros import beginning_zeros
+from vpavly.m1.between_markers import between_markers
+from vpavly.m1.check_even import check_even
+from vpavly.m1.correct_sentence import correct_sentence
 from vpavly.m1.end_zeros import end_zeros
 from vpavly.m1.first_word import first_word
 from vpavly.m1.max_digit import max_digit
@@ -15,7 +18,7 @@ from vpavly.m1.split_pairs import split_pairs
 
 
 # 1 #
-@pytest.mark.parametrize("a, b, expected", [
+@pytest.mark.parametrize('a, b, expected', [
     (10, 5, 50),
     (5, 2, 10),
     (-4, 2, -8),
@@ -130,3 +133,34 @@ def test_split_pairs(a, expected):
     ({-1, 2, 3}, 0, -1)])
 def test_nearest_value(a, b, expected):
     assert nearest_value(a, b) == expected
+
+
+# 13 #
+@pytest.mark.parametrize('a, b, c, expected', [
+    ('What is >apple<', '>', '<', 'apple'),
+    ('What is [apple]', '[', ']', 'apple'),
+    ('What is ><', '>', '<', ''),
+    ('<apple>', '<', '>', 'apple')
+])
+def test_between_markers(a, b, c, expected):
+    assert between_markers(a, b, c) == expected
+
+
+# 14 #
+@pytest.mark.parametrize('a, expected', [
+    ('hello, world', 'Hello, world.'),
+    ('Hi, my name is Shai-Hulud.', 'Hi, my name is Shai-Hulud.'),
+    ('', '')
+])
+def test_correct_sentence(a, expected):
+    assert correct_sentence(a) == expected
+
+
+# 15 #
+@pytest.mark.parametrize('a, expected', [
+    (-2, True),
+    (9999, False),
+    (0, True)
+])
+def test_check_even(a, expected):
+    assert check_even(a) == expected
