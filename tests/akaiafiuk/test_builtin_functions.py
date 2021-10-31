@@ -7,7 +7,7 @@ import pytest
     (0, 0),
 ])
 def test_abs(number, result):
-    """Verify that abs returns module of a number"""
+    """Verify that abs returns modulus of a number"""
     assert abs(number) == result
 
 
