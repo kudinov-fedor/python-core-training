@@ -7,18 +7,11 @@ Output: a boolean.
 """
 
 
-# def is_all_upper(text: str) -> bool:
-#     return text.isupper()
-
-
 def is_all_upper(text: str) -> bool:
-    big_letters = [32] + list(range(65, 91)) + list(range(48, 58))
-    for letter in text:
-        if ord(letter) not in big_letters:
-            return False
-    return True
+    return text.upper() == text
 
 
-if __name__ == '__main__':
-    print("Example:")
-    print(is_all_upper('ALL uPPER'))
+# def is_all_upper(text: str) -> bool:
+#     big_letters = [32] + list(range(65, 91)) + list(range(48, 58))
+#     return all(ord(letter) in big_letters for letter in text)
+#
