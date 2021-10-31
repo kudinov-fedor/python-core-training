@@ -1,5 +1,4 @@
 from dyurchen.end_zeros import end_zeros
-from pytest import *
 
 
 def test_end_zeros():
