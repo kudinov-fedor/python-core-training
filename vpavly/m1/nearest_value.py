@@ -27,7 +27,3 @@ def nearest_value(items: set, value: int) -> int:
         res.append(abs(value - i))
     return s_items[res.index(min(res))]
 
-
-if __name__ == '__main__':
-    print("Example:")
-    print(nearest_value({4, 7, 8, 10, 11, 12, 17}, 9))

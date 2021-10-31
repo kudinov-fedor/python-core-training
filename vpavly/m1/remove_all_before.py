@@ -12,15 +12,7 @@ Input: List and the border element.
 Output: Iterable (tuple, list, iterator ...).
 
 """
-from typing import Iterable
 
 
-def remove_all_before(items: list, border: int) -> Iterable:
-    if border in items:
-        items = items[items.index(border):] if len(items) > 1 else items
-    return items
-
-
-if __name__ == '__main__':
-    print("Example:")
-    print(list(remove_all_before([1, 2, 3, 4, 5], 3)))
+def remove_all_before(items: list, border: int) -> list:
+    return items[items.index(border):] if border in items else items
