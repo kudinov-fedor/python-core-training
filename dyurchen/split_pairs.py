@@ -6,3 +6,8 @@ def split_pairs(a: str) -> list[str]:
         a += "_"
     new_list_pairs = wrap(a, 2)
     return new_list_pairs
+
+
+if __name__ == '__main__':
+    print("Example:")
+    print(list(split_pairs('abcd')))

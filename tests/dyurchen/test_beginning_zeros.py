@@ -8,4 +8,3 @@ def test_beginning_zeros():
     assert beginning_zeros('001001') == 2
     assert beginning_zeros('012345679') == 1
     assert beginning_zeros('0000') == 4
-    print("Coding complete? Click 'Check' to earn cool rewards!")

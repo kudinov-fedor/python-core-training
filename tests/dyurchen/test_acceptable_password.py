@@ -1,5 +1,4 @@
 from dyurchen.acceptable_pass import is_acceptable_password
-from pytest import *
 
 
 def test_is_acceptable_password():

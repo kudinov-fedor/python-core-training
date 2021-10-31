@@ -2,9 +2,16 @@ from typing import Iterable
 
 
 def remove_all_before(items: list, border: int) -> list:
-    for i in range(0, len(items)):
+    items_list = list()
+    for i in range(len(items)):
         if items[i] == border:
-            return items[i:]
-    return items
+            items_list = items[i:]
+        else:
+            items_list = items
+    return items_list
 
+
+if __name__ == '__main__':
+    print("Example:")
+    print(list(remove_all_before([], 0)))
 

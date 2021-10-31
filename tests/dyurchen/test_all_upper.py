@@ -1,5 +1,4 @@
 from dyurchen.all_upper import replace_first
-import pytest
 
 
 def test_replace_first_method():
