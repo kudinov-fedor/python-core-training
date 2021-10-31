@@ -1,19 +1,18 @@
+import pytest
 from akaiafiuk.beginning_zeros import beginning_zeros, beginning_zeros_using_split
 
 
-def test_beginning_zeros():
-    assert beginning_zeros('100') == 0
-    assert beginning_zeros('001') == 2
-    assert beginning_zeros('100100') == 0
-    assert beginning_zeros('001001') == 2
-    assert beginning_zeros('012345679') == 1
-    assert beginning_zeros('0000') == 4
-
-
-def test_beginning_zeros_using_split():
-    assert beginning_zeros_using_split('100') == 0
-    assert beginning_zeros_using_split('001') == 2
-    assert beginning_zeros_using_split('100100') == 0
-    assert beginning_zeros_using_split('001001') == 2
-    assert beginning_zeros_using_split('012345679') == 1
-    assert beginning_zeros_using_split('0000') == 4
+@pytest.mark.parametrize("foo", [
+    beginning_zeros,
+    beginning_zeros_using_split
+])
+@pytest.mark.parametrize("input_value, expected_result",[
+    ("100", 0),
+    ("001", 2),
+    ("100100", 0),
+    ("001001", 2),
+    ("012345679", 1),
+    ("0000", 4)
+])
+def test_beginning_zeros_functions(foo, input_value, expected_result):
+    assert foo(input_value) == expected_result

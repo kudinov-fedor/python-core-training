@@ -1,5 +1,5 @@
-from akaiafiuk.backward_string import backward_string, backward_string_using_reversed
 import pytest
+from akaiafiuk.backward_string import backward_string, backward_string_using_reversed
 
 
 @pytest.mark.parametrize("value, expected", [

@@ -1,5 +1,5 @@
-from akaiafiuk.number_length import number_length
 import pytest
+from akaiafiuk.number_length import number_length
 
 
 @pytest.mark.parametrize("number, result", [
