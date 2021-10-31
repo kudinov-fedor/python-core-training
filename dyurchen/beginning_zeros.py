@@ -4,7 +4,7 @@ def beginning_zeros(number: str) -> int:
         if int(n) == 0:
             result += 1
         else:
-            return result
+            break
     return result
 
 
