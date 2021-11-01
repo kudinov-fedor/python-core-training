@@ -6,5 +6,3 @@ def beginning_zeros(number: str) -> int:
         else:
             break
     return result
-
-

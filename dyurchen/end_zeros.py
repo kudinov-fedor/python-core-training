@@ -7,4 +7,3 @@ def end_zeros(num: int) -> int:
         else:
             break
     return count_null
-

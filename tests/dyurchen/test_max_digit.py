@@ -12,4 +12,3 @@ from dyurchen.max_digit import max_digit
 ])
 def test_max_digit(input_param, expected):
     assert max_digit(input_param) == expected
-

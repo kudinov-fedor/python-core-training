@@ -1,12 +1,11 @@
 from random import random
-import pytest
 
 
 def retry(iters):
     def actual_decorator(func):
         def wrapper(*args, **kwargs):
             total = 0
-            while total < iters:
+            for i in range(iters):
                 try:
                     return_value = func(*args, **kwargs)
                     break
