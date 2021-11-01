@@ -30,3 +30,9 @@ def test_division_error():
     """
     with pytest.raises(ZeroDivisionError):
         demo_division(5, 0)
+
+
+def test_demo_mock(mocker):
+    mock = mocker.MagicMock()
+    len(mock)
+    assert mock.__len__.called
