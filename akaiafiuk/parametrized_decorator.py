@@ -18,8 +18,13 @@ def parametrised_decorator(number_of_tries):
                     return res
                 except AssertionError:
                     continue
+            raise BadLuckException(f"Seems that all {number_of_tries} attempts to call {func} had failed")
         return wrapper
     return decorator
+
+
+class BadLuckException(BaseException):
+    ...
 
 
 @ordinary_decorator
@@ -30,7 +35,7 @@ def get_random():
     return x
 
 
-@parametrised_decorator(1)
+@parametrised_decorator(10)
 def get_random_param():
     import random
     x = random.random()

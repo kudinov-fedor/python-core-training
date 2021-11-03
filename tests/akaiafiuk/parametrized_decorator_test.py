@@ -6,4 +6,5 @@ def test_get_random():
 
 
 def test_get_random_parametrized():
-    assert get_random_param() <= 0.5 or get_random_param() is None
+    # todo: try to add test that takes into account the fact that exception can be raised
+    assert get_random_param() <= 0.5
