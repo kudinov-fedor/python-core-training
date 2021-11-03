@@ -6,7 +6,7 @@ from akaiafiuk.beginning_zeros import beginning_zeros, beginning_zeros_using_spl
     beginning_zeros,
     beginning_zeros_using_split
 ])
-@pytest.mark.parametrize("input_value, expected_result",[
+@pytest.mark.parametrize("input_value, expected_result", [
     ("100", 0),
     ("001", 2),
     ("100100", 0),
