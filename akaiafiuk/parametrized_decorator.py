@@ -17,7 +17,7 @@ def parametrised_decorator(number_of_tries):
                     res = func(*args, **kwargs)
                     return res
                 except AssertionError:
-                    if current_try != number_of_tries - 1:
+                    if current_try == number_of_tries - 1:
                         raise
         return wrapper
     return decorator
@@ -31,7 +31,7 @@ def get_random():
     return x
 
 
-@parametrised_decorator(1)
+@parametrised_decorator(20)
 def get_random_param():
     import random
     x = random.random()
