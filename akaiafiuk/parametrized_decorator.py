@@ -12,19 +12,15 @@ def ordinary_decorator(func: callable) -> callable:
 def parametrised_decorator(number_of_tries):
     def decorator(func: callable):
         def wrapper(*args, **kwargs):
-            for _ in range(number_of_tries):
+            for current_try in range(number_of_tries):
                 try:
                     res = func(*args, **kwargs)
                     return res
                 except AssertionError:
-                    continue
-            raise BadLuckException(f"Seems that all {number_of_tries} attempts to call {func} had failed")
+                    if current_try != number_of_tries - 1:
+                        raise
         return wrapper
     return decorator
-
-
-class BadLuckException(BaseException):
-    ...
 
 
 @ordinary_decorator
@@ -35,7 +31,7 @@ def get_random():
     return x
 
 
-@parametrised_decorator(10)
+@parametrised_decorator(1)
 def get_random_param():
     import random
     x = random.random()
