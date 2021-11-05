@@ -7,6 +7,7 @@ def test_get_random():
 
 def test_get_random_parametrized():
     try:
-        assert get_random_param() <= 0.5
-    except TypeError:
-        ...
+        x = get_random_param()
+    except ValueError:
+        raise
+    assert x <= 5
