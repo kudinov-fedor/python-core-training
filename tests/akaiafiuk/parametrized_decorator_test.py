@@ -10,4 +10,4 @@ def test_get_random_parametrized():
         x = get_random_param()
     except ValueError:
         raise
-    assert x <= 5
+    assert x <= 0.5
