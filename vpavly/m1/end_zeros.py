@@ -12,9 +12,5 @@ Output: An Int.
 
 
 def end_zeros(num: int) -> int:
-    string_num = str(num)[::-1]
-    for zeros, i in enumerate(string_num):
-        if i != '0':
-            return zeros
-        if zeros == len(string_num) - 1:
-            return zeros + 1
+    number = str(num)
+    return len(number) - len(number.rstrip('0'))

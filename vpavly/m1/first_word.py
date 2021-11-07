@@ -8,4 +8,10 @@ Output: A string.
 
 
 def first_word(text: str) -> str:
-    return str(text.split()[0]) if len(text) > 1 else text
+    if text:
+        try:
+            return str(text.split()[0])
+        except IndexError:
+            return text
+    else:
+        return ''

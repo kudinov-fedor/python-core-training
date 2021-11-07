@@ -15,6 +15,15 @@ from vpavly.m1.number_length import number_length
 from vpavly.m1.remove_all_before import remove_all_before
 from vpavly.m1.replace_first import replace_first
 from vpavly.m1.split_pairs import split_pairs
+from vpavly.additional.decorator import gen_random
+
+
+# Additional #
+@pytest.mark.parametrize('expected', [
+    0.5
+])
+def test_gen_random(expected):
+    assert gen_random() <= expected or AssertionError
 
 
 # 1 #

@@ -9,9 +9,3 @@ Output: a boolean.
 
 def is_all_upper(text: str) -> bool:
     return text.upper() == text
-
-
-# def is_all_upper(text: str) -> bool:
-#     big_letters = [32] + list(range(65, 91)) + list(range(48, 58))
-#     return all(ord(letter) in big_letters for letter in text)
-#

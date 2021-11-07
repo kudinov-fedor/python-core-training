@@ -8,4 +8,4 @@ Output: A string.
 
 
 def backward_string(val: str) -> str:
-    return val[::-1]
+    return "".join(list(reversed(val)))
