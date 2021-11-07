@@ -21,9 +21,4 @@ Output: Int.
 
 
 def nearest_value(items: set, value: int) -> int:
-    s_items = sorted(items)
-    res = []
-    for i in s_items:
-        res.append(abs(value - i))
-    return s_items[res.index(min(res))]
-
+    return sorted(items, key=lambda a: abs(value - a))[0]

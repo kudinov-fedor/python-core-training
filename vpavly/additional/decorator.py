@@ -46,29 +46,29 @@ def gen_random():
 """
 
 
-# def retry(func: callable) -> callable:
-#     def wrapper():
-#         while True:
-#             try:
-#                 return func()
-#             except AssertionError:
-#                 pass
-#     return wrapper
+def retry(func: callable) -> callable:
+    def wrapper():
+        while True:
+            try:
+                return func()
+            except AssertionError:
+                pass
+    return wrapper
 
 
 def parametrised_retry(retries):
-    def retry(func: callable):
-        def wrapper():
+    def decorator(func: callable):
+        def wrapper(*args, **xargs):
             nonlocal retries
             while True:
                 try:
-                    return func()
-                except AssertionError:
+                    return func(*args, **xargs)
+                except Exception:
                     retries -= 1
                     if retries == 0:
-                        raise AssertionError
+                        raise
         return wrapper
-    return retry
+    return decorator
 
 
 @parametrised_retry(5)
@@ -77,6 +77,3 @@ def gen_random():
     x = random.random()
     assert x <= 0.5
     return x
-
-
-print(gen_random())
