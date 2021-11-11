@@ -13,3 +13,19 @@ def is_all_upper(text: str) -> bool:
         return True
     else:
         return trimmed_string.isupper()
+
+
+def is_all_upper_v2(text: str) -> bool:
+    trimmed_string = ''.join([i for i in text if i.isalpha()])
+    if not trimmed_string:
+        return True
+    else:
+        return trimmed_string.isupper()
+
+
+def is_all_upper_v3(text: str) -> bool:
+    return not bool([i for i in text if i.islower() and i.isalpha()])
+
+
+def is_all_upper_v4(text: str) -> bool:
+    return text == text.upper()
