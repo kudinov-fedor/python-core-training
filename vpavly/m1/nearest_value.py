@@ -20,5 +20,5 @@ Output: Int.
 """
 
 
-def nearest_value(items: set, value: int) -> int:
-    return sorted(items, key=lambda a: abs(value - a))[0]
+def nearest_value(items: list, value: int) -> int:
+    return sorted(sorted(items), key=lambda a: abs(value - a))[0]

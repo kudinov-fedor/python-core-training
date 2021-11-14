@@ -11,8 +11,9 @@ Output: A string.
 """
 
 
-def correct_sentence(sentence: str) -> str:
-    try:
-        return sentence.capitalize() + "." if not sentence.endswith('.') else sentence.capitalize()
-    except IndexError:
-        return ''
+def correct_sentence_short(sentence: str) -> str:
+    return sentence and (sentence[0].upper() + sentence[1:]).strip(".") + "."
+
+
+def correct_sentence_long(sentence: str) -> str:
+    return (sentence[0].upper() + sentence[1:]).strip(".") + "." if sentence else sentence

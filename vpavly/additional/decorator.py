@@ -51,7 +51,7 @@ def retry(func: callable) -> callable:
         while True:
             try:
                 return func()
-            except AssertionError:
+            except Exception:
                 pass
     return wrapper
 
@@ -59,14 +59,14 @@ def retry(func: callable) -> callable:
 def parametrised_retry(retries):
     def decorator(func: callable):
         def wrapper(*args, **xargs):
-            nonlocal retries
-            while True:
+            for i in range(retries):
                 try:
+                    print(i)
                     return func(*args, **xargs)
                 except Exception:
-                    retries -= 1
-                    if retries == 0:
-                        raise
+                    pass
+            else:
+                raise AssertionError
         return wrapper
     return decorator
 
@@ -77,3 +77,6 @@ def gen_random():
     x = random.random()
     assert x <= 0.5
     return x
+
+
+print(gen_random())
