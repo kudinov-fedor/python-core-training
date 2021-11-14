@@ -7,6 +7,6 @@ Output: An iterable of strings.
 """
 
 
-def split_pairs(a: str) -> list:
-    b = a + '_' if len(a) % 2 else a
-    return list(item[0] + item[1] for item in zip(b[::2], b[1::2]))
+def split_pairs(text: str) -> list:
+    text += '_' if len(text) % 2 else ""
+    return list(left + right for (left, right) in zip(text[::2], text[1::2]))

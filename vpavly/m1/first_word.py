@@ -9,9 +9,7 @@ Output: A string.
 
 def first_word(text: str) -> str:
     if text:
-        try:
-            return str(text.split()[0])
-        except IndexError:
-            return text
+        result = str(text.split()[0])
     else:
-        return ''
+        result = text
+    return result

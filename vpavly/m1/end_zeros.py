@@ -7,10 +7,17 @@ Output: An Int.
 """
 
 
-# def end_zeros(num: int) -> int:
-#     return beginning_zeros(str(num)[::-1])
-
-
-def end_zeros(num: int) -> int:
+def end_zeros_w_rstrip(num: int) -> int:
     number = str(num)
     return len(number) - len(number.rstrip('0'))
+
+
+def end_zeros_w_loop(number: int) -> int:
+    reversed_num = str(number)[::-1]
+    for index, number in enumerate(reversed_num):
+        if number != '0':
+            result = index
+            break
+    else:
+        result = len(number)
+    return result
