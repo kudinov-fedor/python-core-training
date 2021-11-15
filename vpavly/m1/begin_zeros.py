@@ -13,11 +13,9 @@ def beginning_zeros_w_lstrip(number: str) -> int:
 
 def beginning_zeros_w_int(number: str) -> int:
     result = 0
-    if number == '0':
-        result = 1
-    elif number != "":
+    if number:
         int_num = str(int(number))
-        result = abs(len(int_num) - len(number))
+        result = len(number) - len(int_num) or 1
     return result
 
 

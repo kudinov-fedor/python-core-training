@@ -77,6 +77,3 @@ def gen_random():
     x = random.random()
     assert x <= 0.5
     return x
-
-
-print(gen_random())

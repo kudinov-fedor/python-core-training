@@ -21,4 +21,5 @@ Output: Int.
 
 
 def nearest_value(items: list, value: int) -> int:
-    return sorted(sorted(items), key=lambda a: abs(value - a))[0]
+    return sorted(items, key=lambda a: (abs(value - a), a))[0]
+    # tuple in sorted key lambda expression works as key one by one
