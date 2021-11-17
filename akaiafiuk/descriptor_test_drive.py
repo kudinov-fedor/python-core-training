@@ -1,7 +1,9 @@
 """
 Took a look at a simple tutorial related to python descriptors. And based on it created a descriptor for maximum speed
 inside a "Car" object. Positive side of this approach is the fact that now maximum speed value is protected during
-object creation and update
+object creation and update (only in case when user updates max_speed parameter mentioned in Car class,
+_max_speed private attribute still not secured. It is still safer because _max_speed logic is encapsulated inside the
+Descriptor and the attribute marked as private)
 """
 
 
