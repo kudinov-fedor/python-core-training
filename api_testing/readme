@@ -1,0 +1,13 @@
+1. Go to https://trello.com/app-key/ and get api_key
+2. On the same page click "Genereate Token manualy"
+3. use API_KEY and TOKEN as header in requests:
+Authorization: OAuth oauth_consumer_key="{{API_KEY}}", oauth_token="{{TOKEN}}"
+
+4. Use API documentation to create api requests:
+https://developer.atlassian.com/cloud/trello/rest/api-group-actions/
+
+Useful links
+https://developer.atlassian.com/cloud/trello/
+https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/
+https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization/
+https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/

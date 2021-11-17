@@ -1,0 +1,216 @@
+{
+	"variables": [],
+	"info": {
+		"name": "trello",
+		"_postman_id": "f0801735-c086-e512-6401-a6af9c130fbd",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get boards",
+			"request": {
+				"url": "{{host}}/1/members/me/boards",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get board",
+			"request": {
+				"url": "{{host}}/1/boards/{{board_id}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get lists",
+			"request": {
+				"url": "{{host}}/1/boards/{{board_id}}/lists",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get cards",
+			"request": {
+				"url": {
+					"raw": "{{host}}/1/boards/{{board_id}}/cards?fields=desc,name,idBoard,idList",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "desc,name,idBoard,idList",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get cards",
+			"request": {
+				"url": "{{host}}/1/boards/{{board_id}}/cards",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "create card",
+			"request": {
+				"url": "{{host}}/1/cards",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idList\": \"613e0a73b4897775a6cafff6\",\n\t\"name\": \"card from postman\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "create list",
+			"request": {
+				"url": "{{host}}/1/lists",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idBoard\": \"613c71c261d3973ecd42d2f2\",\n\t\"name\": \"list from postman\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get board of a card",
+			"request": {
+				"url": "{{host}}/1/cards/613e0faf5395da0d2dcec0ae/board",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idList\": \"613e0a73b4897775a6cafff6\",\n\t\"name\": \"card from postman\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get list of a card",
+			"request": {
+				"url": "{{host}}/1/cards/613e0faf5395da0d2dcec0ae/list",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\"",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idList\": \"613e0a73b4897775a6cafff6\",\n\t\"name\": \"card from postman\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
