@@ -7,13 +7,13 @@ import pytest
     (0, 0),
 ])
 def test_abs(number, result):
-    """Verify that abs returns module of a number"""
+    """Verify that abs returns modulus of a number"""
     assert abs(number) == result
 
 
 def test_all():
     """Verify that all() returns True only when all elements are true"""
-    x = [1, 2*2, True]
+    x = [1, 2 * 2, True]
     y = [1, 0, True]
     assert all(x)
     assert not all(y)
