@@ -44,3 +44,18 @@ def test_value_error(func):
 def test_type_error(func):
     with pytest.raises(TypeError):
         func("BMW", "M3", "360")
+
+
+@pytest.mark.parametrize("func", [
+    DescriptorCar,
+    PropertyCar,
+    PropertyOutsideCar
+])
+def test_multiple_cars(func):
+    bmw = func("BMW", "M3", 360)
+    audi = func("Audi", "A1", 320)
+    bmw.max_speed = 420
+    audi.max_speed = 390
+    assert str(bmw) == "Make: BMW, Model: M3, Maximum Speed: 420"
+    assert str(audi) == "Make: Audi, Model: A1, Maximum Speed: 390"
+
