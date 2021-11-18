@@ -58,4 +58,3 @@ def test_multiple_cars(func):
     audi.max_speed = 390
     assert str(bmw) == "Make: BMW, Model: M3, Maximum Speed: 420"
     assert str(audi) == "Make: Audi, Model: A1, Maximum Speed: 390"
-
