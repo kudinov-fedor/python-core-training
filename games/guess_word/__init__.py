@@ -2,14 +2,24 @@
 
 word = "clever"
 guesses = ["c", "l", "e"]
+
+# display
 print("".join(i if i in guesses else "_" for i in word))
 
 
-guesses.append("v")                                        # act
-print(set(guesses).issuperset(word))                       # if end
-print("".join(i if i in guesses else "_" for i in word))   # show state
-
-
-guesses.append("r")
+# --------------------------------
+# act
+guesses.append("v")
+# display
+print("".join(i if i in guesses else "_" for i in word))
+# if end check
 print(set(guesses).issuperset(word))
+
+
+# --------------------------------
+# act
+guesses.append("v")
+# display
 print("".join(i if i in guesses else "_" for i in word))
+# if end check
+print(set(guesses).issuperset(word))
