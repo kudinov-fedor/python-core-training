@@ -1,7 +1,17 @@
+import os
 import pytest
 
-from api_testing.helpers.constants import BOARD_NAME, VAULT_NAME, LIST_NAME
 from api_testing.helpers.api_client import ApiClient
+
+
+BOARD_NAME = "TEST_BOARD"
+VAULT_NAME = "TEST_VAULT_BOARD"
+LIST_NAME = "TEST_LIST"
+
+
+@pytest.fixture(scope="session")
+def samples_path():
+    return os.path.join(os.path.dirname(__file__), "sample_data")
 
 
 @pytest.fixture(scope="session")

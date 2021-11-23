@@ -1,7 +1,7 @@
 from datetime import date
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from selenium_testing.tests.test_date_pickers.helpers import DatePickerBootstrap
+from .helpers import DatePickerBootstrap
 
 
 def test_date_picker(session: WebDriver):

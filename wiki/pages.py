@@ -2,7 +2,7 @@ from typing import List
 
 from selenium.webdriver.common.by import By
 
-from selenium_testing.helpers.base_page_object import BaseElement, BasePage as _BasePage
+from selenium_helpers.base_page_object import BaseElement, BasePage as _BasePage
 
 
 class BasePage(_BasePage):

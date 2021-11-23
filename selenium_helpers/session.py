@@ -1,5 +1,11 @@
 import os
+from copy import deepcopy
+
 from selenium import webdriver
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+
+CHROME_DRIVER_PATH = os.environ.get("CHROME_DRIVER_PATH", "chromedriver")
 
 
 def create_session(driver_type="chrome"):
@@ -31,12 +37,10 @@ def create_session(driver_type="chrome"):
         options.add_experimental_option("prefs", prefs)
 
         # for selenium grid
-        from copy import deepcopy
-        from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
         capabilities = deepcopy(DesiredCapabilities().CHROME)
         capabilities.update(options.to_capabilities())
 
-        return webdriver.Chrome(executable_path="chromedriver", options=options, desired_capabilities=capabilities)
+        return webdriver.Chrome(executable_path=CHROME_DRIVER_PATH, options=options, desired_capabilities=capabilities)
 
     elif driver_type == "firefox":
         return webdriver.Firefox(executable_path="geckodriver")

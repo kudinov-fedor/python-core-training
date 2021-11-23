@@ -2,7 +2,7 @@ import os
 
 from selenium.webdriver.remote.webdriver import WebDriver, By
 
-from selenium_testing.helpers.utills import read_file
+from selenium_helpers.utills import read_file
 
 
 VALUE = "abcd\n12345"

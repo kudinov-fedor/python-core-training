@@ -1,7 +1,7 @@
 from time import sleep
 
 from selenium.webdriver.remote.webdriver import WebDriver
-from wiki.page_object import MainPage
+from wiki.pages import MainPage
 
 
 def test_sample(session: WebDriver):
