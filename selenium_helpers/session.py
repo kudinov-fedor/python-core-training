@@ -2,13 +2,14 @@ import os
 from copy import deepcopy
 
 from selenium import webdriver
+from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 CHROME_DRIVER_PATH = os.environ.get("CHROME_DRIVER_PATH", "chromedriver")
 
 
-def create_session(driver_type="chrome"):
+def create_session(driver_type="chrome") -> WebDriver:
 
     if driver_type == "chrome":
         options = webdriver.ChromeOptions()

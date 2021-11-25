@@ -14,37 +14,6 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.command import Command
 
 
-# monkey patch the find_by_css_selector method :
-# def webdriver_s(self, value):
-#     return self.execute(Command.FIND_ELEMENT, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-#
-#
-# def webdriver_ss(self, value):
-#     return self.execute(Command.FIND_ELEMENTS, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-#
-#
-# def webelement_s(self, value):
-#     return self._execute(Command.FIND_ELEMENT, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-#
-#
-# def webelement_ss(self, value):
-#     return self._execute(Command.FIND_ELEMENTS, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-
-
-# WebDriver.s = webdriver_s
-# WebDriver.ss = webdriver_ss
-# WebElement.s = webelement_s
-# WebElement.ss = webelement_ss
-
-
 def open_tab(web_driver: WebDriver, tab):
     web_driver.switch_to.window(web_driver.window_handles[tab])
 
