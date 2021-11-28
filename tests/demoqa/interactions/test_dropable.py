@@ -1,8 +1,6 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.action_chains import ActionChains as AC
 
-import time
-
 
 def test_droppable(host: str, session: WebDriver):
 
