@@ -30,9 +30,10 @@ def create_session(driver_type="chrome") -> WebDriver:
         # options.add_argument("no-first-run")
 
         prefs = {
-            # 'profile.managed_default_content_settings.media_stream': 1  # allow camera
+            # 'profile.managed_default_content_settings.media_stream': 1,  # allow camera
             # 'profile.default_content_setting_values': {'automatic_downloads': 0},
             # 'profile.content_settings.exceptions': {'automatic_downloads': 0},
+            # 'browser.download.manager.showWhenStarting': 0,
             "download.default_directory": os.path.join(os.getcwd(), "tmp")  # specify download directory
         }
         options.add_experimental_option("prefs", prefs)
