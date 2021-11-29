@@ -1,5 +1,7 @@
 from akaiafiuk.mines.mines_simplified import BattleField
 
+DEBUG = False
+
 rules_str = """
             The numbers on the board represent how many bombs are adjacent to a square.
             For example, if a square has a "3" on it, then there are 3 bombs next to that square.
@@ -16,13 +18,13 @@ class TheGame:
     print('-*-' * 15)
     input()
     field = BattleField()
-    field.assemble_mine()
-    field.assemble_mine()
-    field.assemble_mine()
+    for _ in range(3):
+        field.assemble_mine()
     field.get_field()
 
     # Following line can be used for debug purposes to verify mines position
-    # field.get_mines()
+    if DEBUG:
+        field.get_mines()
 
     while True:
 
@@ -30,7 +32,7 @@ class TheGame:
         star_count = 0
         for row in field.field_to_print:
             star_count += row.count('*')
-        if star_count == 2:
+        if star_count == 3:
             print('$' * 30)
             print('$' * 30)
             print('$' * 30)

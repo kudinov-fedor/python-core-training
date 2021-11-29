@@ -1,11 +1,13 @@
 from random import randrange
+from itertools import product
 
 
 class BattleField:
 
+    # Create a battlefield with field to print to a user and field to assemble mines
     def __init__(self):
-        self.field_to_print = ['*'] * 5, ['*'] * 5, ['*'] * 5, ['*'] * 5, ['*'] * 5
-        self.field_mines = [False] * 5, [False] * 5, [False] * 5, [False] * 5, [False] * 5
+        self.field_to_print = [['*'] * 5 for _ in range(5)]
+        self.field_mines = [[False] * 5 for _ in range(5)]
 
     # Draw current state of the battlefield
     def get_field(self):
@@ -25,9 +27,10 @@ class BattleField:
 
     # Open the cell on the battlefield
     def pick_cell(self, coordinates):
-        if self.field_mines[coordinates[1]][coordinates[0]]:
+        x_coord, y_coord = coordinates
+        if self.field_mines[y_coord][x_coord]:
             print('@@@ -- YOU LOOSE! -- @@@')
-            self.field_to_print[coordinates[1]][coordinates[0]] = '@'
+            self.field_to_print[y_coord][x_coord] = '@'
             self.get_field()
             exit(0)
 
@@ -47,13 +50,12 @@ class BattleField:
             if coordinates[0] == 4:
                 y_inspect_cells.pop(+1)
 
-            for x in x_inspect_cells:
-                for y in y_inspect_cells:
-                    try:
-                        if self.field_mines[coordinates[1] + x][coordinates[0] + y]:
-                            mines_count += 1
-                    except IndexError:
-                        continue
+            for x, y in product(x_inspect_cells, y_inspect_cells):
+                try:
+                    if self.field_mines[coordinates[1] + x][coordinates[0] + y]:
+                        mines_count += 1
+                except IndexError:
+                    continue
 
             # Open the cell and draw the current battlefield state
             if mines_count == 0:
