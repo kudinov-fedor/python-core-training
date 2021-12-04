@@ -4,6 +4,7 @@ from selenium.webdriver.remote.webdriver import WebDriver, WebElement
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class BaseElement:
@@ -42,7 +43,18 @@ class BasePage(BaseElement):
     def open_page(self):
         assert self.url
         self.driver.get(self.host + self.url)
+        return self
 
     def get_title(self):
         WebDriverWait(self.driver, 10).until(EC.title_contains(self.title))
         return self.driver.title
+
+
+class GetItem:
+
+    def __init__(self, by=By.ID, value=None):
+        self.by = by
+        self.value = value
+
+    def __get__(self, instance: BaseElement, owner) -> WebElement:
+        return instance.get_element((self.by, self.value))
