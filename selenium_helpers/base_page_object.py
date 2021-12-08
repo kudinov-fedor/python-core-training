@@ -53,7 +53,7 @@ class BasePage(BaseElement):
 
     @property
     def parent(self):
-        raise NotImplemented("not available for BasePage class")
+        raise NotImplementedError("not available for BasePage class")
 
     def open_page(self):
         assert self.url

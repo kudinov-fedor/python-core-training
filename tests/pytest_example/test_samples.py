@@ -55,7 +55,7 @@ def test_skip():
     assert 1 == 1
 
 
-import os
+import os  # noqa: E402
 DEBUG = os.environ.get("DEBUG", True)
 
 

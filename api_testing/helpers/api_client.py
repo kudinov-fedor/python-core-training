@@ -43,7 +43,7 @@ class ApiClient:
         return res.json()
 
     def create_list(self, *, name, board_id):
-        res = self.client.post(self.host + "/1/lists".format(board_id),
+        res = self.client.post(self.host + "/1/lists",
                                json={"idBoard": board_id, "name": name})
         res.raise_for_status()
         return res.json()

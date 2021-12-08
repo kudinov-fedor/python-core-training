@@ -2,7 +2,6 @@ import pytest
 from automationpractice import MainPage, OrderPage
 
 
-
 @pytest.fixture
 def flush_cart(session):
     yield
