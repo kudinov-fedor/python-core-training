@@ -1,6 +1,7 @@
 pytest
 pytest-mock
 parameterized
+flake8
 
 # ui testing
 selenium
