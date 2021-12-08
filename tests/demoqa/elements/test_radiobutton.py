@@ -19,4 +19,3 @@ def test_checkbox(host: str, session: WebDriver):
 
     AC(session).click(impressiveRadio).perform()
     assert textSuccess.text == "Impressive"
-
