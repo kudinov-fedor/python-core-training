@@ -1,6 +1,6 @@
 from akaiafiuk.mines.mines_simplified import BattleField, BattlefieldView
 
-DEBUG = False
+DEBUG = True
 
 rules_str = """
             The numbers on the board represent how many bombs are adjacent to a square.
@@ -17,8 +17,11 @@ class TheGame:
     print('Hit "Enter" to continue')
     print('-*-' * 15)
     input()
-    field = BattleField(7, 7, 3)
-    field_view = BattlefieldView(7, 7)
+    x = int(input('Enter field width and press "Enter": '))
+    y = int(input('Enter field height and press "Enter": '))
+    mines_count = int(input('Enter number of mines: '))
+    field = BattleField(x, y, mines_count)
+    field_view = BattlefieldView(x, y)
     field_view.get_field()
 
     # Following line can be used for debug purposes to verify mines position
@@ -31,7 +34,7 @@ class TheGame:
         star_count = 0
         for row in field_view.field_to_print:
             star_count += row.count('*')
-        if star_count == 3:
+        if star_count == field.mines_count:
             print('$' * 30)
             print('$' * 30)
             print('$' * 30)
@@ -46,6 +49,12 @@ class TheGame:
         y = int(input("Input y coordinates and hit Enter: ") or 0)
         coordinates = (x - 1, y - 1)
         cell_value = field.pick_cell(coordinates)
+        if cell_value == '@':
+            print('@' * 30)
+            print('@@@ Oh crap, you loose @@@')
+            print('@' * 30)
+            field_view.renew_field(coordinates, cell_value)
+            exit(0)
         field_view.renew_field(coordinates, cell_value)
 
 
