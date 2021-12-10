@@ -17,6 +17,10 @@ class BaseElement:
     def parent(self):
         return self.driver._parent
 
+    @property
+    def ac(self) -> AC:
+        return AC(self.parent)
+
     def get_element(self, by_locator, from_parent=False) -> WebElement:
         driver = self.parent if from_parent else self.driver
         return WebDriverWait(driver, 10).until(EC.visibility_of_element_located(by_locator))
@@ -53,7 +57,7 @@ class BasePage(BaseElement):
 
     @property
     def parent(self):
-        raise NotImplementedError("not available for BasePage class")
+        return self.driver
 
     def open_page(self):
         assert self.url
