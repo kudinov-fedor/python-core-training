@@ -1,6 +1,5 @@
 from typing import List
 from selenium.webdriver.common.by import By
-from selenium.webdriver import ActionChains as AC
 
 from automationpractice.constants import EMAIL, PASSWORD
 from selenium_helpers.base_page_object import BasePage as _BasePage, GetItem, GetItems, BaseElement
