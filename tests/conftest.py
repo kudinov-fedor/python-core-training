@@ -21,4 +21,4 @@ def tmp_dir():
 def session() -> WebDriver:
     session = create_session()
     yield session
-    session.close()
+    session.quit()
