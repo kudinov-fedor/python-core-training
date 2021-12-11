@@ -8,28 +8,27 @@ from selenium_helpers.base_page_object import BasePage as _BasePage, GetItem, Ge
 class CartElement(BaseElement):
 
     class Locator:
-        item = By.CSS_SELECTOR, ".remove_link"
+        item = By.CSS_SELECTOR, ".ajax_cart_block_remove_link"
 
+    cart_icon = GetItem(By.CSS_SELECTOR, "b")
     products = GetItems(By.CSS_SELECTOR, ".products dt")
     cart_quantity = GetItem(By.CSS_SELECTOR, ".ajax_cart_quantity")
+    cart_no_product = GetItem(By.CSS_SELECTOR, ".ajax_cart_no_product")
 
     @property
     def is_empty(self) -> bool:
-        return self.cart_quantity.text == "0"
+        return self.cart_no_product.is_displayed()
 
     # todo
     def remove_all(self):
         if self.is_empty:
-            return
+            return self
 
-        ac = self.ac.move_to_element(self.driver)
-
-        # self.do_hover()
-
+        ac = self.ac.move_to_element(self.cart_icon).pause(0.1)
         for item in self.products:
-            ac.click(item.find_element(*self.Locator.item))
-            # item.find_element(*self.Locator.item).click()
+            ac.click(item.find_element(*self.Locator.item)).pause(0.5)
         ac.perform()
+        return self
 
 
 class BasePage(_BasePage):
