@@ -39,17 +39,17 @@ class TestMyTests1(TestCase):
         assert 1 == 1
 
     def test_demo_failure(self):
-        self.assertEqual(1,  2, "some smart message")
+        self.assertEqual(1, 2, "some smart message")
 
     def test_assert_rasise(self):
 
         with self.assertRaises(ZeroDivisionError):
-            10/0
+            10 / 0
 
     @parameterized.expand([
-       (-1.5, -2.0),
-       (1, 1.0),
-       (1.6, 1),
+        (-1.5, -2.0),
+        (1, 1.0),
+        (1.6, 1),
     ])
     def test_floor(self, input, expected):
         self.assertEqual(math.floor(input), expected)
@@ -67,7 +67,7 @@ class TestMyTests1(TestCase):
     def test_monkey_patch_class(self):
 
         with mock.patch.object(ClassWithConnection, "connect"):
-            connector = ClassWithConnection("10.0.0.123:8888")
+            ClassWithConnection("10.0.0.123:8888")
             # do smth with connector
 
             self.assertTrue(ClassWithConnection.connect.called)

@@ -4,7 +4,6 @@ from selenium.webdriver.common.action_chains import ActionChains as AC
 
 def test_sortable(host: str, session: WebDriver):
 
-
     session.get(host + "/sortable")
 
     items = session.find_elements_by_css_selector("#demo-tabpane-list .list-group-item")

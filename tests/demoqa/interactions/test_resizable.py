@@ -9,6 +9,7 @@ def test_resizable(host: str, session: WebDriver):
     assert box.size == {'height': 200, 'width': 200}
 
     # different parameters of item
+    print(box.tag_name)                           # div
     print(box.location)                           # {'x': 318, 'y': 237}
     print(box.size)                               # {'height': 200, 'width': 200}
     print(box.get_attribute("style"))             # "width: 200px; height: 200px;"

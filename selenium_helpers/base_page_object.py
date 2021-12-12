@@ -1,3 +1,4 @@
+import time
 from typing import List
 
 from selenium.webdriver.remote.webdriver import WebDriver, WebElement
@@ -6,6 +7,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains as AC
+
+from automationpractice.constants import TIMEOUT
 
 
 class BaseElement:
@@ -17,13 +20,20 @@ class BaseElement:
     def parent(self):
         return self.driver._parent
 
+    @property
+    def ac(self) -> AC:
+        return AC(self.parent)
+
     def get_element(self, by_locator, from_parent=False) -> WebElement:
+        time.sleep(TIMEOUT)
         driver = self.parent if from_parent else self.driver
-        return WebDriverWait(driver, 10).until(EC.visibility_of_element_located(by_locator))
+        # return WebDriverWait(driver, 10).until(EC.visibility_of_element_located(by_locator))
+        return driver.find_element(*by_locator)
 
     def get_elements(self, by_locator, from_parent=False) -> List[WebElement]:
+        time.sleep(TIMEOUT)
         driver = self.parent if from_parent else self.driver
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located(by_locator))
+        # WebDriverWait(driver, 10).until(EC.visibility_of_element_located(by_locator))
         return driver.find_elements(*by_locator)
 
     def get_element_text(self, by_locator):
@@ -53,7 +63,7 @@ class BasePage(BaseElement):
 
     @property
     def parent(self):
-        raise NotImplemented("not available for BasePage class")
+        return self.driver
 
     def open_page(self):
         assert self.url
