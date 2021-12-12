@@ -13,7 +13,7 @@ def driver():
     driver.quit()
 
 
-@pytest.mark.text_box
+@pytest.mark.registration_form
 def test_positive_registration_form(driver):
     driver.find_element(By.CLASS_NAME, "text").click()
     driver.find_element(By.ID, "userName").send_keys('Human')
@@ -25,4 +25,3 @@ def test_positive_registration_form(driver):
     assert driver.find_element(By.XPATH, "//p[@id='email']").text[6:] == 'some@email.com'
     assert driver.find_element(By.XPATH, "//p[@id='currentAddress']").text[-9:] == 'Milky Way'
     assert driver.find_element(By.XPATH, "//p[@id='permanentAddress']").text[-5:] == 'Earth'
-
