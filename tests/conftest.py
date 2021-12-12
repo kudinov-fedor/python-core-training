@@ -9,10 +9,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 def tmp_dir():
     path = os.path.join(os.getcwd(), "tmp")
     os.system("rm -rf {}".format(path))
-    try:
-        os.makedirs(path)
-    except FileExistsError:
-        ...
+    os.mkdir(path)
     yield path
     os.system("rm -rf {}".format(path))
 

@@ -1,6 +1,7 @@
 # flake8: noqa
 
 import time
+import os
 
 from selenium import webdriver
 from selenium.webdriver import ActionChains as AC
@@ -83,3 +84,9 @@ def retry(times: int = 1, exceptions=Exception, timeout: int = 0):
 def read_file(path, **kwargs):
     with open(path, **kwargs) as file:
         return file.read()
+
+
+# check file is present with retries
+@retry(5, AssertionError, timeout=1)
+def assert_file_is_present(path, **kwargs):
+    assert os.path.exists(path)
