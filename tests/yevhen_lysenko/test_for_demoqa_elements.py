@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 
-def test_elements_block(driver):
+def test_elements_block(main_page, driver):
     driver.find_element(By.ID, 'item-0').click()
     driver.find_element(By.ID, 'userName').send_keys('Test message')
     driver.find_element(By.ID, 'submit').click()
@@ -9,7 +9,7 @@ def test_elements_block(driver):
     assert 'Test message' in final_text
 
 
-def test_check_box(driver):
+def test_check_box(main_page, driver):
     driver.find_element(By.ID, 'item-1').click()
     element_first = driver.find_element(By.CSS_SELECTOR,
                                         '#tree-node > ol > li'
