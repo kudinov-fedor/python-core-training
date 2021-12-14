@@ -47,7 +47,7 @@ def create_session(driver_type="chrome") -> WebDriver:
         return webdriver.Chrome(executable_path=CHROME_DRIVER_PATH, options=options, desired_capabilities=capabilities)
 
     elif driver_type == "firefox":
-        return webdriver.Firefox(executable_path="geckodriver")
+        return webdriver.Firefox(executable_path=FIREFOX_DRIVER_PATH)
 
     elif driver_type == "safari":
         return webdriver.Safari(SAFARI_DRIVER_PATH)
