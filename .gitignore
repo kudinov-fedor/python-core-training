@@ -3,4 +3,4 @@ venv
 .idea
 /tmp/
 *.pyc
-geckodriver.log
+*.log
