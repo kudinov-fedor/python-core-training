@@ -7,6 +7,8 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 CHROME_DRIVER_PATH = os.environ.get("CHROME_DRIVER_PATH", "chromedriver")
+FIREFOX_DRIVER_PATH = os.environ.get("FIREFOX_DRIVER_PATH", "geckodriver")
+SAFARI_DRIVER_PATH = os.environ.get("SAFARI_DRIVER_PATH", "/usr/bin/safaridriver")
 
 
 def create_session(driver_type="chrome") -> WebDriver:
@@ -46,3 +48,6 @@ def create_session(driver_type="chrome") -> WebDriver:
 
     elif driver_type == "firefox":
         return webdriver.Firefox(executable_path="geckodriver")
+
+    elif driver_type == "safari":
+        return webdriver.Safari(SAFARI_DRIVER_PATH)
