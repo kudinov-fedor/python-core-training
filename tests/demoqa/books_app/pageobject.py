@@ -8,15 +8,16 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class BasePage:
 
-    host = "https://demoqa.com"
-    url = ""
+    HOST = "https://demoqa.com"
+    URL = ""
+    HEADER = ""
 
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
     def open(self):
-        self.driver.get(self.host + self.url)
-        return self
+        self.driver.get(self.HOST + self.URL)
+        return self.on_load
 
     def find_elenent(self, by, value):
         return self.driver.find_element(by, value)
@@ -30,7 +31,7 @@ class BasePage:
 
     @property
     def on_load(self):
-        self.wait.until(EC.url_contains(self.url))
+        self.wait.until(EC.url_contains(self.URL))
         return self
 
     @property
@@ -39,7 +40,8 @@ class BasePage:
 
 
 class LoginPage(BasePage):
-    url = "/login"
+    URL = "/login"
+    HEADER = "Login"
 
     def login(self, user: str = None, password: str = None):
         userName = self.find_elenent(By.CSS_SELECTOR, "#userName")
@@ -52,20 +54,88 @@ class LoginPage(BasePage):
 
         self.find_elenent(By.CSS_SELECTOR, "button#login").click()
 
-        self.wait.until(EC.url_changes(self.url))
+        self.wait.until(EC.url_changes(self.URL))
 
         return ProfilePage(self.driver)
 
     def logout(self):
+        self.find_elenent(By.ID, "submit").click()
+        return self
+
+    def user_logged_in(self) -> bool:
         ...
 
-    def user_loged_in(self) -> bool:
-        ...
+
+class RegisterPage(BasePage):
+    ...
 
 
 class BooksPage(BasePage):
-    url = "/books"
+    URL = "/books"
+    HEADER = "Book Store"
+
+    # search
+    # logout
+    # books
+
+    # books on page
+    # prev
+    # next
+    # go to page
+
+    def search(self, value):
+        search = self.find_elenent(By.ID, "searchBox")
+        search.clear()
+        search.send_keys(value)
+        return self
+
+    def get_books(self):
+        # rows = self.find_elenents(By.CSS_SELECTOR, ".books-wrapper .rt-tbody .rt-tr-group")
+        # return [i for i in rows if i.text.strip(" ")]
+
+        if "No rows found" in self.find_elenent(By.CLASS_NAME, "books-wrapper").text:
+            return []
+        return self.find_elenents(By.XPATH, "//div[contains(@class, 'books-wrapper')]"
+                                            "//img/ancestor::div[contains(@class, 'rt-tr-group')]")
 
 
-class ProfilePage(BasePage):
-    url = "/profile"
+class ProfilePage(BooksPage):
+    URL = "/profile"
+    HEADER = "Profile"
+
+    # logout
+    # search
+    # books
+    # go to bookstore
+    # delete all books
+    # delete account
+
+    # books on page
+    # open book
+    # delete book
+    # prev
+    # next
+    # go to page
+
+    def logout(self):
+        self.find_elenent(By.ID, "submit").click()
+        return LoginPage(self.driver)
+
+
+class BookPage(BasePage):
+    ...
+
+    # ISBN
+    # Title
+    # Sub Title
+    # Author
+    # Publisher
+    # Total Pages
+    # Description
+    # Website
+
+    # back to book store
+
+
+class ProfileBookPage(BasePage):
+    ...
