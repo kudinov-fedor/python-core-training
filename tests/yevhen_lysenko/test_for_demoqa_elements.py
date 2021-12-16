@@ -21,3 +21,10 @@ def test_check_box(main_page, driver):
     selected_tree.click()
     displayed_result = driver.find_element(By.ID, 'result')
     assert 'home' in displayed_result.text
+
+
+def test_radio_button(main_page, driver):
+    driver.find_element(By.ID, 'item-2').click()
+    driver.find_element(By.CSS_SELECTOR, '[for="impressiveRadio"]').click()
+    yes_response = driver.find_element(By.CLASS_NAME, 'text-success').text
+    assert yes_response == 'Impressive'
