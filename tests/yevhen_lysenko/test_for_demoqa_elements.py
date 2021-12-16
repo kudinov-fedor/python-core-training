@@ -1,4 +1,5 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver import ActionChains
 
 
 def test_elements_block(main_page, driver):
@@ -51,5 +52,28 @@ def test_form(main_page, driver):
     assert 'IT Security' in items_list
 
 
-
+def test_buttons(main_page, driver):
+    driver.find_element(By.ID, 'item-4').click()
+    # identifying the source element
+    double_click_button = driver.find_element(By.ID, 'doubleClickBtn')
+    # action chain object creation
+    action = ActionChains(driver)
+    # double click operation and then perform
+    action.double_click(double_click_button).perform()
+    # read double click message
+    double_click_message =\
+        driver.find_element(By.ID, 'doubleClickMessage').text
+    right_click_button = driver.find_element(By.ID, 'rightClickBtn')
+    # right click operation and then perform
+    action.context_click(right_click_button).perform()
+    # read right click message
+    right_click_message = driver.find_element(By.ID, 'rightClickMessage').text
+    # click operation and then perform
+    click = driver.find_element(By.CSS_SELECTOR, 'div>div:nth-child(3)>[type="button"]')
+    action.click(on_element=click).perform()
+    # read click message
+    click_me_message = driver.find_element(By.ID, 'dynamicClickMessage').text
+    assert double_click_message == 'You have done a double click'
+    assert right_click_message == 'You have done a right click'
+    assert click_me_message == 'You have done a dynamic click'
 
