@@ -32,3 +32,10 @@ def session(size, browser) -> WebDriver:
 
     yield session
     session.quit()
+
+
+@pytest.fixture()
+def take_screen_on_fail(session, request):
+    yield
+    if request.node.rep_call.outcome == "failed":
+        session.save_screenshot("{}.png".format(request.node.name))
