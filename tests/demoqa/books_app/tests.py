@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from selenium_helpers.session import create_session
-from .pageobject import BasePage, LoginPage, BooksPage, ProfilePage
+from .pageobject import BasePage, LoginPage, BooksPage, ProfilePage  # noqa: F401
 
 
 @pytest.fixture(scope="session")
@@ -30,7 +30,7 @@ def test_login_logout(session: WebDriver):
 
 
 def test_search(session):
-    books_page = BooksPage(session).open().on_load
+    books_page = BooksPage(session).open()
     assert len(books_page.get_books()) == 8
     assert len(books_page.search("ECMA").get_books()) == 1
 
