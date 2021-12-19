@@ -6,14 +6,6 @@ Tests for list() python built-in function
 """
 
 
-def len_func(x):
-    return len(x)
-
-
-def list_func(x):
-    return list(x)
-
-
 @pytest.mark.parametrize("x, expected", [
     (5, TypeError),
     (5.0, TypeError),
@@ -24,11 +16,11 @@ def list_func(x):
 ])
 def test_len(x, expected):
     try:
-        assert len_func(x) == expected
-    except TypeError:
-        pass
+        result = len(x)
+    except Exception as e:
+        assert isinstance(e, expected)
     else:
-        return AssertionError
+        assert result == expected
 
 
 @pytest.mark.parametrize("x, expected", [
@@ -41,8 +33,8 @@ def test_len(x, expected):
 ])
 def test_list(x, expected):
     try:
-        assert list_func(x) == expected
-    except TypeError:
-        pass
+        result = list(x)
+    except Exception as e:
+        assert isinstance(e, expected)
     else:
-        return AssertionError
+        assert result == expected
