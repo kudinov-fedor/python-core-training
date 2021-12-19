@@ -140,3 +140,24 @@ def test_progress_bar(driver):
         By.XPATH, "//*[contains(@class,"
                   "'progress-bar bg-success')and text() = '100%']")
     assert progr_vol.get_attribute('aria-valuenow') == '100'
+
+
+def test_dad_1(driver):
+    driver.get('https://demoqa.com/droppable')
+    source1 = driver.find_element(By.ID, 'draggable')
+    target1 = driver.find_element(By.ID, 'droppable')
+    actions2 = ActionChains(driver)
+    actions2.drag_and_drop(source1, target1).perform()
+    assert target1.text == 'Dropped!'
+
+
+def test_dad_2(driver):
+    driver.get('https://demoqa.com/droppable')
+    driver.find_element(By.CSS_SELECTOR,
+                        '[aria-controls="droppableExample-tabpane-accept"]').click()
+    source1 = driver.find_element(By.ID, 'acceptable')
+    target1 = driver.find_element(By.CSS_SELECTOR,
+                                  '.accept-drop-container>#droppable')
+    actions2 = ActionChains(driver)
+    actions2.drag_and_drop(source1, target1).perform()
+    assert target1.text == 'Dropped!'
