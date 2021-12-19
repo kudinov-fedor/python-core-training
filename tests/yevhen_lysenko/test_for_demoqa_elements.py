@@ -114,3 +114,14 @@ def test_date_picker_2(driver):
     driver.find_element(By.XPATH,
                         "//*[contains(@class,'react-datepicker__time-list-item')and text() = '06:45']").click()
     assert picker.get_attribute('value') == 'February 19, 2022 6:45 AM'
+
+
+def test_progress_bar(driver):
+    driver.get('https://demoqa.com/progress-bar')
+    driver.find_element(By.ID, 'startStopButton').click()
+    driver.find_element(By.CSS_SELECTOR, "[role='progressbar']")
+    wait = Wait(driver, 100)
+    wait.until(EC.presence_of_element_located((By.ID, 'resetButton')))
+    progr_vol = driver.find_element(By.XPATH,
+                                    "//*[contains(@class,'progress-bar bg-success')and text() = '100%']")
+    assert progr_vol.get_attribute('aria-valuenow') == '100'
