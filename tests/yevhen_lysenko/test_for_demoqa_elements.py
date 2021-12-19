@@ -1,6 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait as Wait
+from selenium.webdriver.support import expected_conditions as EC
 
+DATA_PICKER_SITE = 'https://demoqa.com/date-picker'
 
 def test_elements_block(main_page, driver):
     driver.find_element(By.ID, 'item-0').click()
@@ -77,3 +81,36 @@ def test_buttons(main_page, driver):
     assert right_click_message == 'You have done a right click'
     assert click_me_message == 'You have done a dynamic click'
 
+
+def test_date_picker_1(driver):
+    driver.get(DATA_PICKER_SITE)
+    picker = driver.find_element(By.ID, 'datePickerMonthYearInput')
+    picker.click()
+    select_month = Select(driver.find_element(By.CLASS_NAME, 'react-datepicker__month-select'))
+    select_month.select_by_visible_text('September')
+    select_year = Select(driver.find_element(By.CLASS_NAME, 'react-datepicker__year-select'))
+    select_year.select_by_visible_text('2015')
+    selected_day = driver.find_element(By.XPATH,
+                                       '//*[contains(@class,"react-datepicker__day react-datepicker__day--016")]')
+    selected_day.click()
+    assert picker.get_attribute("value") == '09/16/2015'
+
+
+def test_date_picker_2(driver):
+    driver.get(DATA_PICKER_SITE)
+    picker = driver.find_element(By.ID, 'dateAndTimePickerInput')
+    picker.click()
+    driver.find_element(By.XPATH,
+                        "//*[contains(@class,'react-datepicker__month-dropdown-container')]").click()
+    driver.find_element(By.XPATH,
+                        "//*[contains(@class,'react-datepicker__month-option')"
+                        " and text() = 'February']").click()
+    driver.find_element(By.CLASS_NAME,
+                        "react-datepicker__year-read-view--down-arrow").click()
+    driver.find_element(By.XPATH, '//*[contains(@class,"react-datepicker__year-option")'
+                                  'and text() = "2022"]').click()
+    driver.find_element(By.CSS_SELECTOR,
+                        ".react-datepicker__day.react-datepicker__day--019").click()
+    driver.find_element(By.XPATH,
+                        "//*[contains(@class,'react-datepicker__time-list-item')and text() = '06:45']").click()
+    assert picker.get_attribute('value') == 'February 19, 2022 6:45 AM'
