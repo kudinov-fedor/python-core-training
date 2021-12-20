@@ -42,7 +42,7 @@ class BasePage:
         ...
 
     def logout(self):
-        ...
+        raise NotImplementedError
 
 
 class LoginPage(BasePage):
