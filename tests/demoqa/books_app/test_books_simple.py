@@ -11,10 +11,10 @@ def test_books(session: WebDriver):
     # register - SKIP
     # login
     # view books
-    # add book
+    # add 2 books
     # view own books
     # remove own book
-    # remove own books
+    # remove all own books
     # logout
     # login - SKIP
     # remove profile - SKIP
