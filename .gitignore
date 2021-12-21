@@ -3,4 +3,3 @@ venv
 .idea
 /tmp/
 *.pyc
-drivers
