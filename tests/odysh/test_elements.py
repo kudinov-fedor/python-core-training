@@ -1,20 +1,14 @@
 import pytest
-
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+from .constants import HOST
 
 
-@pytest.fixture()
-def driver():
-    driver = webdriver.Chrome(executable_path="drivers\\chromedriver.exe")
-    driver.maximize_window()
-    driver.get("https://demoqa.com/elements")
-    yield driver
-    driver.quit()
+ELEMENTS_PAGE = "elements"
 
 
-@pytest.mark.registration_form
+@pytest.mark.text_box
 def test_positive_registration_form(driver):
+    driver.get(HOST + ELEMENTS_PAGE)
     driver.find_element(By.CLASS_NAME, "text").click()
     driver.find_element(By.ID, "userName").send_keys('Human')
     driver.find_element(By.ID, "userEmail").send_keys('some@email.com')
