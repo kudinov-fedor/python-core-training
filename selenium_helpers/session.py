@@ -7,6 +7,9 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 CHROME_DRIVER_PATH = os.environ.get("CHROME_DRIVER_PATH", "chromedriver")
+ANDROID_CHROME_DRIVER_PATH = os.environ.get("ANDROID_CHROME_DRIVER_PATH", "chromedriver")
+FIREFOX_DRIVER_PATH = os.environ.get("FIREFOX_DRIVER_PATH", "geckodriver")
+SAFARI_DRIVER_PATH = os.environ.get("SAFARI_DRIVER_PATH", "/usr/bin/safaridriver")
 
 
 def create_session(driver_type="chrome") -> WebDriver:
@@ -45,4 +48,13 @@ def create_session(driver_type="chrome") -> WebDriver:
         return webdriver.Chrome(executable_path=CHROME_DRIVER_PATH, options=options, desired_capabilities=capabilities)
 
     elif driver_type == "firefox":
-        return webdriver.Firefox(executable_path="geckodriver")
+        return webdriver.Firefox(executable_path=FIREFOX_DRIVER_PATH)
+
+    elif driver_type == "safari":
+        return webdriver.Safari(SAFARI_DRIVER_PATH)
+
+    elif driver_type == "android":
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option('androidPackage', 'com.android.chrome')
+        driver = webdriver.Chrome(ANDROID_CHROME_DRIVER_PATH, chrome_options=options)
+        return driver
