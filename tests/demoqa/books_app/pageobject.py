@@ -1,6 +1,9 @@
+from typing import List
+
 from .constants import USER, PASSWORD
 
 from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
@@ -59,10 +62,7 @@ class LoginPage(BasePage):
         passwordField.send_keys(password or PASSWORD)
 
         self.find_element(By.CSS_SELECTOR, "button#login").click()
-
-        self.wait.until(EC.url_changes(self.URL))
-
-        return ProfilePage(self.driver)
+        return ProfilePage(self.driver).on_load
 
     def logout(self):
         self.find_element(By.ID, "submit").click()
@@ -79,15 +79,7 @@ class RegisterPage(BasePage):
 class BooksPage(BasePage):
     URL = "/books"
     HEADER = "Book Store"
-
-    # search
-    # logout
-    # books
-
-    # books on page
-    # prev
-    # next
-    # go to page
+    BOOK_TABLE_LOCATOR = (By.CSS_SELECTOR, "div.books-wrapper")
 
     def search(self, value):
         search = self.find_element(By.ID, "searchBox")
@@ -95,37 +87,49 @@ class BooksPage(BasePage):
         search.send_keys(value)
         return self
 
-    def get_books(self):
-        # rows = self.find_elenents(By.CSS_SELECTOR, ".books-wrapper .rt-tbody .rt-tr-group")
-        # return [i for i in rows if i.text.strip(" ")]
+    def user_logged_in(self) -> bool:
+        return not self.driver.find_element(By.ID, "notLoggin-wrapper").is_displayed()
 
-        if "No rows found" in self.find_element(By.CLASS_NAME, "books-wrapper").text:
+    def has_books(self) -> bool:
+        books_table = self.find_element(*self.BOOK_TABLE_LOCATOR)
+        return "No rows found" not in books_table.text
+
+    def get_books(self):
+        if not self.has_books():
             return []
-        return self.find_elements(By.XPATH, "//div[contains(@class, 'books-wrapper')]"
-                                            "//img/ancestor::div[contains(@class, 'rt-tr-group')]")
+        books_table = self.find_element(*self.BOOK_TABLE_LOCATOR)
+        return books_table.find_elements(By.XPATH, "//img/ancestor::div[contains(@class, 'rt-tr-group')]")
+
+    def go_to_book(self, value):
+        books = self.get_books()
+        if isinstance(value, int):
+            book = books[value]
+        else:
+            raise TypeError
+        book.find_element(By.TAG_NAME, "a").click()
+        return BookPage(self.driver)
+
+    def logout(self):
+        self.find_element(By.ID, "submit").click()
+        return LoginPage(self.driver)
 
 
 class ProfilePage(BooksPage):
     URL = "/profile"
     HEADER = "Profile"
+    BOOK_TABLE_LOCATOR = (By.CSS_SELECTOR, "div.profile-wrapper")
 
-    # logout
-    # search
-    # books
-    # go to bookstore
-    # delete all books
-    # delete account
+    def remove_books(self):
+        if not self.has_books():
+            return self
 
-    # books on page
-    # open book
-    # delete book
-    # prev
-    # next
-    # go to page
-
-    def logout(self):
-        self.find_element(By.ID, "submit").click()
-        return LoginPage(self.driver)
+        self.find_element(By.CSS_SELECTOR, ".buttonWrap .text-right #submit").click()
+        modal = Wait(self.driver, 5).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".modal-content")))
+        modal.find_element(By.ID, "closeSmallModal-ok").click()
+        alert = Wait(self.driver, 5).until(EC.alert_is_present())
+        assert alert.text in ["All Books deleted.", "No books available in your's collection!"]
+        alert.accept()
+        return self
 
 
 class BookPage(BasePage):
@@ -141,6 +145,12 @@ class BookPage(BasePage):
     # Website
 
     # back to book store
+    def add_book(self):
+        self.on_load.find_element(By.CSS_SELECTOR, ".text-right #addNewRecordButton").click()
+        alert = Wait(self.driver, 5).until(EC.alert_is_present())
+        assert alert.text in ["Book added to your collection.",
+                              "Book already present in the your collection!"]
+        alert.accept()
 
 
 class ProfileBookPage(BasePage):
