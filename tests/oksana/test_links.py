@@ -3,9 +3,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 import requests
 
 WEBSITE = "https://demoqa.com/"
+CREATED_LINK = "created"
+NO_CONTENT_LINK = "no-content"
+BAD_REQUEST = "bad-request"
 
 
 def test_opening_new_tab_from_link(driver):
+    """
+    Click on link and check that a new tab is open with the home page.
+    """
     driver.get(WEBSITE + "links")
     first_tab_handle = driver.window_handles
     link = driver.find_element(By.ID, "simpleLink")
@@ -17,14 +23,34 @@ def test_opening_new_tab_from_link(driver):
     assert driver.current_url == WEBSITE
 
 
-def test_link_status(driver):
+def test_link_status_created(driver):
+    """
+    Click on the link and check the response of the request is 201.
+    """
     driver.get(WEBSITE + "links")
-    link = driver.find_element(By.ID, "created")
+    link = driver.find_element(By.ID, CREATED_LINK)
     link.click()
-    for entry in driver.get_log('browser'):
-        print(entry)
-    assert 0 == 1
+    res = requests.head(WEBSITE + CREATED_LINK)
+    assert res.status_code == 201
 
 
+def test_link_status_no_content(driver):
+    """
+    Click on the link and check the response of the request is 204.
+    """
+    driver.get(WEBSITE + "links")
+    link = driver.find_element(By.ID, NO_CONTENT_LINK)
+    link.click()
+    res = requests.head(WEBSITE + NO_CONTENT_LINK)
+    assert res.status_code == 204
 
 
+def test_link_status_bad_request(driver):
+    """
+    Click on the link and check the response of the request is 400.
+    """
+    driver.get(WEBSITE + "links")
+    link = driver.find_element(By.ID, BAD_REQUEST)
+    link.click()
+    res = requests.head(WEBSITE + BAD_REQUEST)
+    assert res.status_code == 400
