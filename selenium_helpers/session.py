@@ -11,6 +11,7 @@ CHROME_DRIVER_PATH = os.environ.get("CHROME_DRIVER_PATH", "chromedriver")
 ANDROID_CHROME_DRIVER_PATH = os.environ.get("ANDROID_CHROME_DRIVER_PATH", "chromedriver")
 FIREFOX_DRIVER_PATH = os.environ.get("FIREFOX_DRIVER_PATH", "geckodriver")
 SAFARI_DRIVER_PATH = os.environ.get("SAFARI_DRIVER_PATH", "/usr/bin/safaridriver")
+OPERA_DRIVER_PATH = os.environ.get("OPERA_DRIVER_PATH", "operadriver")
 CONFIG = os.environ.get("CONFIG")
 
 
@@ -70,6 +71,10 @@ def create_session(driver_type="chrome", config: dict = None) -> WebDriver:
 
     elif driver_type == "safari":
         return webdriver.Safari(SAFARI_DRIVER_PATH)
+
+    elif driver_type == "opera":
+        return webdriver.Opera(executable_path=OPERA_DRIVER_PATH,
+                               desired_capabilities=deepcopy(DesiredCapabilities.OPERA))
 
     elif driver_type == "android":
         options = webdriver.ChromeOptions()

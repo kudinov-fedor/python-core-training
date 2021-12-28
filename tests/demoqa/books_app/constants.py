@@ -7,4 +7,5 @@ PASSWORD = os.environ["BOOK_APP_PASSWORD"]
 CAPABILITIES = [
     copy.deepcopy(DesiredCapabilities.CHROME),
     copy.deepcopy(DesiredCapabilities.FIREFOX),
+    copy.deepcopy(DesiredCapabilities.OPERA),
 ]
