@@ -1,19 +1,10 @@
-import os
+import os, copy
+
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 USER = os.environ["BOOK_APP_USER"]
 PASSWORD = os.environ["BOOK_APP_PASSWORD"]
 
-SIZES = [
-    # "S",
-    # "M",
-    "L"
+CAPABILITIES = [
+    copy.deepcopy(DesiredCapabilities.CHROME),
+    copy.deepcopy(DesiredCapabilities.FIREFOX),
 ]
-BROWSERS = [
-    "chrome",
-    # "safari",
-    # "firefox",
-    # "android"
-]
-
-WINDOW_PREFS = {
-    "S": (375, 812)
-}

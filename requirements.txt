@@ -3,6 +3,9 @@ pytest-mock
 parameterized
 flake8
 
+# for parallel execution
+pytest-xdist
+
 # ui testing
 selenium
 
