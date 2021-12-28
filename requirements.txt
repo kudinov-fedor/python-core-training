@@ -16,3 +16,6 @@ requests
 sanic
 flask
 locust
+
+# for android native and Windows
+Appium-Python-Client>=0.28
