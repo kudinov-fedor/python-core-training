@@ -6,7 +6,7 @@ from selenium.common.exceptions import TimeoutException
 
 def test_download_progress(session: WebDriver):
 
-    session.get("https://www.seleniumeasy.com/test/bootstrap-download-progress-demo.html")
+    session.get("https://demo.seleniumeasy.com/bootstrap-download-progress-demo.html")
 
     upload_btn = session.find_element(By.ID, "cricle-btn")
     percent_locator = (By.CSS_SELECTOR, "#circle .percenttext")

@@ -8,7 +8,7 @@ from selenium.webdriver import ActionChains as AC
 @pytest.mark.xfail
 def test_drag_and_drop(session: WebDriver):
 
-    session.get("https://www.seleniumeasy.com/test/drag-and-drop-demo.html")
+    session.get("https://demo.seleniumeasy.com/drag-and-drop-demo.html")
 
     items = session.find_elements(By.CSS_SELECTOR, "#todrag > span")
     dropzone = session.find_element(By.ID, "mydropzone")

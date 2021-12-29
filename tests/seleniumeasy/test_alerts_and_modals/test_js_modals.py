@@ -10,7 +10,7 @@ SHOW_AND_HIDE_SCRIPT = "{script}  setTimeout(function (){{waitingDialog.hide();}
 
 def test_simple_dialog(session: WebDriver):
 
-    session.get("https://www.seleniumeasy.com/test/bootstrap-progress-bar-dialog-demo.html")
+    session.get("https://demo.seleniumeasy.com/bootstrap-progress-bar-dialog-demo.html")
     simple_script = SHOW_AND_HIDE_SCRIPT.format(script="waitingDialog.show();", timeout=2)
     session.execute_script(simple_script)
 
