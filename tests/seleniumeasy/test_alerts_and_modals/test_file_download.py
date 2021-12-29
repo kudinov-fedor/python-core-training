@@ -10,7 +10,7 @@ VALUE = "abcd\n12345"
 
 def test_download_file(session: WebDriver, tmp_dir):
 
-    session.get("https://www.seleniumeasy.com/test/generate-file-to-download-demo.html")
+    session.get("https://demo.seleniumeasy.com/generate-file-to-download-demo.html")
     session.find_element(By.ID, "textbox").send_keys(VALUE)
     assert session.find_element(By.ID, "textarea_feedback").text == "{} characters remaining".format(500 - len(VALUE))
     session.find_element(By.ID, "create").click()
