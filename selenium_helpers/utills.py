@@ -1,4 +1,7 @@
+# flake8: noqa
+
 import time
+import os
 
 from selenium import webdriver
 from selenium.webdriver import ActionChains as AC
@@ -12,37 +15,6 @@ from selenium.common.exceptions import (NoSuchElementException,
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.remote.command import Command
-
-
-# monkey patch the find_by_css_selector method :
-# def webdriver_s(self, value):
-#     return self.execute(Command.FIND_ELEMENT, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-#
-#
-# def webdriver_ss(self, value):
-#     return self.execute(Command.FIND_ELEMENTS, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-#
-#
-# def webelement_s(self, value):
-#     return self._execute(Command.FIND_ELEMENT, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-#
-#
-# def webelement_ss(self, value):
-#     return self._execute(Command.FIND_ELEMENTS, {
-#         'using': "css selector",  # By.CSS_SELECTOR,
-#         'value': value})['value']
-
-
-# WebDriver.s = webdriver_s
-# WebDriver.ss = webdriver_ss
-# WebElement.s = webelement_s
-# WebElement.ss = webelement_ss
 
 
 def open_tab(web_driver: WebDriver, tab):
@@ -112,3 +84,9 @@ def retry(times: int = 1, exceptions=Exception, timeout: int = 0):
 def read_file(path, **kwargs):
     with open(path, **kwargs) as file:
         return file.read()
+
+
+# check file is present with retries
+@retry(5, AssertionError, timeout=1)
+def assert_file_is_present(path, **kwargs):
+    assert os.path.exists(path)
