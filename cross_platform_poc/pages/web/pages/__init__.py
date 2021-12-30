@@ -21,7 +21,7 @@ class BooksPage(BasePage):
             "safari": BooksPageSafari,
             "chrome": BooksPageChrome
         }.get(driver[0], cls)
-        if page_class is not cls and cls in page_class.__mro__:
+        if cls in page_class.__mro__[1:]:
             return page_class(driver)
         return super().__new__(cls)
 
@@ -49,3 +49,4 @@ class ProfileBooksPage(BooksPage):
     def add_book(self, index: int):
         books = self.super.get_books()  # get books from correct BooksPage subclass based on driver
         print(self.driver, self.__class__.__name__, " add_book ", books[index])
+        return books[index]

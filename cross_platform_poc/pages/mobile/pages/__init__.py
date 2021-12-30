@@ -23,3 +23,4 @@ class ProfileBooksPage(BooksPage):
     def add_book(self, index: int):
         books = self.get_books()  # get books from correct BooksPage subclass based on driver
         print(self.driver, self.__class__.__name__, " add_book mobile", books[index])
+        return books[index]
