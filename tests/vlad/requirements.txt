@@ -12,11 +12,3 @@ webdriver-manager
 
 # rest api testing
 requests
-
-# load testing
-sanic
-flask
-locust
-
-# for android native and Windows
-Appium-Python-Client>=0.28
