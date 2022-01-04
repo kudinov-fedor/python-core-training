@@ -28,7 +28,7 @@ def create_session(driver_type="chrome", config: dict = None) -> WebDriver:
         options = webdriver.ChromeOptions()
 
         # https://chromedriver.chromium.org/capabilities
-        # options.add_argument("--start-maximized")  # Opens Chrome in maximize mode
+        options.add_argument("--start-maximized")  # Opens Chrome in maximize mode
         # options.add_argument("--incognito")  # Opens Chrome in incognito mode
         # options.add_argument("--headless")  # Opens Chrome in headless mode
         # options.add_argument("--disable-extensions")  # Disables existing extensions on Chrome browser
@@ -39,13 +39,13 @@ def create_session(driver_type="chrome", config: dict = None) -> WebDriver:
         # options.add_argument("--disable-infobars")
         # options.add_argument("--no-sandbox")
         # options.add_argument("--disable-gpu")
-        options.add_argument("--window-size=800,600")
+        # options.add_argument("--window-size=800,600")
         # options.add_argument("--disable-dev-shm-usage")
         # options.add_argument("--no-default-browser-check")
         # options.add_argument("--no-first-run")
 
         # todo clean up new tab opened
-        options.add_extension(os.path.join(os.getcwd(), "extensions", "add_blocker.crx"))
+        # options.add_extension(os.path.join(os.getcwd(), "extensions", "add_blocker.crx"))
 
         prefs = {
             'profile.managed_default_content_settings.media_stream': 1,  # allow camera
