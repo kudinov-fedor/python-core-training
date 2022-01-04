@@ -3,6 +3,11 @@ pytest-mock
 parameterized
 flake8
 
+# pytest reports
+pytest-reportlog
+pytest-excel
+pytest-html
+
 # for parallel execution
 pytest-xdist
 
