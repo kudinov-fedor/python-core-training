@@ -32,8 +32,14 @@ def pytest_runtest_makereport(item, call):
         driver.save_screenshot("{}.png".format(report.head_line))
         img = extras.image("{}.png".format(report.head_line))
         extra.append(img)
-
         report.extra = extra
+
+        # attach screenshot to allure report
+        try:
+            import allure
+            allure.attach.file("./{}.png".format(report.head_line), attachment_type=allure.attachment_type.PNG)
+        except ImportError:
+            pass
 
 
 # HTML HOOKS
