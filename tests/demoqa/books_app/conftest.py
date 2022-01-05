@@ -28,6 +28,9 @@ def pytest_runtest_makereport(item, call):
     extra = getattr(report, "extra", [])
     if report.when == "call" and report.outcome == "failed":
         # extend html report by link to screenshot in case of failure
+        if "session" not in item.funcargs:
+            return
+
         driver = item.funcargs["session"]
         driver.save_screenshot("{}.png".format(report.head_line))
         img = extras.image("{}.png".format(report.head_line))
