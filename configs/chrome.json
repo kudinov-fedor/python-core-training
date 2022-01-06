@@ -1,0 +1,19 @@
+{
+  "browserName": "chrome",
+  "version": "",
+  "platform": "ANY",
+  "goog:chromeOptions": {
+    "prefs": {
+      "profile.managed_default_content_settings.media_stream": 1,
+      "download.default_directory": "/Users/fkudi/PycharmProjects/python_at_2021/tmp"
+    },
+    "excludeSwitches": [
+      "enable-automation"
+    ],
+    "useAutomationExtension": false,
+    "extensions": [],
+    "args": [
+      "--window-size=800,600"
+    ]
+  }
+}

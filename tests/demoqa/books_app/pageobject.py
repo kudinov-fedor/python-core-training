@@ -18,6 +18,18 @@ class BasePage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
 
+    @property
+    def browser_name(self):
+        return self.driver.capabilities["browserName"]
+
+    @property
+    def platform_name(self):
+        return self.driver.capabilities["platformName"]
+
+    @property
+    def window_size(self):
+        return self.driver.get_window_size()
+
     def open(self):
         self.driver.get(self.HOST + self.URL)
         return self.on_load

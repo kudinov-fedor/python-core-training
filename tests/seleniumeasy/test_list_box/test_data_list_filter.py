@@ -10,7 +10,7 @@ from selenium.webdriver.remote.webdriver import WebDriver, By
     ("-234-", 1)
 ])
 def test_data_filter(session: WebDriver, search, expected_count):
-    session.get("https://www.seleniumeasy.com/test/data-list-filter-demo.html")
+    session.get("https://demo.seleniumeasy.com/data-list-filter-demo.html")
 
     session.find_element(By.ID, "input-search").send_keys(search)
     items = [i for i in session.find_elements(By.CSS_SELECTOR, '.items')

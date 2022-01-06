@@ -3,8 +3,18 @@ pytest-mock
 parameterized
 flake8
 
+# pytest reports
+pytest-reportlog
+pytest-excel
+pytest-html
+allure-pytest
+
+# for parallel execution
+pytest-xdist
+
 # ui testing
 selenium
+webdriver-manager
 
 # rest api testing
 requests
@@ -13,3 +23,6 @@ requests
 sanic
 flask
 locust
+
+# for android native and Windows
+Appium-Python-Client>=0.28

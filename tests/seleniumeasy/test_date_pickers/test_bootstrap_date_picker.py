@@ -14,7 +14,7 @@ def test_date_picker(session: WebDriver):
     """
 
     # todo how test will work on Sunday?
-    session.get("https://www.seleniumeasy.com/test/bootstrap-date-picker-demo.html")
+    session.get("https://demo.seleniumeasy.com/bootstrap-date-picker-demo.html")
     dp = DatePickerBootstrap(session)
     dp.click()
     dp.today()
