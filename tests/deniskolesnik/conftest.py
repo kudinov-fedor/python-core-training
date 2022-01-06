@@ -7,7 +7,7 @@ def driver_init():
     #options = webdriver.ChromeOptions()
     #options.add_argument("--disable-popup-blocking")
     driver = webdriver.Chrome()
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(1)
     driver.maximize_window()
     yield driver
     driver.quit()
