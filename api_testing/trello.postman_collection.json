@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "1ffd6711-1f7b-44fe-8f79-d6f48e978449",
+		"name": "trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get boards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/members/me/boards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"members",
+						"me",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create board",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"some_board\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/1/boards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get board",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/boards/{{board_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create list",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idBoard\": \"{{board_id}}\",\n\t\"name\": \"list from postman\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/1/lists",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get lists",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/boards/{{board_id}}/lists",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}",
+						"lists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create card",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idList\": \"{{list_id}}\",\n\t\"name\": \"card from postman\"\n}"
+				},
+				"url": {
+					"raw": "{{host}}/1/cards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get cards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/boards/{{board_id}}/cards",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get cards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/boards/{{board_id}}/cards?fields=desc,name,idBoard,idList",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						"{{board_id}}",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "desc,name,idBoard,idList"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get card",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/cards/{{card_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get board of a card",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/cards/{{card_id}}/board",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}",
+						"board"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list of a card",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/cards/{{card_id}}/list",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get attachements",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/cards/{{card_id}}/attachments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}",
+						"attachments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get attachement",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"url": {
+					"raw": "{{host}}/1/cards/{{card_id}}/attachments/{{attachment_id}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}",
+						"attachments",
+						"{{attachment_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create attachement",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "OAuth oauth_consumer_key=\"{{Key}}\", oauth_token=\"{{Token}}\""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "some",
+							"type": "default"
+						},
+						{
+							"key": "setCover",
+							"value": "false",
+							"type": "default"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/fkudi/Downloads/download.jpeg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{host}}/1/cards/{{card_id}}/attachments",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{card_id}}",
+						"attachments"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
