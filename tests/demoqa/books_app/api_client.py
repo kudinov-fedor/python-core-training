@@ -9,14 +9,23 @@ class ApiClient:
         self.login = login
         self.password = password
         self.user_id = None
-        self.token = None
+        self.session = session()
 
     @property
-    def session(self):
-        _session = session()
-        if self.token:
-            _session.headers["Authorization"] = "Bearer {}".format(self.token)
-        return _session
+    def token(self):
+        header = self.session.headers.get("Authorization")
+        return header.replace("Bearer ", "") if header else None
+
+    @token.setter
+    def token(self, token):
+        if token:
+            self.session.headers["Authorization"] = "Bearer {}".format(token)
+        else:
+            del self.token
+
+    @token.deleter
+    def token(self):
+        self.session.headers.pop("Authorization", None)
 
     def user_create(self):
         res = self.session.post(self.HOST + "/Account/v1/User",
