@@ -3,6 +3,7 @@ import os, copy
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 USER = os.environ["BOOK_APP_USER"]
 PASSWORD = os.environ["BOOK_APP_PASSWORD"]
+HOST = "https://demoqa.com"
 
 CAPABILITIES = [
     copy.deepcopy(DesiredCapabilities.CHROME),
