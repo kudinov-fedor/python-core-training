@@ -15,12 +15,11 @@ def test_see_an_alert(driver):
     driver.get(WEBSITE)
     driver.find_element(By.ID, "alertButton").click()
     try:
-        WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
-        alert = driver.switch_to.alert
+        alert = WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
         assert alert.text == "You clicked a button"
         alert.accept()
     except TimeoutException:
-        print("no alert")
+        raise TimeoutException("Alert is not shown")
 
 
 def test_see_an_alert_confirm_box_appear(driver):
@@ -30,11 +29,10 @@ def test_see_an_alert_confirm_box_appear(driver):
     driver.get(WEBSITE)
     driver.find_element(By.ID, "confirmButton").click()
     try:
-        WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
-        alert = driver.switch_to.alert
+        alert = WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
         alert.accept()
     except TimeoutException:
-        print("no alert")
+        raise TimeoutException("Alert is not shown")
     assert driver.find_element(By.ID, "confirmResult").text == "You selected Ok"
 
 
@@ -45,11 +43,10 @@ def test_see_an_alert_confirm_box_appear_and_canceled(driver):
     driver.get(WEBSITE)
     driver.find_element(By.ID, "confirmButton").click()
     try:
-        WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
-        alert = driver.switch_to.alert
+        alert = WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
         alert.dismiss()
     except TimeoutException:
-        print("no alert")
+        raise TimeoutException("Alert is not shown")
     assert driver.find_element(By.ID, "confirmResult").text == "You selected Cancel"
 
 
@@ -60,10 +57,9 @@ def test_see_an_alert_prompt(driver):
     driver.get(WEBSITE)
     driver.find_element(By.ID, "promtButton").click()
     try:
-        WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
-        alert = driver.switch_to.alert
+        alert = WebDriverWait(driver, TIME_WAIT).until(EC.alert_is_present())
         alert.send_keys("Test")
         alert.accept()
     except TimeoutException:
-        print("no alert")
+        raise TimeoutException("Alert is not shown")
     assert driver.find_element(By.ID, "promptResult").text == "You entered Test"
