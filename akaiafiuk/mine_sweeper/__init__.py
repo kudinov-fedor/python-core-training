@@ -5,58 +5,65 @@ DELTAS = [(1, 0), (-1, 0), (0, 1), (0, -1),
 DEBUG = True
 
 
-def create_mines(count: int, field: list) -> list:
-    """
-    A function which returns a list of coordinates corresponding to mines
-    :param count: Count of mines
-    :param field: Field representation as a list
-    :return: list of mine coordinates
-    """
-    mines = list()
-    counter = 0
-    while counter < count:
-        x = randint(1, len(field[0]) - 1)
-        y = randint(1, len(field) - 1)
-        coord = x, y
-        if coord in mines:
-            continue
-        mines.append(coord)
-        counter += 1
-    if DEBUG:
-        print(mines)
-    return mines
+class Field:
 
+    def __init__(self, height: int, width: int, mines_count: int):
+        """
+        Initialize the field and assemble mines
+        :param height: field height
+        :param width: field width
+        :param mines_count: count of mines inside the field
+        """
+        self.field = [["."] * width for _ in range(height)]
+        self.mines = Field.create_mines(mines_count, self.field)
 
-def setup(height: int, width: int) -> list:
-    """
-    Create a field in form of list
-    :param height: field height
-    :param width: field width
-    :return: field representation as a list
-    """
-    field = [["."] * width for _ in range(height)]
-    return field
+    @staticmethod
+    def create_mines(count: int, field: list) -> list:
+        """
+        A function which returns a list of coordinates corresponding to mines
+        :param count: Count of mines
+        :param field: Field representation as a list
+        :return: list of mine coordinates
+        """
+        mines = list()
+        counter = 0
+        while counter < count:
+            x = randint(1, len(field[0]) - 1)
+            y = randint(1, len(field) - 1)
+            coord = x, y
+            if coord in mines:
+                continue
+            mines.append(coord)
+            counter += 1
+        if DEBUG:
+            print(mines)
+        return mines
 
+    def display_field(self) -> None:
+        """
+        Display the field
+        :return: None
+        """
+        for i in self.field:
+            print(i)
+        print("-" * len(self.field[0]))
 
-def display_field(field: list) -> None:
-    """
-    Display the field
-    :param field: field representation as a list
-    :return: None
-    """
-    for i in field:
-        print(i)
-    print("-" * len(field[0]))
+    def mines_count(self, guess_coordinates: tuple) -> int:
+        """
+        Returns an int with number of mines around the cell
+        :param guess_coordinates: a tuple with x and y coordinates of a choice
+        :return: int with number of mines around
+        """
+        return sum((guess_coordinates[0] + dx, guess_coordinates[1] + dy) in self.mines for dx, dy in DELTAS)
 
-
-def mines_count(guess_coordinates: tuple, mines: list) -> int:
-    """
-    Returns an int with number of mines around the cell
-    :param guess_coordinates: a tuple with x and y coordinates of a choice
-    :param mines: a list of tuples with mine coordinates
-    :return: int with number of mines around
-    """
-    return sum((guess_coordinates[0] + dx, guess_coordinates[1] + dy) in mines for dx, dy in DELTAS)
+    def set_sign(self, guess_coordinates: tuple) -> None:
+        """
+        Sets sign on the field.  * if mine else: mines_around
+        :param guess_coordinates: a tuple with x and y coordinates
+        :return: None
+        """
+        sign = "*" if guess_coordinates in self.mines else str(self.mines_count(guess_coordinates))
+        self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
 
 
 def next_move(field: list) -> tuple:
@@ -72,18 +79,6 @@ def next_move(field: list) -> tuple:
     return coord
 
 
-def set_sign(guess: tuple, mines: tuple, field: list) -> None:
-    """
-    Sets sign on the field.  * if mine else: mines_around
-    :param guess: a tuple with x and y coordinates
-    :param mines: a list of tuples with mine coordinates
-    :param field: field representation as a list
-    :return: None
-    """
-    sign = "*" if guess in mines else str(mines_count(guess, mines))
-    field[guess[1]][guess[0]] = sign
-
-
 def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
     """
     Runs a mine sweeper game
@@ -92,19 +87,18 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
     :param mines_number: Count of mines that the field will contain
     :return: None
     """
-    field = setup(height, width)
-    mines = create_mines(mines_number, field)
+    field = Field(height, width, mines_number)
 
     while True:
 
-        x, y, = next_move(field)
+        x, y, = next_move(field.field)
         guess = x, y
 
         # set sign
-        set_sign(guess, mines, field)
+        field.set_sign(guess)
 
         # display
-        display_field(field, width)
+        field.display_field()
 
 
 if __name__ == "__main__":
