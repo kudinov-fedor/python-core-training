@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Hi there</title>
+        <link media="all" rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        <h1>My Header</h1>
+        <img src="/static/img.png" alt="some picture">
+        <br>
+        <a href="/static/hello.html">Link to other page</a>
+
+        <h1> USERS </h1>
+        {% for user in users %}
+          user:  {{ user.id }} {{ user.email }}  <br>
+          {% for book in user.books %}
+             book: {{ book.title }} author: {{ book.author.first_name }}  <br>
+          {% endfor %}
+        <br>
+
+        {% endfor %}
+
+    </body>
+</html>

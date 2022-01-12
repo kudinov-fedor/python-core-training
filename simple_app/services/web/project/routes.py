@@ -8,13 +8,22 @@ from flask import (
     send_from_directory,
     request,
     redirect,
-    url_for
+    url_for,
+    render_template
 )
 
 from project.models import User
 
 
 @app.route("/")
+def main():
+    page = int(request.args.get("page", 1))
+    per_page = int(request.args.get("per_page", 10))
+    users = User.query.paginate(page, per_page, error_out=False).items
+    return render_template('main.html', users=users)
+
+
+@app.route("/hello")
 def hello_world():
     return jsonify(hello="world")
 
