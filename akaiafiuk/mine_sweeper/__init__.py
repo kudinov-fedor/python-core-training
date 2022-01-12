@@ -14,6 +14,8 @@ class Field:
         :param width: field width
         :param mines_count: count of mines inside the field
         """
+        self.height = height
+        self.width = width
         self.field = [["."] * width for _ in range(height)]
         self.mines = Field.create_mines(mines_count, self.field)
 
