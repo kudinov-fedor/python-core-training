@@ -2,7 +2,7 @@ from random import randint
 
 DELTAS = [(1, 0), (-1, 0), (0, 1), (0, -1),
                   (1, 1), (-1, 1), (1, -1), (-1, -1)]
-DEBUG = True
+DEBUG = False
 
 
 class Field:
