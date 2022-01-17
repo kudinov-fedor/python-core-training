@@ -1,4 +1,4 @@
-import os
+import os, logging
 from project import app, db
 
 from werkzeug.utils import secure_filename
@@ -13,6 +13,8 @@ from flask import (
 )
 
 from project.models import User
+
+logger = logging.getLogger(__name__)
 
 
 @app.route("/")
@@ -30,6 +32,12 @@ def hello_world():
 
 @app.route('/users', methods=['GET'])
 def users():
+
+    logger.info("hi info")
+    logger.debug("hi debug")
+    logger.warning("hi warning")
+    logger.error("hi error")
+
     page = int(request.args.get("page", 1))
     per_page = int(request.args.get("per_page", 10))
 

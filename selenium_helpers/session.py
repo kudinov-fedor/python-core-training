@@ -13,6 +13,7 @@ FIREFOX_DRIVER_PATH = os.environ.get("FIREFOX_DRIVER_PATH", "geckodriver")
 SAFARI_DRIVER_PATH = os.environ.get("SAFARI_DRIVER_PATH", "/usr/bin/safaridriver")
 OPERA_DRIVER_PATH = os.environ.get("OPERA_DRIVER_PATH", "operadriver")
 CONFIG = os.environ.get("CONFIG")
+TESTPROJECT_TOKEN = os.environ.get("TESTPROJECT_TOKEN")
 
 
 def create_session(driver_type="chrome", config: dict = None) -> WebDriver:
@@ -81,3 +82,9 @@ def create_session(driver_type="chrome", config: dict = None) -> WebDriver:
         options.add_experimental_option('androidPackage', 'com.android.chrome')
         driver = webdriver.Chrome(ANDROID_CHROME_DRIVER_PATH, chrome_options=options)
         return driver
+
+    elif driver_type == "testproject":
+        from src.testproject.sdk.drivers import webdriver as testproject_webdriver
+        return testproject_webdriver.Chrome(token=TESTPROJECT_TOKEN,
+                                            project_name='Demo project',
+                                            job_name='Run with Failure_7')
