@@ -10,7 +10,7 @@ from selenium_helpers.session import create_session
 from .pageobject import BasePage, LoginPage, BooksPage, ProfilePage, BookPage  # noqa: F401
 
 
-@pytest.fixture(scope="session", params=["testproject"])
+@pytest.fixture(scope="session", params=["chrome"])
 def capabilities(request):
     return request.param
 
