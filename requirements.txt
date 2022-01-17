@@ -8,6 +8,7 @@ pytest-reportlog
 pytest-excel
 pytest-html
 allure-pytest
+testproject-python-sdk
 
 # for parallel execution
 pytest-xdist

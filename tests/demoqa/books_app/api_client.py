@@ -137,6 +137,7 @@ class ApiClient:
         self.token = res["token"]
 
     def reset(self):
+        self.update_token()
         self.user_delete()
         self.token = None
         self.user_id = None

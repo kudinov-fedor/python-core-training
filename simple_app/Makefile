@@ -9,6 +9,10 @@ dev_down:
 	docker-compose down -v
 
 
+dev_logs:
+	docker-compose logs -f
+
+
 prod_up:
 	docker-compose -f docker-compose.prod.yml up -d --build
 	docker-compose -f docker-compose.prod.yml exec web python manage.py create_db
@@ -18,3 +22,7 @@ prod_up:
 
 prod_down:
 	docker-compose -f docker-compose.prod.yml down -v
+
+
+prod_logs:
+	docker-compose -f docker-compose.prod.yml logs -f
