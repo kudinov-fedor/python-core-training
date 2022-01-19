@@ -33,6 +33,5 @@ def test_link_status_response(driver, text, status_code):
     driver.get(WEBSITE + "links")
     link = driver.find_element(By.XPATH, "//a[text()='{}']".format(text))
     path = link.get_attribute("id")
-    link.click()
     res = requests.head(urljoin(WEBSITE, path))
     assert res.status_code == status_code
