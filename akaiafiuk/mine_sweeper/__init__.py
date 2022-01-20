@@ -1,37 +1,36 @@
 from random import randint
+from typing import Union
 
 DELTAS = [(1, 0), (-1, 0), (0, 1), (0, -1),
                   (1, 1), (-1, 1), (1, -1), (-1, -1)]
-DEBUG = True
+DEBUG = False
 
 
 class Field:
 
-    def __init__(self, height: int, width: int, mines_count: int):
+    def __init__(self, height: int, width: int, mines_count: Union[int, list] = 0):
         """
         Initialize the field and assemble mines
         :param height: field height
         :param width: field width
-        :param mines_count: count of mines inside the field
+        :param mines_count: int: count of mines inside the field | list: list of tuples with mine coordinates
         """
         self.height = height
         self.width = width
         self.field = [["."] * width for _ in range(height)]
-        self.mines = Field.create_mines(mines_count, self.field)
+        self.mines = self.create_mines(mines_count) if isinstance(mines_count, int) else mines_count
 
-    @staticmethod
-    def create_mines(count: int, field: list) -> list:
+    def create_mines(self, count: int) -> list:
         """
         A function which returns a list of coordinates corresponding to mines
         :param count: Count of mines
-        :param field: Field representation as a list
         :return: list of mine coordinates
         """
         mines = list()
         counter = 0
         while counter < count:
-            x = randint(1, len(field[0]) - 1)
-            y = randint(1, len(field) - 1)
+            x = randint(1, self.width - 1)
+            y = randint(1, self.height - 1)
             coord = x, y
             if coord in mines:
                 continue
@@ -66,6 +65,15 @@ class Field:
         """
         sign = "*" if guess_coordinates in self.mines else str(self.mines_count(guess_coordinates))
         self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
+
+    def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
+        """
+        Verify if given coordinates are within the field boundaries
+        :param coord_to_verify: a tuple with x and y coordinates
+        :return: bool if a coordinate is within the field boundaries
+        """
+        x, y = coord_to_verify
+        return x in range(self.width) and y in range(self.height)
 
 
 def next_move(field: list) -> tuple:
