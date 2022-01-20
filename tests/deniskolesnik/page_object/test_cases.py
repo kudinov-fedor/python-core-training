@@ -1,0 +1,48 @@
+from selenium.webdriver.common.by import By
+from page_object import env_variable
+from selenium.common.exceptions import NoSuchElementException
+from page_object.pages.base_page import BasePage
+from page_object.pages.login_page import LoginPage
+from page_object.pages.profile_page import Profile
+from page_object.pages.book_store_page import BookStore
+from page_object.pages.book_page import BookPage
+
+
+def test_login(driver_init):
+    LoginPage(driver_init).open().login()
+    try:
+        driver_init.find_element(By.XPATH, BasePage(driver_init).logout_button)
+    except NoSuchElementException:
+        AssertionError('User is not logged in')
+
+
+def test_logout(driver_init):
+    test_login(driver_init)
+    BasePage(driver_init).logout()
+
+    try:
+        LoginPage(driver_init).login_form()
+    except NoSuchElementException:
+        return AssertionError('User is not logged out')
+
+
+def test_search_and_add_book_to_collecton(driver_init):
+    test_delete_all_books(driver_init)
+
+    open_book = BookStore(driver_init).open().search_book_and_open(env_variable.BOOK_NAME)
+    assert open_book in driver_init.current_url
+
+    add_book = BookPage(driver_init).add_book_to_collection()
+    assert add_book == 'Book added to your collection.'
+
+
+def test_delete_all_books(driver_init):
+    test_login(driver_init)
+
+    delete_books = Profile(driver_init).open().delete_all_books()
+    if 'All Books deleted.' in delete_books:
+        pass
+    elif "No books available in yours collection!" in delete_books:
+        return 'List of books already empty'
+    else:
+        return AssertionError('No match found')
