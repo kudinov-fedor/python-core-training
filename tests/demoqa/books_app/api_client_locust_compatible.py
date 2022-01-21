@@ -1,80 +1,86 @@
 from requests import session
 
+from tests.demoqa.books_app.constants import USER, PASSWORD, HOST
+
 
 class ApiClient:
+    # locust compatible ApiClient
+    # - no required params in init
+    # - host
+    # - client
 
-    HOST = "https://demoqa.com"
+    host = HOST
 
-    def __init__(self, login, password):
+    def __init__(self, login=USER, password=PASSWORD):
         self.login = login
         self.password = password
         self.user_id = None
-        self.session = session()
+        self.client = session()
 
     @property
     def token(self):
-        header = self.session.headers.get("Authorization")
+        header = self.client.headers.get("Authorization")
         return header.replace("Bearer ", "") if header else None
 
     @token.setter
     def token(self, token):
         if token:
-            self.session.headers["Authorization"] = "Bearer {}".format(token)
+            self.client.headers["Authorization"] = "Bearer {}".format(token)
         else:
             del self.token
 
     @token.deleter
     def token(self):
-        self.session.headers.pop("Authorization", None)
+        self.client.headers.pop("Authorization", None)
 
     def user_create(self):
-        res = self.session.post(self.HOST + "/Account/v1/User",
-                                json={"userName": self.login,
-                                      "password": self.password})
+        res = self.client.post(self.host + "/Account/v1/User",
+                               json={"userName": self.login,
+                                     "password": self.password})
         res.raise_for_status()
         return res.json()
 
     def generate_token(self):
-        res = self.session.post(self.HOST + "/Account/v1/GenerateToken",
-                                json={"userName": self.login,
-                                      "password": self.password})
+        res = self.client.post(self.host + "/Account/v1/GenerateToken",
+                               json={"userName": self.login,
+                                     "password": self.password})
         res.raise_for_status()
         return res.json()
 
     def user_exists(self) -> bool:
-        res = self.session.post(self.HOST + "/Account/v1/Authorized",
-                                json={"userName": self.login,
-                                      "password": self.password})
+        res = self.client.post(self.host + "/Account/v1/Authorized",
+                               json={"userName": self.login,
+                                     "password": self.password})
         return res.status_code == 200
 
     def user_authorized(self) -> bool:
-        res = self.session.post(self.HOST + "/Account/v1/Authorized",
-                                json={"userName": self.login,
-                                      "password": self.password})
+        res = self.client.post(self.host + "/Account/v1/Authorized",
+                               json={"userName": self.login,
+                                     "password": self.password})
         res.raise_for_status()
         return res.content == "true"
 
     def user_login(self):
-        res = self.session.post(self.HOST + "/Account/v1/Login",
-                                json={"userName": self.login,
-                                      "password": self.password})
+        res = self.client.post(self.host + "/Account/v1/Login",
+                               json={"userName": self.login,
+                                     "password": self.password})
         res.raise_for_status()
         return res.json()
 
     def user_get(self):
         assert self.user_id
 
-        res = self.session.get(self.HOST + "/Account/v1/User/{}".format(self.user_id))
+        res = self.client.get(self.host + "/Account/v1/User/{}".format(self.user_id))
         res.raise_for_status()
         return res.json()
 
     def books_get(self):
-        res = self.session.get(self.HOST + "/BookStore/v1/Books")
+        res = self.client.get(self.host + "/BookStore/v1/Books")
         res.raise_for_status()
         return res.json()
 
     def book_get(self, isbn):
-        res = self.session.get(self.HOST + "/BookStore/v1/Book/{}".format(isbn))
+        res = self.client.get(self.host + "/BookStore/v1/Book/{}".format(isbn))
         res.raise_for_status()
         return res.json()
 
@@ -84,7 +90,7 @@ class ApiClient:
 
         data = {"userId": self.user_id,
                 "collectionOfIsbns": [{"isbn": i} for i in isbn]}
-        res = self.session.post(self.HOST + "/BookStore/v1/Books", json=data)
+        res = self.client.post(self.host + "/BookStore/v1/Books", json=data)
         res.raise_for_status()
         return res.json()
 
@@ -93,7 +99,7 @@ class ApiClient:
 
         data = {"userId": self.user_id,
                 "isbn": isbn2}
-        res = self.session.put(self.HOST + "/BookStore/v1/Books/{}".format(isbn1), json=data)
+        res = self.client.put(self.host + "/BookStore/v1/Books/{}".format(isbn1), json=data)
         res.raise_for_status()
         return res.json()
 
@@ -102,20 +108,20 @@ class ApiClient:
 
         data = {"isbn": isbn,
                 "userId": self.user_id}
-        res = self.session.delete(self.HOST + "/BookStore/v1/Book", json=data)
+        res = self.client.delete(self.host + "/BookStore/v1/Book", json=data)
         res.raise_for_status()
 
     def books_delete(self):
         assert self.user_id, self.user_id
 
         params = {"UserId": self.user_id}
-        res = self.session.delete(self.HOST + "/BookStore/v1/Books", params=params)
+        res = self.client.delete(self.host + "/BookStore/v1/Books", params=params)
         res.raise_for_status()
 
     def user_delete(self):
         assert self.user_id
 
-        res = self.session.delete(self.HOST + "/Account/v1/User/{}".format(self.user_id))
+        res = self.client.delete(self.host + "/Account/v1/User/{}".format(self.user_id))
         res.raise_for_status()
 
     # ====================
@@ -137,7 +143,6 @@ class ApiClient:
         self.token = res["token"]
 
     def reset(self):
-        self.update_token()
         self.user_delete()
         self.token = None
         self.user_id = None
