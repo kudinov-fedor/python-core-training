@@ -8,18 +8,18 @@ from page_object.pages.profile_page import Profile
 class LoginPage(BasePage):
 
     URL = '/login'
-    login_wrapper = '.login-wrapper'
-    username_field = '#userName'
-    password_field = '#password'
-    login_button = '#login'
-    new_user_button = '#newUser'
+    LOGIN_WRAPPER = By.CSS_SELECTOR, '.login-wrapper'
+    USERNAME_FIELD = '#userName'
+    PASSWORD_FIELD = '#password'
+    LOGIN_BUTTON = '#login'
+    NEW_USER_BUTTON = '#newUser'
 
     def login_form(self):
-        return self.find_element(By.CSS_SELECTOR, self.login_wrapper)
+        return self.find_element(*self.LOGIN_WRAPPER)
 
     def login(self):
-        username = self.find_element(By.CSS_SELECTOR, self.username_field)
-        password = self.find_element(By.CSS_SELECTOR, self.password_field)
+        username = self.find_element(By.CSS_SELECTOR, self.USERNAME_FIELD)
+        password = self.find_element(By.CSS_SELECTOR, self.PASSWORD_FIELD)
 
         username.clear()
         username.send_keys(env_variable.USERNAME)
@@ -27,7 +27,7 @@ class LoginPage(BasePage):
         password.clear()
         password.send_keys(env_variable.PASSWORD)
 
-        self.find_element(By.CSS_SELECTOR, self.login_button).click()
+        self.find_element(By.CSS_SELECTOR, self.LOGIN_BUTTON).click()
 
         Profile(self.driver).on_load()
 

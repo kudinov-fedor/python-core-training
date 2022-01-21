@@ -7,8 +7,8 @@ from page_object import env_variable
 
 
 class BasePage:
-    logout_button = '//button[text()="Log out"]'
-    book_store = ''
+    LOGOUT_BUTTON = '//button[text()="Log out"]'
+    BOOK_STORE = ''
 
     URL = ''
 
@@ -31,6 +31,6 @@ class BasePage:
         return self.driver.find_element(by, value)
 
     def logout(self):
-        self.find_element(By.XPATH, self.logout_button).click()
+        self.find_element(By.XPATH, self.LOGOUT_BUTTON).click()
         self.wait.until(EC.url_contains('/login'))
         return self

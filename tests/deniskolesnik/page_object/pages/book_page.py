@@ -6,11 +6,11 @@ from page_object.pages.base_page import BasePage
 
 
 class BookPage(BasePage):
-    back_to_bookstore_button = '//button[text()="Back To Book Store"]'
-    add_to_your_collection_button = '//button[text()="Add To Your Collection"]'
+    BACK_TO_BOOKSTORE_BUTTON = '//button[text()="Back To Book Store"]'
+    ADD_TO_YOUR_COLLECTION_BUTTON = '//button[text()="Add To Your Collection"]'
 
     def add_book_to_collection(self):
-        self.find_element(By.XPATH, self.add_to_your_collection_button).click()
+        self.find_element(By.XPATH, self.ADD_TO_YOUR_COLLECTION_BUTTON).click()
         Wait(self.driver, 2).until(EC.alert_is_present())
         alert = self.driver.switch_to.alert
         alert_text = alert.text

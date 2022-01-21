@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='function', autouse=True)
 def driver_init():
     # add_argument("--ignore-certificate-errors")
     options = webdriver.ChromeOptions()

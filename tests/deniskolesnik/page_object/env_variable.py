@@ -1,4 +1,4 @@
 HOST = 'https://demoqa.com'
-USERNAME = 'desya'
-PASSWORD = 'Qwertyuiop12!'
+USERNAME = ''
+PASSWORD = ''
 BOOK_NAME = 'Designing Evolvable Web APIs with ASP.NET'
