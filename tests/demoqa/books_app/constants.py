@@ -1,19 +1,12 @@
-import os
+import os, copy
+
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 USER = os.environ["BOOK_APP_USER"]
 PASSWORD = os.environ["BOOK_APP_PASSWORD"]
+HOST = "https://demoqa.com"
 
-SIZES = [
-    # "S",
-    # "M",
-    "L"
+CAPABILITIES = [
+    copy.deepcopy(DesiredCapabilities.CHROME),
+    copy.deepcopy(DesiredCapabilities.FIREFOX),
+    copy.deepcopy(DesiredCapabilities.OPERA),
 ]
-BROWSERS = [
-    "chrome",
-    # "safari",
-    # "firefox",
-    # "android"
-]
-
-WINDOW_PREFS = {
-    "S": (375, 812)
-}

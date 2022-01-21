@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 def test_dual_list_box(session: WebDriver):
 
-    session.get("https://www.seleniumeasy.com/test/jquery-dual-list-box-demo.html")
+    session.get("https://demo.seleniumeasy.com/jquery-dual-list-box-demo.html")
 
     items = session.find_elements(By.CSS_SELECTOR, "select.pickData > option")
     add_btn = session.find_element(By.CSS_SELECTOR, "button.pAdd")

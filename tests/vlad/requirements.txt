@@ -1,0 +1,14 @@
+pytest
+pytest-mock
+parameterized
+flake8
+
+# for parallel execution
+pytest-xdist
+
+# ui testing
+selenium
+webdriver-manager
+
+# rest api testing
+requests

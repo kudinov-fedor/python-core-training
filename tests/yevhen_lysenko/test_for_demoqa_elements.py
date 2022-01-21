@@ -1,5 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait as Wait
+from selenium.webdriver.support import expected_conditions as EC
+
+DATA_PICKER_SITE = 'https://demoqa.com/date-picker'
 
 
 def test_elements_block(main_page, driver):
@@ -69,7 +74,8 @@ def test_buttons(main_page, driver):
     # read right click message
     right_click_message = driver.find_element(By.ID, 'rightClickMessage').text
     # click operation and then perform
-    click = driver.find_element(By.CSS_SELECTOR, 'div>div:nth-child(3)>[type="button"]')
+    click = driver.find_element(By.CSS_SELECTOR,
+                                'div>div:nth-child(3)>[type="button"]')
     action.click(on_element=click).perform()
     # read click message
     click_me_message = driver.find_element(By.ID, 'dynamicClickMessage').text
@@ -77,3 +83,81 @@ def test_buttons(main_page, driver):
     assert right_click_message == 'You have done a right click'
     assert click_me_message == 'You have done a dynamic click'
 
+
+def test_date_picker_1(driver):
+    driver.get(DATA_PICKER_SITE)
+    picker = driver.find_element(By.ID,
+                                 'datePickerMonthYearInput')
+    picker.click()
+    select_month = Select(driver.find_element(
+        By.CLASS_NAME, 'react-datepicker__month-select'))
+    select_month.select_by_visible_text('September')
+    select_year = Select(driver.find_element(
+        By.CLASS_NAME, 'react-datepicker__year-select'))
+    select_year.select_by_visible_text('2015')
+    selected_day = driver.find_element(
+        By.XPATH,
+        '//*[contains(@class,"react-datepicker__day'
+        ' react-datepicker__day--016")]')
+    selected_day.click()
+    assert picker.get_attribute("value") == '09/16/2015'
+
+
+def test_date_picker_2(driver):
+    driver.get(DATA_PICKER_SITE)
+    picker = driver.find_element(
+        By.ID, 'dateAndTimePickerInput')
+    picker.click()
+    driver.find_element(
+        By.XPATH,
+        "//*[contains(@class,"
+        "'react-datepicker__month-dropdown-container')]").click()
+    driver.find_element(By.XPATH,
+                        "//*[contains(@class,'react-datepicker__month-option')"
+                        " and text() = 'February']").click()
+    driver.find_element(By.CLASS_NAME,
+                        "react-datepicker__year-read-view--down-arrow").click()
+    driver.find_element(By.XPATH,
+                        '//*[contains(@class,"react-datepicker__year-option")'
+                        'and text() = "2022"]').click()
+    driver.find_element(
+        By.CSS_SELECTOR,
+        ".react-datepicker__day.react-datepicker__day--019").click()
+    driver.find_element(By.XPATH,
+                        "//*[contains(@class,"
+                        "'react-datepicker__time-list-item')"
+                        "and text() = '06:45']").click()
+    assert picker.get_attribute('value') == 'February 19, 2022 6:45 AM'
+
+
+def test_progress_bar(driver):
+    driver.get('https://demoqa.com/progress-bar')
+    driver.find_element(By.ID, 'startStopButton').click()
+    driver.find_element(By.CSS_SELECTOR, "[role='progressbar']")
+    wait = Wait(driver, 100)
+    wait.until(EC.presence_of_element_located((By.ID, 'resetButton')))
+    progr_vol = driver.find_element(
+        By.XPATH, "//*[contains(@class,"
+                  "'progress-bar bg-success')and text() = '100%']")
+    assert progr_vol.get_attribute('aria-valuenow') == '100'
+
+
+def test_dad_1(driver):
+    driver.get('https://demoqa.com/droppable')
+    source1 = driver.find_element(By.ID, 'draggable')
+    target1 = driver.find_element(By.ID, 'droppable')
+    actions2 = ActionChains(driver)
+    actions2.drag_and_drop(source1, target1).perform()
+    assert target1.text == 'Dropped!'
+
+
+def test_dad_2(driver):
+    driver.get('https://demoqa.com/droppable')
+    driver.find_element(By.CSS_SELECTOR,
+                        '[aria-controls="droppableExample-tabpane-accept"]').click()
+    source1 = driver.find_element(By.ID, 'acceptable')
+    target1 = driver.find_element(By.CSS_SELECTOR,
+                                  '.accept-drop-container>#droppable')
+    actions2 = ActionChains(driver)
+    actions2.drag_and_drop(source1, target1).perform()
+    assert target1.text == 'Dropped!'
