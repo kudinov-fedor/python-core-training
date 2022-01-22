@@ -15,10 +15,16 @@ class Field:
         :param width: field width
         :param mines_count: int: count of mines inside the field | list: list of tuples with mine coordinates
         """
-        self.height = height
-        self.width = width
         self.field = [["."] * width for _ in range(height)]
         self.mines = self.create_mines(mines_count) if isinstance(mines_count, int) else mines_count
+
+    @property
+    def width(self):
+        return len(self.field[0])
+
+    @property
+    def height(self):
+        return len(self.field)
 
     def create_mines(self, count: int) -> list:
         """
@@ -76,13 +82,13 @@ class Field:
         return x in range(self.width) and y in range(self.height)
 
 
-def next_move(field: list) -> tuple:
+def next_move(field) -> tuple:
     """
     A function which generates next user's try
     :return: tuple of coordinates
     """
-    x = randint(0, len(field[0]) - 1)
-    y = randint(0, len(field) - 1)
+    x = randint(0, field.width - 1)
+    y = randint(0, field.height - 1)
     coord = x, y
     if DEBUG:
         print(coord)
@@ -101,7 +107,7 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
 
     while True:
 
-        x, y, = next_move(field.field)
+        x, y, = next_move(field)
         guess = x, y
 
         # set sign
