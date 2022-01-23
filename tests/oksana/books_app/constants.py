@@ -2,5 +2,5 @@ import os
 
 
 HOST = "https://demoqa.com"
-LOGIN = os.environ['LOGIN']
-PASSWORD = os.environ['PASSWORD']
+LOGIN = os.getenv("LOGIN")
+PASSWORD = os.getenv("PASSWORD")
