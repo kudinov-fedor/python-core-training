@@ -50,4 +50,3 @@ def test_empty_cells():
     for coord in coordinates:
         field.set_sign(coord)
     assert field.empty_cells() == []
-
