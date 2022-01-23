@@ -3,7 +3,7 @@ from typing import Union
 
 DELTAS = [(1, 0), (-1, 0), (0, 1), (0, -1),
                   (1, 1), (-1, 1), (1, -1), (-1, -1)]
-DEBUG = False
+DEBUG = True
 
 
 class Field:
@@ -69,7 +69,7 @@ class Field:
         :param guess_coordinates: a tuple with x and y coordinates
         :return: None
         """
-        sign = "*" if guess_coordinates in self.mines else str(self.mines_count(guess_coordinates))
+        sign = "*" if self.is_mine(guess_coordinates) else str(self.mines_count(guess_coordinates))
         self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
@@ -80,6 +80,28 @@ class Field:
         """
         x, y = coord_to_verify
         return x in range(self.width) and y in range(self.height)
+
+    def is_mine(self, coord_to_verify: tuple) -> bool:
+        """
+        Returns True if coordinate in mines, else return False
+        :param coord_to_verify: a coordinate to verify
+        :return: bool if coord_to_verify in mines
+        """
+        return coord_to_verify in self.mines
+
+    def empty_cells(self) -> list:
+        """
+        Returns a list of all available closed cells
+        :return: list of tuples with all available closed cells
+        """
+        empty_cells = list()
+        for y_index, y in enumerate(self.field):
+            for x_index, x in enumerate(y):
+                if x == '.':
+                    empty_cells.append((x_index, y_index))
+        if DEBUG:
+            print(empty_cells)
+        return empty_cells
 
 
 def next_move(field) -> tuple:
@@ -95,7 +117,27 @@ def next_move(field) -> tuple:
     return coord
 
 
-def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
+def auto_run_the_game(height: int = 10, width: int = 7, mines_number: int = 3):
+    field = Field(height, width, mines_number)
+
+    while True:
+
+        x, y, = next_move(field)
+        guess = x, y
+        if DEBUG:
+            print("Guess: " + str(guess))
+
+        # set sign
+        field.set_sign(guess)
+
+        # display
+        field.display_field()
+
+        if field.is_mine(guess):
+            break
+
+
+def run(height: int = 5, width: int = 7, mines_number: int = 3) -> None:
     """
     Runs a mine sweeper game
     :param height: Game field height
@@ -106,15 +148,29 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
     field = Field(height, width, mines_number)
 
     while True:
-
-        x, y, = next_move(field)
+        try:
+            x, y = map(int, input('Input x, y and press Enter').split(','))
+        except Exception:
+            print("Enter 2 coordinates using comma as a separator.")
+            continue
+        x, y = x - 1, y - 1
         guess = x, y
 
         # set sign
-        field.set_sign(guess)
+        if guess in field.empty_cells():
+            field.set_sign(guess)
+        else:
+            print("Coordinates already used or incorrect.")
 
         # display
         field.display_field()
+
+        if field.is_mine(guess):
+            break
+
+        if not [value for value in field.empty_cells() if not field.is_mine(value)]:
+            print("You've won. Congratulations!")
+            break
 
 
 if __name__ == "__main__":
