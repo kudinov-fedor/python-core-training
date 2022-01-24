@@ -1,5 +1,5 @@
 from .base_page import BasePage
-from .locators import BooksPageLocators
+from tests.odysh.books_app.locators import BooksPageLocators
 
 
 class BooksPage(BasePage):

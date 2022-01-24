@@ -3,7 +3,7 @@ from selenium.webdriver.remote.webdriver import By
 from selenium.webdriver.support.wait import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions as EC
 
-from .constants import HOST
+from tests.odysh.books_app.constants import HOST
 
 
 class BasePage:

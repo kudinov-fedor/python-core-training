@@ -1,5 +1,5 @@
-from .constants import USER, PASSWORD
-from .locators import LoginPageLocators
+from tests.odysh.books_app.constants import USER, PASSWORD
+from tests.odysh.books_app.locators import LoginPageLocators
 from .base_page import BasePage
 from .profile_page import ProfilePage
 
