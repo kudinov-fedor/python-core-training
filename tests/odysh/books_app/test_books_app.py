@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from .constants import USER
@@ -23,7 +21,6 @@ def test_user_name(driver):
 def test_search_book(driver):
     books_page = BooksPage(driver)
     books_page.navigate_to_page()
-    time.sleep(5)
     assert books_page.search_book() == 'Git Pocket Guide'
 
 def test_qweqwe(driver):
