@@ -1,7 +1,9 @@
+import os
+
 HOST = "https://demoqa.com"
 
-USER = "test_user_1"
-PASSWORD = "QWEqwe123!@#"
+USER = os.environ['demoqa_user_name']
+PASSWORD = os.environ['demoqa_user_password']
 
 #login page locators
 user_name_field = 'userName'
