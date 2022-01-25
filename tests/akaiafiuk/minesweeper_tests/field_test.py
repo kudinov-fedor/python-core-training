@@ -34,3 +34,26 @@ def test_set_sign():
     assert field.field[2][2] == '2'
     assert field.field[3][3] == '.'
     assert field.field[4][4] == '0'
+
+
+def test_is_mine():
+    mines = [(1, 1), ]
+    field = Field(5, 6, mines)
+    assert field.is_mine((1, 1))
+    assert field.is_mine((1, 0)) is False
+
+
+def test_possible_moves():
+    field = Field(2, 2)
+    coordinates = [(0, 0), (1, 0), (0, 1), (1, 1)]
+    assert field.possible_moves() == coordinates
+    for coord in coordinates:
+        field.set_sign(coord)
+    assert field.possible_moves() == []
+
+
+def test_empty_cells():
+    mines = [(1, 1), ]
+    field = Field(5, 6, mines)
+    assert (1, 1) in field.possible_moves()
+    assert (1, 1) not in field.empty_cells()

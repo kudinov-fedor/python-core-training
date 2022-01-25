@@ -63,7 +63,7 @@ class Field:
         :param guess_coordinates: a tuple with x and y coordinates
         :return: None
         """
-        sign = "*" if guess_coordinates in self.mines else str(self.mines_count(guess_coordinates))
+        sign = "*" if self.is_mine(guess_coordinates) else str(self.mines_count(guess_coordinates))
         self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
@@ -74,6 +74,36 @@ class Field:
         """
         x, y = coord_to_verify
         return x in range(self.width) and y in range(self.height)
+
+    def is_mine(self, coord_to_verify: tuple) -> bool:
+        """
+        Returns True if coordinate in mines, else return False
+        :param coord_to_verify: a coordinate to verify
+        :return: bool if coord_to_verify in mines
+        """
+        return coord_to_verify in self.mines
+
+    def possible_moves(self) -> list:
+        """
+        Returns a list of coordinates for all possible moves
+        :return: list of tuples with all available x, y coordinates
+        """
+        possible_moves = list()
+        for y_index, y in enumerate(self.field):
+            for x_index, x in enumerate(y):
+                if x == '.':
+                    possible_moves.append((x_index, y_index))
+        if DEBUG:
+            print(possible_moves)
+        return possible_moves
+
+    def empty_cells(self) -> list:
+        """
+        possible_moves excluding is_mine fields
+        :return: list of tuples with x, y coordinates of possible_moves excluding mine coordinates
+        """
+        empty_cells = [coord for coord in self.possible_moves() if coord not in self.mines]
+        return empty_cells
 
 
 def next_move(field: list) -> tuple:
