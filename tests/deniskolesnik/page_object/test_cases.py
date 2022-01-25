@@ -9,14 +9,11 @@ def test_login(driver_init):
     LoginPage(driver_init).open().login()
     driver_init.find_element(By.XPATH, BasePage(driver_init).LOGOUT_BUTTON)
 
+
 def test_logout(driver_init):
     test_login(driver_init)
     BasePage(driver_init).logout()
-
-    try:
-        LoginPage(driver_init).login_form()
-    except NoSuchElementException:
-        return AssertionError('User is not logged out')
+    LoginPage(driver_init).login_form()
 
 
 def test_search_and_add_book_to_collecton(driver_init):
