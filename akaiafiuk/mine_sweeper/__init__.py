@@ -109,6 +109,7 @@ class Field:
 def next_move(field: list) -> tuple:
     """
     A function which generates next user's try
+    :param field: Field representation as a list
     :return: tuple of coordinates
     """
     x = randint(0, len(field[0]) - 1)
@@ -116,6 +117,18 @@ def next_move(field: list) -> tuple:
     coord = x, y
     if DEBUG:
         print(coord)
+    return coord
+
+
+def next_user_move(field: list) -> tuple:
+    """
+    A function that generates next try using user input
+    :param field: Field representation as a list
+    :return: Tuple with coordinates entered by user
+    """
+    x, y = map(int, input('Input x, y and press Enter').split(','))
+    x, y = x - 1, y - 1
+    coord = x, y
     return coord
 
 
