@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from tests.odysh.books_app.constants import USER
@@ -10,7 +8,6 @@ from tests.odysh.books_app.pages import BooksPage, LoginPage, ProfilePage
 def test_login(driver: WebDriver):
     login_page = LoginPage(driver)
     login_page.navigate_to_page()
-    time.sleep(5)
     login_page.login()
     assert login_page.header == ProfilePage.HEADER
 
