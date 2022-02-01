@@ -106,7 +106,7 @@ class Field:
         return empty_cells
 
 
-def next_move(field: list) -> tuple:
+def next_move_automatic(field: list) -> tuple:
     """
     A function which generates next user's try
     :param field: Field representation as a list
@@ -120,7 +120,7 @@ def next_move(field: list) -> tuple:
     return coord
 
 
-def next_user_move(field: list) -> tuple:
+def next_move_user(field: list) -> tuple:
     """
     A function that generates next try using user input
     :param field: Field representation as a list
@@ -130,6 +130,9 @@ def next_user_move(field: list) -> tuple:
     x, y = x - 1, y - 1
     coord = x, y
     return coord
+
+
+MOVE_CONTROLLER = next_move_automatic
 
 
 def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
@@ -144,7 +147,7 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
 
     while True:
 
-        x, y, = next_move(field.field)
+        x, y, = MOVE_CONTROLLER(field.field)
         guess = x, y
 
         # set sign
