@@ -147,8 +147,10 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
 
     while True:
 
-        x, y, = MOVE_CONTROLLER(field.field)
-        guess = x, y
+        guess = MOVE_CONTROLLER(field.field)
+        if guess not in field.possible_moves():
+            print("Invalid coordinates")
+            continue
 
         # set sign
         field.set_sign(guess)
