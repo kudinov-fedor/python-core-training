@@ -15,10 +15,16 @@ class Field:
         :param width: field width
         :param mines_count: int: count of mines inside the field | list: list of tuples with mine coordinates
         """
-        self.height = height
-        self.width = width
         self.field = [["."] * width for _ in range(height)]
         self.mines = self.create_mines(mines_count) if isinstance(mines_count, int) else mines_count
+
+    @property
+    def width(self):
+        return len(self.field[0])
+
+    @property
+    def height(self):
+        return len(self.field)
 
     def create_mines(self, count: int) -> list:
         """
@@ -106,21 +112,21 @@ class Field:
         return empty_cells
 
 
-def next_move_automatic(field: list) -> tuple:
+def next_move_automatic(field: Field) -> tuple:
     """
     A function which generates next user's try
     :param field: Field representation as a list
     :return: tuple of coordinates
     """
-    x = randint(0, len(field[0]) - 1)
-    y = randint(0, len(field) - 1)
+    x = randint(0, field.width - 1)
+    y = randint(0, field.height - 1)
     coord = x, y
     if DEBUG:
         print(coord)
     return coord
 
 
-def next_move_user(field: list) -> tuple:
+def next_move_user(field: Field) -> tuple:
     """
     A function that generates next try using user input
     :param field: Field representation as a list
@@ -147,7 +153,7 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
 
     while True:
 
-        guess = MOVE_CONTROLLER(field.field)
+        guess = MOVE_CONTROLLER(field)
         if guess not in field.possible_moves():
             print("Invalid coordinates")
             continue
