@@ -15,10 +15,16 @@ class Field:
         :param width: field width
         :param mines_count: int: count of mines inside the field | list: list of tuples with mine coordinates
         """
-        self.height = height
-        self.width = width
         self.field = [["."] * width for _ in range(height)]
         self.mines = self.create_mines(mines_count) if isinstance(mines_count, int) else mines_count
+
+    @property
+    def width(self):
+        return len(self.field[0])
+
+    @property
+    def height(self):
+        return len(self.field)
 
     def create_mines(self, count: int) -> list:
         """
