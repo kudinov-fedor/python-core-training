@@ -1,9 +1,9 @@
 from random import randint
 from typing import Union
+from akaiafiuk.mine_sweeper.config import DEBUG, MOVE_CONTROLLER
 
 DELTAS = [(1, 0), (-1, 0), (0, 1), (0, -1),
                   (1, 1), (-1, 1), (1, -1), (-1, -1)]
-DEBUG = False
 
 
 class Field:
@@ -112,35 +112,6 @@ class Field:
         return empty_cells
 
 
-def next_move_automatic(field: Field) -> tuple:
-    """
-    A function which generates next user's try
-    :param field: Field representation as a list
-    :return: tuple of coordinates
-    """
-    x = randint(0, field.width - 1)
-    y = randint(0, field.height - 1)
-    coord = x, y
-    if DEBUG:
-        print(coord)
-    return coord
-
-
-def next_move_user(field: Field) -> tuple:
-    """
-    A function that generates next try using user input
-    :param field: Field representation as a list
-    :return: Tuple with coordinates entered by user
-    """
-    x, y = map(int, input('Input x, y and press Enter').split(','))
-    x, y = x - 1, y - 1
-    coord = x, y
-    return coord
-
-
-MOVE_CONTROLLER = next_move_automatic
-
-
 def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
     """
     Runs a mine sweeper game
@@ -154,6 +125,8 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
     while True:
 
         guess = MOVE_CONTROLLER(field)
+        if DEBUG:
+            print(guess)
         if guess not in field.possible_moves():
             print("Invalid coordinates")
             continue
