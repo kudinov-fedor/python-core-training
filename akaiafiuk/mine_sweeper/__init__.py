@@ -137,6 +137,12 @@ def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
         # display
         field.display_field()
 
+        if guess in field.mines:
+            break
+
+        if not field.empty_cells():
+            break
+
 
 if __name__ == "__main__":
     run()
