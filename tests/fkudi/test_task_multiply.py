@@ -10,5 +10,3 @@ from fkudi.task_multiply import mult_two
 ])
 def test_mult_two(a, b, expected):
     assert mult_two(a, b) == expected
-
-
