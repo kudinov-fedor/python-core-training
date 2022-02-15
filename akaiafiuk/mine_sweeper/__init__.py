@@ -4,7 +4,6 @@ from akaiafiuk.mine_sweeper.config import DEBUG, MOVE_CONTROLLER
 
 DELTAS = [(1, 0), (-1, 0), (0, 1), (0, -1),
                   (1, 1), (-1, 1), (1, -1), (-1, -1)]
-VISITED_COORDINATES = list()
 
 
 class Field:
@@ -73,10 +72,10 @@ class Field:
         sign = "*" if self.is_mine(guess_coordinates) else str(self.mines_count(guess_coordinates))
         self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
         if sign == '0':
-            VISITED_COORDINATES.append(guess_coordinates)
-            coordinates_to_test = [x for x in self.nearby_cells(guess_coordinates) if x not in VISITED_COORDINATES]
-            for coord in coordinates_to_test:
-                self.set_sign(coord)
+            for coord in self.nearby_cells(guess_coordinates):
+                x, y = coord
+                if self.field[y][x] == '.':
+                    self.set_sign(coord)
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
         """
