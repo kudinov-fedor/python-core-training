@@ -32,8 +32,9 @@ def test_set_sign():
     field.set_sign((4, 4))
     assert field.field[1][1] == '*'
     assert field.field[2][2] == '2'
-    assert field.field[3][3] == '.'
+    assert field.field[3][3] == '0'
     assert field.field[4][4] == '0'
+    assert field.field[0][0] == '.'
 
 
 def test_is_mine():
