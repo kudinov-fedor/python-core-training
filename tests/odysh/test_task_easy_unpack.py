@@ -16,4 +16,4 @@ def test_easy_unpack(tuple, exp_tuple):
 def test_negative_unpack():
     with pytest.raises(IndexError) as e:
         easy_unpack((1, 2))
-    assert e.typename ==  "IndexError"
+    assert e.typename == "IndexError"
