@@ -4,6 +4,7 @@ from akaiafiuk.mine_sweeper.config import DEBUG, MOVE_CONTROLLER
 
 DELTAS = [(1, 0), (-1, 0), (0, 1), (0, -1),
                   (1, 1), (-1, 1), (1, -1), (-1, -1)]
+VISITED_COORDINATES = list()
 
 
 class Field:
@@ -71,11 +72,11 @@ class Field:
         """
         sign = "*" if self.is_mine(guess_coordinates) else str(self.mines_count(guess_coordinates))
         self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
-        if sign == "0":
-            nearby_cells = self.nearby_cells(guess_coordinates)
-            for coord in nearby_cells:
-                sign = "*" if self.is_mine(coord) else str(self.mines_count(coord))
-                self.field[coord[1]][coord[0]] = sign
+        if sign == '0':
+            VISITED_COORDINATES.append(guess_coordinates)
+            coordinates_to_test = [x for x in self.nearby_cells(guess_coordinates) if x not in VISITED_COORDINATES]
+            for coord in coordinates_to_test:
+                self.set_sign(coord)
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
         """
@@ -116,15 +117,15 @@ class Field:
         empty_cells = [coord for coord in self.possible_moves() if coord not in self.mines]
         return empty_cells
 
-    def nearby_cells(self, coordinates: tuple):
+    def nearby_cells(self, coordinates: tuple) -> list:
         """
-        Opens all nearby cells for the cell under coordinates
+        Get coordinates of neighbouring cells within field
         :param coordinates: a tuple with x and y coordinates
-        :return: None
+        :return: list of coordinates
         """
-        coordinates_to_open = [(coordinates[0] + dx, coordinates[1] + dy) for dx, dy in DELTAS
-                               if self.is_coordinate_in_field((coordinates[0] + dx, coordinates[1] + dy))]
-        return coordinates_to_open
+        x, y = coordinates
+        coordinates = [(x + dx, y + dy) for dx, dy in DELTAS if self.is_coordinate_in_field((x + dx, y + dy))]
+        return coordinates
 
 
 def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
