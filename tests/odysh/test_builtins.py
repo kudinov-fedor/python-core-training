@@ -7,7 +7,7 @@ import pytest
     (False, bool),
 ])
 def test_is_instance(inst, cls):
-    assert True == isinstance(inst, cls)
+    assert isinstance(inst, cls) is True
 
 
 @pytest.mark.parametrize("seq, reverse", [
