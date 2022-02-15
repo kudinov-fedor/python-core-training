@@ -1,4 +1,4 @@
-# verification that all the characters in the text are digits
+# verification adding new items at the end of the list
 
 
 def extend_func(a: list, b: list) -> list:
