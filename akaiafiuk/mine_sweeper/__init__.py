@@ -72,10 +72,10 @@ class Field:
         sign = "*" if self.is_mine(guess_coordinates) else str(self.mines_count(guess_coordinates))
         self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
         if sign == '0':
-            for coord in self.nearby_cells(guess_coordinates):
-                x, y = coord
-                if self.field[y][x] == '.':
-                    self.set_sign(coord)
+            nearby_cells = self.nearby_cells(guess_coordinates)
+            cells_to_visit = [(x, y) for (x, y) in nearby_cells if self.field[y][x] == '.']
+            for cell in cells_to_visit:
+                self.set_sign(cell)
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
         """
