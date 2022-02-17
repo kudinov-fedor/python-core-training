@@ -71,6 +71,11 @@ class Field:
         """
         sign = "*" if self.is_mine(guess_coordinates) else str(self.mines_count(guess_coordinates))
         self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
+        if sign == '0':
+            for coord in self.nearby_cells(guess_coordinates):
+                x, y = coord
+                if self.field[y][x] == '.':
+                    self.set_sign(coord)
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
         """
@@ -110,6 +115,16 @@ class Field:
         """
         empty_cells = [coord for coord in self.possible_moves() if coord not in self.mines]
         return empty_cells
+
+    def nearby_cells(self, coordinates: tuple) -> list:
+        """
+        Get coordinates of neighbouring cells within field
+        :param coordinates: a tuple with x and y coordinates
+        :return: list of coordinates
+        """
+        x, y = coordinates
+        coordinates = [(x + dx, y + dy) for dx, dy in DELTAS if self.is_coordinate_in_field((x + dx, y + dy))]
+        return coordinates
 
 
 def run(height: int = 10, width: int = 7, mines_number: int = 3) -> None:
