@@ -75,8 +75,7 @@ class Field:
             coord = queue.pop()
             sign = "*" if self.is_mine(coord) else str(self.mines_count(coord))
             if sign == "0":
-                cells_to_visit = [(x, y) for (x, y) in self.nearby_cells(coord) if self.field[y][x] == '.']
-                queue += cells_to_visit
+                queue += [(x, y) for (x, y) in self.nearby_cells(coord) if self.field[y][x] == '.']
             self.field[coord[1]][coord[0]] = sign
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
