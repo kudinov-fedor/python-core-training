@@ -69,13 +69,14 @@ class Field:
         :param guess_coordinates: a tuple with x and y coordinates
         :return: None
         """
-        sign = "*" if self.is_mine(guess_coordinates) else str(self.mines_count(guess_coordinates))
-        self.field[guess_coordinates[1]][guess_coordinates[0]] = sign
-        if sign == '0':
-            for coord in self.nearby_cells(guess_coordinates):
-                x, y = coord
-                if self.field[y][x] == '.':
-                    self.set_sign(coord)
+        queue = list()
+        queue.append(guess_coordinates)
+        while queue:
+            coord = queue.pop()
+            sign = "*" if self.is_mine(coord) else str(self.mines_count(coord))
+            if sign == "0":
+                queue += [(x, y) for (x, y) in self.nearby_cells(coord) if self.field[y][x] == '.']
+            self.field[coord[1]][coord[0]] = sign
 
     def is_coordinate_in_field(self, coord_to_verify: tuple) -> bool:
         """
