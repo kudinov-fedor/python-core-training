@@ -2,6 +2,7 @@ import pytest
 
 from odysh.max_digit import max_digit
 
+
 @pytest.mark.parametrize("number, max", [
     (123, 3),
     (456, 6),
