@@ -13,10 +13,29 @@ def test_min_true2():
     assert res == 0
 
 
-def test_min_false():
+def test_min_true3():
     c = [93, 4325, -135, 71, 39]
     res = min(c)
-    assert res == 39
+    assert res == -135
+
+
+def test_min_true4():
+    float_nmbrs_list = ['7.91', '5.15', '79.35']
+    res = min(float_nmbrs_list)
+    assert res == '5.15'
+
+
+def test_min_true5():
+    list_of_tuples = ([5, 936, 79, 0], [51, 37, 99, 370], [15, 55, 78, -9])
+    res = min(list_of_tuples[2])
+    assert res == -9
+
+
+def test_min_true6():
+    list_of_str = ['banana', 'coffee', 'siebentausendzweihundertvierundfünfzig']
+    res = min(list_of_str)
+    print(res)
+    assert res == 'banana'
 
 
 @pytest.mark.parametrize('item, expected_min', [
