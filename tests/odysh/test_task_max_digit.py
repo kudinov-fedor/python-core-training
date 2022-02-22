@@ -7,7 +7,7 @@ from odysh.max_digit import max_digit
     (123, 3),
     (456, 6),
     (654, 6),
-    (321, 3)
+    (421, 4)
 ])
 def test_max_digit(number, max):
     assert max_digit(number) == max
