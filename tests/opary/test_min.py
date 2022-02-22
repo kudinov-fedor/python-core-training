@@ -26,12 +26,6 @@ def test_min_true4():
 
 
 def test_min_true5():
-    list_of_tuples = ([5, 936, 79, 0], [51, 37, 99, 370], [15, 55, 78, -9])
-    res = min(list_of_tuples[2])
-    assert res == -9
-
-
-def test_min_true6():
     list_of_str = ['banana', 'coffee', 'siebentausendzweihundertvierundfünfzig']
     res = min(list_of_str)
     print(res)
@@ -41,7 +35,8 @@ def test_min_true6():
 @pytest.mark.parametrize('item, expected_min', [
     ([59, 745, 9, -3, 91], -3),
     ([12, 71, 0, 51, 264], 0),
-    ([93, 4325, -135, 71, 39], -135)
+    ([93, 4325, -135, 71, 39], -135),
+    ([(10, "aB", 5), (10, "aC", 1), (10, "aa", 1)], (10, "aB", 5))
 ])
 def test_min_parametrize(item, expected_min):
     a = item
