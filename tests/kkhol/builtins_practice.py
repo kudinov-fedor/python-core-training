@@ -68,6 +68,6 @@ species = animals.union(birds)
 print(species)
 species1 = birds.issuperset(animals)
 print(species1)
-species2 = {'cat', 'dog', 'possum', 'squirrel', 'munchkin', 'hippo'}
+species2 = {'cat', 'dog', 'possum', 'squirrel', 'munchkin', 'hippo'}`
 species.intersection_update(species2)
 print(species)
