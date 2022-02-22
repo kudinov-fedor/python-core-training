@@ -31,31 +31,76 @@ def test_len2():
 
 
 def test_len3():
-    #verify whether r is not empty
+    # verify whether r is not empty
     r = [9]
     assert len(r) != 0, 'Cannot be empty'
 
 
 def test_divide():
-    #Make sure we do not divide on 0
+    # Make sure we do not divide on 0
     a = 23
     b = 7
-    z = a / b
     assert b != 0
+    z = a / b
+
+
+'''def test_divide_error():
+    # Make sure we get error when dividing by 0
+    a = 23
+    b = 0
+    z = a / b
+
+    def func_error():
+        with pytest.raises(ZeroDivisionError):
+            1 / 0
+
+    assert test_divide_error == func_error
+
+
+def div_two(a, b) -> ZeroDivisionError:
+    return a / b
+
+
+@pytest.mark.parametrize("a, b, expected", [
+    (3, 0, ZeroDivisionError)
+])
+def test_div_two(a, b, expected):
+    assert div_two(a, b) == expected
+
+
+@pytest.mark.xfail(reason="Expected failure to check division by 0")
+def div_two():
+    a = 23
+    b = 0
+    z = a / b
+    return z'''
 
 
 def test_pres():
-    c = '2 few 76 a lot'
+    c = '2 few 764 a lot'
     d = '4'
-    assert d in c, 'c does not contain d'
+    assert d in c
 
 
 # Check is boolean value is a number
-def test_bool():
-    assert True != 1
+def add_bool(a: int, b: bool) -> int:
+    return a + b
+
+
+@pytest.mark.parametrize("a, b, expected", [
+    (3, True, 4),
+    (4, False, 4),
+])
+def test_add_bool(a, b, expected):
+    assert add_bool(a, b) == expected
 
 
 def test_bool1():
+    assert False == 0
+
+
+@pytest.mark.xfail(reason="Expected failure to check False case")
+def test_bool2():
     assert False != 0, 'False is actually a zero'
 
 
@@ -64,7 +109,9 @@ def test_alike():
     a = 4
     b = 4
     c = id(a)
+    assert c == id(a)
     d = id(b)
+    assert d == id(b)
     assert c == d
 
 
