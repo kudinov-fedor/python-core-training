@@ -1,6 +1,8 @@
 from kkhol.multiply import multiply_two
 
+
 import pytest
+
 
 @pytest.mark.parametrize("a, b, expected", [
     (3, 2, 6),

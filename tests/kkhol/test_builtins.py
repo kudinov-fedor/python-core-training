@@ -42,38 +42,30 @@ def test_divide():
     b = 7
     assert b != 0
     z = a / b
+    return z
 
 
-'''def test_divide_error():
-    # Make sure we get error when dividing by 0
-    a = 23
-    b = 0
-    z = a / b
-
-    def func_error():
-        with pytest.raises(ZeroDivisionError):
-            1 / 0
-
-    assert test_divide_error == func_error
+a = 4
+b = 0
 
 
-def div_two(a, b) -> ZeroDivisionError:
-    return a / b
+def error_func():
+    a / b  # causes ZeroDivisionError
 
 
-@pytest.mark.parametrize("a, b, expected", [
-    (3, 0, ZeroDivisionError)
-])
-def test_div_two(a, b, expected):
-    assert div_two(a, b) == expected
+def test_error_func():
+    try:
+        error_func()
+        print("bla bla bla")
+    except ZeroDivisionError:
+        pass
+    else:
+        raise AssertionError("Error did not happen")
 
 
-@pytest.mark.xfail(reason="Expected failure to check division by 0")
-def div_two():
-    a = 23
-    b = 0
-    z = a / b
-    return z'''
+def test_error_func_2():
+    with pytest.raises(ZeroDivisionError):
+        error_func()
 
 
 def test_pres():
@@ -96,7 +88,8 @@ def test_add_bool(a, b, expected):
 
 
 def test_bool1():
-    assert False == 0
+    if 0 is False:
+        return True
 
 
 @pytest.mark.xfail(reason="Expected failure to check False case")

@@ -26,13 +26,13 @@ print(txt)
 r = '4560r836'
 print(r.isdigit())
 
-lotr = "In the first part of J.R.R. Tolkien's epic masterpiece, The Lord of the Rings, a shy young hobbit named Frodo Baggins " \
-       "inherits a simple gold ring. He knows the ring has power, but not that he alone holds the secret to the survival--or " \
-       "enslavement--of the entire world. Now Frodo, accompanied by a wizard, an elf, a dwarf, two men and three loyal hobbit " \
-       "friends, must become the greatest hero the world has ever known to save the land and the people he loves."
+lotr = "In the first part of J.R.R. Tolkien's epic masterpiece, The Lord of the Rings, a shy young hobbit named Frodo" \
+       " Baggins inherits a simple gold ring. He knows the ring has power, but not that he alone holds the secret  " \
+       "to the survival--or enslavement--of the entire world. Now Frodo, accompanied by a wizard, an elf, a dwarf,  " \
+       "two men and three friends, loyal hobbit must become the greatest hero the world has ever known to save " \
+       "the land and the people he loves."
 lotr1 = lotr.find('save')
 print(lotr1)
-
 
 # list
 
@@ -49,7 +49,7 @@ print(ls)
 
 # dict
 
-dict1 = {1: 'potato', 2: 56, 'c':'bananas'}
+dict1 = {1: 'potato', 2: 56, 'c': 'bananas'}
 print(dict1[1])
 
 dog = {'breed': 'chihuahua',
@@ -60,7 +60,7 @@ print(dog.get('weight'))
 dog.update({'color': 'except merl'})
 print(dog)
 
-#set
+# set
 
 animals = {'cat', 'dog', 'squirrel', 'munchkin'}
 birds = {'parrot', 'chicken', 'rooster', 'dove'}
@@ -68,6 +68,6 @@ species = animals.union(birds)
 print(species)
 species1 = birds.issuperset(animals)
 print(species1)
-species2 = {'cat', 'dog', 'possum', 'squirrel', 'munchkin', 'hippo'}`
+species2 = {'cat', 'dog', 'possum', 'squirrel', 'munchkin', 'hippo'}
 species.intersection_update(species2)
 print(species)
