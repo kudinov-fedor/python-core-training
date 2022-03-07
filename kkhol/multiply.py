@@ -9,6 +9,3 @@ mult_two(1, 0) == 0
 
 def multiply_two(a: int, b: int) -> int:
     return a * b
-
-
-

@@ -25,9 +25,11 @@ def test_len_error():
 
 
 def test_len2():
-    # verify whether r is not empty
+    # verify whether length of r is not zero
     r = [34, 56, 87, 23]
     assert len(r) != 0
+    # make sure that collection is not empty
+    assert r != 0
 
 
 def test_len3():
@@ -88,8 +90,7 @@ def test_add_bool(a, b, expected):
 
 
 def test_bool1():
-    if 0 is False:
-        return True
+    assert False == 0
 
 
 @pytest.mark.xfail(reason="Expected failure to check False case")
@@ -106,6 +107,8 @@ def test_alike():
     d = id(b)
     assert d == id(b)
     assert c == d
+    assert d != 3204364986767
+    assert d != 3204364986769
 
 
 def test_isinstance():
