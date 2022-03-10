@@ -1,5 +1,5 @@
 # Unpack using while loop
-def unpack(item):
+def unpack_while(item):
     queue = [item]
     result = list()
     while queue:
@@ -12,33 +12,22 @@ def unpack(item):
 
 
 # Unpack using recursion
-def unpack(item):
+def unpack_recursion(item):
     result = []
     if isinstance(item, int):
         return [item]
     else:
         for x in item:
-            result.extend(unpack(x))
+            result.extend(unpack_recursion(x))
     return result
 
 
 # Unpack with state transition
-def unpack(item, result=None):
-    result = result or []
+def unpack_recursion_state_transition(item, result=None):
+    result = result if result is not None else []
     if isinstance(item, int):
-        return [item]
+        result.append(item)
     else:
         for x in item:
-            if isinstance(x, int):
-                result.extend(unpack(x, result=result))
-            else:
-                result.extend(unpack(x))
+            unpack_recursion_state_transition(x, result=result)
     return result
-
-
-if __name__ == "__main__":
-    assert unpack(10) == [10]
-    assert unpack([1, 2, 3]) == [1, 2, 3]
-    assert unpack([1, [2, 3]]) == [1, 2, 3]
-    assert unpack([1, [2, [3]]]) == [1, 2, 3]
-    assert unpack([[[[1, 2, 3]]]]) == [1, 2, 3]
