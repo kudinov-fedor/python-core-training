@@ -28,8 +28,6 @@ def test_len2():
     # verify whether length of r is not zero
     r = [34, 56, 87, 23]
     assert len(r) != 0
-    # make sure that collection is not empty
-    assert r != 0
 
 
 def test_len3():
@@ -44,8 +42,14 @@ def test_divide():
     b = 7
     assert b != 0
     z = a / b
-    return z
 
+
+#Make sure we get error during division by 0
+def test_divide2():
+    a = 23
+    b = 0
+    with pytest.raises(ZeroDivisionError):
+        var = a / b
 
 a = 4
 b = 0
@@ -107,9 +111,8 @@ def test_alike():
     d = id(b)
     assert d == id(b)
     assert c == d
-    assert d != 3204364986767
-    assert d != 3204364986769
-
+    assert a == b
+   
 
 def test_isinstance():
     # check whether c is of a particular type
