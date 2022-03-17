@@ -28,6 +28,8 @@ def test_len2():
     # verify whether length of r is not zero
     r = [34, 56, 87, 23]
     assert len(r) != 0
+    # verify r is not empty
+    assert r != 0
 
 
 def test_len3():
@@ -44,19 +46,18 @@ def test_divide():
     z = a / b
 
 
-#Make sure we get error during division by 0
+# Make sure we get error during division by 0
 def test_divide2():
     a = 23
     b = 0
     with pytest.raises(ZeroDivisionError):
         var = a / b
 
-a = 4
-b = 0
-
 
 def error_func():
-    a / b  # causes ZeroDivisionError
+    a = 4
+    b = 0
+    var = a / b  # causes ZeroDivisionError
 
 
 def test_error_func():
@@ -104,15 +105,23 @@ def test_bool2():
 
 def test_alike():
     # Test whether values have similar id's
-    a = 4
-    b = 4
+    a = 256
+    b = 256
+    assert id(a) == id(b)
     c = id(a)
     assert c == id(a)
     d = id(b)
     assert d == id(b)
     assert c == d
     assert a == b
-   
+
+
+def test_not_alike():
+    par1 = 257
+    par2 = 256
+    assert id(par1) != id(par2)
+    assert par1 != par2
+
 
 def test_isinstance():
     # check whether c is of a particular type
