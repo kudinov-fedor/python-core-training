@@ -1,4 +1,4 @@
-password = input()
+password = input('Type your password here:')
 if len(password) >= 6:
     if not password.isalnum():
         print('Password must contain only letters or numbers')

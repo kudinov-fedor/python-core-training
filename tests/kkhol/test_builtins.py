@@ -5,6 +5,7 @@ def test_len():
     x = "23456"
     res = len(x)
     assert res == 5
+    assert x
 
 
 @pytest.mark.parametrize("item, expected_length", [
@@ -28,8 +29,8 @@ def test_len2():
     # verify whether length of r is not zero
     r = [34, 56, 87, 23]
     assert len(r) != 0
-    # verify r is not empty
     assert r != 0
+    assert r
 
 
 def test_len3():
@@ -39,11 +40,11 @@ def test_len3():
 
 
 def test_divide():
-    # Make sure we do not divide on 0
+    # Make sure z is not 0
     a = 23
     b = 7
-    assert b != 0
     z = a / b
+    assert z != 0
 
 
 # Make sure we get error during division by 0
@@ -117,13 +118,20 @@ def test_alike():
 
 
 def test_not_alike():
-    par1 = 257
-    par2 = 256
-    assert id(par1) != id(par2)
-    assert par1 != par2
+    param1 = 257
+    param2 = 256
+    assert id(param1) != id(param2)
+    assert param1 != param2
 
 
 def test_isinstance():
     # check whether c is of a particular type
-    c = 56
+    c = 'norway'
     assert isinstance(c, (int, float, str))
+    assert not isinstance(c, (float, int))
+    c1 = 87.9
+    assert isinstance(c1, (int, float, str))
+    assert not isinstance(c1, (int, str))
+    c2 = 45
+    assert isinstance(c2, (int, float, str))
+    assert not isinstance(c2, (float, str))

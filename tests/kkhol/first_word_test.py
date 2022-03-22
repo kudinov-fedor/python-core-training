@@ -21,5 +21,3 @@ def test_first_word(text, word):
 ])
 def test_not_first_word(text, word):
     assert first_word(text) != word
-
-

@@ -1,7 +1,7 @@
-from kkhol.password_1 import is_acceptable_password
-
-
 import pytest
+
+
+from kkhol.password_1 import is_acceptable_password
 
 
 @pytest.mark.parametrize("password, expected", [

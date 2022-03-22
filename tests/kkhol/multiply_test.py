@@ -1,7 +1,6 @@
-from kkhol.multiply import multiply_two
-
-
 import pytest
+
+from kkhol.multiply import multiply_two
 
 
 @pytest.mark.parametrize("a, b, expected", [
@@ -11,4 +10,4 @@ import pytest
     (2, 1, 2)
 ])
 def test_multiply_two(a, b, expected):
-   assert multiply_two(a, b) == expected
+    assert multiply_two(a, b) == expected
