@@ -70,7 +70,7 @@ def test_dict():
     assert res == {'coffee': 'latte', 'coffee1': 'espresso'}
 
 
-def test_divmod():
-    x = (10, 3)
-    res = divmod(x)
-    assert res == (3, 1)
+def test_enumerate():
+    x = ("dog", "cat", "cow")
+    res = enumerate(x)
+    assert res == [(0, "dog"), (1, "cat"), (2, "cow")]
