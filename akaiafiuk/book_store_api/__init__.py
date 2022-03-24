@@ -14,14 +14,6 @@ class ApiClient:
         self.client = session()
 
     @property
-    def username(self):
-        return self.login
-
-    @property
-    def userid(self):
-        return self.user_id
-
-    @property
     def token(self):
         return self.client.headers['Authorization']
 
