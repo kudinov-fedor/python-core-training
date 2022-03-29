@@ -6,11 +6,15 @@ Output: a string."""
 
 from collections import Counter
 
+data = 'a, b, c, a, b, a'
 
-def most_frequent(data: list) ->str:
-    count = Counter(data)
-    let1 = count['a']
-    let2 = count['b']
-    let3 = count['c']
+
+def most_frequent(data: list) -> int:
+    # count = Counter(data)
+    let1 = data.count('a')
+    let2 = data.count('b')
+    let3 = data.count('c')
     num = max(let1, let2, let3)
     return num
+
+print(most_frequent(data))
