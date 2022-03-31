@@ -1,6 +1,6 @@
 import requests
 from requests import session
-from akaiafiuk.book_store_api.constants import BASE_URL, USER, PASSWORD
+from akaiafiuk.book_store_api.constants import BASE_URL, USER, PASSWORD, RETRY_TIMES
 
 
 class ApiClient:
@@ -16,6 +16,18 @@ class ApiClient:
     @property
     def token(self):
         return self.client.headers['Authorization']
+
+    def user_exists(self) -> bool:
+        """
+        Verifies if a user exists
+        :return: True if exists, False if does not exist
+        """
+        res = requests.post(self.host + '/Account/v1/GenerateToken', data={
+            "userName": self.login,
+            "password": self.password
+        })
+        status = not res.json()['status'] == 'Failed'
+        return status
 
     def create_user(self) -> dict:
         """
@@ -46,12 +58,15 @@ class ApiClient:
         Generates a user token for a user
         :return: authorization token
         """
-        res = requests.post(self.host + '/Account/v1/GenerateToken', data={
-            "userName": self.login,
-            "password": self.password
-        })
-        res.raise_for_status()
-        return res.json().get("token")
+        for i in range(RETRY_TIMES):
+            res = requests.post(self.host + '/Account/v1/GenerateToken', data={
+                "userName": self.login,
+                "password": self.password
+            })
+            res.raise_for_status()
+            if res.json().get("token") is not None:
+                return res.json().get("token")
+        raise Exception(f"Failed to retrieve token from {RETRY_TIMES} tries")
 
     def log_in(self) -> str:
         """
@@ -78,6 +93,7 @@ class ApiClient:
         Deletes a user with the given credentials
         :return: None
         """
+        self.prepare_user()
         res = self.client.delete(self.host + '/Account/v1/user/' + self.user_id)
         res.raise_for_status()
 
