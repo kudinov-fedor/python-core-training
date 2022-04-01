@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from akaiafiuk.book_store_api.constants import BASE_URL, USER, PASSWORD
 
@@ -16,7 +14,7 @@ def user():
     if api_client.user_exists():
         api_client.delete_user()
     api_client.create_user()
-    return api_client
+    yield api_client
     if api_client.user_exists():
         api_client.delete_user()
 

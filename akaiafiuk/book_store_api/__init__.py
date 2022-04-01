@@ -3,6 +3,11 @@ from requests import session
 from akaiafiuk.book_store_api.constants import BASE_URL, USER, PASSWORD, RETRY_TIMES
 
 
+class RunTimeException(Exception):
+    """Raised when request failed to return correct data after RETRY_TIMES number of times"""
+    pass
+
+
 class ApiClient:
 
     host = BASE_URL
@@ -64,9 +69,9 @@ class ApiClient:
                 "password": self.password
             })
             res.raise_for_status()
-            if res.json().get("token") is not None:
-                return res.json().get("token")
-        raise Exception(f"Failed to retrieve token from {RETRY_TIMES} tries")
+            if res.json()['token'] is not None:
+                return res.json()["token"]
+        raise RunTimeException(f"Failed to retrieve token from {RETRY_TIMES} tries")
 
     def log_in(self) -> str:
         """
