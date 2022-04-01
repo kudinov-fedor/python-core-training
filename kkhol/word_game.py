@@ -16,9 +16,9 @@ while display != word:
 
         if letter and letter == word[i]:
             display = display[0:i] + letter + display[i + 1:]
-            print(letter,' is correct,')
+            print(letter, ' is correct,')
 
-    print('You already tried:',set(used))
+    print('You already tried:', set(used))
 
     print(" ".join(display))
 
