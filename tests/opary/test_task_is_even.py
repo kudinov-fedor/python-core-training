@@ -1,10 +1,15 @@
 from opary.task_is_even import is_even
 
+import pytest
 
-def test_is_even():
-    assert is_even(270) == True
-    assert is_even(39) == False
-    assert is_even(1234567890) == True
-    assert is_even(35792) == True
-    assert is_even(0) == True
-    assert is_even(-572) != False
+
+@pytest.mark.parametrize("data, result", [
+    (270, True),
+    (39, False),
+    (1234567890, True),
+    (35792, True),
+    (0, True),
+    (-572, True)
+])
+def test_is_even(data, result):
+    assert is_even(data) == result
