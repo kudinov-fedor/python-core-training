@@ -37,11 +37,10 @@ class ApiClient:
         Verifies if a user exists
         :return: True if exists, False if does not exist
         """
-        try:
-            self.generate_token()
-            return True
-        except RuntimeError:
-            return False
+        result = False
+        if self.log_in() is not None:
+            result = True
+        return result
 
     def create_user(self) -> dict:
         """
@@ -82,17 +81,20 @@ class ApiClient:
             raise RuntimeError("Failed to retrieve token")
         return res.json()["token"]
 
-    def log_in(self) -> str:
+    def log_in(self) -> str or None:
         """
-        Sets a user id parameter to a User id of logged in user
-        :return: user id
+        Returns a string with user id if user exists or None
+        :return: user id or None
         """
+        user_id = None
         res = requests.post(self.host + '/Account/v1/Login', data={
             "userName": self.login,
             "password": self.password
         })
         res.raise_for_status()
-        return res.json().get("userId")
+        if res.text:
+            user_id = res.json().get("userId")
+        return user_id
 
     def prepare_user(self) -> None:
         """
