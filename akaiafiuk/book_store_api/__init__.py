@@ -3,14 +3,15 @@ from requests import session
 from akaiafiuk.book_store_api.constants import BASE_URL, USER, PASSWORD, RETRY_TIMES
 
 
-def parametrized_decorator(number_of_tries):
+def retry(number_of_tries):
     def decorator(func: callable):
         def wrapper(*args, **kwargs):
             for current_try in range(number_of_tries):
                 try:
                     res = func(*args, **kwargs)
                     return res
-                except Exception:
+                except Exception as e:
+                    print(e)
                     if current_try == number_of_tries - 1:
                         raise
         return wrapper
@@ -66,7 +67,7 @@ class ApiClient:
         res.raise_for_status()
         return res.text == 'true'
 
-    @parametrized_decorator(RETRY_TIMES)
+    @retry(RETRY_TIMES)
     def generate_token(self) -> str:
         """
         Generates a user token for a user
