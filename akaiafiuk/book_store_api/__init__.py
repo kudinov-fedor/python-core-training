@@ -37,10 +37,7 @@ class ApiClient:
         Verifies if a user exists
         :return: True if exists, False if does not exist
         """
-        result = False
-        if self.log_in() is not None:
-            result = True
-        return result
+        return self.log_in() is not None
 
     def create_user(self) -> dict:
         """
@@ -92,8 +89,8 @@ class ApiClient:
             "password": self.password
         })
         res.raise_for_status()
-        if res.text:
-            user_id = res.json().get("userId")
+        if res.headers.get("Content-Type") == "application/json; charset=utf-8":
+            user_id = res.json()["userId"]
         return user_id
 
     def prepare_user(self) -> None:
