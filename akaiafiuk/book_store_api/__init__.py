@@ -89,7 +89,7 @@ class ApiClient:
             "password": self.password
         })
         res.raise_for_status()
-        if res.headers.get("Content-Type") == "application/json; charset=utf-8":
+        if res.headers.get("Content-Type") is not None:
             user_id = res.json()["userId"]
         return user_id
 
