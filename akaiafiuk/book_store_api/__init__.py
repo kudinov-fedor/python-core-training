@@ -1,4 +1,3 @@
-import requests
 from requests import session
 from akaiafiuk.book_store_api.constants import BASE_URL, USER, PASSWORD, RETRY_TIMES
 
@@ -30,7 +29,7 @@ class ApiClient:
 
     @property
     def token(self):
-        return self.client.headers['Authorization']
+        return self.client.get('Authorization')
 
     def user_exists(self) -> bool:
         """
@@ -44,7 +43,7 @@ class ApiClient:
         Creates a new user
         :return: a dictionary with "userID"; "username", "books" keys
         """
-        res = requests.post(self.host + '/Account/v1/user', data={
+        res = self.client.post(self.host + '/Account/v1/user', data={
             "userName": self.login,
             "password": self.password
         })
@@ -56,7 +55,7 @@ class ApiClient:
         Returns a bool flag is the user authorized
         :return: True or False
         """
-        res = requests.post(self.host + '/Account/v1/Authorized', data={
+        res = self.client.post(self.host + '/Account/v1/Authorized', data={
             "userName": self.login,
             "password": self.password
         })
@@ -69,7 +68,7 @@ class ApiClient:
         Generates a user token for a user
         :return: authorization token
         """
-        res = requests.post(self.host + '/Account/v1/GenerateToken', data={
+        res = self.client.post(self.host + '/Account/v1/GenerateToken', data={
             "userName": self.login,
             "password": self.password
         })
@@ -84,7 +83,7 @@ class ApiClient:
         :return: user id or None
         """
         user_id = None
-        res = requests.post(self.host + '/Account/v1/Login', data={
+        res = self.client.post(self.host + '/Account/v1/Login', data={
             "userName": self.login,
             "password": self.password
         })
