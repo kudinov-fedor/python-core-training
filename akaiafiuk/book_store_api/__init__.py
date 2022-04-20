@@ -29,7 +29,7 @@ class ApiClient:
 
     @property
     def token(self):
-        return self.client.get('Authorization')
+        return self.client.headers.get('Authorization')
 
     def user_exists(self) -> bool:
         """
