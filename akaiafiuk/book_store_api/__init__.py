@@ -31,6 +31,14 @@ class ApiClient:
     def token(self):
         return self.client.headers.get('Authorization')
 
+    @token.setter
+    def token(self):
+        return self.client.headers.update({'Authorization': 'Bearer ' + self.generate_token()})
+
+    @token.deleter
+    def token(self):
+        del self.client.headers['Authorization']
+
     def user_exists(self) -> bool:
         """
         Verifies if a user exists
@@ -97,7 +105,7 @@ class ApiClient:
         Generates and sets authorization token and user id
         :return:
         """
-        self.client.headers.update({'Authorization': 'Bearer ' + self.generate_token()})
+        self.token
         self.user_id = self.log_in()
 
     def delete_user(self) -> None:
@@ -124,4 +132,4 @@ class ApiClient:
         :return: None
         """
         self.user_id = None
-        del self.client.headers['Authorization']
+        del self.token
