@@ -32,8 +32,8 @@ class ApiClient:
         return self.client.headers.get('Authorization')
 
     @token.setter
-    def token(self):
-        return self.client.headers.update({'Authorization': 'Bearer ' + self.generate_token()})
+    def token(self, value: str):
+        return self.client.headers.update({'Authorization': 'Bearer ' + value})
 
     @token.deleter
     def token(self):
@@ -105,7 +105,7 @@ class ApiClient:
         Generates and sets authorization token and user id
         :return:
         """
-        self.token
+        self.token = self.generate_token()
         self.user_id = self.log_in()
 
     def delete_user(self) -> None:
