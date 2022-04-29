@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from akaiafiuk.book_store_api.constants import USER
 from akaiafiuk.book_store_api import ApiClient
@@ -45,9 +46,9 @@ def test_register_using_weak_password():
     Verify that user is not created in case of weak password was used
     """
     api_client = ApiClient(password='123')
-    with pytest.raises(Exception) as e_info:
+    with pytest.raises(requests.exceptions.HTTPError,
+                       match=r"400 Client Error: Bad Request for url: https://demoqa.com/Account/v1/user"):
         api_client.create_user()
-    assert '400 Client Error: Bad Request' in str(e_info)
 
 
 def test_login_using_invalid_credentials():
@@ -55,7 +56,7 @@ def test_login_using_invalid_credentials():
     Verify that log_in method returns None for non existent user
     """
     api_client = ApiClient(login='non_existent', password='123')
-    assert not api_client.log_in()
+    assert api_client.log_in() is None
 
 
 def test_delete_user(user):
@@ -63,4 +64,4 @@ def test_delete_user(user):
     Verify that log_in method returns None for deleted user
     """
     user.delete_user()
-    assert not user.log_in()
+    assert not user.user_exists()
