@@ -33,7 +33,7 @@ class ApiClient:
 
     @token.setter
     def token(self, value: str):
-        self.client.headers.headers['Authorization'] = 'Bearer ' + value
+        self.client.headers['Authorization'] = 'Bearer ' + value
 
     @token.deleter
     def token(self):
