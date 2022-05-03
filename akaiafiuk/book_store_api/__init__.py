@@ -33,7 +33,7 @@ class ApiClient:
 
     @token.setter
     def token(self, value: str):
-        self.client.headers.headers['Authorization'] = 'Bearer ' + value
+        self.client.headers['Authorization'] = 'Bearer ' + value
 
     @token.deleter
     def token(self):
@@ -69,6 +69,13 @@ class ApiClient:
         })
         res.raise_for_status()
         return res.text == 'true'
+
+    def is_logged_in(self) -> bool:
+        """
+        Returns a bool flag if a user logged in
+        :return: True or False
+        """
+        return self.log_in() is not None
 
     @retry(RETRY_TIMES)
     def generate_token(self) -> str:
