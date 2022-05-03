@@ -46,8 +46,7 @@ def test_register_using_weak_password():
     Verify that user is not created in case of weak password was used
     """
     api_client = ApiClient(password='123')
-    with pytest.raises(requests.exceptions.HTTPError,
-                       match=r"400 Client Error: Bad Request for url: https://demoqa.com/Account/v1/user"):
+    with pytest.raises(requests.exceptions.HTTPError, match=r"400 Client Error: Bad Request"):
         api_client.create_user()
 
 
@@ -56,7 +55,7 @@ def test_login_using_invalid_credentials():
     Verify that log_in method returns None for non existent user
     """
     api_client = ApiClient(login='non_existent', password='123')
-    assert api_client.log_in() is None
+    assert not api_client.is_logged_in()
 
 
 def test_delete_user(user):
