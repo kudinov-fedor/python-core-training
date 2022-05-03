@@ -55,6 +55,7 @@ def test_login_using_invalid_credentials():
     Verify that log_in method returns None for non existent user
     """
     api_client = ApiClient(login='non_existent', password='123')
+    assert not api_client.user_exists()
     assert not api_client.is_logged_in()
 
 
