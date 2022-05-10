@@ -140,3 +140,22 @@ class ApiClient:
         """
         self.user_id = None
         del self.token
+
+    def get_all_books(self) -> list:
+        """
+        Returns a list with all available books
+        :return: a list of dictionaries with available books and their info
+        """
+        res = self.client.get(self.host + '/BookStore/v1/Books')
+        res.raise_for_status()
+        return res.json()['books']
+
+    def get_book_by_isbn(self, isbn: str) -> dict:
+        """
+        Returns a dictionary with the information about a given book
+        :param isbn: isbn number of a book
+        :return: a dictionary with book data
+        """
+        res = self.client.get(self.host + '/BookStore/v1/Book', params={'ISBN': isbn})
+        res.raise_for_status()
+        return res.json()
