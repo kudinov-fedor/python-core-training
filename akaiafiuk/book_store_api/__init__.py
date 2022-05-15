@@ -1,4 +1,5 @@
 from requests import session
+from typing import Union
 from akaiafiuk.book_store_api.constants import BASE_URL, USER, PASSWORD, RETRY_TIMES
 
 
@@ -18,7 +19,6 @@ def retry(number_of_tries):
 
 
 class ApiClient:
-
     host = BASE_URL
 
     def __init__(self, login=USER, password=PASSWORD):
@@ -159,3 +159,54 @@ class ApiClient:
         res = self.client.get(self.host + '/BookStore/v1/Book', params={'ISBN': isbn})
         res.raise_for_status()
         return res.json()
+
+    def add_book_to_collection(self, isbn_numbers: Union[int, list]) -> dict:
+        """
+        Ads a book to a collection
+        :param isbn_numbers: string or list of strings
+        :return: dict with list of books available in user's collection
+        """
+        res = self.client.post(self.host + '/BookStore/v1/Books', json={
+            "userId": self.user_id,
+            "collectionOfIsbns": [{"isbn": isbn} for isbn in isbn_numbers] if isinstance(isbn_numbers, list)
+            else [{"isbn": isbn_numbers}]
+        })
+        res.raise_for_status()
+        return res.json()
+
+    def replace_book_in_collection(self, isbn: str, isbn_replace_to: str) -> dict:
+        """
+        Replace one bok with another in a user collection
+        :param isbn: str with isbn number of a user book
+        :param isbn_replace_to: str with isbn of a book from a book store
+        :return: a dict with user data
+        """
+        res = self.client.put(self.host + '/BookStore/v1/Books/' + isbn, json={
+            "userId": self.user_id,
+            "isbn": isbn_replace_to
+        })
+        res.raise_for_status()
+        return res.json()
+
+    def delete_book_from_collection(self, isbn: str) -> None:
+        """
+        Delete a book from a user collection
+        :param isbn: isbn number of a book to delete
+        :return: None
+        """
+        res = self.client.delete(self.host + '/BookStore/v1/Book', json={
+            "isbn": isbn,
+            "userId": self.user_id
+        })
+        res.raise_for_status()
+
+    def delete_books_from_collection(self, isbn_numbers: Union[int, list]):
+        res = self.client.delete(self.host + '/BookStore/v1/Books', params={
+            "UserId": self.user_id
+        }, json={
+            "userId": self.user_id,
+            "collectionOfIsbns": [{"isbn": isbn} for isbn in isbn_numbers] if isinstance(
+                isbn_numbers, list)
+            else [{"isbn": isbn_numbers}]
+        })
+        res.raise_for_status()

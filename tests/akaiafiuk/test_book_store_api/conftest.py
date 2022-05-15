@@ -11,3 +11,13 @@ def user():
     yield api_client
     if api_client.user_exists():
         api_client.delete_user()
+
+
+@pytest.fixture(scope='session')
+def api_client():
+    return ApiClient()
+
+
+@pytest.fixture(scope='session')
+def books(api_client):
+    return api_client.get_all_books()
