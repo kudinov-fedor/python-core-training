@@ -90,7 +90,7 @@ class ApiClient:
         res.raise_for_status()
         if res.json()['token'] is None:
             raise RuntimeError("Failed to retrieve token")
-        return res.json()["token"]
+        return res.json()
 
     def log_in(self) -> str or None:
         """
@@ -112,7 +112,7 @@ class ApiClient:
         Generates and sets authorization token and user id
         :return:
         """
-        self.token = self.generate_token()
+        self.token = self.generate_token()["token"]
         self.user_id = self.log_in()
 
     def delete_user(self) -> None:
