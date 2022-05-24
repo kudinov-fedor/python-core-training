@@ -24,7 +24,7 @@ def test_division(param1, param2, res):
     assert param1 / param2 == res
 
 
-def test_len():
+def test_my_len():
     # arrange
     item = [1, 2, 3]
 
