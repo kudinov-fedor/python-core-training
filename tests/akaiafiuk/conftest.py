@@ -1,6 +1,6 @@
 import pytest
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture()
 def test_list():
     return [1, 2, 3]

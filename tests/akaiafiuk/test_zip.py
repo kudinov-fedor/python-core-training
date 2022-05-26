@@ -1,11 +1,13 @@
 import pytest
 
 
+@pytest.mark.xfail
 def test_zip_type():
     """Verify that zip() returns an object of zip type"""
-    assert type(zip()) == zip
+    assert isinstance(zip(), zip)
 
 
+@pytest.mark.my_mark
 @pytest.mark.parametrize('input_one, input_two, expected_result', [
     ([1, 2, 3], ['a', 'b', 'c'], [(1, 'a'), (2, 'b'), (3, 'c')]),
     ([1, 2, 3], ('a', 'b', 'c'), [(1, 'a'), (2, 'b'), (3, 'c')]),
