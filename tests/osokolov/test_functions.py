@@ -20,4 +20,4 @@ def test_function_len_invalid_data(data):
 @pytest.mark.skip('Due to bug')
 def test_password(get_password):
     password = get_password
-    assert (any(map(lambda i: i.isdigit(), password)) and not all(map(lambda i: i.isdigit(), password))) is True
+    assert any(map(str.isdigit, password)) and not password.isdigit() is True
