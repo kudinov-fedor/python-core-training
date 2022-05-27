@@ -1,4 +1,4 @@
-# test built-in functions len/zip/enumarate
+# test built-in functions len/zip/enumerate
 import pytest
 
 
@@ -19,6 +19,14 @@ def test_len_error():
 @pytest.mark.parametrize("set1, set2, res", [
     ((1, 3, 5), ("Apple", "Orange", "Pamelo"), [(1, "Apple"), (3, "Orange"), (5, "Pamelo")]),
     ([], [], []),
-    ((1, 2), ["x", "y", "z"], [(1, "x"), (2, "y")]) ])
+    ((1, 2), ["x", "y", "z"], [(1, "x"), (2, "y")])])
 def test_zip(set1, set2, res):
     print(list(zip(set1, set2))) == res
+
+
+@pytest.mark.parametrize("list1, res", [
+    ((1, 3, 5), (0, 1, 2)),
+    (["b", "a", "c"], [0, 1, 2])
+])
+def test_zip(list1, res):
+    enumerate(list1) == res
