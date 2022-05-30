@@ -1,14 +1,15 @@
 from selenium.webdriver.common.by import By
+from python_at_2021.tests.akaiafiuk.tools_qa.utils import scroll_down
 
 HOST = 'https://demoqa.com'
 
-FULL_NAME_TEXTBOX_LOCATOR = (By.ID, 'userName')
-EMAIL_TEXTBOX_LOCATOR = (By.CSS_SELECTOR, '[type="email"]')
-CURRENT_ADDRESS_TEXTBOX_LOCATOR = (By.XPATH, './/textarea[@class="form-control"]')
-SUBMIT_BTN_LOCATOR = (By.CSS_SELECTOR, '[id="submit"]')
-FULL_NAME_LABEL_LOCATOR = (By.ID, "name")
-EMAIL_LABEL_LOCATOR = (By.CSS_SELECTOR, '[id="email"]')
-CURRENT_ADDRESS_LABEL_LOCATOR = (By.XPATH, './/p[@id="currentAddress"]')
+FULL_NAME_TEXTBOX_LOCATOR = By.ID, 'userName'
+EMAIL_TEXTBOX_LOCATOR = By.CSS_SELECTOR, '[type="email"]'
+CURRENT_ADDRESS_TEXTBOX_LOCATOR = By.XPATH, './/textarea[@class="form-control"]'
+SUBMIT_BTN_LOCATOR = By.CSS_SELECTOR, '[id="submit"]'
+FULL_NAME_LABEL_LOCATOR = By.ID, "name"
+EMAIL_LABEL_LOCATOR = By.CSS_SELECTOR, '[id="email"]'
+CURRENT_ADDRESS_LABEL_LOCATOR = By.XPATH, './/p[@id="currentAddress"]'
 
 
 def test_text_box(akaiafiuk_session):
@@ -25,7 +26,8 @@ def test_text_box(akaiafiuk_session):
     email_textbox.send_keys('jd@gmail.com')
     current_address_textbox.send_keys('New York')
     submit_button = akaiafiuk_session.find_element(*SUBMIT_BTN_LOCATOR)
-    akaiafiuk_session.execute_script('arguments[0].click();', submit_button)
+    scroll_down(akaiafiuk_session)
+    submit_button.click()
     full_name_label = akaiafiuk_session.find_element(*FULL_NAME_LABEL_LOCATOR)
     email_label = akaiafiuk_session.find_element(*EMAIL_LABEL_LOCATOR)
     current_address_label = akaiafiuk_session.find_element(*CURRENT_ADDRESS_LABEL_LOCATOR)
