@@ -3,7 +3,7 @@ import pytest
 
 
 @pytest.fixture
-def akaiafiuk_session():
+def session():
     driver = Chrome()
     driver.maximize_window()
     yield driver
