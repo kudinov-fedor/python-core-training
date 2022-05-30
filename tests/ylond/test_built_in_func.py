@@ -21,12 +21,11 @@ def test_len_error():
     ([], [], []),
     ((1, 2), ["x", "y", "z"], [(1, "x"), (2, "y")])])
 def test_zip(set1, set2, res):
-    print(list(zip(set1, set2))) == res
+    list(zip(set1, set2)) == res
 
 
 @pytest.mark.parametrize("list1, res", [
     ((1, 3, 5), (0, 1, 2)),
-    (["b", "a", "c"], [0, 1, 2])
-])
+    (["b", "a", "c"], [0, 1, 2])])
 def test_zip(list1, res):
     enumerate(list1) == res
