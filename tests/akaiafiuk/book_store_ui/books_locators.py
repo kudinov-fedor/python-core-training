@@ -11,3 +11,7 @@ class BooksLocators:
     BOOK_TITLES = By.XPATH, './/*[contains(@class, "action")]/*/a'
     BOOK_AUTHORS = By.XPATH, './/div[3][@class="rt-td"]'
     TABLE_ROW = By.XPATH, './/*[@class="rt-tr-group"]/child::*'
+
+    @staticmethod
+    def get_book_locator_locator_by_name(name):
+        return f'//*[text() = "{name}"]'
