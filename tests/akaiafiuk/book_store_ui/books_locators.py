@@ -9,8 +9,9 @@ class BooksLocators:
 
     COLUMN_TITLES = By.XPATH, '//*[@class="rt-resizable-header-content"]'
     BOOK_TITLES = By.XPATH, '//*[contains(@class, "action")]/*/a'
-    BOOK_AUTHORS = By.XPATH, '//*[@class="action-buttons"]/../../div[3]'
-    TABLE_ROW = By.XPATH, '//*[@class="action-buttons"]/../..'
+    TABLE_ROW = By.XPATH, '//*[@class="action-buttons"]/ancestor::*[@role="row"]'
+    BOOK_TITLE = By.XPATH, '/following::a'
+    BOOK_AUTHOR = By.XPATH, '/div[3]'
 
     @staticmethod
     def get_book_locator_locator_by_name(name):
