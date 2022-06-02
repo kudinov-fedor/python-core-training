@@ -7,7 +7,7 @@ import pytest
     ("0123654", 7),
     ("", 0)])
 def test_len(param, res):
-    len(param) == res
+    assert len(param) == res
 
 
 def test_len_error():
@@ -21,11 +21,12 @@ def test_len_error():
     ([], [], []),
     ((1, 2), ["x", "y", "z"], [(1, "x"), (2, "y")])])
 def test_zip(set1, set2, res):
-    list(zip(set1, set2)) == res
+    assert list(zip(set1, set2)) == res
 
 
 @pytest.mark.parametrize("list1, res", [
-    ((1, 3, 5), (0, 1, 2)),
-    (["b", "a", "c"], [0, 1, 2])])
-def test_zip(list1, res):
-    enumerate(list1) == res
+    ((1, 3, 5), [(0, 1), (1, 3), (2, 5)]),
+    (["b", "a", "c"], [(0, 'b'), (1, 'a'), (2, 'c')]),
+    ((), [])])
+def test_enumerate(list1, res):
+    assert list(enumerate(list1)) == res
