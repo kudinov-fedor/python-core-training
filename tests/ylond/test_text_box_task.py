@@ -2,10 +2,9 @@ import os
 import time
 import pytest
 
-from selenium.webdriver import Chrome, Opera, Firefox
-from selenium.webdriver.remote.webdriver import WebDriver
+
+from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 
 driver_path = os.environ.get("DRIVER_PATH", "chromedriver")
@@ -101,4 +100,4 @@ def test_all_submit_form(session):
 
     result_field = session.find_element(By.CSS_SELECTOR, "div.border.col-md-12.col-sm-12")
     assert result_field.is_enabled()
-    assert result_field.text == 'Name:Yuliia Londarenko\n' 'Email:test@gmail.com\n' 'Current Address :CurrentAddress\n' 'Permananet Address :Permanent Address'
+    assert result_field.text == 'Name:Yuliia Londarenko\n' 'Email:test@gmail.com\n' 'Current Address :CurrentAddress\n' 'Permanent Address :Permanent Address'
