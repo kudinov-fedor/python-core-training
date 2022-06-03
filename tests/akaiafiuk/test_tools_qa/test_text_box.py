@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from python_at_2021.tests.akaiafiuk.test_tools_qa.utils import scroll_down
+from python_at_2021.tests.akaiafiuk.constants import HOST
 
-HOST = 'https://demoqa.com'
 
 FULL_NAME_TEXTBOX_LOCATOR = By.ID, 'userName'
 EMAIL_TEXTBOX_LOCATOR = By.CSS_SELECTOR, '[type="email"]'
