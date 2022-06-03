@@ -14,7 +14,7 @@ class BooksLocators:
     BOOK_AUTHOR = By.XPATH, './div[3]'
 
     @staticmethod
-    def get_book_locator_locator_by_name(name):
+    def get_book_locator_by_name(name):
         return f'//*[text() = "{name}"]'
 
 
