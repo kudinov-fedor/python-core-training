@@ -4,6 +4,7 @@ from selenium.webdriver.support.wait import WebDriverWait as Wait
 
 WINDOWS_DEMO_URL = 'https://demoqa.com/browser-windows'
 
+
 def test_switch_to_new_tab(driver):
     TAB_BUTTON_ID = (By.ID, 'tabButton')
     NEW_WINDOW_TEXT_ID = (By.ID, 'sampleHeading')
@@ -18,6 +19,7 @@ def test_switch_to_new_tab(driver):
 
     assert new_window == windows[1], 'User is not switched to new window'
     assert new_window_text == 'This is a sample page', 'Text is different from expected'
+
 
 def test_close_new_window(driver):
     NEW_WINDOW_MESSAGE_ID = (By.ID, 'messageWindowButton')

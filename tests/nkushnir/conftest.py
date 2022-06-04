@@ -5,6 +5,7 @@ from selenium.webdriver.firefox.options import Options
 SELENIUM_HOST = 'http://127.0.0.1'
 SELENIUM_PORT = '4444'
 
+
 @pytest.fixture(scope="function")
 def driver():
     options = Options()
