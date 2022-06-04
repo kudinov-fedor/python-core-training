@@ -77,7 +77,7 @@ def test_books_images(bookstore_session):
 @pytest.mark.books
 def test_books_links(bookstore_session):
     """
-    Test that a valid image is displayed for each book
+    Test that bok links are not broken
     """
     rows = bookstore_session.find_elements(*BooksLocators.TABLE_ROW)
     links = list(row.find_element(*BooksLocators.BOOKS_LINKS) for row in rows)
