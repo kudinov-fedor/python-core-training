@@ -1,7 +1,3 @@
-import pytest
-
-from selenium.webdriver.common.by import By
-
 from tests.osokolov.book_store_elements import BookStoreElements
 
 HOST = 'https://demoqa.com'
