@@ -3,18 +3,18 @@ from selenium.webdriver.common.by import By
 
 
 class BookStoreElements:
-    def __init__(self, browser):
-        self.browser = browser
+    def __init__(self):
 
-        self.search_box = self.browser.find_element(By.XPATH, '//input[@id="searchBox"]')
-        self.login_button = self.browser.find_element(By.XPATH, '//button[@id="login"]')
+        self.search_box = (By.XPATH, '//input[@id="searchBox"]')
+        self.login_button = (By.XPATH, '//button[@id="login"]')
 
-        self.headers = self.browser.find_element(By.XPATH, '//div[@class="rt-thead -header"]/div[@class="rt-tr"]')
-        self.image = self.headers.find_element(By.XPATH, './/*[contains(text(), "Image")]')
-        self.title = self.headers.find_element(By.XPATH, './/*[contains(text(), "Title")]')
-        self.author = self.headers.find_element(By.XPATH, './/*[contains(text(), "Author")]')
-        self.publisher = self.headers.find_element(By.XPATH, './/*[contains(text(), "Publisher")]')
+        self.headers = (By.XPATH, '//div[@class="rt-thead -header"]/div[@class="rt-tr"]')
+        self.image = (By.XPATH, f'{self.headers[1]}/div[1]')
+        self.title = (By.XPATH, f'{self.headers[1]}/div[2]')
+        self.author = (By.XPATH, f'{self.headers[1]}/div[3]')
+        self.publisher = (By.XPATH, f'{self.headers[1]}/div[4]')
 
-        self.table_row = lambda row_number: self.browser.find_element(By.XPATH, f'//div[@class="rt-tbody"]//div[@class="rt-tr-group"][{row_number}]')
+        self.table_rows = (By.XPATH, '//div[@class="rt-tr-group"]')
+        self.table_row = lambda row_number: (By.XPATH, f'//div[@class="rt-tbody"]//div[@class="rt-tr-group"][{row_number}]')
 
-        self.page_field = self.browser.find_element(By.XPATH, '//input[@aria-label="jump to page"]')
+        self.page_field = (By.XPATH, '//input[@aria-label="jump to page"]')
