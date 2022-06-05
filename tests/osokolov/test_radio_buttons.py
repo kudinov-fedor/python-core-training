@@ -4,34 +4,29 @@ import pytest
 HOST = 'https://demoqa.com'
 
 
-@pytest.fixture(scope="class")
-def pre_condition(browser):
+@pytest.fixture(autouse=True)
+def setup(browser):
     path = '/radio-button'
-    browser.implicitly_wait(2)
     browser.get(f'{HOST}{path}')
-    return browser
 
 
 class TestRadioButtons:
 
-    def test_yes_button(self, pre_condition):
-        browser = pre_condition
+    def test_yes_button(self, browser):
         yes_button = browser.find_element(By.CSS_SELECTOR, '[for="yesRadio"]')
-        yes_button.is_enabled().click()
+        yes_button.click()
         text_result = browser.find_element(By.CSS_SELECTOR, '.text-success').text
 
         assert text_result == 'Yes'
 
-    def test_impressive_button(self, pre_condition):
-        browser = pre_condition
+    def test_impressive_button(self, browser):
         impressive_button = browser.find_element(By.CSS_SELECTOR, '[for="impressiveRadio"]')
-        impressive_button.is_enabled().click()
+        impressive_button.click()
         text_result = browser.find_element(By.CSS_SELECTOR, '.text-success').text
 
         assert text_result == 'Impressive'
 
-    def test_no_button(self, pre_condition):
-        browser = pre_condition
+    def test_no_button(self, browser):
         no_button = browser.find_element(By.CSS_SELECTOR, '#noRadio')
 
         assert not no_button.is_enabled()
