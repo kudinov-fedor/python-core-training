@@ -4,7 +4,37 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
-from python_at_2021.tests.akaiafiuk.constants import HOST
+from selenium.common.exceptions import NoSuchElementException
+from python_at_2021.tests.akaiafiuk.constants import HOST, LOGIN, PASSWORD
+
+
+class LoginPage:
+    USERNAME_INPUT = By.CSS_SELECTOR, '#userName'
+    PASSWORD_INPUT = By.CSS_SELECTOR, '#password'
+
+    LOGIN_BTN = By.CSS_SELECTOR, 'button#login'
+    NEW_USER_BTN = By.CSS_SELECTOR, 'button#newUser'
+
+    def __init__(self, session: WebDriver):
+        self.session = session
+
+    def open(self) -> None:
+        """
+        Open Login page
+        :return: None
+        """
+        self.session.get(HOST + '/login')
+
+    def login(self, username: str, password: str) -> None:
+        """
+        Login using given credentials
+        :param username: string
+        :param password: string
+        :return: None
+        """
+        self.session.find_element(*LoginPage.USERNAME_INPUT).send_keys(username)
+        self.session.find_element(*LoginPage.PASSWORD_INPUT).send_keys(password)
+        self.session.find_element(*LoginPage.LOGIN_BTN).click()
 
 
 class BooksPage:
@@ -19,6 +49,7 @@ class BooksPage:
     BOOK_AUTHOR = By.XPATH, './div[3]'
     BOOKS_IMAGES = By.XPATH, './/img'
     BOOKS_LINKS = By.XPATH, './/a'
+    USER_NAME = By.CSS_SELECTOR, '#userName-value'
 
     def __init__(self, session: WebDriver):
         self.session = session
@@ -99,6 +130,12 @@ class BooksPage:
         links = list(row.find_element(*BooksPage.BOOKS_LINKS) for row in rows)
         return links
 
+    def click_login(self) -> None:
+        self.session.find_element(*BooksPage.LOGIN_BUTTON).click()
+
+    def get_displayed_username(self) -> str:
+        return self.session.find_element(*BooksPage.USER_NAME).text
+
 
 @pytest.mark.books
 def test_locators(session):
@@ -163,3 +200,34 @@ def test_books_links(session):
         r = requests.head(link)
         assert 200 <= r.status_code < 400
         r.raise_for_status()
+
+
+@pytest.mark.user
+def test_login(session):
+    """
+    Login using existing user
+    """
+    session.delete_cookie('token')
+    books = BooksPage(session)
+    books.open()
+    books.click_login()
+    login_page = LoginPage(session)
+    login_page.login(LOGIN, PASSWORD)
+    assert books.get_displayed_username() == LOGIN
+    assert session.get_cookie('token')
+
+
+@pytest.mark.user
+def test_remove_cookies(session):
+    """
+    Verify that user is not authorized after removing cookies
+    """
+    session.delete_cookie('token')
+    login_page = LoginPage(session)
+    login_page.open()
+    login_page.login(LOGIN, PASSWORD)
+    session.delete_cookie('token')
+    books = BooksPage(session)
+    books.open()
+    with pytest.raises(NoSuchElementException):
+        books.get_displayed_username()
