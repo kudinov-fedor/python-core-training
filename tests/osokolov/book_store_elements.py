@@ -14,7 +14,7 @@ class BookStoreElements:
         self.author = (By.XPATH, f'{self.headers[1]}/div[3]')
         self.publisher = (By.XPATH, f'{self.headers[1]}/div[4]')
 
-        self.table_rows = (By.XPATH, '//div[@class="rt-tr-group"]')
+        self.table_rows = (By.XPATH, '//div[@class="rt-tr-group"]//img')
         self.table_row = lambda row_number: (By.XPATH, f'//div[@class="rt-tbody"]//div[@class="rt-tr-group"][{row_number}]')
 
         self.page_field = (By.XPATH, '//input[@aria-label="jump to page"]')
