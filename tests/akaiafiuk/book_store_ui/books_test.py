@@ -5,7 +5,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.common.exceptions import NoSuchElementException
-from python_at_2021.tests.akaiafiuk.constants import HOST, LOGIN, PASSWORD
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait as Wait
+from python_at_2021.tests.akaiafiuk.constants import HOST, LOGIN
 
 
 class LoginPage:
@@ -35,6 +37,7 @@ class LoginPage:
         self.session.find_element(*LoginPage.USERNAME_INPUT).send_keys(username)
         self.session.find_element(*LoginPage.PASSWORD_INPUT).send_keys(password)
         self.session.find_element(*LoginPage.LOGIN_BTN).click()
+        Wait(self.session, 5).until(EC.url_changes(HOST + '/login'))
 
 
 class BooksPage:
@@ -203,31 +206,23 @@ def test_books_links(session):
 
 
 @pytest.mark.user
-def test_login(session):
+def test_login(prepared_user):
     """
     Login using existing user
     """
-    session.delete_cookie('token')
-    books = BooksPage(session)
+    books = BooksPage(prepared_user)
     books.open()
-    books.click_login()
-    login_page = LoginPage(session)
-    login_page.login(LOGIN, PASSWORD)
+    assert prepared_user.get_cookie('token')
     assert books.get_displayed_username() == LOGIN
-    assert session.get_cookie('token')
 
 
 @pytest.mark.user
-def test_remove_cookies(session):
+def test_remove_cookies(prepared_user):
     """
     Verify that user is not authorized after removing cookies
     """
-    session.delete_cookie('token')
-    login_page = LoginPage(session)
-    login_page.open()
-    login_page.login(LOGIN, PASSWORD)
-    session.delete_cookie('token')
-    books = BooksPage(session)
+    prepared_user.delete_all_cookies()
+    books = BooksPage(prepared_user)
     books.open()
     with pytest.raises(NoSuchElementException):
         books.get_displayed_username()
