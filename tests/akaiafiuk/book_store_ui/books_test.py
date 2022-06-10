@@ -4,7 +4,6 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as Wait
 from python_at_2021.tests.akaiafiuk.constants import HOST, LOGIN
@@ -139,6 +138,9 @@ class BooksPage:
     def get_displayed_username(self) -> str:
         return self.session.find_element(*BooksPage.USER_NAME).text
 
+    def user_is_logged_in(self) -> bool:
+        return LOGIN in self.session.page_source
+
 
 @pytest.mark.books
 def test_locators(session):
@@ -224,5 +226,4 @@ def test_remove_cookies(prepared_user):
     prepared_user.delete_all_cookies()
     books = BooksPage(prepared_user)
     books.open()
-    with pytest.raises(NoSuchElementException):
-        books.get_displayed_username()
+    assert not books.user_is_logged_in()
