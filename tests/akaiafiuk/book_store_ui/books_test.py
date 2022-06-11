@@ -8,10 +8,10 @@ def test_locators(session):
     """
     Verify that locators are correct and it is possible to test a separate table row
     """
-    books = BooksPage(session)
-    row = books.open().get_rows()[0]
-    assert books.get_book_title_from_row(row) == 'Git Pocket Guide'
-    assert 'Richard E.' in books.get_book_author_from_row(row)
+    books_page = BooksPage(session)
+    row = books_page.open().get_rows()[0]
+    assert books_page.get_book_title_from_row(row) == 'Git Pocket Guide'
+    assert 'Richard E.' in books_page.get_book_author_from_row(row)
 
 
 @pytest.mark.books
@@ -19,11 +19,11 @@ def test_search(session):
     """
     Test search using exact match
     """
-    books = BooksPage(session)
-    row = books.open().get_rows()[0]
-    title = books.get_book_title_from_row(row)
-    books.do_search(title)
-    assert len(books.get_rows()) == 1
+    books_page = BooksPage(session)
+    row = books_page.open().get_rows()[0]
+    title = books_page.get_book_title_from_row(row)
+    books_page.do_search(title)
+    assert len(books_page.get_rows()) == 1
 
 
 @pytest.mark.books
@@ -43,8 +43,8 @@ def test_books_images(session):
     """
     Test that a valid image is displayed for each book
     """
-    books = BooksPage(session).open()
-    for i in books.get_images():
+    books_page = BooksPage(session).open()
+    for i in books_page.get_images():
         link = i.get_attribute('src')
         r = requests.head(link)
         assert r.headers['Content-Type'] == 'image/jpeg'
