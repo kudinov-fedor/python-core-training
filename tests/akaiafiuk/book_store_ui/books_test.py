@@ -9,8 +9,7 @@ def test_locators(session):
     Verify that locators are correct and it is possible to test a separate table row
     """
     books = BooksPage(session)
-    row = books.open().\
-        get_row_by_id(0)
+    row = books.open().get_rows()[0]
     assert books.get_book_title_from_row(row) == 'Git Pocket Guide'
     assert 'Richard E.' in books.get_book_author_from_row(row)
 
@@ -21,8 +20,7 @@ def test_search(session):
     Test search using exact match
     """
     books = BooksPage(session)
-    row = books.open(). \
-        get_row_by_id(0)
+    row = books.open().get_rows()[0]
     title = books.get_book_title_from_row(row)
     books.do_search(title)
     assert len(books.get_rows()) == 1
@@ -34,9 +32,8 @@ def test_column_names(session):
     Test that column names are correct
     """
     expected_titles = ('Image', 'Title', 'Author', 'Publisher')
-    books = BooksPage(session)
-    columns = books.open().\
-        get_columns()
+    books_page = BooksPage(session)
+    columns = books_page.open().get_columns()
     assert len(columns) == len(expected_titles)
     assert all(text.text in expected_titles for text in columns)
 
@@ -58,8 +55,8 @@ def test_books_links(session):
     """
     Test that bok links are not broken
     """
-    books = BooksPage(session).open()
-    for i in books.get_links():
+    books_page = BooksPage(session).open()
+    for i in books_page.get_links():
         link = i.get_attribute('href')
         r = requests.head(link)
         assert 200 <= r.status_code < 400

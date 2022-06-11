@@ -36,14 +36,6 @@ class BooksPage(Page):
         """
         return self.elements(BooksPage.COLUMN_TITLES)
 
-    def get_row_by_id(self, row_id: int) -> WebElement:
-        """
-        Get a specific row from the list of all rows
-        :param row_id: id of a row from the list of rows
-        :return: Web element that represents a single row
-        """
-        return self.get_rows()[row_id]
-
     @staticmethod
     def get_book_title_from_row(row: WebElement) -> str:
         """

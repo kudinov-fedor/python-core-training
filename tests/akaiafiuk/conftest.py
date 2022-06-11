@@ -24,9 +24,7 @@ def session() -> WebDriver:
 def prepared_user(session) -> WebDriver:
     session.delete_all_cookies()
     session.refresh()
-    login_page = LoginPage(session)
-    login_page.open()
-    login_page.login(LOGIN, PASSWORD)
+    LoginPage(session).open().login(LOGIN, PASSWORD)
     yield session
     session.delete_all_cookies()
     session.refresh()
