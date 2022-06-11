@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver import Chrome
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from python_at_2021.tests.akaiafiuk.book_store_ui.books_test import LoginPage
+from python_at_2021.tests.akaiafiuk.book_store_ui.pages.login_page import LoginPage
 from python_at_2021.tests.akaiafiuk.constants import LOGIN, PASSWORD
 
 
@@ -24,9 +24,7 @@ def session() -> WebDriver:
 def prepared_user(session) -> WebDriver:
     session.delete_all_cookies()
     session.refresh()
-    login_page = LoginPage(session)
-    login_page.open()
-    login_page.login(LOGIN, PASSWORD)
+    LoginPage(session).open().login(LOGIN, PASSWORD)
     yield session
     session.delete_all_cookies()
     session.refresh()
