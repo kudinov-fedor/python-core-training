@@ -27,14 +27,14 @@ class BooksPage(Page):
         Get all book rows currently displayed
         :return: list of Web Elements
         """
-        return self.session.find_elements(*BooksPage.TABLE_ROW)
+        return self.elements(BooksPage.TABLE_ROW)
 
     def get_columns(self) -> list:
         """
         Get column titles
         :return: list of web elements
         """
-        return self.session.find_elements(*BooksPage.COLUMN_TITLES)
+        return self.elements(BooksPage.COLUMN_TITLES)
 
     def get_row_by_id(self, row_id: int) -> WebElement:
         """
@@ -68,7 +68,7 @@ class BooksPage(Page):
         :param search_text: Search criteria
         :return: None
         """
-        search_input = self.session.find_element(*BooksPage.SEARCH_INPUT)
+        search_input = self.element(BooksPage.SEARCH_INPUT)
         search_input.clear()
         search_input.send_keys(search_text)
         search_input.send_keys(Keys.ENTER)
@@ -79,7 +79,7 @@ class BooksPage(Page):
         Get a list with all images from the books table
         :return: list of Web Elements
         """
-        rows = self.session.find_elements(*BooksPage.TABLE_ROW)
+        rows = self.elements(BooksPage.TABLE_ROW)
         images = list(row.find_element(*BooksPage.BOOKS_IMAGES) for row in rows)
         return images
 
@@ -88,16 +88,16 @@ class BooksPage(Page):
         Get a list with all links from the books table
         :return: list of Web Elements
         """
-        rows = self.session.find_elements(*BooksPage.TABLE_ROW)
+        rows = self.elements(BooksPage.TABLE_ROW)
         links = list(row.find_element(*BooksPage.BOOKS_LINKS) for row in rows)
         return links
 
     def click_login(self) -> LoginPage:
-        self.session.find_element(*BooksPage.LOGIN_BUTTON).click()
+        self.element(BooksPage.LOGIN_BUTTON).click()
         return LoginPage(self.session)
 
     def get_displayed_username(self) -> str:
-        return self.session.find_element(*BooksPage.USER_NAME).text
+        return self.element(BooksPage.USER_NAME).text
 
     def user_is_logged_in(self) -> bool:
         return LOGIN in self.session.page_source
