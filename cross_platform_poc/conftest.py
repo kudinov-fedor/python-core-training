@@ -34,6 +34,7 @@ def driver(request):
 # def pytest_generate_tests(metafunc):
 #     if "driver" in metafunc.fixturenames:
 #         if metafunc.config.getoption("all"):
-#             metafunc.parametrize("driver", CAPS)
+#             caps = CAPS
 #         else:
-#             metafunc.parametrize("driver", CAPS[:1])
+#             caps = CAPS[:1]
+#         metafunc.parametrize("driver", caps, ids=[str(i) for i in caps])
