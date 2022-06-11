@@ -1,5 +1,27 @@
 import pytest
-from appium import webdriver
+from appium.webdriver import Remote as _Remote
+
+
+#  https://stackoverflow.com/a/48836462/10754683
+class Remote(_Remote):
+    def _unwrap_value(self, value):
+        if isinstance(value, dict):
+            if 'ELEMENT' in value:
+                return self.create_web_element(value['ELEMENT'])
+            elif 'SHADOW' in value:
+                return self._shadowroot_cls(self, value['SHADOW'])
+            elif 'element-6066-11e4-a52e-4f735466cecf' in value:
+                return self.create_web_element(value['element-6066-11e4-a52e-4f735466cecf'])
+            elif 'shadow-6066-11e4-a52e-4f735466cecf' in value:
+                return self._shadowroot_cls(self, value['shadow-6066-11e4-a52e-4f735466cecf'])
+            else:
+                for key, val in value.items():
+                    value[key] = self._unwrap_value(val)
+                return value
+        elif isinstance(value, list):
+            return list(self._unwrap_value(item) for item in value)
+        else:
+            return value
 
 
 @pytest.fixture
@@ -7,7 +29,7 @@ def driver():
     # set up appium
     desired_caps = dict()
     desired_caps["app"] = "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App"
-    driver = webdriver.Remote(
+    driver = Remote(
         command_executor='http://127.0.0.1:4723',
         desired_capabilities=desired_caps)
     yield driver

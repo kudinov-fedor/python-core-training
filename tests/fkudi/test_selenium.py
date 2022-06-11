@@ -23,14 +23,6 @@ def scroll_down_page(session: WebDriver):
     session.execute_script("window.scrollTo(0,document.body.scrollHeight)")
 
 
-@pytest.fixture
-def session():
-    session = Chrome(driver_path)
-    session.maximize_window()
-    yield session
-    session.quit()
-
-
 def test_some(session):
     session.get(HOST + "/books")
 
