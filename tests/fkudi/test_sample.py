@@ -9,6 +9,7 @@ def test_pass():
     pass
 
 
+@pytest.mark.xfail
 def test_error():
     res = 1 != 1
     print(res)

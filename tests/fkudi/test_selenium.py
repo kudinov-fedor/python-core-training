@@ -41,7 +41,7 @@ def test_some(session):
 
 def test_ajax(session: WebDriver):
 
-    session.get("https://demoqa.com/profile")
+    session.get("https://www.w3schools.com/js/js_ajax_intro.asp")
 
     btn = session.find_element(By.CSS_SELECTOR, "#demo button")
     btn.click()
