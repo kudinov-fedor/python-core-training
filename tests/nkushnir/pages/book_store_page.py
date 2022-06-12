@@ -48,7 +48,7 @@ class BookStorePage(BasePage):
         column_values = []
         for row in self.get_elements_list(self.TABLE_ROW_DATA):
             col_locator = self.format_xpath_locator(self.CELL_XPATH, self.COLUMNS[column.lower()])
-            cell_text = self.get_text_from_parent(row, col_locator)
+            cell_text = self.get_text_by_parent(row, col_locator)
             column_values.append(cell_text)
         return column_values
     

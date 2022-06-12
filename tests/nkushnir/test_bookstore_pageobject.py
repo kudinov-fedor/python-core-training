@@ -12,13 +12,13 @@ def test_next_button_enabled_if_next_page_exist(driver):
     assert book_store_page.next_page_is_enabled() == True
 
 
-@pytest.mark.parametrize("number_of_pages", [(5), (10), (20)])
-def test_select_rows_per_page(driver, number_of_pages):
+@pytest.mark.parametrize("number_of_rows", [(5), (10), (20)])
+def test_select_rows_per_page(driver, number_of_rows):
     book_store_page = BookStorePage(driver)
     book_store_page.open()
     book_store_page.scroll_to_bottom()
-    book_store_page.select_table_rows_number(number_of_pages)
-    assert book_store_page.get_table_rows_number() == number_of_pages
+    book_store_page.select_table_rows_number(number_of_rows)
+    assert book_store_page.get_table_rows_number() == number_of_rows
 
 
 @pytest.mark.parametrize("filter_value, column, filtered_books_count", [

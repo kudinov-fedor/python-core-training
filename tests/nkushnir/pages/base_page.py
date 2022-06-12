@@ -10,7 +10,7 @@ def get_element(method):
     return wrapper
 
 
-def get_element_from_parent(method):
+def get_element_by_parent(method):
     def wrapper(self, parent, locator, *args, **kwargs):
         element = parent.find_element(*locator)
         return method(self, element, *args, **kwargs)
@@ -59,8 +59,8 @@ class BasePage():
     def get_text(self, element):
         return element.text
     
-    @get_element_from_parent
-    def get_text_from_parent(self, element):
+    @get_element_by_parent
+    def get_text_by_parent(self, element):
         return element.text
 
     @get_element
