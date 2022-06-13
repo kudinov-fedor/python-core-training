@@ -41,12 +41,12 @@ class BookStorePage(BasePage):
     def sort_by_publisher(self):
         self.element(self.book_store_elements.publisher).click()
 
-    def verify_user_name(self, user_name):
-        assert self.element(self.book_store_elements.user_name).text == user_name
+    def get_user_name(self):
+        assert self.element(self.book_store_elements.user_name).text
         return self
 
     def verify_log_out_button(self):
         try:
             self.element(self.book_store_elements.log_out_button).is_displayed()
-        except(NoSuchElementException):
+        except NoSuchElementException:
             return False
