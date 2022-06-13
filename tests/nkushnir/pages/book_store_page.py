@@ -19,9 +19,6 @@ class BookStorePage(BasePage):
     CELL_XPATH = '//div[@class="rt-td"][{}]'
 
 
-    def open(self):
-        self.open_page(self.PAGE_PATH)
-
     def select_table_rows_number(self, rows_number):
         self.select_by_value(self.PAGES_SELECT, rows_number)
     

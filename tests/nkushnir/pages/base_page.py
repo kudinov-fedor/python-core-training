@@ -32,13 +32,14 @@ def get_elements(method):
 
 
 class BasePage():
-    BASE_URL = 'https://demoqa.com/'
+    BASE_URL = 'https://demoqa.com'
+    PAGE_PATH = ''
 
     def __init__(self, driver):
         self.driver = driver
     
-    def open_page(self, page_path=None):
-        self.driver.get(f'{self.BASE_URL}{page_path}')
+    def open(self):
+        self.driver.get(f'{self.BASE_URL}/{self.PAGE_PATH}')
     
     def scroll_to_bottom(self):
         self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
