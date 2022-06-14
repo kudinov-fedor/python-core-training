@@ -15,7 +15,6 @@ def test_tuple():
 def test_reversed():
     test_list = ['dasasd', 'asdsa', 1, 22]
     test_list.reverse()
-    return test_list
     assert test_list == [22, 1, 'asdsa', 'dasasd']
 
 

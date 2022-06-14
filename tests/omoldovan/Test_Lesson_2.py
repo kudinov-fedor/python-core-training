@@ -10,10 +10,8 @@ driver_path = os.environ.get("DRIVER_PATH", "chromedriver")
 @pytest.fixture
 def session():
     session = Chrome(driver_path)
-    time.sleep(5)
     yield session
     session.quit()
-    time.sleep(5)
 
 
 def test_sample_1(session: WebDriver):

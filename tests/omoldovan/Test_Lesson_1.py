@@ -23,7 +23,7 @@ import pytest
 
 ])
 def test_zero_dev_with_param(param1, param2, res):
-    assert param1/param2 == res
+    assert param1 / param2 == res
 
 
 @pytest.mark.skip("Just for fun")
@@ -35,4 +35,4 @@ def test_error():
 
 def test_zero_div_error():
     with pytest.raises(ZeroDivisionError):
-        1/5
+        1 / 5
