@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.remote.webelement import WebElement
 from python_at_2021.tests.akaiafiuk.constants import LOGIN
 from python_at_2021.tests.akaiafiuk.book_store_ui.pages.page import Page
 from python_at_2021.tests.akaiafiuk.book_store_ui.pages.login_page import LoginPage
+from python_at_2021.tests.akaiafiuk.book_store_ui.elements.books_table import BooksTable
 
 
 class BooksPage(Page):
@@ -22,37 +22,8 @@ class BooksPage(Page):
     BOOKS_LINKS = By.XPATH, './/a'
     USER_NAME = By.CSS_SELECTOR, '#userName-value'
 
-    def get_rows(self) -> list:
-        """
-        Get all book rows currently displayed
-        :return: list of Web Elements
-        """
-        return self.elements(BooksPage.TABLE_ROW)
-
-    def get_columns(self) -> list:
-        """
-        Get column titles
-        :return: list of web elements
-        """
-        return self.elements(BooksPage.COLUMN_TITLES)
-
-    @staticmethod
-    def get_book_title_from_row(row: WebElement) -> str:
-        """
-        Returns a string with a book title for a specific row
-        :param row: row Web element
-        :return: string with a book title
-        """
-        return row.find_element(*BooksPage.BOOK_TITLE).text
-
-    @staticmethod
-    def get_book_author_from_row(row: WebElement) -> str:
-        """
-        Returns a string with a book author for a specific row
-        :param row: row Web element
-        :return: string with a book author
-        """
-        return row.find_element(*BooksPage.BOOK_AUTHOR).text
+    def get_books_table(self) -> BooksTable:
+        return BooksTable(self.session)
 
     def do_search(self, search_text: str) -> None:
         """
