@@ -8,10 +8,10 @@ def test_locators(session):
     """
     Verify that locators are correct and it is possible to test a separate table row
     """
-    books_page = BooksPage(session)
-    row = books_page.open().get_rows()[0]
-    assert books_page.get_book_title_from_row(row) == 'Git Pocket Guide'
-    assert 'Richard E.' in books_page.get_book_author_from_row(row)
+    books_page = BooksPage(session).open()
+    row = books_page.get_books_table().get_rows()[0]
+    assert row.title == 'Git Pocket Guide'
+    assert 'Richard E.' in row.author
 
 
 @pytest.mark.books
@@ -19,11 +19,11 @@ def test_search(session):
     """
     Test search using exact match
     """
-    books_page = BooksPage(session)
-    row = books_page.open().get_rows()[0]
-    title = books_page.get_book_title_from_row(row)
+    books_page = BooksPage(session).open()
+    row = books_page.open().get_books_table().get_rows()[0]
+    title = row.title
     books_page.do_search(title)
-    assert len(books_page.get_rows()) == 1
+    assert len(books_page.get_books_table().get_rows()) == 1
 
 
 @pytest.mark.books
@@ -33,7 +33,7 @@ def test_column_names(session):
     """
     expected_titles = ('Image', 'Title', 'Author', 'Publisher')
     books_page = BooksPage(session)
-    columns = books_page.open().get_columns()
+    columns = books_page.open().get_books_table().get_columns()
     assert len(columns) == len(expected_titles)
     assert all(text.text in expected_titles for text in columns)
 
@@ -43,9 +43,9 @@ def test_books_images(session):
     """
     Test that a valid image is displayed for each book
     """
-    books_page = BooksPage(session).open()
-    for i in books_page.get_images():
-        link = i.get_attribute('src')
+    rows = BooksPage(session).open().get_books_table().get_rows()
+    for row in rows:
+        link = row.image.get_attribute('src')
         r = requests.head(link)
         assert r.headers['Content-Type'] == 'image/jpeg'
 
@@ -55,9 +55,9 @@ def test_books_links(session):
     """
     Test that bok links are not broken
     """
-    books_page = BooksPage(session).open()
-    for i in books_page.get_links():
-        link = i.get_attribute('href')
+    rows = BooksPage(session).open().get_books_table().get_rows()
+    for row in rows:
+        link = row.link.get_attribute('href')
         r = requests.head(link)
         assert 200 <= r.status_code < 400
         r.raise_for_status()
