@@ -21,7 +21,7 @@ class LoginPage(Page):
         :param password: string
         :return: None
         """
-        self.element(*LoginPage.USERNAME_INPUT).send_keys(username)
-        self.element(*LoginPage.PASSWORD_INPUT).send_keys(password)
-        self.element(*LoginPage.LOGIN_BTN).click()
+        self.element(LoginPage.USERNAME_INPUT).send_keys(username)
+        self.element(LoginPage.PASSWORD_INPUT).send_keys(password)
+        self.element(LoginPage.LOGIN_BTN).click()
         Wait(self.session, 5).until(EC.url_changes(self.host + self.url))

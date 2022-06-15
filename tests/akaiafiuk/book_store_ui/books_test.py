@@ -10,8 +10,8 @@ def test_locators(session):
     """
     books_page = BooksPage(session).open()
     row = books_page.get_books_table().get_rows()[0]
-    assert row.get_book_title() == 'Git Pocket Guide'
-    assert 'Richard E.' in row.get_book_author()
+    assert row.title == 'Git Pocket Guide'
+    assert 'Richard E.' in row.author
 
 
 @pytest.mark.books
@@ -21,7 +21,7 @@ def test_search(session):
     """
     books_page = BooksPage(session).open()
     row = books_page.open().get_books_table().get_rows()[0]
-    title = row.get_book_title()
+    title = row.title
     books_page.do_search(title)
     assert len(books_page.get_books_table().get_rows()) == 1
 
@@ -43,9 +43,9 @@ def test_books_images(session):
     """
     Test that a valid image is displayed for each book
     """
-    books_page = BooksPage(session).open()
-    for i in books_page.get_images():
-        link = i.get_attribute('src')
+    rows = BooksPage(session).open().get_books_table().get_rows()
+    for row in rows:
+        link = row.image.get_attribute('src')
         r = requests.head(link)
         assert r.headers['Content-Type'] == 'image/jpeg'
 
@@ -55,9 +55,9 @@ def test_books_links(session):
     """
     Test that bok links are not broken
     """
-    books_page = BooksPage(session).open()
-    for i in books_page.get_links():
-        link = i.get_attribute('href')
+    rows = BooksPage(session).open().get_books_table().get_rows()
+    for row in rows:
+        link = row.link.get_attribute('href')
         r = requests.head(link)
         assert 200 <= r.status_code < 400
         r.raise_for_status()

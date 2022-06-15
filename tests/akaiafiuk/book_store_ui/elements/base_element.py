@@ -4,7 +4,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webdriver import WebElement
 
 
-class BaseElement:
+class BaseElement(WebElement):
     def __init__(self, session: WebElement):
         self.session = session
 
