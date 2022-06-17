@@ -78,7 +78,7 @@ def test_current_address(session):
 
 
 @pytest.mark.skip
-def test_permanenet_address(session): # ER --- TEST MUST FAILED
+def test_permanent_address(session): # ER --- TEST MUST FAILED
     session.get(HOST + '/text-box')
     permanentAddress = session.find_element_by_css_selector('#permanentAddress')
     permanentAddress.send_keys('Vasylkivska 49/34234 A')
