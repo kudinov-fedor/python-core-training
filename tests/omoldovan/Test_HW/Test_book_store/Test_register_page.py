@@ -44,6 +44,8 @@ def test_registration_correct(session):
     res = password.get_attribute('value')
     assert res == 'asdqweASDQWE123!@#'
 
+
+# !!!     HOW TO SKIP OR PASS CAPTCHA ???
     # captcha = session.find_element_by_xpath('/html/body/div[2]/div[3]/div[1]/div/div/span/div[4]')
     # res = captcha.get_attribute("aria-checked")
     # assert res == "true"
