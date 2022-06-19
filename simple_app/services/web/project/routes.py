@@ -1,4 +1,5 @@
-import os, logging
+import os
+import logging
 from project import app, db
 
 from werkzeug.utils import secure_filename

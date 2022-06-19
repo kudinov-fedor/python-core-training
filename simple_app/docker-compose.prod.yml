@@ -15,6 +15,11 @@ services:
       - ./.env.prod
     depends_on:
       - db
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "1g"
   db:
     image: postgres:13-alpine
     volumes:
