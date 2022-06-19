@@ -24,6 +24,7 @@ requests
 sanic
 flask
 locust
+beautifulsoup4  # to parse htmls
 
 # for android native and Windows
 Appium-Python-Client>=0.28

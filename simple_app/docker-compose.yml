@@ -7,11 +7,16 @@ services:
     volumes:
       - ./services/web/:/usr/src/app/
     ports:
-      - 5000:5000
+      - 1337:5000
     env_file:
       - ./.env.dev
     depends_on:
       - db
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: "1g"
   db:
     image: postgres:13-alpine
     volumes:
