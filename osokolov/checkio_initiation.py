@@ -2,6 +2,7 @@
 from collections import Counter
 from typing import Iterable
 
+
 def first_word(text: str) -> str:
     return text.split()[0]
 
@@ -25,11 +26,11 @@ def backward_string(val: str) -> str:
 
 def end_zeros(num: int) -> int:
     data = str(num)
-    return  0 if data[-1] != '0' else len(data) - len(data.rstrip('0'))
+    return 0 if data[-1] != '0' else len(data) - len(data.rstrip('0'))
 
 
 def easy_unpack(elements: tuple) -> tuple:
-    return (elements[0], elements[2], elements[-2])
+    return elements[0], elements[2], elements[-2]
 
 
 def remove_all_before(items: list, border: int) -> Iterable:
@@ -37,6 +38,7 @@ def remove_all_before(items: list, border: int) -> Iterable:
 
 # def is_all_upper(text: str) -> bool:
 #     return text.isupper() |
+
 
 def replace_first(items: list) -> Iterable:
     return items[1:] + items[:1]
@@ -62,7 +64,8 @@ def between_markers(text: str, begin: str, end: str):
 def correct_sentence(text: str) -> str:
     return text.capitalize() if text[-1] == '.' else text.capitalize() + '.'
 
+
 def is_even(num: int) -> bool:
-    return num%2 ==0
+    return num % 2 == 0
 
 # def nearest_value(values: set, one: int) -> int:
