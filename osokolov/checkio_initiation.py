@@ -36,8 +36,15 @@ def easy_unpack(elements: tuple) -> tuple:
 def remove_all_before(items: list, border: int) -> Iterable:
     return items if border not in items else items[items.index(border):]
 
-# def is_all_upper(text: str) -> bool:
-#     return text.isupper() |
+
+def is_all_upper(text: str) -> bool:
+    flag = True
+    for c in text:
+        if c.islower():
+            flag = False
+            break
+
+    return flag
 
 
 def replace_first(items: list) -> Iterable:
