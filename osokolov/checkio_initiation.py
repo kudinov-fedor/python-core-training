@@ -1,5 +1,5 @@
 
-from collections import Counter
+
 from typing import Iterable
 
 
@@ -15,9 +15,8 @@ def number_length(a: int) -> int:
     return len(str(a))
 
 
-def most_frequent(data: list) -> str:
-    data_collection = Counter(data)
-    return max(data_collection.items(), key=lambda x: x[1])[0]
+def most_frequent(data: list):
+    return sorted(data, key=lambda x: data.count(x), reverse=True)[0]
 
 
 def backward_string(val: str) -> str:
@@ -38,13 +37,7 @@ def remove_all_before(items: list, border: int) -> Iterable:
 
 
 def is_all_upper(text: str) -> bool:
-    flag = True
-    for c in text:
-        if c.islower():
-            flag = False
-            break
-
-    return flag
+    return all([False if i.islower() else True for i in text])
 
 
 def replace_first(items: list) -> Iterable:
@@ -53,7 +46,7 @@ def replace_first(items: list) -> Iterable:
 
 def max_digit(number: int) -> int:
     string_number = str(number)
-    return max([int(i) for i in string_number])
+    return sorted(string_number)[-1]
 
 
 def beginning_zeros(number: str) -> int:
@@ -65,14 +58,22 @@ def between_markers(text: str, begin: str, end: str):
     second_index = text.find(end)
     return text[first_index:second_index]
 
-# def split_pairs(a: str):
+
+def split_pairs(a: str):
+    return [(a + '_')[i:i + 2] for i in range(0, len(a), 2)]
 
 
 def correct_sentence(text: str) -> str:
-    return text.capitalize() if text[-1] == '.' else text.capitalize() + '.'
+    return text.capitalize().rstrip('.') + '.'
 
 
 def is_even(num: int) -> bool:
     return num % 2 == 0
 
-# def nearest_value(values: set, one: int) -> int:
+
+def nearest_value(values: set, one: int):
+    if one in values:
+        return one
+    else:
+        data = sorted(list(values) + [one])
+    return data[data.index(one) + 1] if data.index(one) == 0 else data[data.index(one) - 1]
