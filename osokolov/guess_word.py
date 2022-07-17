@@ -27,4 +27,3 @@ def guess(word: str, hint: str):
             continue
         else:
             break
-
