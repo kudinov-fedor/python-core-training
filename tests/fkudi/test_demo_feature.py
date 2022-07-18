@@ -36,3 +36,12 @@ def test_demo_mock(mocker):
     mock = mocker.MagicMock()
     len(mock)
     assert mock.__len__.called
+
+
+def test_failed_test_example():
+    res = 1 + 2
+
+    try:
+        assert res == 5
+    except AssertionError:
+        print("some error happened")
