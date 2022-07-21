@@ -3,7 +3,10 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
-# Node artifact files
+# Venv
+venv/
+
+# Node artifact filt ges
 node_modules/
 dist/
 
