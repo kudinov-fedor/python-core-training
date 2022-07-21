@@ -6,7 +6,7 @@
 # Venv
 venv/
 
-# Node artifact filt ges
+# Node artifact files
 node_modules/
 dist/
 
