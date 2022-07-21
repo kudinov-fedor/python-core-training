@@ -31,17 +31,17 @@ else:
     print("Are the same.")
 
 # Task_04
-    print("Task 04")
+print("Task 04")
     # Checking is a user entered number is even or odd
-    number = int(input("Enter a number : "))
-    if number % 2 == 0:
-        print("Number is even")
-    else:
-        print("Number is odd")
+number = int(input("Enter a number : "))
+if number % 2 == 0:
+    print("Number is even")
+else:
+    print("Number is odd")
 
 # Task_05
     # We're listing all weekday & weekend tasks and showing list depending on user selection
-    print("Task 05")
+print("Task 05")
 
 weekday_tasks = ["Morning meeting", "Task research", "Planning", "Conference", "Budgeting"]
 weekend_tasks = ["Laundry", "Vet appointment", "Pet store", "Grocery shopping", "Pay bills"]
