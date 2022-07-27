@@ -62,10 +62,11 @@ company = {
     'sales': '15 employees',
     'HR': '4 employees'
 }
+print(list(company))
 
 key = company.keys()
 employees = company.pop('sales')
 numbers = company.values()
 print(key)
 print(employees)
-print(numbers) # Why it ignores 15?
+print(numbers)
