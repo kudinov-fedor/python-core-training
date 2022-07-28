@@ -1,0 +1,34 @@
+# Task_01
+
+#Asks for user input details and prints messages
+
+print("Task 01")
+first_name = str(input("Enter first name : "))
+last_name = str(input("Enter last name : "))
+age = int(input("Enter age : "))
+
+#If user age is under 18 user cannot proceed forward, received minor message and names are capitalized
+if age < 18:
+    print("Dear, " + first_name.capitalize() +" "+ last_name.capitalize() + ", as a minor you cannot proceed forward.")
+#If user is above 18 years of age, message asks for credit card; names are also capitalized
+else:
+    print("Dear, " + first_name.capitalize() +" "+ last_name.capitalize() + ", please proceed forward and provide a valid credit card number.")
+print()
+
+# Task_02
+print("Task 02") #Listed values in the grocery list are mapped to match a separate value
+print()
+grocery_list = ["milk", "cat food", "bread", "cheese"]
+a, b, c, d = grocery_list
+print("The following ",len(grocery_list),"items in your cart are: ")
+print(a)
+print(b)
+print(c)
+print(d)
+print()
+
+# Task_03
+print("Task 03") #Duplicated values in our entry shopping list set won't be printed, only original values will be kept
+print()
+shopping_list = {"dress", "shoes", "bag", "necklace", "ring", "shoes", "coat", "ring"}
+print("This is your shopping list: ", shopping_list)
