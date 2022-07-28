@@ -61,10 +61,10 @@ def test_most_frequent_with_max(item, expected):
 
 
 @pytest.mark.parametrize("item, expected", [
-    (["a", "b", "c", "a", "a", "b"], "a"),
-    (["a", "b", "c", "a", "c", "b"], "a, b, c"),
-    (["aa", "a", "aaa", "ab", "aa", "ba"], "aa"),
-    ([",", ".", "aaa", ",", ".", "ba"], ",, .")
+    (["a", "b", "c", "a", "a", "b"], ["a"]),
+    (["a", "b", "c", "a", "c", "b"], ["a", "b", "c"]),
+    (["aa", "a", "aaa", "ab", "aa", "ba"], ["aa"]),
+    ([",", ".", "aaa", ",", ".", "ba"], [",", "."])
 ])
 def test_most_frequent_with_dict(item, expected):
     assert checkio.most_frequent_with_dict(item) == expected

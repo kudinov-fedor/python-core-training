@@ -44,16 +44,11 @@ def most_frequent_with_max(data: list) -> str:
     return max(data, key=data.count)
 
 
-def most_frequent_with_dict(data: list) -> str:
+def most_frequent_with_dict(data: list) -> list:
     """
-       Returns the most frequent string of the input list
-       In case there are strings with the same frequency, returns the string of ordered from smallest to largest data
-       separated by comma
+       Returns the most frequent strings of the input list sorted by alphabet
     """
     mydict = defaultdict(list)
-    for item in data:
-        current_count = data.count(item)
-        if item not in mydict[current_count]:
-            mydict[current_count].append(item)
-    max_values = sorted(mydict[max(mydict.keys())])
-    return ", ".join(max_values)
+    for item in set(data):
+        mydict[data.count(item)].append(item)
+    return sorted(mydict[max(mydict.keys())])
