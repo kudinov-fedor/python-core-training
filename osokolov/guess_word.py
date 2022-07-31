@@ -35,7 +35,6 @@ from string import ascii_lowercase
 #         #input
 #
 #         pass
-tries = []
 
 
 def get_user_answer():
@@ -49,24 +48,17 @@ def validate_user_answer(user_answer):
         return False
 
 
-def save_user_answer(user_answer: str):
-    tries.append(user_answer)
-
-
 def show_game_result(word: str, letters: list):
-    return ''.join([letter if letter in letters else "*" for letter in word])
+    print(''.join([letter if letter in letters else "*" for letter in word]))
 
 
 def check_win(word: str, letters: list):
     return all([i in letters for i in word])
 
 
-def get_letters():
-    return tries
-
-
 def guess(word: str, hint: str):
     word = word.lower()
+    tries = []
     print('Welcome!')
     print(f'Guess the word: f{hint}  ')
     print('If you want ot quit the game input word: quit')
@@ -77,15 +69,14 @@ def guess(word: str, hint: str):
         if answer == 'quit':
             break
         if validate_user_answer(answer):
-            save_user_answer(answer)  # save user data
+            tries.append(answer)  # save user data
         else:
             print('Input correct data')
             continue
         # show current state
-        letters = get_letters()
-        print(show_game_result(word, letters))
+        show_game_result(word, tries)
         # check win
-        if check_win(word, letters):
+        if check_win(word, tries):
             break
 
     print('You guess!')

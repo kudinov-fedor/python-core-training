@@ -42,4 +42,4 @@ def test_check_win_negative_data(data):
     ('ab', ['c', 'd'], '**')
 ])
 def test_show_game_result(word, list_data, expected_result):
-    assert show_game_result(word, list_data) == expected_result
+    assert show_game_result(word, list_data) == print(expected_result)
