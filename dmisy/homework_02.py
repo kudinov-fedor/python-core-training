@@ -139,20 +139,22 @@ muscle_cars = ['Pontiac', 'Buick', 'Dodge']
 car_models.extend(muscle_cars)
 print(car_models)
 
-z = 1
+z = 0
 while z < 26:
     print('Information is processing...')
+    # How to remove this string from above the first loop?
+    # I want loop to start with Loop 1, not this string.
     z += 1
-    if z <= 13 <= z:  # Python have suggested me to simplify the chained comparison
-        print('Error Found!')
     if z == 13:
+        # My idea was to 'error' loop 13, 'fix it' and 'process' it further successfully
+        # I ended up modifying code as per lines 148-152
+        print('Loop 13: Error Found!')
         print('Working on fixing the issue...')
-    if z == 13:
         print('Please wait...')
-    if z == 13:
         print('Issue is fixed. Moving forward.')
+        print('Loop', z, 'is done. Moving forward.')
     elif z <= 25:
-        print('Loop', z, 'is done. Moving Forward.')
-    elif z >= 26:
+        print('Loop', z, 'is done. Moving forward.')
+    elif z == 26:
         print('Loop', z, 'is done')
         print('Finished')
