@@ -71,3 +71,5 @@ def test_pass(number1):
 @pytest.mark.parametrize('number2', [0, 1, 2, 3, 5, 20, 150])
 def test_fail(number2):
     assert number2 > 2  # 0, 1, 2 will fail, rest will pass
+
+
