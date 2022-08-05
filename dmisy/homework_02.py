@@ -59,31 +59,33 @@ myArgument('Here you go some facts below')
 
 
 def fact1(rodent):
-    print('Fact #1: ' + rodent + ' live only for 2-3 years')
+    print('Fact #1: ', rodent, ' live only for 2-3 years')
 
 
 fact1('Fancy rats')
 
 
 def fact2(pet, pet2):
-    print('Fact #2 ' + pet + ':')
+    print('Fact #2 ', pet, ':')
     print(' - do like water')
     print(' - can swim')
-    print(' - do not fight with ' + pet2)
+    print(' - do not fight with ', pet2)
 
 
 fact2('Cats', 'dogs')
 
 
 def factsRest(h1, h2, h3, h4):
-    print('Fact #3 ' + h1 + ' is a 2nd ' + h2 + ' I am trying to learn after ' + h3)
-    print('Fact #4 ' + h4 + ' is a planet')
+    print('Fact #3 ', h1, ' is a 2nd ', h2, ' I am trying to learn after ', h3)
+    print('Fact #4 ', h4, ' is a planet')
     try:
         truth = h3 ** h4
         return truth
     except:
         print('I have handled this error btw')
 
+
+# I have reformatted code in lines 62-80, by removing '+' between strings and objects as per your comment earlier
 
 factsRest('Python', 'programming language', 'JS', 'Moon')
 
@@ -143,11 +145,9 @@ z = 0
 while z < 26:
     print('Information is processing...')
     # How to remove this string from above the first loop?
-    # I want loop to start with Loop 1, not this string.
+    # I want loop to start with Loop 1, not 'Information is processing...'
     z += 1
     if z == 13:
-        # My idea was to 'error' loop 13, 'fix it' and 'process' it further successfully
-        # I ended up modifying code as per lines 148-152
         print('Loop 13: Error Found!')
         print('Working on fixing the issue...')
         print('Please wait...')
@@ -158,3 +158,6 @@ while z < 26:
     elif z == 26:
         print('Loop', z, 'is done')
         print('Finished')
+
+# My idea was to 'error' loop 13, 'fix it' and 'process' it further successfully
+# I ended up modifying code as per lines 149-160
