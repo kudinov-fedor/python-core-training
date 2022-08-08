@@ -2,11 +2,13 @@ from string import ascii_lowercase
 
 
 class GameModel:
-    def __init__(self):
+    def __init__(self, word, hint):
+        self.word = word
+        self.hint = hint
         self.tries = []
 
-    def check_win(self, word: str):
-        return all([i in self.tries for i in word])
+    def check_win(self):
+        return all([i in self.tries for i in self.word])
 
 
 class GameView:
@@ -19,11 +21,11 @@ class GameView:
     def warning_message(self):
         print('Input correct data')
 
-    def get_user_answer(self):
-        return input('Your try: ')
-
     def show_game_result(self, word: str, letters: list):
         print(''.join([letter if letter in letters else "*" for letter in word]))
+
+    def win_message(self):
+        print('You guess!')
 
 
 class GameController:
@@ -31,12 +33,12 @@ class GameController:
         self.word = word.lower()
         self.hint = hint
         self.view = GameView()
-        self.model = GameModel()
+        self.model = GameModel(self.word, self.hint)
 
     def start(self):
         self.view.start_game_message(self.hint)
         while True:
-            answer = self.view.get_user_answer()
+            answer = self.get_user_answer()
             if answer == 'quit':
                 break
             if self.validate_user_answer(answer):
@@ -45,9 +47,9 @@ class GameController:
                 self.view.warning_message()
                 continue
             self.view.show_game_result(self.word, self.model.tries)
-            if self.model.check_win(self.word):
+            if self.model.check_win():
                 break
-        print('You guess!')
+        self.view.win_message()
 
     @classmethod
     def validate_user_answer(cls, answer):
@@ -55,6 +57,10 @@ class GameController:
             return len(answer) == 1 and answer in ascii_lowercase
         except TypeError:
             return False
+
+    @classmethod
+    def get_user_answer(cls):
+        return input('Your try: ')
 
 
 def guess(word: str, hint: str):
