@@ -13,16 +13,16 @@ class GameModel:
 
 class GameView:
 
-    def start_game_message(self, hint):
+    def start_game_message(self, model: GameModel):
         print('Welcome!')
-        print(f'Guess the word: f{hint}  ')
+        print(f'Guess the word: f{model.hint}  ')
         print('If you want ot quit the game input word: quit')
 
     def warning_message(self):
         print('Input correct data')
 
-    def show_game_result(self, word: str, letters: list):
-        print(''.join([letter if letter in letters else "*" for letter in word]))
+    def show_game_result(self, model: GameModel):
+        print(''.join([letter if letter in model.tries else "*" for letter in model.word]))
 
     def win_message(self):
         print('You guess!')
@@ -30,13 +30,11 @@ class GameView:
 
 class GameController:
     def __init__(self, word, hint):
-        self.word = word.lower()
-        self.hint = hint
         self.view = GameView()
-        self.model = GameModel(self.word, self.hint)
+        self.model = GameModel(word, hint)
 
     def start(self):
-        self.view.start_game_message(self.hint)
+        self.view.start_game_message(self.model)
         while True:
             answer = self.get_user_answer()
             if answer == 'quit':
@@ -46,7 +44,7 @@ class GameController:
             else:
                 self.view.warning_message()
                 continue
-            self.view.show_game_result(self.word, self.model.tries)
+            self.view.show_game_result(self.model)
             if self.model.check_win():
                 break
         self.view.win_message()
