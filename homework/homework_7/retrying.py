@@ -1,3 +1,8 @@
+"""
+Create decorator, which will retry inner function multiple times untill it passes
+"""
+
+
 import random
 
 
