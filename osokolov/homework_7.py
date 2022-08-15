@@ -31,9 +31,9 @@ def make_stable_recursion(func):
 
 # @retry(exceptions=(ValueError, TypeError), tries=5)
 # @make_stable
+@make_stable_recursion
 def unstable_function():
     res = random.random()
     if res < 0.5:
         raise ValueError("Unpredictable Error")
     return res
-

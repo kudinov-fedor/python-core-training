@@ -11,9 +11,9 @@ from operator import gt, lt, le, ge
 
 
 def check_running_time(func):
-    def run():
+    def run(*args, **kwargs):
         start_run = time.time_ns()
-        f = func()
+        f = func(*args, **kwargs)
         print(time.time_ns() - start_run)
         return f
 
@@ -42,7 +42,7 @@ def bubble_sort(iterable, reverse: bool = True, key: callable = None) -> list:
         limit -= 1
     return args
 
-
+@check_running_time
 def gnome_sort(iterable, reverse: bool = True, key: callable = None) -> list:
     """
     grab an item and drag it to place, where closest is bigger than this
@@ -66,7 +66,7 @@ def gnome_sort(iterable, reverse: bool = True, key: callable = None) -> list:
         last_position = position
     return args
 
-
+@check_running_time
 def insert_sort(iterable, reverse: bool = True, key: callable = None) -> list:
     """
     Pick any item
@@ -90,7 +90,7 @@ def insert_sort(iterable, reverse: bool = True, key: callable = None) -> list:
 
     return args
 
-
+@check_running_time
 def select_sort(iterable, reverse: bool = True, key: callable = None) -> list:
     """
     Pick biggest item
