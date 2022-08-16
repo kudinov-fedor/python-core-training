@@ -1,7 +1,7 @@
 """
 Create decorator, which will retry inner function multiple times untill it passes
 """
-
+from retry import retry
 import random
 
 
@@ -29,6 +29,8 @@ def make_stable_recursion(func):
     return repeat
 
 
+# @retry(exceptions=(ValueError, TypeError), tries=5)
+# @make_stable
 @make_stable_recursion
 def unstable_function():
     res = random.random()
