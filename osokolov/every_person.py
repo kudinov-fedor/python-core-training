@@ -1,5 +1,4 @@
-from dateutil.parser import parse as du_parse
-from dateutil.relativedelta import relativedelta
+from datetime import datetime
 
 
 class Person:
@@ -13,15 +12,16 @@ class Person:
         self.country = country
         self.city = city
         self.gender = gender
+        self.current_date = '01.01.2018'
+        self.days_in_year = 365.2425
 
     def name(self) -> str:
         return f'{self.first_name} {self.last_name}'
 
-    def age(self):
-        current_date = du_parse('01.01.2018', dayfirst=True)
-        birth = du_parse(self.birth_date, dayfirst=True)
-
-        return relativedelta(current_date, birth).years
+    def age(self) -> int:
+        current = datetime.strptime(self.current_date, '%d.%m.%Y')
+        birth = datetime.strptime(self.birth_date, '%d.%m.%Y')
+        return int((current - birth).days // self.days_in_year)
 
     def work(self) -> str:
         pronouns = None
