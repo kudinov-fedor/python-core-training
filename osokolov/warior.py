@@ -8,27 +8,31 @@ class Warrior:
     def is_alive(self) -> bool:
         return self.health > 0
 
+    def perform_attack(self, warrior):
+        warrior.health -= self.attack
+
+    def take_damage(self, warrior):
+        self.health -= warrior.attack
+
 
 class Knight(Warrior):
     def __init__(self):
-        super().__init__()
+        self.health = 50
         self.attack = 7
 
 
 def fight(warrior_1, warrior_2):
-    flag = True
     while True:
-        warrior_2.health -= warrior_1.attack
-        if warrior_2.is_alive is False:
+        warrior_1.perform_attack(warrior_2)
+        if not warrior_2.is_alive:
             break
         else:
-            warrior_1.health -= warrior_2.attack
-        if warrior_1.is_alive is False:
-            flag = False
-            break
+            warrior_1.take_damage(warrior_2)
+        if not warrior_1.is_alive:
+            return False
         else:
             continue
-    return flag
+    return True
 
 
 if __name__ == '__main__':
