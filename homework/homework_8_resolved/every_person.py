@@ -24,7 +24,8 @@ class Person:
         return f"{self.first_name} {self.last_name}"
 
     def age(self):
-        return (CURRENT_DATE - self.birth_date).days // 365
+        not_full_year = (self.birth_date.month, self.birth_date.day) > (CURRENT_DATE.month, CURRENT_DATE.day)
+        return (CURRENT_DATE.year - self.birth_date.year) - not_full_year
 
     def work(self):
         prefix = self.PREFIX[self.gender]
