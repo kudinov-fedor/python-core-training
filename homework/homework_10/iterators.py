@@ -6,7 +6,7 @@ class SimpleIterator:
         ...
 
 
-class ReversedOperator:
+class ReversedIterator:
 
     def __init__(self, iterable):
         ...
@@ -40,7 +40,7 @@ if __name__ == "__main__":
     b = list(iterator)
     assert b == [0, 1, 2]
 
-    iterator = ReversedOperator(a)
+    iterator = ReversedIterator(a)
     b = list(iterator)
     assert b == [2, 1, 0]
 
