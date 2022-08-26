@@ -42,6 +42,9 @@ class GameSession:
         """
         ...
 
+    def empty_cells(self) -> list:
+        ...
+
     def in_field(self, coord: tuple) -> bool:
         """
         Check that coord is in field
