@@ -43,6 +43,9 @@ class GameSession:
         ...
 
     def empty_cells(self) -> list:
+        """
+        Retun cells, which are yet not opened and do not contain mines
+        """
         ...
 
     def in_field(self, coord: tuple) -> bool:
