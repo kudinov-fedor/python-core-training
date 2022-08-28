@@ -4,7 +4,7 @@ import random
 # read file and parse into a list
 def read_source():
     words = {}
-    with open("C:\\Users\\ikrast\\OneDrive - SoftServe, Inc\\Desktop\\GameSource.txt") as file:
+    with open("GameSource.txt") as file:
         for line in file:
             (key, value) = line.split(":")
             words[key] = value

@@ -1,0 +1,7 @@
+phone:Portable device allowing end users to make and receive long distance calls
+cable:An insulated wire or wires having a protective casing and used for transmitting electricity or telecommunication signals
+laptop:A personal computer that can be easily moved and used in a variety of locations
+desk:A piece of furniture with a flat or sloping surface and typically with drawers at which one can read write or do other work
+office:A room set of rooms or building used as a place for commercial professional or bureaucratic work
+chair:A separate seat for one person typically with a back and four legs
+nintendo:A Japanese multinational video game company headquartered in Kyoto Japan
