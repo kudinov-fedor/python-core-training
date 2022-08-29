@@ -80,7 +80,7 @@ class CustomEnumerate(Iterator):
 
 
 class CustomFilter(Iterator):
-    def __init__(self, function=None, iterable=None):
+    def __init__(self, function=lambda i: None, iterable=None):
         self._position = -1
         self.function = function
         self.iterable = iterable
@@ -94,12 +94,18 @@ class CustomFilter(Iterator):
                 return self.iterable[self._position]
 
 
-class CustomMap(CustomFilter):
+class CustomMap(Iterator):
+    def __init__(self, function=lambda i: None, *args):
+        self._position = -1
+        self.function = function
+        self.iterators = args
+
     def __next__(self):
         self._position += 1
-        if self._position >= len(self.iterable):
+        try:
+            return self.function(*(itr[self._position] for itr in self.iterators))
+        except IndexError:
             raise StopIteration
-        return self.function(self.iterable[self._position])
 
 
 if __name__ == '__main__':
@@ -118,6 +124,10 @@ if __name__ == '__main__':
     iterator = CustomMap(lambda p: p + 1, [i for i in range(10)])
     x = list(iterator)
     assert x == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    iterator = CustomMap(lambda a1, b1: a1 + b1, [1, 2, 3, 4], [1, 2, 3, 4])
+    x = list(iterator)
+    assert x == [2, 4, 6, 8]
 
     a = [0, 1, 2]
 

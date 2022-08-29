@@ -2,6 +2,7 @@ import argparse
 import csv
 import random
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
 
