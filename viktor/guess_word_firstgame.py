@@ -34,7 +34,7 @@ def get_task(args) -> tuple:
     """
     # path = args.path
     # sep = args.sep
-    with open("guess_word/file.txt", encoding='utf-8') as f:
+    with open("file.txt", encoding='utf-8') as f:
         lines = f.readlines()  # lines - array
         splited_lines = list(map(lambda pair: pair.split(':'), lines))  # [ [word, description], []]
         random_pair = random.choice(splited_lines)
@@ -46,22 +46,26 @@ class ScreenView:
     def __init__(self, session: "GameSession"):
         self.session = session
 
-    def show_start_screen(self,):
-        self.session.desc, len(self.session.task)
+
+    def show_start_screen(self):
         print('Welcome to the my first guess-word game!')
         # print('Description:', description) # first way          several args for function print
         # print('Description: ' + description) # second way       concatenation
         # print('Description: {}'.format(description) # third way interpolation
-        print(f"Description: {description}")  # 4th way       f-strings
-        print(f"Length of guess word is {number_letters} letters - {'*' * number_letters}")
+        print(f"Description: {self.session.desc}")  # 4th way       f-strings
+        print(f"Length of guess word is {len(self.session.task)} letters - {'*' * len(self.session.task)}")
 
     def fire_alert(self, message=" "):
         print(f'-----{message}-----')
 
 
     def show_current_state(self, ):
-        current_state   ####???
-        print()
+        current_state = ""
+        for x in self.se
+            ssion.task:  # a p p l e
+            current_state += x if x in self.session.tries else "*"          ####???
+
+        print(current_state)
 
 
 class GameSession:
