@@ -1,0 +1,2 @@
+apple:Fruit, but also a company name
+orange:Fruit, but also a company name
