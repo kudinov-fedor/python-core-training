@@ -46,7 +46,8 @@ class ScreenView:
     def __init__(self, session: "GameSession"):
         self.session = session
 
-    def show_start_screen(self, description, number_letters):
+    def show_start_screen(self,):
+        self.session.desc, len(self.session.task)
         print('Welcome to the my first guess-word game!')
         # print('Description:', description) # first way          several args for function print
         # print('Description: ' + description) # second way       concatenation
@@ -58,8 +59,9 @@ class ScreenView:
         print(f'-----{message}-----')
 
 
-    def show_current_state(self, state):
-        print(state)
+    def show_current_state(self, ):
+        current_state   ####???
+        print()
 
 
 class GameSession:
@@ -71,11 +73,12 @@ class GameSession:
         self.tries = []
         self.screen = ScreenView(self)
 
-    def get_current_state(self):
-        current_state = ""
-        for x in self.task:  # a p p l e
-            current_state += x if x in self.tries else "*"
-        return current_state
+# не место в основном классе потому что данные для репрезентации
+    # def get_current_state(self):
+    #     current_state = ""
+    #     for x in self.task:  # a p p l e
+    #         current_state += x if x in self.tries else "*"
+    #     return current_state
 
     def user_make_guess(self) -> str:
         """
@@ -92,7 +95,11 @@ class GameSession:
         """
         Check if all letters are guessed
         """
-        return self.get_current_state() == self.task
+        current_state = ""
+        for x in self.task:  # a p p l e
+            current_state += x if x in self.tries else "*"
+
+        return current_state == self.task   # ?????????????
 
     def guess_is_valid(self, guess: str) -> bool:  # Here True or False
         """
@@ -126,7 +133,7 @@ class GameSession:
     # object_b.a # 7
 
     def main(self):
-        self.screen.show_start_screen(self.desc, len(self.task))  # call method show_start_screen of ScreenView object
+        self.screen.show_start_screen()  # call method show_start_screen of ScreenView object
 
         while not self.win():
             guess = self.user_make_guess()
@@ -137,11 +144,11 @@ class GameSession:
             self.save_guess(guess)
             current_message = Message.CORRECT if guess in self.task else Message.WRONG
             self.screen.fire_alert(message=current_message)
-            current_state = self.get_current_state()
-            self.screen.show_current_state(current_state)
+            # current_state = self.get_current_state()
+            self.screen.show_current_state()
 
         self.screen.fire_alert(message=Message.WIN)
-        print(f"{self.get_current_state()} - is the task guess word")
+        # print(f"{self.get_current_state()} - is the task guess word")
 
 
 if __name__ == "__main__":
