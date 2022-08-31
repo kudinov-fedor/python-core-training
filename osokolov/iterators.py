@@ -42,13 +42,11 @@ class CycleIterator:
         return self
 
     def __next__(self):
-        while True:
-            if self.index < self.iterable_length:
-                elem = self.iterable[self.index]
-                self.index += 1
-                return elem
-            else:
-                self.index = 0
+        if self.index >= self.iterable_length:
+            self.index = 0
+        elem = self.iterable[self.index]
+        self.index += 1
+        return elem
 
 
 class PingPongIterator:
