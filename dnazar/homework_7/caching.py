@@ -9,17 +9,14 @@ def fibo_without_rec(n: int):
     Count fibonacci numbers, where next is sum of 2 prior
     1, 2, 3, 5, 8, 13, 21, ...
     """
-    res = 0
-    first = 1
-    second = 2
+
+    first, second = 1, 2
     if n < 3:
-        return [res, first, second][n]
+        return [0, first, second][n]
     else:
         for _ in range(3, n+1):
-            res = first + second
-            first = second
-            second = res
-        return res
+            first, second = second, first + second
+        return second
 
 
 def fibo_dec(func):
