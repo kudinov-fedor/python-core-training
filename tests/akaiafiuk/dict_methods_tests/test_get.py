@@ -1,3 +1,5 @@
+import pytest
+
 CAR = {
   "brand": "Ford",
   "model": "Mustang",
@@ -23,3 +25,9 @@ def test_get_non_existent_key():
 def test_get_with_default_value_non_existent():
     """Get a value for an existing key with default"""
     assert CAR.get('passenger', 'Anton') == 'Anton'
+
+
+def test_get_by_invalid_key():
+    """Error is displayed when getting by invalid key using []"""
+    with pytest.raises(KeyError):
+        CAR['non_existent_key']

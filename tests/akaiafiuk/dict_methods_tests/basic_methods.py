@@ -13,4 +13,4 @@ def test_all_dicts_are_eql():
 def test_clear(default_dict):
     """clear() method removes all the elements from a dict"""
     default_dict.clear()
-    assert not default_dict
+    assert default_dict == {}
