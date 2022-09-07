@@ -3,7 +3,7 @@ import Screen_View
 
 
 class GameSession:
-    def __init__(self, height, width, mine_count):
+    def __init__(self, height: int, width, mine_count):
         if height * width < mine_count:
             raise Exception("Too small field")
 
@@ -23,17 +23,13 @@ class GameSession:
         coordinates = []
         # print("Empty:", coordinates)
 
-        while True:
+        while len(coordinates) < mine_count:
             coord_x = random.randint(0, self.width-1)
             coord_y = random.randint(0, self.height-1)
 
-            condition = (coord_x, coord_y) in coordinates
-            if condition:
-                continue
-            else:
+            if (coord_x, coord_y) not in coordinates:
                 coordinates.append((coord_x, coord_y))
-            if len(coordinates) == mine_count:
-                break
+
 
         #     print("Current0", coordinates)
         # print("Final", coordinates)
@@ -63,26 +59,23 @@ class GameSession:
         # x = int(x)
         # y = int(y)
 
-    def empty_cells(self) -> list:
+    def not_open_cells(self) -> list:
         """
         Retun cells, which are yet not opened and do not contain mines
         """
-        #?????????????????????????????????????????????????????????????????????????????????????????
-        empty_cells_list = []
-        for i in range(self.height):
-            for j in range(self.width):
-                cell = (i, j)
-                condition = cell not in (self.guesses + self.mines)
-                if condition:
-                    empty_cells_list.append(cell)
-        return empty_cells_list
+        not_open_cells_list = [(i, j)
+                            for i in range(self.height)
+                            for j in range(self.width)
+                            if (i, j) not in (self.guesses + self.mines)]
+        return not_open_cells_list
 
 
     def in_field(self, coord: tuple) -> bool:
         """
         Check that coord is in field
         """
-        return 0 <= coord[0] < self.width and 0 <= coord[1] < self.height
+        return coord[0] in range(self.width) and coord[1] in range(self.height)
+
 
 
     def is_mine(self, coord: tuple) -> bool:
@@ -114,30 +107,14 @@ class GameSession:
         """
         Check if user wins the game
         """
-        return sorted(self.guesses) == sorted(self.empty_cells())
-
-    def get_current_state(self, last_screen=False):
-        state = [[None for j in range(self.width)] for i in range(self.height)]
-        for i in range(self.height):
-            for j in range(self.width):
-                cell = (i, j)
-                if cell in self.mines and last_screen:
-                    value = "*"
-                elif cell in self.guesses:
-                    value = self.count_mines_around(cell)
-                else:
-                    value = "-"
-                state[i][j] = value
-
-
-                # state[i][j] = "-" if cell not in self.guesses else self.count_mines_around(cell)
-        return state
+        # if len(self.not_open_cells()) == 0:
+        return not len(self.not_open_cells())  # return True if all cells except mines are opened
 
     def main(self):
         while not self.win():
             # show screen with current state
-            current_state = self.get_current_state()
-            self.screen.update_screen(current_state)
+
+            self.screen.update_screen()
 
             # input from user
             user_input = self.receive_user_input()
@@ -158,6 +135,6 @@ class GameSession:
             # ...
 
         # show screen last time
-        current_state = self.get_current_state(last_screen=True)
-        self.screen.update_screen(current_state)
+
+        self.screen.update_screen(last_screen=True)
 
