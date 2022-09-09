@@ -1,0 +1,3 @@
+apple:Fruit, but also a company name
+orange:Color but also a fruit
+strawberry:Red colored berry

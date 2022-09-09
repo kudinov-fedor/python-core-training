@@ -1,5 +1,5 @@
 import random
-import Screen_View
+import screen_view
 
 
 class GameSession:
@@ -14,28 +14,25 @@ class GameSession:
         # todo save guesses here,
         #  use list or dict, or 2d array, what ever comfortable
         self.guesses = []
-        self.screen = Screen_View.ScreenView(self)
+        self.screen = screen_view.ScreenView(self)
 
     def prepare_mines(self, mine_count: int) -> list:
         """
         Prepare list of mines coords based on config
         """
         coordinates = []
-        # print("Empty:", coordinates)
 
         while len(coordinates) < mine_count:
-            coord_x = random.randint(0, self.width-1)
-            coord_y = random.randint(0, self.height-1)
+            coord_x = random.randint(0, self.width - 1)
+            coord_y = random.randint(0, self.height - 1)
 
             if (coord_x, coord_y) not in coordinates:
                 coordinates.append((coord_x, coord_y))
 
-
-        #     print("Current0", coordinates)
-        # print("Final", coordinates)
         return coordinates
 
-    def receive_user_input(self) -> str:
+    @staticmethod
+    def receive_user_input() -> str:
         """
         Receive coords as input from user
         """
@@ -55,28 +52,21 @@ class GameSession:
 
         return x, y
 
-        # x, y = data.split(" ")
-        # x = int(x)
-        # y = int(y)
-
     def not_open_cells(self) -> list:
         """
         Retun cells, which are yet not opened and do not contain mines
         """
         not_open_cells_list = [(i, j)
-                            for i in range(self.height)
-                            for j in range(self.width)
-                            if (i, j) not in (self.guesses + self.mines)]
+                               for i in range(self.height)
+                               for j in range(self.width)
+                               if (i, j) not in (self.guesses + self.mines)]
         return not_open_cells_list
-
 
     def in_field(self, coord: tuple) -> bool:
         """
         Check that coord is in field
         """
         return coord[0] in range(self.width) and coord[1] in range(self.height)
-
-
 
     def is_mine(self, coord: tuple) -> bool:
         """
@@ -90,12 +80,11 @@ class GameSession:
         """
         i, j = coord
         neighbouring_cells = [
-            (i-1, j-1), (i, j-1), (i+1, j-1),
-            (i-1, j), (i+1,j),
-            (i-1, j+1), (i, j+1), (i+1, j+1)
+            (i - 1, j - 1), (i, j - 1), (i + 1, j - 1),
+            (i - 1, j), (i + 1, j),
+            (i - 1, j + 1), (i, j + 1), (i + 1, j + 1)
         ]
         return len(list(filter(self.is_mine, neighbouring_cells)))
-
 
     def save_guess(self, coord: tuple):
         """
@@ -107,34 +96,24 @@ class GameSession:
         """
         Check if user wins the game
         """
-        # if len(self.not_open_cells()) == 0:
         return not len(self.not_open_cells())  # return True if all cells except mines are opened
 
     def main(self):
         while not self.win():
-            # show screen with current state
-
             self.screen.update_screen()
-
-            # input from user
             user_input = self.receive_user_input()
             # validate and normalize, if error - catch, inform user and return to start
             try:
                 coordinates = self.normalize_user_input(user_input)
             except ValueError:
-                print('Not a number')
+                self.screen.fire_alert('Please input a number')
 
             except Exception as error:
-                print('Out of  bounds error')
+                self.screen.fire_alert(f"Error occured {error}")
             else:
-                if self.is_mine(coordinates):                    # if mine - end game
-                    print('Here\'s mine - game over')
+                if self.is_mine(coordinates):
+                    self.screen.fire_alert('Here\'s mine - game over')
                     break
-                self.save_guess(coordinates)                     # save user input
-
-            # ...
-
-        # show screen last time
+                self.save_guess(coordinates)
 
         self.screen.update_screen(last_screen=True)
-

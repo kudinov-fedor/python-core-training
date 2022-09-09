@@ -63,7 +63,7 @@ class GameSession:
         Check if all letters are guessed
         """
         current_state = ""
-        for x in self.task:  # a p p l e
+        for x in self.task:
             current_state += x if x in self.tries else "*"
 
         return "*" not in current_state

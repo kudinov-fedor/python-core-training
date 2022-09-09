@@ -1,18 +1,20 @@
-import Game_Session
+import game_session
 
 
 class ScreenView:
-
     def __init__(self, session: "GameSession"):
         self.session = session
 
-    def render_field(self, current_state):
+    @staticmethod
+    def fire_alert(message=" "):
+        print(f'-----{message}-----')
 
+    @staticmethod
+    def render_field(current_state):
         for row in current_state:
             for element in row:
                 print(element, end='   ')
             print()
-        # print(current_state)
 
     def update_screen(self, last_screen=False):
         state = [[None for j in range(self.session.width)] for i in range(self.session.height)]

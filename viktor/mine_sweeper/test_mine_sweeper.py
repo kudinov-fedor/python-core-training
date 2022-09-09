@@ -1,4 +1,5 @@
-import Game_Session as game
+import game_session as game
+
 
 def test_mines():
 
@@ -8,5 +9,6 @@ def test_mines():
 
     cor = game.GameSession(a, b, c)
     assert len(cor.mines) == c
+
 
 test_mines()
