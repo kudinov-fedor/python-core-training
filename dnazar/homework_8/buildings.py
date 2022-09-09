@@ -22,7 +22,7 @@ class Building:
                 "south-east": [self.south, self.east]}
 
     def area(self):
-        return self.width_WE*self.width_NS
+        return self.width_WE * self.width_NS
 
     def volume(self):
         return self.width_WE*self.width_NS*self.height

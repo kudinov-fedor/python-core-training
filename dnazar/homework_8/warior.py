@@ -8,6 +8,11 @@ class Warrior:
     def is_alive(self):
         return self.health > 0
 
+    def receive_dmg(self, dmg: int):
+        self.health = self.health - dmg
+
+    def attack_enemy(self, enemy: "Warrior"):
+        enemy.receive_dmg(self.attack)
 
 class Knight(Warrior):
     def __init__(self):
@@ -15,11 +20,11 @@ class Knight(Warrior):
         self.attack = 7
 
 
-def fight(unit_1, unit_2):
+def fight(unit_1: "Warrior", unit_2: "Warrior"):
     while unit_1.is_alive and unit_2.is_alive:
-        unit_2.health = unit_2.health - unit_1.attack
+        unit_1.attack_enemy(unit_2)
         if unit_2.is_alive:
-            unit_1.health = unit_1.health - unit_2.attack
+            unit_2.attack_enemy(unit_1)
     return unit_1.is_alive
 
 
