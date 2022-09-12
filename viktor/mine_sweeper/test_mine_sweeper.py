@@ -11,4 +11,5 @@ def test_mines():
     assert len(cor.mines) == c
 
 
-test_mines()
+
+
