@@ -44,3 +44,13 @@ def test_set_comprehension():
     some_set = {x for x in some_list if isinstance(x, int)}
     assert isinstance(some_set, set)
     assert some_set == {1, 2, 3, 4, 8}
+
+
+def test_can_compare_set_and_frozenset():
+    """Can compare set and frozenset with no issues"""
+    x = {1, 2, 3}
+    y = frozenset(x)
+    z = {1, 2, 3, 4}
+    assert x == y
+    assert y == x
+    assert y <= z
