@@ -17,7 +17,7 @@ import pytest
     ({1, 2, 3}, {1, 2, 3, 4}, False)
 ])
 def test_issubset_method(set_called_from, set_comparing_with, result):
-    """Checking issubset() method"""
+    """Checking issuperset() method"""
     assert set_called_from.issuperset(set_comparing_with) == result
 
 
@@ -28,6 +28,6 @@ def test_issubset_method(set_called_from, set_comparing_with, result):
     ({1, 2, 3}, {1, 2, 3, 4}, False)
 ])
 def test_issubset_operator(set_called_from, set_comparing_with, expected_result):
-    """Checking "<=" operator"""
+    """Checking ">=" operator"""
     actual_result = set_called_from >= set_comparing_with
     assert actual_result == expected_result
