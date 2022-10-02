@@ -9,5 +9,10 @@ def device():
 
 
 @pytest.fixture(autouse=True)
-def health_check(device):
+def mock_device_class(mocker):
+    mocker.patch.object(Device, 'get_version', return_value=None)
+
+
+@pytest.fixture(autouse=True)
+def health_check(device, mock_device_class):
     device.validate_device()
