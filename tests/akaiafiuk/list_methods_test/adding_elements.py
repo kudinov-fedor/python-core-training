@@ -21,7 +21,7 @@ def test_append_positive(some_list, append_with_item):
 def test_extend_positive(some_list):
     """Extend extends the list with items from iterable"""
     some_list.extend("item")
-    assert some_list[-4::] == ['i', 't', 'e', 'm']
+    assert some_list[-4:] == ['i', 't', 'e', 'm']
 
 
 @pytest.mark.parametrize('non_iterable', [

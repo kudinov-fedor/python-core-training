@@ -14,6 +14,16 @@ def test_concatenate_in_place():
     assert some_list == [1, 2, 3, 4, 5, 6]
 
 
+def test_concatenate_in_place_second_link():
+    """Concatenate two lists in-place using += operator"""
+    some_list = [1, 2, 3]
+    second_link = some_list
+    some_list += [4, 5, 6]
+    assert some_list == [1, 2, 3, 4, 5, 6]
+    assert second_link == [1, 2, 3, 4, 5, 6]
+    assert second_link is some_list
+
+
 @pytest.mark.parametrize(
     "s1, s2, expected_result", [
         ([1, 2, 3], (3, 4, 5), [1, 2, 3, 3, 4, 5]),
