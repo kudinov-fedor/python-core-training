@@ -38,7 +38,7 @@ def test_pop_with_defined_index(some_list, index, popped_value, result_list):
     ('a', TypeError, "'str' object cannot be interpreted as an integer"),
 ])
 def test_pop_negative_cases(some_list, index, exception, error_text):
-    """Test that error is raised when calling pop with an invalid arguemnt"""
+    """Test that error is raised when calling pop with an invalid argument"""
     with pytest.raises(exception, match=error_text):
         some_list.pop(index)
 
