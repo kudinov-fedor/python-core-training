@@ -39,7 +39,7 @@ def test_reverse_list():
 def test_negative_step():
     """Reverse and cut each 'n' element"""
     original_list = [1, 2, 3, 4, 5, 6]
-    sliced = original_list[3: 1: -2]  # start at 3(included), stop at 1(not included), step is -1
+    sliced = original_list[3: 1: -2]  # start at 3(included), stop at 1(not included), step is -2
     assert sliced == [4]
 
 
@@ -53,3 +53,26 @@ def test_named_slice():
     assert patterned_list_2[numbers] == [10, 20, 30]
     assert patterned_list_1[letters] == ['a', 'b', 'c']
     assert patterned_list_2[letters] == ['x', 'y', 'z']
+
+
+def test_convert_slices():
+    """Can replace slices in the list. In this test each 2nd element starting from 0 is converted to str"""
+    ints = [1, 2, 3, 4, 5, 6]
+    ints[::2] = [str(i) for i in ints[::2]]
+    assert all([isinstance(i, str) for i in ints[::2]])
+    assert all([isinstance(i, int) for i in ints[1::2]])
+
+
+def test_insert_slices():
+    """Can insert slices in the list. Original elements will be replaced."""
+    ints = [1, 2, 3, 4, 5, 6]
+    chars = ['a', 'b', 'c', 'd', 'e']
+    ints[1:5] = chars[0:2]
+    assert ints == [1, 'a', 'b', 6]
+
+
+def test_remove_slices():
+    """Can remove slices. In this example elements 3-5 will be removed"""
+    ints = [0, 1, 2, 3, 4, 5]
+    ints = ints[:3]
+    assert ints == [0, 1, 2]
