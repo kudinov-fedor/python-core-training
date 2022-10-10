@@ -76,3 +76,10 @@ def test_remove_slices():
     ints = [0, 1, 2, 3, 4, 5]
     del ints[3:]
     assert ints == [0, 1, 2]
+
+
+def test_remove_slice_with_step():
+    """Can remove slices. In this example elements 3-5 will be removed"""
+    ints = [0, 1, 2, 3, 4, 5]
+    del ints[1:5:2]
+    assert ints == [0, 2, 4, 5]
