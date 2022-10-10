@@ -74,5 +74,5 @@ def test_insert_slices():
 def test_remove_slices():
     """Can remove slices. In this example elements 3-5 will be removed"""
     ints = [0, 1, 2, 3, 4, 5]
-    ints = ints[:3]
+    del ints[3:]
     assert ints == [0, 1, 2]
