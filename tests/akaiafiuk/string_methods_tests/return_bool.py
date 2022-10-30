@@ -8,6 +8,7 @@ import pytest
     ("123456", str(6), True),       # Can convert to string before passing param
     ("Hello", "There", False),      # False if does not end with the given param
     ("Hello", "HHello", False),     # Param is longer than the string itself
+    ("HELLO", "lo", False),         # False since .endswith() is rank sensitive
 ])
 def test_endswith(string, ends_with, result):
     """Verify that a string ends with entered parameter and returns bool."""
@@ -63,3 +64,39 @@ def test_is_ascii():
     """
     assert "Hello World 1234567890 !".isascii()
     assert not "日本人 中國的".isascii()
+
+
+@pytest.mark.parametrize("string, result", [
+    ("1234567890", True),    # All characters are decimal
+    ("123Abc", False),       # Not all are decimal characters
+    ("\u0033", True),        # Unicode for 3
+    ("\u00B2", False),       # Power of two ^2.
+    ("\u00BD", False),       # ½
+
+])
+def test_is_decimal(string, result):
+    """Check if all the characters in the unicode object are decimals."""
+    assert string.isdecimal() == result
+
+
+@pytest.mark.parametrize("string, result", [
+    ("1234567890", True),    # All characters are decimal
+    ("\u0033", True),        # Unicode for 3
+    ("\u00B2", True),        # Power of two ^2.
+    ("\u00BD", False),       # ½
+])
+def test_is_digit(string, result):
+    """Check if all the characters in the text are digits."""
+    assert string.isdigit() == result
+
+
+@pytest.mark.parametrize("string, result", [
+    ("1234567890", True),    # All characters are decimal
+    ("\u0033", True),        # Unicode for 3
+    ("\u00B2", True),        # Power of two ^2.
+    ("\u00BD", True),        # ½
+    ("one", False),          # Not that smart though
+])
+def test_is_numeric(string, result):
+    """Check if all the characters in the text are numeric."""
+    assert string.isnumeric() == result
