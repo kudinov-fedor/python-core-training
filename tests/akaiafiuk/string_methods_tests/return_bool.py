@@ -72,7 +72,7 @@ def test_is_ascii():
     ("\u0033", True),        # Unicode for 3
     ("\u00B2", False),       # Power of two ^2.
     ("\u00BD", False),       # ½
-
+    ("ↁ", False),             # False for Roman numerals
 ])
 def test_is_decimal(string, result):
     """Check if all the characters in the unicode object are decimals."""
@@ -80,10 +80,13 @@ def test_is_decimal(string, result):
 
 
 @pytest.mark.parametrize("string, result", [
-    ("1234567890", True),    # All characters are decimal
+    ("1234567890", True),    # All characters are decimal digits
     ("\u0033", True),        # Unicode for 3
     ("\u00B2", True),        # Power of two ^2.
+    ("ↁ", False),            # False for Roman numerals
     ("\u00BD", False),       # ½
+    ("0.5", False),          # False for decimals
+    ("1 5", False),          # False if contains spaces
 ])
 def test_is_digit(string, result):
     """Check if all the characters in the text are digits."""
@@ -95,6 +98,9 @@ def test_is_digit(string, result):
     ("\u0033", True),        # Unicode for 3
     ("\u00B2", True),        # Power of two ^2.
     ("\u00BD", True),        # ½
+    ("ↁ", True),             # True for Roman numerals
+    ("0.5", False),          # False for decimals
+    ("1 5", False),          # False if contains spaces
     ("one", False),          # Not that smart though
 ])
 def test_is_numeric(string, result):
