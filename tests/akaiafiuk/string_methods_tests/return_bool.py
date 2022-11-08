@@ -106,3 +106,77 @@ def test_is_digit(string, result):
 def test_is_numeric(string, result):
     """Check if all the characters in the text are numeric."""
     assert string.isnumeric() == result
+
+
+@pytest.mark.parametrize("string, result", [
+    ("valid_identifier", True),     # Valid. Only letters and underscores
+    ("Valid_1dent1f1er", True),     # Valid. Alphanumeric and underscores
+    ("1nvalid_identifier", False),  # Invalid. Starts with number
+    ("invalid identifier", False),  # Invalid. Contain spaces
+    ("inv@lid identifier", False),  # Invalid. Contain @
+])
+def test_is_identifier(string, result):
+    """
+    isidentifier() method returns True if the string is a valid identifier, otherwise False.
+
+    String is considered a valid identifier if it only contains alphanumeric letters, or underscores (_).
+    A valid identifier cannot start with a number, or contain any spaces.
+    """
+    assert string.isidentifier() == result
+
+
+@pytest.mark.parametrize("string, result", [
+    ("all lower_1234567890!", True),     # all characters are lower
+    ("a", True),                         # one letter in lower case
+    ("hellO", False),                    # one capital letter. False
+    (" 1234567890", False),              # no lowercase characters included. False
+
+])
+def test_is_lower(string, result):
+    """
+    islower() returns True when all characters are lowercase
+    """
+    assert string.islower() == result
+
+
+@pytest.mark.parametrize("string, result", [
+    ("ALL UPPER_1234567890!", True),
+    ("A", True),
+    ("Hello", False),
+    (" 1234567890", False),
+
+])
+def test_is_upper(string, result):
+    """
+    isupper() returns True when all characters are uppercase
+    """
+    assert string.isupper() == result
+
+
+@pytest.mark.parametrize("string, result", [
+    ("Hello, World!", True),
+    ("123 Questions", True),
+    ("Hello 123!", True),
+    ("HELLO WORLD", False),
+    ("hello", False),
+    (" 1234567890", False),
+
+])
+def test_is_title(string, result):
+    """
+    istitle() returns True when all words starts with an uppercase
+    """
+    assert string.istitle() == result
+
+
+def test_is_printable():
+    """Returns True if all characters are printable, False otherwise."""
+    assert "ABC abc_123".isprintable()
+    assert not "ABC abc_123\n".isprintable()
+
+
+def test_is_space():
+    """Returns True if all characters are whitespaces"""
+    assert "     ".isspace()
+    assert " ".isspace()
+    assert not "hi there".isspace()
