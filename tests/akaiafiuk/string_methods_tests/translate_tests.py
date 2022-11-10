@@ -26,7 +26,7 @@ def test_using_mapping_table(some_string):
     """Create mapping table using maketrans and then translate using this table"""
     original = "Say"
     translated = "$@Y"
-    table = some_string.maketrans(original, translated)
+    table = str.maketrans(original, translated)
     translated = some_string.translate(table)
     assert table == {83: 36, 97: 64, 121: 89}   # Basically, maketrans() creates a translate dict
     assert translated == "$@Y hello to @nton."  # And then characters are replaced using this dict
