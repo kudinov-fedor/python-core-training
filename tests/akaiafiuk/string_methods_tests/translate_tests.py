@@ -46,3 +46,24 @@ def test_errors_different_type(some_string):
     translated = 123
     with pytest.raises(TypeError, match="must be str, not int"):
         some_string.maketrans(original, translated)
+
+
+def test_maketrans_three_arguments():
+    """First arg - translate from, second arg - translate to. Third arg - chars to be removed."""
+    sample_string = "Afnstoddn"
+    translated = sample_string.translate(str.maketrans("A", "a", "fsd"))
+    assert translated == "anton"
+
+
+def test_maketrans_only_third_argument():
+    """Third argument is a string of characters that will be replaced to None"""
+    sample_string = "nfodnes"
+    translated = sample_string.translate(str.maketrans("", "", "fsd"))
+    assert translated == "none"
+
+
+def test_maketrans_chars_in_dict():
+    """Maketrans can receive only one argument with dict of from-to characters to replace"""
+    sample_string = "fizz"
+    translated = sample_string.translate(str.maketrans({'f': 'b', 'i': 'u'}))
+    assert translated == "buzz"
