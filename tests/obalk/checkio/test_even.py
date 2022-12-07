@@ -1,5 +1,5 @@
-from obalk.checkio.even import is_even
 import pytest
+from obalk.checkio.even import is_even
 
 
 @pytest.mark.parametrize("number, result", [

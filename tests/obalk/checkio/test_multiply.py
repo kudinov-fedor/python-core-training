@@ -1,5 +1,4 @@
 import pytest
-
 from obalk.checkio.multiply import mult_two
 
 
