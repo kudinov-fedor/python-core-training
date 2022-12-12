@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_split_no_args():
     """Split with no arguments splits using space as a separator."""
     assert "Hello World".split() == ['Hello', 'World']
