@@ -1,6 +1,6 @@
 import pytest
 
-from obalk.checkio.replace_first import replace_first, replace_first_slice
+from obalk.checkio.initiation.replace_first import replace_first, replace_first_slice
 
 
 @pytest.mark.parametrize("function", [

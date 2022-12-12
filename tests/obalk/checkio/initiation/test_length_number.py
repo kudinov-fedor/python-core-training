@@ -1,5 +1,5 @@
 import pytest
-from obalk.checkio.length_number import number_length, number_length_math
+from obalk.checkio.initiation.length_number import number_length, number_length_math
 
 
 @pytest.mark.parametrize("function", [number_length, number_length_math])

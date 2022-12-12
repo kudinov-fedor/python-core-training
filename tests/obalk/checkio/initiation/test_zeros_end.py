@@ -1,5 +1,5 @@
 import pytest
-from obalk.checkio.zeros_end import end_zeros, end_zeros_strip_len
+from obalk.checkio.initiation.zeros_end import end_zeros, end_zeros_strip_len
 
 
 @pytest.mark.parametrize("function", [end_zeros, end_zeros_strip_len])

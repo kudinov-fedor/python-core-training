@@ -1,6 +1,6 @@
 import pytest
 
-from obalk.checkio.all_the_same import all_the_same, all_the_same_set
+from obalk.checkio.initiation.all_the_same import all_the_same, all_the_same_set
 
 
 @pytest.mark.parametrize("function", [

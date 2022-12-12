@@ -1,5 +1,5 @@
 import pytest
-from obalk.checkio.string_backward import backward_string
+from obalk.checkio.initiation.string_backward import backward_string
 
 
 @pytest.mark.parametrize("value, result", [

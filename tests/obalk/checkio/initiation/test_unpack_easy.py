@@ -1,6 +1,6 @@
 import pytest
 
-from obalk.checkio.unpack_easy import easy_unpack
+from obalk.checkio.initiation.unpack_easy import easy_unpack
 
 
 @pytest.mark.parametrize("elements, result", [

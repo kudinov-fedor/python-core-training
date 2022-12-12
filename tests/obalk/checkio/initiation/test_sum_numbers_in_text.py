@@ -1,5 +1,5 @@
 import pytest
-from obalk.checkio.sum_numbers_in_text import sum_numbers, sum_numbers_with_filter_map
+from obalk.checkio.initiation.sum_numbers_in_text import sum_numbers, sum_numbers_with_filter_map
 
 
 @pytest.mark.parametrize("function", [sum_numbers, sum_numbers_with_filter_map])

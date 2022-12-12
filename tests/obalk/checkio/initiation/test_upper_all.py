@@ -1,6 +1,6 @@
 import pytest
 
-from obalk.checkio.upper_all import all_upper, all_upper_upper
+from obalk.checkio.initiation.upper_all import all_upper, all_upper_upper
 
 
 @pytest.mark.parametrize("function", [

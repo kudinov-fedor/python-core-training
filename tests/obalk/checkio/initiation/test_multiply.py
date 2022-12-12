@@ -1,5 +1,5 @@
 import pytest
-from obalk.checkio.multiply import mult_two
+from obalk.checkio.initiation.multiply import mult_two
 
 
 @pytest.mark.parametrize("number1, number2, result", [

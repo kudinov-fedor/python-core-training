@@ -1,5 +1,5 @@
 import pytest
-from obalk.checkio.the_most_frequent_letter import most_frequent, most_frequent_with_max
+from obalk.checkio.initiation.the_most_frequent_letter import most_frequent, most_frequent_with_max
 
 
 @pytest.mark.parametrize("function", [most_frequent, most_frequent_with_max])

@@ -1,6 +1,6 @@
 import pytest
 
-from obalk.checkio.before_all_remove import remove_all_before, remove_all_before_boolean
+from obalk.checkio.initiation.before_all_remove import remove_all_before, remove_all_before_boolean
 
 
 @pytest.mark.parametrize("function", [
