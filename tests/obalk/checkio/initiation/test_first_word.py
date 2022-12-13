@@ -1,4 +1,5 @@
 import pytest
+
 from obalk.checkio.initiation.find_first_word import first_word
 
 
