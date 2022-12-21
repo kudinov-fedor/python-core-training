@@ -7,6 +7,14 @@ def test_format_using_indexes():
     assert test_string == "My name is Anton. I live in Kyiv"
 
 
+def test_format__using_pattern():
+    """Format using string string pattern and passing dict as kwargs."""
+    pattern = "My name is {name}. I live in {city}"
+    data = dict(name="Anton", city="Kyiv")
+    res = pattern.format(**data)
+    assert res == "My name is Anton. I live in Kyiv"
+
+
 def test_format_using_numbered_indexes():
     """format string using numbered indexes"""
     test_string = "My name is {0}. I live in {1}".format("Anton", "Kyiv")
