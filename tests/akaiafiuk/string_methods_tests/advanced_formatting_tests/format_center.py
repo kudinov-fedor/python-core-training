@@ -1,6 +1,6 @@
 def test_center_string():
     """Center string using format"""
-    assert '{:^10}'.format('test')
+    assert '{:^10}'.format('test') == '   test   '
 
 
 def test_center_uneven():
