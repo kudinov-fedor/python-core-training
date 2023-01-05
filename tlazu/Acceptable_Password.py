@@ -8,5 +8,4 @@ The verification condition is:
 the length should be bigger than 6.
 """
 def is_acceptable_password(password: str) -> bool:
-    # your code here
-    return len(password) >9
+    return len(password) > 9
