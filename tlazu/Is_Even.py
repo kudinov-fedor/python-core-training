@@ -3,7 +3,7 @@ Check if the given number is even or not. Your function should return True if th
 """
 def is_even(num: int) -> bool:
     # your code here
-    return num % 2!= 1
+    return num % 2 == 0
 
 
 print("Example:")
