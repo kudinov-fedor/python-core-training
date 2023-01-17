@@ -27,5 +27,5 @@ def test_format_str():
     assert '{0!s}'.format(ObjectWithFormatDefined()) == "str"
 
 
-def test_format_str():
+def test_format_repr():
     assert '{0!r}'.format(ObjectWithFormatDefined()) == "repr"
