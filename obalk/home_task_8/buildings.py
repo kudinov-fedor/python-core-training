@@ -2,7 +2,7 @@
 
 
 class Building:
-    def __init__(self, south, west, width_WE, width_NS, height=10):
+    def __init__(self, south: int, west: int, width_WE: int, width_NS: int, height: int = 10):
         self.south = south
         self.west = west
         self.width_we = width_WE

@@ -3,7 +3,8 @@ from datetime import datetime
 
 
 class Person:
-    def __init__(self, first_name, last_name, birth_date, job, working_years, salary, country, city, gender='unknown'):
+    def __init__(self, first_name: str, last_name: str, birth_date: str, job: str, working_years: int, salary: int,
+                 country: str, city: str, gender='unknown'):
         self.first_name = first_name
         self.last_name = last_name
         self.birth_date = datetime.strptime(birth_date, "%d.%m.%Y")
