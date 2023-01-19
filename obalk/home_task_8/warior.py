@@ -2,19 +2,20 @@
 
 
 class Warrior:
+    HEALTH = 50
+
     def __init__(self, attack: int = 5):
-        self.health: int = 50
         self.attack = attack
 
     @property
     def is_alive(self):
-        return self.health > 0
+        return self.HEALTH > 0
 
     def perform_attack(self, attacked_unit: "Warrior"):
-        attacked_unit.health -= self.attack
+        attacked_unit.HEALTH -= self.attack
 
     def take_damage(self, attacking_unit: "Warrior"):
-        self.health -= attacking_unit.attack
+        self.HEALTH -= attacking_unit.attack
 
 
 class Knight(Warrior):
