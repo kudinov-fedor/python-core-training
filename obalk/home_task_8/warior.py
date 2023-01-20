@@ -12,7 +12,7 @@ class Warrior:
         return self.HEALTH > 0
 
     def perform_attack(self, attacked_unit: "Warrior"):
-        attacked_unit.HEALTH -= self.attack
+        attacked_unit.take_damage(self)
 
     def take_damage(self, attacking_unit: "Warrior"):
         self.HEALTH -= attacking_unit.attack

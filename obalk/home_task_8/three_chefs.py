@@ -1,5 +1,6 @@
 """https://py.checkio.org/en/mission/3-chefs"""
 from abc import ABC
+from collections import defaultdict
 import functools
 
 
@@ -7,7 +8,7 @@ class AbstractCook(ABC):
     AVAILABLE_CATEGORIES = ["food", "drink", "snack", "soup"]
 
     def __init__(self):
-        self.order: dict = {}
+        self.order: dict = defaultdict(int)
 
     def _add_menu_item(self, menu_type: str, count: int, price: int):
         """
@@ -21,7 +22,7 @@ class AbstractCook(ABC):
             raise ValueError(f"Cooker doesn't have '{menu_type}' in his menu")
         name = self.MENU[menu_type]
 
-        self.order[name] = self.order.get(name, 0) + count * price
+        self.order[name] += count * price
 
     add_food: "functools.partialmethod" = functools.partialmethod(_add_menu_item, menu_type="food")
     add_drink: "functools.partialmethod" = functools.partialmethod(_add_menu_item, menu_type="drink")
