@@ -2,13 +2,20 @@
 
 
 class Warrior:
+    HEALTH = 50
+
     def __init__(self, attack: int = 5):
-        self.health = 50
         self.attack = attack
 
     @property
     def is_alive(self):
-        return self.health > 0
+        return self.HEALTH > 0
+
+    def perform_attack(self, attacked_unit: "Warrior"):
+        attacked_unit.take_damage(self)
+
+    def take_damage(self, attacking_unit: "Warrior"):
+        self.HEALTH -= attacking_unit.attack
 
 
 class Knight(Warrior):
@@ -17,14 +24,12 @@ class Knight(Warrior):
 
 
 def fight(unit_1: Warrior, unit_2: Warrior):
-    while True:
-        unit_2.health = max(0, unit_2.health - unit_1.attack)
-        if unit_2.is_alive:
-            unit_1.health = max(0, unit_1.health - unit_2.attack)
-            if not unit_1.is_alive:
-                return False
-        else:
-            return True
+    while unit_1.is_alive:
+        unit_1.perform_attack(unit_2)
+        if not unit_2.is_alive:
+            break
+        unit_2.perform_attack(unit_1)
+    return unit_1.is_alive
 
 
 if __name__ == '__main__':
