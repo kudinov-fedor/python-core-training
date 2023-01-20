@@ -24,14 +24,12 @@ class Knight(Warrior):
 
 
 def fight(unit_1: Warrior, unit_2: Warrior):
-    while True:
+    while unit_1.is_alive:
         unit_1.perform_attack(unit_2)
         if not unit_2.is_alive:
-            return True
-        else:
-            unit_1.take_damage(unit_2)
-        if not unit_1.is_alive:
-            return False
+            break
+        unit_2.perform_attack(unit_1)
+    return unit_1.is_alive
 
 
 if __name__ == '__main__':
