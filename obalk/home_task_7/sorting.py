@@ -15,8 +15,7 @@ def timer(func):
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()
         result = func(args, kwargs)
-        is_reverse = kwargs['reverse']
-        print(f"{func.__name__} { is_reverse=}. Took {time.perf_counter() - start_time}")
+        print(f"{func.__name__} {kwargs=}. Took {time.perf_counter() - start_time}")
         return result
 
     return wrapper
