@@ -25,7 +25,7 @@ def retry(attempts):
     return func_wraps
 
 
-@retry(1)
+@retry(3)
 def unstable_function():
     res = random.random()
     if res < 0.5:
