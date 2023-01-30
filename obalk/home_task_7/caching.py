@@ -5,6 +5,20 @@ and if answer was given, do not make a call to a function
 import functools
 
 
+def fibo_without_rec(number: int):
+    """
+    FIBO without recursion
+
+    number: int number of items in a sequence
+    """
+    first, second = 1, 2
+    if number < 3:
+        return [0, first, second][number]
+    for _ in range(3, number + 1):
+        first, second = second, first + second
+    return second
+
+
 def cache(func):
     cached = {}
 
