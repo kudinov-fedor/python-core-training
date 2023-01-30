@@ -1,6 +1,8 @@
+from functools import total_ordering
 from math import gcd
 
 
+@total_ordering
 class Fraction:
 
     def __init__(self, num: int, denom: int = 1):
@@ -23,26 +25,21 @@ class Fraction:
         return f"'{self.num} / {self.denom}'"
 
     def __format__(self, format_spec: str = "1 / 2") -> str:
-        if format_spec == 'dec':
-            return f"{self.num / self.denom}"
-        return f"'{self.num} / {self.denom}'"
+        return f"{self.num / self.denom}" if format_spec == 'dec' else str(self)
 
     def __bool__(self):
         return self.num != 0
 
-    def __eq__(self, other: object) -> bool:
+    def __eq__(self, other):
         if isinstance(other, Fraction):
-            return self.num / self.denom == other.num / other.denom
+            return self.num == other.num and self.denom == other.denom
         elif isinstance(other, int):
             return self == Fraction(other)
-
-    def __gt__(self, other: "Fraction"):
-        return self.num / self.denom > other.num / other.denom
 
     def __ge__(self, other: "Fraction"):
         return self.num / self.denom >= other.num / other.denom
 
-    def __add__(self, other: object):
+    def __add__(self, other):
         if isinstance(other, Fraction):
             return Fraction(self.num * other.denom + other.num * self.denom, self.denom * other.denom)
         elif isinstance(other, int):
@@ -50,15 +47,6 @@ class Fraction:
 
     __radd__ = __add__
     __iadd__ = __add__
-
-
-    def __sub__(self, other):
-        return self + (other * (-1))
-
-    def __rsub__(self, other):
-        return Fraction(other) - self
-
-    __isub__ = __sub__
 
     def __mul__(self, other):
         if isinstance(other, Fraction):
@@ -82,11 +70,20 @@ class Fraction:
 
     __itruediv__ = __truediv__
 
+    def __sub__(self, other):
+        return self + (other * (-1))
+
+    def __rsub__(self, other):
+        return Fraction(other) - self
+
+    __isub__ = __sub__
+
     def __neg__(self):
         return self * (-1)
 
     def __abs__(self):
         return Fraction(abs(self.num), self.denom)
+
 
 if __name__ == "__main__":
     a = Fraction(2, 4)
