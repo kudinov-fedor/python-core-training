@@ -1,22 +1,17 @@
 from operator import add
-from typing import Sequence, Collection, Iterable
-
-zip, enumerate, filter, map
 
 
 def zip_new(*iterables):
-    shortest_iterable = min(iterables, key=len)
-    for i in range(len(shortest_iterable)):
-        yield tuple(b[i] for b in iterables)
+    iterators = [iter(i) for i in iterables]
+    try:
+        while True:
+            yield tuple([next(i) for i in iterators])
+    except StopIteration:
+        return
 
 
 def enumerate_new(iterable, start: int = 0):
-    for i in range(len(iterable)):
-        yield start + i, iterable[i]
-
-
-def enumerate_new_2(iterable, start: int = 0):
-    indexes = range(start, len(iterable) + start)
+    indexes = range(start, len(list(iterable)) + start)
     yield from zip_new(indexes, iterable)
 
 
@@ -33,12 +28,13 @@ def map_new(function, *iterables):
 
 
 if __name__ == '__main__':
-    seq1 = [2, 3]
+    gen1 = (value for value in (1, 2))
+    gen2 = (value for value in (1, 2))
     seq2 = [1, 2, 3]
     seq3 = [3, 4]
 
     # zip
-    assert list(zip(seq1, seq2, seq3)) == list(zip_new(seq1, seq2, seq3))
+    assert list(zip(gen1, seq2, seq3)) == list(zip_new(gen2, seq2, seq3))
     assert list(zip(seq2, seq3)) == list(zip_new(seq2, seq3))
     assert list(zip(seq2)) == list(zip_new(seq2))
     str1 = "223"
@@ -49,18 +45,19 @@ if __name__ == '__main__':
 
     # enumerate
     assert list(enumerate_new(seq2)) == list(enumerate(seq2))
-    assert list(enumerate_new_2(seq2)) == list(enumerate(seq2))
     assert list(enumerate_new(seq2, 1)) == list(enumerate(seq2, 1))
-    assert list(enumerate_new_2(seq2, 1)) == list(enumerate(seq2, 1))
+    assert list(enumerate_new(gen1, 1)) == list(enumerate(gen2, 1))
 
     # filter
     assert list(filter_new(None, str2)) == list(filter(None, str2))
     assert list(filter_new(None, seq2)) == list(filter(None, seq2))
+    assert list(filter_new(None, gen1)) == list(filter(None, gen2))
     condition = lambda i: int(i) < 2
     assert list(filter_new(condition, str2)) == list(filter(condition, str2))
     assert list(filter_new(condition, seq2)) == list(filter(condition, seq2))
+    assert list(filter_new(condition, gen1)) == list(filter(condition, gen2))
 
     # map
     func = lambda i: i + 1
     assert list(map_new(func, seq2)) == list(map(func, seq2))
-    assert list(map_new(add, seq1, seq2)) ==  list(map(add, seq1, seq2))
+    assert list(map_new(add, gen1, seq2)) == list(map(add, gen1, seq2))
