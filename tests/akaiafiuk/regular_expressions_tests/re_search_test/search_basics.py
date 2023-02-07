@@ -30,3 +30,46 @@ def test_not_a_part_of_set():
     """^ as the first character, in which case it matches any character that isn’t in the set."""
     result = re.search('[^1-3]', '123car')
     assert result.group() == 'c'
+
+
+def test_alphanumeric():
+    """
+    '\\w' matches any alphanumeric word character.
+    Word characters are uppercase and lowercase letters, digits, and the underscore (_) character,
+    so '\\w' is essentially shorthand for [a-zA-Z0-9_]
+    """
+    result = re.findall('\\w', '#(.a$@&B1_')
+    assert result == ['a', 'B', '1', '_']
+
+
+def test_non_alphanumeric():
+    """
+    \\W is the opposite. It matches any non-word character and is equivalent to [^a-zA-Z0-9_]:
+    """
+    result = re.search('\\W', 'abcd#(.a$@&')
+    assert result.group() == '#'
+
+
+def test_decimal():
+    """\\d will seacrh for a decimal character"""
+    result = re.search('\\d', '#(.abc1.2$@&')
+    assert result.group() == '1'
+
+
+def test_non_decimal():
+    """\\D will seacrh for a non-decimal character"""
+    result = re.search('\\D', '12$@&')
+    assert result.group() == '$'
+
+
+def test_space():
+    """\\s will search for a space character"""
+    result = re.search('\\s', '12 @&')
+    assert result.group() == " "
+    assert result.span() == (2, 3)
+
+
+def test_not_a_space():
+    """\\S will search for a character different from a space"""
+    result = re.search('\\S', '  !@&')
+    assert result.group() == '!'
