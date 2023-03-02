@@ -1,5 +1,7 @@
 import re
 
+import pytest
+
 
 def test_exact_occurrence_number():
     """{n}: Matches exactly n occurrences of the preceding character or group."""
@@ -38,12 +40,13 @@ def test_one_or_more_occurrence():
     assert match.group() == "aaaab"
 
 
-def test_zero_or_one_occurrence():
+@pytest.mark.parametrize("search_string, result", [
+    ("cb", "b"),
+    ("cab", "ab"),
+    ("aab", "ab")
+])
+def test_zero_or_one_occurrence(search_string, result):
     """? Matches zero or one occurrences of the preceding character or group."""
     pattern = "a?b"
-    match = re.search(pattern, "cb")
-    also_match = re.search(pattern, "cab")
-    one_more_match = re.search(pattern, "aab")
-    assert match.group() == "b"
-    assert also_match.group() == "ab"
-    assert one_more_match.group() == "ab"
+    match = re.search(pattern, search_string)
+    assert match.group() == result
