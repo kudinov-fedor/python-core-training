@@ -15,11 +15,19 @@ bool(set())
 bool(True)
 bool(3)
 bool(-0.1)
-bool("a")
+
+# containers bool check
+bool("abc")
 bool([False, ])
 bool((None, ))
 bool({"a": 123})
 bool({1, "abc"})
+# same as
+len("abc") > 0
+len([False, ]) > 0
+len((None, )) > 0
+len({"a": 123}) > 0
+len({1, "abc"}) > 0
 
 
 not 5
