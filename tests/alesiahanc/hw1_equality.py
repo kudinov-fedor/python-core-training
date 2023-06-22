@@ -21,10 +21,10 @@ def test_identity():
     assert a == c
 
 
-@pytest.mark.parametrize(["param", "key", "y"], [
+@pytest.mark.parametrize(["param", "key", "result"], [
     ([2, 3, 1, -2, -5, -8, 12], abs, 12),
     ([2, 3, 1, -2, -5, -80, 12], abs, -80)  # abs = absolute value, -+ doesn't matter
 ])
-def test_max(param, key, y):
-    x = max(param, key=key)  # how to fix this "Unexpected type" warning?
-    assert x == y
+def test_max(param, key, result):
+    expected = max(param, key=key)  # how to fix this "Unexpected type" warning?
+    assert expected == result
