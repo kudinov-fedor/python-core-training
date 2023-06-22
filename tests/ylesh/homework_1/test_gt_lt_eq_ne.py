@@ -17,8 +17,6 @@ b = a
     (2 not in ("a", "b", "c"), True),
     (max([2, 3, 1, -2, -5, -8, 12]), 12),
     (min("banana", "ball", "cat", key=len), "cat")
-
-
 ])
 def test_assertion(param, result):
     assert param is result
