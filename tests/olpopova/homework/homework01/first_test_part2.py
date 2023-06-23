@@ -15,6 +15,8 @@ def sum_operation(num1, num2):
     return num1 + num2
 
 
-actual_list = sum_operation([4, 5], [3, 9])
-result = sum(actual_list)
-print(result)
+@pytest.mark.parametrize(['list1', 'list2', 'expected'], [
+    ([4, 5], [3, 9], 21),
+])
+def test_sum_lists_and_sum_values_in_result_list(list1, list2, expected):
+    assert sum(sum_operation(list1, list2)) == expected
