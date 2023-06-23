@@ -34,42 +34,37 @@ def test_max_value_in_list(actual_list, expected):
 
 
 @pytest.mark.parametrize(['actual', 'reverse', 'expected'], [
-    ([2, 4, -5, 6, -1], "True", [6, 4, 2, -1, -5]),
-    ([2, 4, -5, 6, -1], "False", [-5, -1, 2, 4, 6]),
-    ([2, 4, -5, 6, -1], "module", [-1, 2, 4, -5, 6])
+    ([2, 4, -5, 6, -1], True, [6, 4, 2, -1, -5]),
+    ([2, 4, -5, 6, -1], False, [-5, -1, 2, 4, 6]),
+    ([2, 4, -5, 6, -1], None, [-5, -1, 2, 4, 6])
 ])
-def test_sort_numbers(actual, reverse, expected):
-    if reverse == "True":
-        changed_list = sorted(actual, reverse=True)
-    elif reverse == "False":
-        changed_list = sorted(actual)
-    else:
-        changed_list = sorted(actual, key=abs)
+def test_sort_numbers_reverse_param(actual, reverse, expected):
+    kwargs = {}
+    if reverse is not None:
+        kwargs['reverse'] = reverse
+    changed_list = sorted(actual, **kwargs)
     assert changed_list == expected
 
 
-def test_find_ascii_integer(values_list):
-    # sth = []
-    for string in values_list:
-        # map = (*map(ord, string), sep='_')
-        print(*map(ord, string), sep=', ')
-        # print('Chars in {} has following numbers in ASCII table [{}]'.format(string)
-    # print(srt)
-
-
-@pytest.mark.parametrize(['actual', 'sort_type','expected'], [
-    (["banana", "ball", "cat"], 'alphabet', ["ball", "banana", "cat"]),
-    (["banana", "ball", "cat"], 'words_length', ["cat", "ball", "banana"]),
-    (["banana", "ball", "cat"], 'reverse', ["cat", "banana", "ball"]),
-    (["banana", "ball", "cat"], "reverse_and_length", ["banana", "ball", "cat"])
+@pytest.mark.parametrize(['values_list', 'expected'], [
+    (["banana", "cat"], [[98, 97, 110, 97, 110, 97], [99, 97, 116]]),
 ])
-def test_sort_chars(actual, sort_type, expected):
-    if sort_type == 'alphabet':
-        changed_list = sorted(actual)
-    elif sort_type == 'words_length':
-        changed_list = sorted(actual, key=len)
-    elif sort_type == 'reverse':
-        changed_list = sorted(actual, reverse=True)
-    else:
-        changed_list = sorted(actual, reverse=True, key=len)
+def test_find_ascii_integer(values_list, expected):
+    result = []
+    for string in values_list:
+        result.append(list(map(ord, string)))
+    assert result == expected
+
+
+@pytest.mark.parametrize(['actual', 'reverse', 'length', 'expected'], [
+    (["banana", "ball", "cat"], False, False, ["ball", "banana", "cat"]),
+    (["banana", "ball", "cat"], False, True, ["cat", "ball", "banana"]),
+    (["banana", "ball", "cat"], True, False, ["cat", "banana", "ball"]),
+    (["banana", "ball", "cat"], True, True, ["banana", "ball", "cat"])
+])
+def test_sort_chars_reverse_len_params(actual, reverse, length, expected):
+    kwargs = {'reverse': reverse}
+    if length:
+        kwargs['key'] = len
+    changed_list = sorted(actual, **kwargs)
     assert changed_list == expected
