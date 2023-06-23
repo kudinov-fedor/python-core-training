@@ -60,10 +60,9 @@ assert is_acceptable_password_4th_edition('this is password') == True
 
 def is_acceptable_password_5th_edition(password: str) -> bool:
     result = False
-    invalid = ['password', 'PASSWORD']
     if 6 < len(password) < 9:
         result = password.isalnum() and not password.isalpha() and not password.isdecimal()
-    elif len(password) > 9 and (invalid[0] not in password and invalid[1] not in password):
+    elif len(password) > 9 and ('password' not in password.lower()):
         result = password.isalnum() or " " in password
     return result
 
