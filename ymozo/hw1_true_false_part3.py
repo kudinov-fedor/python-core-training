@@ -1,7 +1,7 @@
 import pytest
 
 
-@pytest.mark.parametrize(["par1", "res"], [
+@pytest.mark.parametrize(["par1", "expected"], [
     (bool(None), False),
     (bool(False), False),
     (bool(0), False),
@@ -15,12 +15,12 @@ import pytest
     (bool(3), True),
     (bool(-0.1), True)
 ])
-def test_bool_values(par1, res):
+def test_bool_values(par1, expected):
     result = par1
-    assert result == res
+    assert result == expected
 
 
-@pytest.mark.parametrize(["par1", "res"], [
+@pytest.mark.parametrize(["par1", "expected"], [
     (bool("abc"), True),
     (bool([False, ]), True),
     (bool((None,)), True),
@@ -33,21 +33,21 @@ def test_bool_values(par1, res):
     (not [], True),
     (not (1, 2, 3), False)
 ])
-def test_check_bool_containers(par1, res):
+def test_check_bool_containers(par1, expected):
     result = par1
-    assert result == res
+    assert result == expected
 
 
-@pytest.mark.parametrize(["par1", "res"], [
+@pytest.mark.parametrize(["par1", "expected"], [
     (len("abc"), True),
     (len([False, ]), True),
     (len((None,)), True),
     (len({"a": 123}), True),
     (len({1, "abc"}), True)
 ])
-def test_check_bool_containers_1(par1, res):
+def test_check_bool_containers_1(par1, expected):
     result = par1 > 0
-    assert result == res
+    assert result == expected
 
 
 def test_check_comparison():
@@ -86,16 +86,16 @@ def test_check_comparison_5():
     assert a == result
 
 
-@pytest.mark.parametrize(["par1", "par2", "res"], [
+@pytest.mark.parametrize(["par1", "par2", "expected"], [
     (True, False, True),
     (False, True, True),
     (1, 3, 1),
     ([], "abc", "abc"),
     (None, "some", "some"),
 ])
-def test_check_first_item_true_or_last(par1, par2, res):
+def test_check_first_item_true_or_last(par1, par2, expected):
     result = par1 or par2
-    assert result == res
+    assert result == expected
 
 
 def test_check_first_item_true_or_last_1():
@@ -110,16 +110,16 @@ def test_check_first_item_true_or_last_2():
     assert result == expected
 
 
-@pytest.mark.parametrize(["par1", "par2", "res"], [
+@pytest.mark.parametrize(["par1", "par2", "expected"], [
     (True, False, False),
     (False, True, False),
     (1, 3, 3),
     ([1, 2, 3], "abc", "abc"),
     ("some", {}, {})
 ])
-def test_check_first_item_true_or_last_3(par1, par2, res):
+def test_check_first_item_true_or_last_3(par1, par2, expected):
     result = par1 and par2
-    assert result == res
+    assert result == expected
 
 
 def test_check_first_item_true_or_last_4():
@@ -128,35 +128,35 @@ def test_check_first_item_true_or_last_4():
     assert result == expected
 
 
-@pytest.mark.parametrize(["par1", "par2", "par3", "res"], [
+@pytest.mark.parametrize(["par1", "par2", "par3", "expected"], [
     ("", "Some", {}, {}),
     (False, "", 123, "")
 ])
-def test_check_priority(par1, par2, par3, res):
+def test_check_priority(par1, par2, par3, expected):
     result = par1 or par2 and par3
-    assert result == res
+    assert result == expected
 
 
-@pytest.mark.parametrize(["par1","res"], [
+@pytest.mark.parametrize(["par1", "expected"], [
     ((all(["a", 0, True, (1, 2, 3)])), False),
     ((all(["a", -1, True, (1, 2, 3)])), True),
     ((all(["a", -1, False, (1, 2, 3)])), False),
     ((all(["a", -1, True, ()])), False)
 ])
-def test_check_if_all_true(par1, res):
+def test_check_if_all_true(par1, expected):
     result = par1
-    assert result == res
+    assert result == expected
 
 
-@pytest.mark.parametrize(["par1", "res"], [
+@pytest.mark.parametrize(["par1", "expected"], [
     (any(["", 0, False, (), None]), False),
     (any(["", 1, False, (), None]), True),
     (any(["", 0, True, (), None]), True),
     (any(["", 0, False, (1,), None]), True)
 ])
-def test_check_if_any_true(par1, res):
+def test_check_if_any_true(par1, expected):
     result = par1
-    assert result == res
+    assert result == expected
 
 
 def test_check_filter_1():
