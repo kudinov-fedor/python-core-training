@@ -16,7 +16,7 @@ def test_max_modulo_number(numbers, expected):
 ])
 def test_max_chars_in_word(words, expected):
     max_module_value = len(max(words, key=len))
-    assert max_module_value is expected
+    assert max_module_value == expected
 
 
 @pytest.mark.parametrize(['actual_list', 'expected'], [
@@ -28,7 +28,7 @@ def test_max_chars_in_word(words, expected):
 def test_max_value_in_list(actual_list, expected):
     if len(actual_list) != 0:
         max_word = max(actual_list)
-        assert max_word is expected
+        assert max_word == expected
 
 
 @pytest.mark.parametrize(['actual', 'reverse', 'expected'], [
