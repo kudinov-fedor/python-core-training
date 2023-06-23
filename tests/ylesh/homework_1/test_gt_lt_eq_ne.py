@@ -6,13 +6,15 @@ def test_equal():
     assert result is True
 
 
-a = []
-b = a
+def test_equal_id():
+    a = []
+    b = a
+    result = True == (id(a) == id(b))
+    assert result is True
 
 
 @pytest.mark.parametrize(["param", "result"], [
     (1.5 <= (5 + 3) > len(["2", "e"]), True),
-    (id(a) == id(b), True),
     ("a" in ["a", "b", "c"], True),
     (2 not in ("a", "b", "c"), True),
     (max([2, 3, 1, -2, -5, -8, 12]), 12),
