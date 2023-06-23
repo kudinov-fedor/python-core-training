@@ -7,7 +7,7 @@ import pytest
 ])
 def test_max_modulo_number(numbers, expected):
     max_module_value = max(numbers, key=abs)
-    assert max_module_value is expected
+    assert max_module_value == expected
 
 
 @pytest.mark.parametrize(['words', 'expected'], [
@@ -29,8 +29,6 @@ def test_max_value_in_list(actual_list, expected):
     if len(actual_list) != 0:
         max_word = max(actual_list)
         assert max_word is expected
-    else:
-        print("\n**** List is empty! ****")
 
 
 @pytest.mark.parametrize(['actual', 'reverse', 'expected'], [
@@ -46,14 +44,12 @@ def test_sort_numbers_reverse_param(actual, reverse, expected):
     assert changed_list == expected
 
 
-@pytest.mark.parametrize(['values_list', 'expected'], [
-    (["banana", "cat"], [[98, 97, 110, 97, 110, 97], [99, 97, 116]]),
+@pytest.mark.parametrize(['value', 'expected'], [
+    ("banana", [98, 97, 110, 97, 110, 97]),
+    ("cat", [99, 97, 116])
 ])
-def test_find_ascii_integer(values_list, expected):
-    result = []
-    for string in values_list:
-        result.append(list(map(ord, string)))
-    assert result == expected
+def test_find_ascii_integer(value, expected):
+    assert list(map(ord, value)) == expected
 
 
 @pytest.mark.parametrize(['actual', 'reverse', 'length', 'expected'], [
