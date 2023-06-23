@@ -50,6 +50,7 @@ def test_check_division_int():
     res = 4
     assert a == res
 
+
 # region sequences
 def test_check_sequences_1():
     seq = "abc" + "efg"
