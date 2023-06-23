@@ -14,5 +14,5 @@ def test_true_or_false(par1, res):
 
 def test_filter_logic():
     data = ["cat", "dog", "", None, False, 0, 1, -2, True]
-    text = list(filter(lambda i: isinstance(i, str) or isinstance(i, bool), data))
-    assert type(int) not in text
+    text = list(filter(lambda i: isinstance(i, (str, bool)), data))
+    assert int not in [type(i) for i in text]
