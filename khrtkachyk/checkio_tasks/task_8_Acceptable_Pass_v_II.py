@@ -9,7 +9,9 @@ Output: A logic value (bool).
 
 
 def is_acceptable_password(password: str) -> bool:
-    return True if len(password.strip()) > 6 and any(i.isdigit() for i in password) else False
+    valid_length = len(password.strip()) > 6
+    contains_digits = any(i.isdigit() for i in password)
+    return valid_length and contains_digits
 
 
 if __name__ == '__main__':
@@ -17,3 +19,4 @@ if __name__ == '__main__':
     print(is_acceptable_password("short14"))
     print(is_acceptable_password("muchlonger5"))
     print(is_acceptable_password("short1"))
+    print(is_acceptable_password("lettersonly"))
