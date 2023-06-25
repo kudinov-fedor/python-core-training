@@ -1,5 +1,5 @@
 def checkio(number: int) -> str:
-    if number % 3 == 0 and number % 5 == 0:
+    if number % 15 == 0:
         result = "Fizz Buzz"
     elif number % 3 == 0:
         result = "Fizz"

@@ -1,7 +1,10 @@
 # Taken from mission Acceptable Password I
-
-def is_acceptable_password(password: str) -> bool:
-    return len(password) > 6 and any(element.isdigit() for element in password)
+def is_acceptable_password(password: str) -> str:
+    pwd_lenght = len(password) > 6
+    pwd_digit = any(char.isdigit() for char in password)
+    return pwd_lenght and pwd_digit
+# def is_acceptable_password(password: str) -> bool:
+    # return len(password) > 6 and any(element.isdigit() for element in password)
 
 
 print("Example:")

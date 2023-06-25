@@ -1,16 +1,11 @@
 def first_word(text: str) -> str:
-    word_list = []
-    for i in text:
-        if i != " ":
-            word_list.append(i)
-        else:
-            break
-    word = "".join(word_list)
-    return word
+    word = text.split(" ")
+    return word[0]
 
 
 print("Example:")
 print(first_word("Hello world"))
+
 # These "asserts" are used for self-checking
 assert first_word("Hello world") == "Hello"
 assert first_word("a word") == "a"
