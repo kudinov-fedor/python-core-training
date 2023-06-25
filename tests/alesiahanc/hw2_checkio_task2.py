@@ -7,11 +7,7 @@ The text consists of numbers, spaces and letters from the English alphabet.
 
 def sum_numbers(text: str) -> int:
     elements = text.split(" ")
-    digits = []
-    for x in elements:
-        if x.isdigit():
-            digits.append(x)
-
+    digits = [x for x in elements if x.isdigit()]
     result = list(map(int, digits))
     return sum(result)
 
