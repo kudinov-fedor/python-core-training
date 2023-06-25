@@ -20,7 +20,7 @@ from checkio_tasks.task_10_Acceptable_Pass_v_IV import is_acceptable_password
     ("muchlonger5", True),
     ("sh5", False),
     ("1234567", False),
-    ("12345678910", True)
+    ("12345678910", False)
 ])
 def test_acceptable_pass(passwd, res):
     assert is_acceptable_password(passwd) == res

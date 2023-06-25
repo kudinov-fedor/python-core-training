@@ -10,10 +10,18 @@ Output: A logic value (bool).
 
 
 def is_acceptable_password(password: str) -> bool:
-    valid_length = len(password)
-    contains_digits = any(i.isdigit() for i in password)
-    is_not_digit = all(i.isdigit() for i in password)
-    return (valid_length > 6 and contains_digits) and not is_not_digit or valid_length > 9
+    valid_length = 6 < len(password) <= 9
+    not_too_short = len(password) <= 6
+    at_least_one_digit = any(i.isdigit() for i in password)
+    not_only_digits = any(i.isalpha() for i in password)
+    is_long_password = len(password) > 9
+
+    just_valid_length = valid_length and at_least_one_digit and not_only_digits
+    valid_short = not not_too_short and at_least_one_digit and not_only_digits
+    valid_long = is_long_password and not_only_digits
+
+    pass_is_valid = valid_long or valid_short or just_valid_length
+    return pass_is_valid
 
 
 if __name__ == '__main__':
