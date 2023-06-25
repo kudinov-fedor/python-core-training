@@ -13,13 +13,9 @@ Output: A logic value (bool).
 
 
 def goes_after(word: str, first: str, second: str) -> bool:
-    index_first_item = word.find(first)
-    index_second_item = word.find(second)
-    if index_first_item == -1 and index_second_item == -1:
-        return False
-    elif first == second:
-        return False
-    elif index_second_item != index_first_item + 1:
-        return False
-    else:
-        return True
+    return f"{first}{second}" in word
+
+
+
+if __name__ == '__main__':
+    goes_after("world", "w", "o")
