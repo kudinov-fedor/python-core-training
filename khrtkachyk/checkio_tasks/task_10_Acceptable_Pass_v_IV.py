@@ -12,12 +12,8 @@ Output: A logic value (bool).
 def is_acceptable_password(password: str) -> bool:
     valid_length = len(password)
     contains_digits = any(i.isdigit() for i in password)
-    contains_letters = any(i.isalpha() for i in password)
-    if valid_length <= 6:
-        return False
-    if valid_length > 9:
-        return True
-    return contains_digits and contains_letters and not password.isdigit()
+    is_not_digit = all(i.isdigit() for i in password)
+    return (valid_length > 6 and contains_digits) and not is_not_digit or valid_length > 9
 
 
 if __name__ == '__main__':
@@ -28,3 +24,4 @@ if __name__ == '__main__':
     print(is_acceptable_password("1234567899"))
     print(is_acceptable_password("muchlonger"))
     print(is_acceptable_password("-----------"))
+    print(is_acceptable_password("-------"))
