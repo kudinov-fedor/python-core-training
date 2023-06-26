@@ -5,7 +5,6 @@ def is_acceptable_password(password: str) -> str:
     return pwd_lenght and pwd_digit
 
 
-
 print("Example:")
 print(is_acceptable_password("short"))
 
