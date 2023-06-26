@@ -12,7 +12,7 @@ The number as a string for other cases.
 
 
 def checkio(num: int) -> str:
-    if num % 3 == 0 and num % 5 == 0:
+    if num % 15 == 0:
         res = 'Fizz Buzz'
     elif num % 3 == 0:
         res = 'Fizz'
