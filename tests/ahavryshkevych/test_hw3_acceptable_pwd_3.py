@@ -5,7 +5,7 @@ def is_acceptable_password(password: str) -> str:
     pwd_lenght = len(password) > 6
     pwd_digit = any(char.isdigit() for char in password)
     all_digits_check = all(char.isdigit() for char in password)
-    return pwd_lenght and pwd_digit and all_digits_check is not True
+    return pwd_lenght and pwd_digit and  not all_digits_check
 
 
 print("Example:")
