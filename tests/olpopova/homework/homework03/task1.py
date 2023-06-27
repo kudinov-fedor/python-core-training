@@ -6,19 +6,9 @@ If one of the symbols is not in the given word - your function should return Fal
 - your function should return False.
 **********************************************************************
 """
-import pytest
 
 
-@pytest.mark.parametrize(['word', 'first', 'second', 'expected'], [
-    ("world", "w", "o", True),
-    ("world", "w", "r", False),
-    ("world", "l", "o", False),
-    ("list", "l", "o", False),
-    ("", "l", "o", False),
-    ("list", "l", "l", False),
-    ("world", "d", "w", False)
-])
-def test_goes_after(word, first, second, expected):
+def goes_after(word: str, first: str, second: str) -> bool:
     result = False
 
     # edge cases
@@ -31,4 +21,13 @@ def test_goes_after(word, first, second, expected):
     # final steps
     follow_index = first_index + 1
     result = first == word[first_index] and second == word[follow_index]
-    assert result is expected
+    return result
+
+
+assert goes_after("world", "w", "o") == True
+assert goes_after("world", "w", "r") == False
+assert goes_after("world", "l", "o") == False
+assert goes_after("list", "l", "o") == False
+assert goes_after("", "l", "o") == False
+assert goes_after("list", "l", "l") == False
+assert goes_after("world", "d", "w") == False
