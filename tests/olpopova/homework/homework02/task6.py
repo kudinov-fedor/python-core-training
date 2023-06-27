@@ -25,8 +25,7 @@ The verification conditions are:
 
 
 def is_acceptable_password(password: str) -> bool:
-    result = True if (len(password) > 6 and password.isalnum() and not password.isalpha()) else False
-    return result
+    return len(password) > 6 and password.isalnum() and not password.isalpha()
 
 
 # These "asserts" are used for self-checking
@@ -38,12 +37,13 @@ assert is_acceptable_password("sh5") == False
 
 
 def is_acceptable_password_4th_edition(password: str) -> bool:
-    result = False
-    if 6 < len(password) < 9:
-        result = password.isalnum() and not password.isalpha() and not password.isdecimal()
-    elif len(password) > 9:
-        result = password.isalnum() or " " in password
-    return result
+    # intermediate steps
+    valid_length_betw_6_9 = 6 < len(password) < 9
+    cond_for_length_betw_6_9 = password.isalnum() and not password.isalpha() and not password.isdecimal()
+    valid_length_gt_9 = len(password) > 9
+    cond_for_length_gt_9 = password.isalnum() or " " in password
+
+    return valid_length_betw_6_9 and cond_for_length_betw_6_9 or valid_length_gt_9 and cond_for_length_gt_9
 
 
 # These "asserts" are used for self-checking
@@ -60,12 +60,13 @@ assert is_acceptable_password_4th_edition('this is password') == True
 
 
 def is_acceptable_password_5th_edition(password: str) -> bool:
-    result = False
-    if 6 < len(password) < 9:
-        result = password.isalnum() and not password.isalpha() and not password.isdecimal()
-    elif len(password) > 9 and ('password' not in password.lower()):
-        result = password.isalnum() or " " in password
-    return result
+    # intermediate steps
+    valid_length_betw_6_9 = 6 < len(password) < 9
+    cond_for_length_betw_6_9 = password.isalnum() and not password.isalpha() and not password.isdecimal()
+    valid_length_gt_9 = len(password) > 9 and ('password' not in password.lower())
+    cond_for_length_gt_9 = password.isalnum() or " " in password
+
+    return valid_length_betw_6_9 and cond_for_length_betw_6_9 or valid_length_gt_9 and cond_for_length_gt_9
 
 
 # These "asserts" are used for self-checking
