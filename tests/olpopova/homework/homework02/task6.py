@@ -75,7 +75,7 @@ def is_acceptable_password_5th_edition(password: str) -> bool:
     is_digit_exist = any((i.isdigit() for i in password))
     short_pass_checks = all([is_digit_exist, not password.isdigit()])
     is_long_pass = len(password) > 9
-    long_pass_checks = password.isalnum() and 'password' not in password.lower()
+    long_pass_checks = all([password.isalnum(), 'password' not in password.lower()])
 
     return is_short_pass and short_pass_checks or is_long_pass and long_pass_checks
 
