@@ -1,10 +1,14 @@
 def is_acceptable_password(password: str) -> bool:
-    if "password" in password.lower():
-        return False
-    elif (any(char.isdigit() for char in password) and len(password) >= 6 and not password.isnumeric()) or len(password) >= 9:
-        return True
-    else:
-        return False
+    long_pass = len(password) >= 9
+    enough_length = len(password) >= 6
+    at_least_one_digit = any(char.isdigit() for char in password)
+    not_only_digits = not password.isnumeric()
+    pass_word = not"password" in password.lower()
+
+    valid_pass = enough_length and at_least_one_digit and not_only_digits and pass_word
+    valid_pass_long = long_pass and pass_word
+
+    return valid_pass or valid_pass_long
 
 
 if __name__ == '__main__':
