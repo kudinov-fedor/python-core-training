@@ -1,5 +1,6 @@
 import pytest
 from checkio_tasks.task_12_Between_markers import between_markers
+from checkio_tasks.task_12_Between_markers import between_markers_2_0
 """
 You are given a string and two markers (the initial one and final). You have to find a substring enclosed
     between these two markers. But there are a few important conditions.
@@ -21,3 +22,13 @@ Output: A string (str).
 ])
 def test_between_markers(text, start, end, res):
     assert between_markers(text, start, end) == res
+
+
+@pytest.mark.parametrize(["text", "start", "end", "res"], [
+    ("What is >apple<", ">", "<", "apple"),
+    ("What is [apple]", "[", "]", "apple"),
+    ("What is ><", ">", "<", ""),
+    ("[an apple]", "[", "]", "an apple")
+])
+def test_between_markers_2_0(text, start, end, res):
+    assert between_markers_2_0(text, start, end) == res

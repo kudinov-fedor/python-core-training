@@ -29,6 +29,14 @@ def between_markers(text: str, start: str, end: str) -> str:
     return ''.join(substring)
 
 
+def between_markers_2_0(text: str, start: str, end: str) -> str:
+    start_marker = text.index(start)
+    end_marker = text.index(end)
+    substring = text[start_marker + 1:end_marker]
+    return substring
+
+
 if __name__ == '__main__':
     print("Example:")
     print(between_markers("What is >apple<", ">", "<"))
+    print(between_markers_2_0("[an apple]", "[", "]"))
