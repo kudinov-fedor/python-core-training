@@ -1,9 +1,13 @@
 def goes_after(word: str, first: str, second: str) -> bool:
-    if first in word and second in word:
+    (""""
+    first in word and second in word:
         first = word.index(first)
         second = word.index(second)
         return second - first == 1
     return False
+    """)
+    sentence = first + second
+    return sentence in word
 
 
 if __name__ == '__main__':
@@ -23,5 +27,6 @@ if __name__ == '__main__':
     assert goes_after('copyrightable', 'o', 'p') == True
     assert goes_after('copyrightable', 'o', 'a') == False
     assert goes_after('copyrightable', 'o', 'o') == False
+    assert goes_after('elephant', 'e', 'p') == True
 
     print("The mission is done! Click 'Check Solution' to earn rewards!")
