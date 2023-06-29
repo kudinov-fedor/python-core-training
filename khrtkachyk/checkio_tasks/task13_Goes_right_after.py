@@ -11,16 +11,12 @@ Output: A logic value (bool).
 
 
 def goes_after(word: str, first: str, second: str) -> bool:
-    res = None
     for i in range(0, len(word)-1):
-        if word[i] == first and word[i + 1] == second:
-            return True
-    if res is None:
-        return False
-    else:
-        return True
+        return True if (word[i] == first and word[i + 1] == second) else False
+    return False
 
 
 if __name__ == '__main__':
     print("Example:")
     print(goes_after("world", "w", "o"))
+    print(goes_after("", "w", "o"))
