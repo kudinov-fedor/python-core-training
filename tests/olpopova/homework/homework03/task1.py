@@ -10,7 +10,7 @@ import pytest
 
 
 def goes_after(word: str, first: str, second: str) -> bool:
-    return any(word[i : i + 2] == first + second for i in range(0, len(word)))
+    return any(word[i : i + 2] == first + second for i in range(0, len(word)))      # or   first + second in word
 
 
 @pytest.mark.parametrize(['word', 'first','second', 'expected'], [
