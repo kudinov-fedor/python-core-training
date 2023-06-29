@@ -10,4 +10,4 @@ from ahavryshkevych.task_between_markers import between_markers
     ("[an apple]", "[", "]", "an apple")
 ])
 def test_between_markers(par1, par2, par3, res):
-    assert between_markers(par1, par2, parcd..3) == res
+    assert between_markers(par1, par2, par3) == res

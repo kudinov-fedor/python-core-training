@@ -7,11 +7,14 @@ second is a symbol (str) that should go first, and the third is a symbol (str) t
 
 
 def goes_after(word: str, first: str, second: str) -> bool:
+    both_present = first in word and second in word
+    non_equality_check = first != second
     i, j = word.find(first), word.find(second)
-    if first != second and (first or second in word):
-        if i + 1 == j:
-            return True
-        else:
-            return False
-    else:
-        return False
+
+    if non_equality_check and both_present:
+        for i, j in zip(word, word[1:]):
+            # I Wanted to return this expression, as you have taught, buy for some reason it returns False
+            # I have to figure out why this happens
+            if i == first and j == second:
+                return True
+    return False
