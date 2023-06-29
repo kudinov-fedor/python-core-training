@@ -9,18 +9,10 @@ The text consists of numbers, spaces and letters from the English alphabet.
 
 
 def sum_numbers(text: str) -> int:
-    result_list = []
-
-    # edge cases
     words_list = text.split(" ")
-    if len(words_list) == 1 and not words_list[0].isdigit():
-        return sum(result_list)
 
     # final steps
-    for i in words_list:
-        if i.isdigit():
-            result_list.append(int(i))
-
+    result_list = [int(i) for i in words_list if i.isdigit()]
     return sum(result_list)
 
 
