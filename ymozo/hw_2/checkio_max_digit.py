@@ -1,13 +1,8 @@
 def max_digit(value: int) -> int:
     str_num = str(value)
-    max_val = 0
-    for digit in str_num:
-        if digit.isdigit():
-            current_num = int(digit)
-            if current_num > max_val:
-                max_val = current_num
-
-    return max_val
+    tuple_of_numbers = tuple(int(char) for char in str_num)
+    max_value = max(tuple_of_numbers)
+    return max_value
 
 
 if __name__ == '__main__':
