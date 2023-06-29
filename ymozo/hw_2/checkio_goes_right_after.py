@@ -1,11 +1,4 @@
 def goes_after(word: str, first: str, second: str) -> bool:
-    (""""
-    first in word and second in word:
-        first = word.index(first)
-        second = word.index(second)
-        return second - first == 1
-    return False
-    """)
     sentence = first + second
     return sentence in word
 
