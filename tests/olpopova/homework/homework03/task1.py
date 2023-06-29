@@ -10,15 +10,7 @@ import pytest
 
 
 def goes_after(word: str, first: str, second: str) -> bool:
-    # edge cases
-    if len(word) == 0 or first not in word:
-        return False
-
-    first_index = word.index(first)
-    if first_index == len(word) - 1:
-        return False
-
-    return any(word[i] == first and word[i + 1] == second for i in range(0, len(word)))
+    return any(word[i : i + 2] == first + second for i in range(0, len(word)))
 
 
 @pytest.mark.parametrize(['word', 'first','second', 'expected'], [
