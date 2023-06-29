@@ -3,7 +3,7 @@ def is_acceptable_password(password: str) -> bool:
     enough_length = len(password) >= 6
     at_least_one_digit = any(char.isdigit() for char in password)
     not_only_digits = not password.isnumeric()
-    pass_word = not"password" in password.lower()
+    pass_word = "password" not in password.lower()
 
     valid_pass = enough_length and at_least_one_digit and not_only_digits and pass_word
     valid_pass_long = long_pass and pass_word
