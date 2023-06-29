@@ -23,7 +23,7 @@ import pytest
     (set("abc") == {'a', 'b', 'c'}, True),
     (set({"a": 1, "b": 2}) == {'a', 'b'}, True),
     (dict(a=123, b=456) == {'a': 123, 'b': 456}, True),
-    (dict(enumerate(["a", "b", "c"])) == {0: 'a', 1: 'b', 2: 'c'}, True)  # This is not working, could you explaine?
+    (dict(enumerate(["a", "b", "c"])) == {0: 'a', 1: 'b', 2: 'c'}, True)
 ])
 def test_conversion(param, result):
     assert param is result
