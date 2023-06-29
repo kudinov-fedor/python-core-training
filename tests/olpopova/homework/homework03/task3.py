@@ -6,6 +6,7 @@ In a given text you need to sum the numbers while excluding any digits that form
 The text consists of numbers, spaces and letters from the English alphabet.
 *********************************************************************
 """
+import pytest
 
 
 def sum_numbers(text: str) -> int:
@@ -16,10 +17,18 @@ def sum_numbers(text: str) -> int:
     return sum(result_list)
 
 
-assert sum_numbers("hi") == 0
-assert sum_numbers("who is 1st here") == 0
-assert sum_numbers("my numbers is 2") == 2
-assert (sum_numbers("This picture is an oil on canvas painting by Danish artist Anna Petersen between 1845 and 1910 year")
-    == 3755)
-assert sum_numbers("5 plus 6 is") == 11
-assert sum_numbers("") == 0
+def sum_numbers2(text: str) -> int:
+    return sum((int(i) for i in text.split(" ") if i.isdigit()))
+
+
+@pytest.mark.parametrize(['text', 'expected'], [
+    ("hi", 0),
+    ("who is 1st here", 0),
+    ("my numbers is 2", 2),
+    ("This picture is an oil on canvas painting by Danish artist Anna Petersen between 1845 and 1910 year", 3755),
+    ("5 plus 6 is", 11),
+    ("", 0)
+])
+def test_sum_numbers(text, expected):
+    assert sum_numbers(text) == expected
+    assert sum_numbers2(text) == expected
