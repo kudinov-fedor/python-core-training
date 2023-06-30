@@ -23,4 +23,4 @@ def goes_after2(word: str, first: str, second: str):
 
 
 def goes_after3(word: str, first: str, second: str):
-    return any([(i, j) for i, j in zip(word, word[1:]) if i == first and j == second])
+    return any(el == (first, second) for el in zip(word, word[1:]))
