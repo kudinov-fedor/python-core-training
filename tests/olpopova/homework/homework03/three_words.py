@@ -12,8 +12,9 @@ import pytest
 
 
 def checkio(words: str) -> bool:
+
     # edge cases
-    words_list = words.split(" ")
+    words_list = words.split()
     list_size = len(words_list)
     if list_size < 3:
         return False
@@ -21,7 +22,8 @@ def checkio(words: str) -> bool:
     # final steps
     for i in range(0, list_size - 1):
         if i <= list_size - 3:
-            is_all_alpha = all([words_list[i].isalpha(), words_list[i + 1].isalpha(), words_list[i + 2].isalpha()])
+
+            is_all_alpha = all(map(str.isalpha, words_list[i: i + 3]))
 
             if not is_all_alpha:
                 continue
@@ -38,4 +40,4 @@ def checkio(words: str) -> bool:
     ('one two 3 four five 6 seven eight 9 ten eleven 12', False)
 ])
 def test_checkio(words, expected):
-    assert checkio("Hello World hello") is True
+    assert checkio(words) is expected
