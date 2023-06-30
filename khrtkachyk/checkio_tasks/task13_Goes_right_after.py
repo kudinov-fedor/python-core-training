@@ -19,10 +19,7 @@ def goes_after(word: str, first: str, second: str) -> bool:
 
 def goes_after_2_0(word: str, first: str, second: str) -> bool:
     splitted = word.split(first)
-    if any(item.startswith(second) for item in splitted[1:]):
-        return True
-    else:
-        return False
+    return any(item.startswith(second) for item in splitted[1:])
 
 
 def goes_after_3_0(word: str, first: str, second: str) -> bool:
