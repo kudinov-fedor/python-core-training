@@ -1,16 +1,11 @@
-import pytest
+def test_zip():
+    assert list(zip("qwerty", {1, 2, 3, 4})) == [('q', 1), ('w', 2), ('e', 3), ('r', 4)]
 
 
-def convert_list(list1, list2):
-    return list(zip(list1, list2))
+def test_dict_items():
+    assert list(dict(brand="Ford", model="Mustang", year=1964).items()) == [('brand', 'Ford'), ('model', 'Mustang'), ('year', 1964)]
+    assert list({"brand": "Mercedes", "model": "S"}.items()) == [('brand', 'Mercedes'), ('model', 'S')]
 
 
-def convert_list2(list1, list2):
-    return list(dict(enumerate(list2, start=list1[0])).items())
-
-
-@pytest.mark.parametrize(['list1', 'list2', 'expected'], [
-    ([7, 8, 9], ["a", "b", "c"], [(7, "a"), (8, "b"), (9, "c")])
-])
-def test_compare_tuples(list1, list2, expected):
-    assert convert_list(list1, list2) == convert_list2(list1, list2) == expected
+def test_enumerate():
+    assert list(enumerate(["a", "b", "c"], start=1)) == [(1, "a"), (2, "b"), (3, "c")]
