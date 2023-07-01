@@ -30,8 +30,7 @@ def test_convert_without_parameters(func, arg, expected):
     ("aabcc", {'a', 'b', 'c'})  # no duplicates in sets
 ])
 def test_conversion_sets(arg1, arg2):
-    assert set() == set(arg1).difference(arg2)  # set can be returned in any order, so we need to check that all elements are there
-
+    assert set(arg1).issubset(arg2)
 
 @pytest.mark.parametrize(["arg", "expected"], [
     ([("a", 123), ("b", 456)], {'a': 123, 'b': 456}),
@@ -41,8 +40,5 @@ def test_conversion_dictionaries(arg, expected):
     assert expected == dict(arg)
 
 
-@pytest.mark.parametrize(["arg1", "arg2", "func", "expected"], [
-    (["a", "b", "c"], [1, 2, 3], zip, {'a': 1, 'b': 2, 'c': 3})
-])
-def test_conversion_dict_functions(arg1, arg2, func, expected):
-    assert expected == dict(func(arg1, arg2))
+def test_conversion_dict_functions():
+    assert {'a': 1, 'b': 2, 'c': 3} == dict(zip(["a", "b", "c"], [1, 2, 3]))
