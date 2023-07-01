@@ -24,7 +24,6 @@ def checkio(words: str) -> bool:
 
 def checkio_2(words: str) -> bool:
     words = words.split()
-    print(words)
     window_size = 3
     if len(words) < window_size:
         return False
@@ -33,6 +32,21 @@ def checkio_2(words: str) -> bool:
         if all(map(str.isalpha, res)):
             return True
     return False
+
+
+def checkio_3(words: str) -> bool:
+    my_tuple = tuple(i for i in words.split())
+    new_lst = []
+    for word1, word2, word3 in zip(my_tuple, my_tuple[1:], my_tuple[2:]):
+        new_lst.append(word1 + word2 + word3)
+    new_lst2 = []
+    index = 0
+    while index < len(new_lst):
+        sth = new_lst[index]
+        index += 1
+        boolean = sth.isalpha()
+        new_lst2.append(boolean)
+    return sum(new_lst2) != 0
 
 
 if __name__ == '__main__':
@@ -48,3 +62,10 @@ if __name__ == '__main__':
     print(checkio_2("He is 123 man"))
     print(checkio_2("one two 3 four five six 7 eight 9 ten eleven 12"))
     print(checkio_2('one two 3 four five 6 seven eight 9 ten eleven 12'))
+
+    print("Example:")
+    print(checkio_3("Hello World hello"))
+    print(checkio_3("bla bla bla bla"))
+    print(checkio_3("He is 123 man"))
+    print(checkio_3("one two 3 four five six 7 eight 9 ten eleven 12"))
+    print(checkio_3('one two 3 four five 6 seven eight 9 ten eleven 12'))
