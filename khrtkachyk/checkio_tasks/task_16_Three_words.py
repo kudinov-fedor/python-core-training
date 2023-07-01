@@ -22,9 +22,29 @@ def checkio(words: str) -> bool:
     return False
 
 
+def checkio_2(words: str) -> bool:
+    words = words.split()
+    print(words)
+    window_size = 3
+    if len(words) < window_size:
+        return False
+    for i in range(len(words) - window_size + 1):
+        res = words[i:i + window_size]
+        if all(map(str.isalpha, res)):
+            return True
+    return False
+
+
 if __name__ == '__main__':
     print("Example:")
     print(checkio("Hello World hello"))
     print(checkio("bla bla bla bla"))
     print(checkio("He is 123 man"))
     print(checkio("one two 3 four five six 7 eight 9 ten eleven 12"))
+
+    print("Example:")
+    print(checkio_2("Hello World hello"))
+    print(checkio_2("bla bla bla bla"))
+    print(checkio_2("He is 123 man"))
+    print(checkio_2("one two 3 four five six 7 eight 9 ten eleven 12"))
+    print(checkio_2('one two 3 four five 6 seven eight 9 ten eleven 12'))
