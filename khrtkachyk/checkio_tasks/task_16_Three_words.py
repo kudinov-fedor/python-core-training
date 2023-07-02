@@ -42,6 +42,8 @@ def checkio_3(words: str) -> bool:
         res1 = all(map(str.isalpha, res))
         lst.append(res1)
     return any(j for j in lst if j is True)
+
+
 if __name__ == '__main__':
     print("Example:")
     print(checkio("Hello World hello"))
