@@ -10,7 +10,5 @@ then adding another one will be a mistake.
 
 
 def correct_sentence(text: str) -> str:
-    text = text[0].upper() + text[1:]  # change first element to uppercase
-    if text[-1] != ".":  # check of the last element is not a period
-        text = text + "."
+    text = text.title().rstrip(".") + "."  # change first element to uppercase
     return text
