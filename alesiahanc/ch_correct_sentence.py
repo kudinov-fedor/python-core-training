@@ -10,5 +10,9 @@ then adding another one will be a mistake.
 
 
 def correct_sentence(text: str) -> str:
-    text = text.title().rstrip(".") + "."  # change first element to uppercase
+    text = text.capitalize().rstrip(".") + "."  # change first element to uppercase
     return text
+
+
+if __name__ == '__main__':
+    correct_sentence("world")
