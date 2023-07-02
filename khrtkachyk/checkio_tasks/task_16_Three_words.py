@@ -36,19 +36,12 @@ def checkio_2(words: str) -> bool:
 
 def checkio_3(words: str) -> bool:
     my_tuple = tuple(i for i in words.split())
-    new_lst = []
+    lst = []
     for word1, word2, word3 in zip(my_tuple, my_tuple[1:], my_tuple[2:]):
-        new_lst.append(word1 + word2 + word3)
-    new_lst2 = []
-    index = 0
-    while index < len(new_lst):
-        sth = new_lst[index]
-        index += 1
-        boolean = sth.isalpha()
-        new_lst2.append(boolean)
-    return sum(new_lst2) != 0
-
-
+        res = word1 + word2 + word3
+        res1 = all(map(str.isalpha, res))
+        lst.append(res1)
+    return any(j for j in lst if j is True)
 if __name__ == '__main__':
     print("Example:")
     print(checkio("Hello World hello"))
