@@ -1,5 +1,5 @@
 import pytest
-from checkio_tasks.task_17_Beginning_zeros import beginning_zeros, beginning_zeros2
+from checkio_tasks.task_17_Beginning_zeros import beginning_zeros, beginning_zeros2, beginning_zeros3
 """
 You have a string that consist only of digits. You need to find how many zero
 digits ("0") are at the beginning of the given string.
@@ -9,7 +9,7 @@ Output: An integer (int).
 """
 
 
-@pytest.mark.parametrize("func", [beginning_zeros, beginning_zeros2])
+@pytest.mark.parametrize("func", [beginning_zeros, beginning_zeros2, beginning_zeros3])
 @pytest.mark.parametrize("string, res", [
     ("10", 0),
     ("100", 0),
