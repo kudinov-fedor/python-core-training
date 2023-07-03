@@ -35,11 +35,11 @@ def checkio_2(words: str) -> bool:
 
 
 def checkio_3(words: str) -> bool:
-    my_tuple = tuple(i for i in words.split())
-    for word1, word2, word3 in zip(my_tuple, my_tuple[1:], my_tuple[2:]):
+    splitted = words.split()
+    for word1, word2, word3 in zip(splitted, splitted[1:], splitted[2:]):
         res = word1 + word2 + word3
-        if all(map(str.isalpha, res)):
-            return any(j for j in map(str.isalpha, res) if j is True)
+        if str(res).isalpha():
+            return True
     return False
 
 
