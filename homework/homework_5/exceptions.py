@@ -40,6 +40,10 @@ def error_func_9():
     eval("x = ")
 
 
+def error_func_10():
+    error_func_10()
+
+
 # traceback several levels deep
 def func_1():
     5 / 0
