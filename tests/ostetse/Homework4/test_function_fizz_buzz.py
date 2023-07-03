@@ -1,6 +1,4 @@
-import pytest
-
-from tests.ostetse.Homework4.function_fizz_buzz import checkio
+from tests.ostetse.Homework4.define_function_fizz_buzz import checkio
 
 
 def test_checkio():
