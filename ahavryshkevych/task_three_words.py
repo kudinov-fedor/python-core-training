@@ -8,11 +8,19 @@ For example, the string "start 5 one two three 7 end" contains three words in su
 
 def three_words(words: str) -> bool:
     match = 0
-    for el in words.split(" "):
+    for el in words.split():
         if el.isalpha():
             match += 1
         else:
             match = 0
         if match >= 3:
+            return True
+    return False
+
+
+def three_words02(words: str) -> bool:
+    spl_words = [i for i in words.split()]
+    for word1, word2, word3 in zip(spl_words, spl_words[1:], spl_words[2:]):
+        if word1.isalpha() and word2.isalpha() and word3.isalpha():
             return True
     return False
