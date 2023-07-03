@@ -1,6 +1,4 @@
-import pytest
-
-from tests.ostetse.Homework4.function_first_word import first_word
+from tests.ostetse.Homework4.define_function_first_word import first_word
 
 
 def test_first_word():

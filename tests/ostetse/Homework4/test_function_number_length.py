@@ -1,6 +1,4 @@
-import pytest
-
-from tests.ostetse.Homework4.function_number_length import number_length
+from tests.ostetse.Homework4.define_function_number_length import number_length
 
 
 def test_number_length():
