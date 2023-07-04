@@ -13,14 +13,10 @@ Precondition: No leading and trailing spaces, text contains only spaces, a-z, A-
 
 
 def correct_sentence(text: str) -> str:
-    res = text.endswith(".")
-    res1 = text[0].istitle()
-    if res and res1:
-        return text
-    elif res and not res1:
-        return f"{text[0].upper() + text[1:]}"
-    else:
-        return f"{text[0].upper() + text[1:]}."
+    res = text[0].capitalize() + text[1:]
+    if not res.endswith("."):
+        res += "."
+    return res
 
 
 def correct_sentence_2_0(text: str) -> str:
