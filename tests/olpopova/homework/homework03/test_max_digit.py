@@ -1,5 +1,7 @@
 import pytest
 
+from olpopova.homework.homework03.max_digit import max_digit
+
 
 @pytest.mark.parametrize(['value', 'expected'], [
     (0, 0),
