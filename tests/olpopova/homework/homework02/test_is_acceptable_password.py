@@ -45,3 +45,42 @@ def test_function_4th(password, expected):
 ])
 def test_function_5th(password, expected):
     assert is_acceptable_password_5th_edition(password) is expected
+
+
+@pytest.mark.parametrize(['password', 'expected'], [
+    ("short", False),
+    ("short54", True),
+    ("muchlonger", True),
+    ("ashort", False),
+    ("muchlonger5", True),
+    ("sh5", False),
+    ("1234567", False),
+    ("12345678910", True),
+    ("password12345", False),
+    ("PASSWORD12345", False),
+    ("pass1234word", True),
+    ("aaaaaa1", False),
+    ("aaaaaabbbbb", False),
+    ("aaaaaabb1", True),
+    ("abc1", False),
+    ("abbcc12", True),
+    ("aaaaaaabbaaaaaaaab", False),
+    ("short54", True),
+    ("muchlonger", True),
+    ("ashort", False),
+    ("muchlonger5", True),
+    ("sh5", False),
+    ("1234567", False),
+    ("12345678910", True),
+    ("password12345", False),
+    ("PASSWORD12345", False),
+    ("pass1234word", True),
+    ("aaaaaa1", False),
+    ("aaaaaabbbbb", False),
+    ("aaaaaabb1", True),
+    ("abc1", False),
+    ("abbcc12", True),
+    ("aaaaaaabbaaaaaaaab", False)
+])
+def test_function_6th(password, expected):
+    assert is_acceptable_password_6th_edition(password) is expected
