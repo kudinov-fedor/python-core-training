@@ -1,5 +1,5 @@
 def test_zip():
-    assert list(zip("qwerty", {1, 2, 3, 4})) == [('q', 1), ('w', 2), ('e', 3), ('r', 4)]
+    assert list(zip("qwerty", sorted({4, 8, 3, 7}))) == [('q', 3), ('w', 4), ('e',7), ('r', 8)]
 
 
 def test_dict_items():
