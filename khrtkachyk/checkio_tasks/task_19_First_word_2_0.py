@@ -17,5 +17,5 @@ Output: A string (str).
 
 
 def first_word(text: str) -> str:
-    res = re.sub(",", "", text.strip(" . ")).split()
+    res = re.sub(",", "", text.replace(".", " ")).split()
     return res[0]

@@ -24,7 +24,8 @@ Output: A string (str).
     ("don't touch it", "don't"),
     ("greetings, friends", "greetings"),
     ("... and so on ...", "and"),
-    ("hi", "hi")
+    ("hi", "hi"),
+    ("Hello.World", "Hello")
 ])
 def test_first_word(string, res):
     assert first_word(string) == res
