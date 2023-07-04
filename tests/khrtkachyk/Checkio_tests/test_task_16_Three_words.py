@@ -20,7 +20,12 @@ Output: Logic value (bool).
     ("bla bla bla bla", True),
     ("Hi", False),
     ("one two 3 four five six 7 eight 9 ten eleven 12", True),
-    ("0 qwerty iddqd asdfg ", True)
+    ("0 qwerty iddqd asdfg ", True),
+    ("123 abc abc", False),
+    ("   ", False),
+    ("1 last three words", True),
+    ("1abcd", False)
+
 ])
-def test_acceptable_password(func, words, res):
+def test_three_words(func, words, res):
     assert func(words) is res
