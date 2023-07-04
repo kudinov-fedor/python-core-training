@@ -21,3 +21,7 @@ def correct_sentence(text: str) -> str:
         return f"{text[0].upper() + text[1:]}"
     else:
         return f"{text[0].upper() + text[1:]}."
+
+
+def correct_sentence_2_0(text: str) -> str:
+    return text[0].capitalize() + text[1:].rstrip(".") + "."

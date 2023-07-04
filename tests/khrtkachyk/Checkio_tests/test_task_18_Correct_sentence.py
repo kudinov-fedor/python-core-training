@@ -1,5 +1,5 @@
 import pytest
-from checkio_tasks.task_18_Correct_sentence import correct_sentence
+from checkio_tasks.task_18_Correct_sentence import correct_sentence, correct_sentence_2_0
 
 
 """
@@ -16,6 +16,7 @@ Precondition: No leading and trailing spaces, text contains only spaces, a-z, A-
 """
 
 
+@pytest.mark.parametrize("func", [correct_sentence, correct_sentence_2_0])
 @pytest.mark.parametrize("sentence, res", [
     ("greetings, friends", "Greetings, friends."),
     ("Greetings, friends", "Greetings, friends."),
@@ -24,5 +25,5 @@ Precondition: No leading and trailing spaces, text contains only spaces, a-z, A-
     ("hi", "Hi."),
     ("welcome to Lviv city", "Welcome to Lviv city.")
 ])
-def test_correct_sentence(sentence, res):
-    assert correct_sentence(sentence) == res
+def test_correct_sentence(func, sentence, res):
+    assert func(sentence) == res
