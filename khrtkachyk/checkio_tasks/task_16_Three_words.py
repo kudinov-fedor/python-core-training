@@ -24,10 +24,8 @@ def checkio(words: str) -> bool:
 
 def checkio1_2(words: str) -> bool:
     lst = words.split()
-    for word in range(len(lst) - 1):
-        if all(word.isalpha() for word in lst[word:word+3]):
-            return True
-    return False
+    res = bool([index for index in range(len(lst) - 2) if all(map(str.isalpha, lst[index:index + 3]))])
+    return res
 
 
 def checkio_2(words: str) -> bool:
@@ -42,40 +40,28 @@ def checkio_2(words: str) -> bool:
     return False
 
 
-def checkio_2_2(words: str) -> bool:
-    words = words.split()
-    window_size = 3
-    if len(words) < window_size:
-        return False
-    res = [words[i:i + window_size] for i in range(len(words) - window_size + 1)]
-    print(res)
-    for x in res:
-        if all(map(str.isalpha, x)):
-            return True
-    return False
-
-
 def checkio_3(words: str) -> bool:
-    splitted = words.split()
-    for word1, word2, word3 in zip(splitted, splitted[1:], splitted[2:]):
-        res = word1 + word2 + word3
-        if str(res).isalpha():
-            return True
-    return False
+    split = words.split()
+    res = bool([(word1, word2, word3) for (word1, word2, word3) in (zip(split, split[1:], split[2:])) if
+                str(word1 + word2 + word3).isalpha()])
+    return res
 
 
 if __name__ == '__main__':
-    print("Example:")
-    print(checkio("Hello World hello"))
-    print(checkio("bla bla bla bla"))
-    print(checkio("He is 123 man"))
-    print(checkio("one two 3 four five six 7 eight 9 ten eleven 12"))
-
-    print("Example:")
-    print(checkio1_2("Hello World hello"))
-    print(checkio1_2("bla bla bla bla"))
-    print(checkio1_2("He is 123 man"))
-    print(checkio1_2("one two 3 four five six 7 eight 9 ten eleven 12"))
+    # print("Example:")
+    # print(checkio("Hello World hello"))
+    # print(checkio("bla bla bla bla"))
+    # print(checkio("He is 123 man"))
+    # print(checkio("one two 3 four five six 7 eight 9 ten eleven 12"))
+    #
+    # print("Example:")
+    # print(checkio1_2("Hello World hello"))
+    # print(checkio1_2("bla bla bla bla"))
+    # print(checkio1_2("He is 123 man"))
+    # print(checkio1_2("one two 3 four five six 7 eight 9 ten eleven 12"))
+    # print(checkio1_2("123 abc abc"))
+    # print(checkio1_2("one two 3 four five 6 seven eight 9 ten eleven 12"))
+    # print(checkio1_2(""))
 
     print("Example:")
     print(checkio_2("Hello World hello"))
@@ -84,17 +70,11 @@ if __name__ == '__main__':
     print(checkio_2("one two 3 four five six 7 eight 9 ten eleven 12"))
     print(checkio_2('one two 3 four five 6 seven eight 9 ten eleven 12'))
 
-    print("Example:")
-    print(checkio_2_2("Hello World hello"))
-    print(checkio_2_2("bla bla bla bla"))
-    print(checkio_2_2("He is 123 man"))
-    print(checkio_2_2("one two 3 four five six 7 eight 9 ten eleven 12"))
-    print(checkio_2_2('one two 3 four five 6 seven eight 9 ten eleven 12'))
-    print(checkio_2_2("0 qwerty iddqd asdfg "))
-
-    print("Example:")
-    print(checkio_3("Hello World hello"))
-    print(checkio_3("bla bla bla bla"))
-    print(checkio_3("He is 123 man"))
-    print(checkio_3("one two 3 four five six 7 eight 9 ten eleven 12"))
-    print(checkio_3('one two 3 four five 6 seven eight 9 ten eleven 12'))
+    # print("Example:")
+    # print(checkio_3("Hello World hello"))
+    # print(checkio_3("bla bla bla bla"))
+    # print(checkio_3("He is 123 man"))
+    # print(checkio_3("one two 3 four five six 7 eight 9 ten eleven 12"))
+    # print(checkio_3('one two 3 four five 6 seven eight 9 ten eleven 12'))
+    # print(checkio_3("123 abc abc"))
+    # print(checkio_3(" "))
