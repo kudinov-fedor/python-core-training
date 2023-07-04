@@ -22,6 +22,11 @@ def checkio(words: str) -> bool:
     return False
 
 
+def checkio1_2(words: str) -> bool:
+    lst = words.split()
+    return any(all(map(str.isalpha, lst[index:index + 3])) for index in range(len(lst) - 2))
+
+
 def checkio_2(words: str) -> bool:
     words = words.split()
     window_size = 3
@@ -35,31 +40,5 @@ def checkio_2(words: str) -> bool:
 
 
 def checkio_3(words: str) -> bool:
-    splitted = words.split()
-    for word1, word2, word3 in zip(splitted, splitted[1:], splitted[2:]):
-        res = word1 + word2 + word3
-        if str(res).isalpha():
-            return True
-    return False
-
-
-if __name__ == '__main__':
-    print("Example:")
-    print(checkio("Hello World hello"))
-    print(checkio("bla bla bla bla"))
-    print(checkio("He is 123 man"))
-    print(checkio("one two 3 four five six 7 eight 9 ten eleven 12"))
-
-    print("Example:")
-    print(checkio_2("Hello World hello"))
-    print(checkio_2("bla bla bla bla"))
-    print(checkio_2("He is 123 man"))
-    print(checkio_2("one two 3 four five six 7 eight 9 ten eleven 12"))
-    print(checkio_2('one two 3 four five 6 seven eight 9 ten eleven 12'))
-
-    print("Example:")
-    print(checkio_3("Hello World hello"))
-    print(checkio_3("bla bla bla bla"))
-    print(checkio_3("He is 123 man"))
-    print(checkio_3("one two 3 four five six 7 eight 9 ten eleven 12"))
-    print(checkio_3('one two 3 four five 6 seven eight 9 ten eleven 12'))
+    split = words.split()
+    return any(all(map(str.isalpha, three_words)) for three_words in (zip(split, split[1:], split[2:])))
