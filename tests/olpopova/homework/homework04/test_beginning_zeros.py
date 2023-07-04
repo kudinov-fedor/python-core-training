@@ -1,6 +1,6 @@
 import pytest
 
-from olpopova.homework.homework04.beginning_zeros import beginning_zeros
+from olpopova.homework.homework04.beginning_zeros import *
 
 
 @pytest.mark.parametrize(['number', 'expected'], [
@@ -13,3 +13,4 @@ from olpopova.homework.homework04.beginning_zeros import beginning_zeros
 ])
 def test_function(number, expected):
     assert beginning_zeros(number) == expected
+    assert beginning_zeros_forloop(number) == expected
