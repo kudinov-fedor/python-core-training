@@ -10,13 +10,3 @@ given string.
 
 def beginning_zeros(a: str) -> int:
     return len(a) - len(a.lstrip('0'))
-
-
-# These "asserts" are used for self-checking
-def test_function():
-    assert beginning_zeros("100") == 0
-    assert beginning_zeros("001") == 2
-    assert beginning_zeros("100100") == 0
-    assert beginning_zeros("001001") == 2
-    assert beginning_zeros("012345679") == 1
-    assert beginning_zeros("0000") == 4
