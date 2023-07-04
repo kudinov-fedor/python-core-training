@@ -26,6 +26,4 @@ When solving a task pay attention to the following points:
 
 
 def first_word_2nd_version(text: str) -> str:
-    word = text.replace('.', " ").split()[0]
-    is_coma_in_the_end = any(i for i in [',', '.'] if word.endswith(i))
-    return word.removesuffix(word[-1]) if is_coma_in_the_end else word
+    return text.replace('.', ' ').split()[0].rstrip(',')
