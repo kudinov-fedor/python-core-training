@@ -1,5 +1,5 @@
 """
-***** Task4 *********************************************************
+*********************************************************************
 You have a non-negative integer. Try to find out how many digits it has.
 *********************************************************************
 """
@@ -42,9 +42,3 @@ def number_length_with_div_mod(value: int) -> int:
         qty += 1
 
     return qty
-
-
-# These "asserts" are used for self-checking
-for i in range(1, 50):
-    val = int("9" * i)
-    assert number_length(val) == number_length_with_log_10(val) == number_length_with_div_mod(val)

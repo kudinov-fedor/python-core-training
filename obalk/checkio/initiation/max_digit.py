@@ -7,10 +7,10 @@ Output: An integer (0-9).
 
 Examples:
 
-assert max_digit(0) == 0
-assert max_digit(52) == 5
-assert max_digit(634) == 6
-assert max_digit(1) == 1
+assert max_digit.py(0) == 0
+assert max_digit.py(52) == 5
+assert max_digit.py(634) == 6
+assert max_digit.py(1) == 1
 """
 
 

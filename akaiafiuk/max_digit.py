@@ -5,11 +5,11 @@ Input: A positive int.
 Output: An Int (0-9).
 
 Example:
-max_digit(0) == 0
-max_digit(52) == 5
-max_digit(634) == 6
-max_digit(1) == 1
-max_digit(10000) == 1
+max_digit.py(0) == 0
+max_digit.py(52) == 5
+max_digit.py(634) == 6
+max_digit.py(1) == 1
+max_digit.py(10000) == 1
 """
 
 
