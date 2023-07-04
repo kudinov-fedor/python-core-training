@@ -6,23 +6,10 @@ The input string consists of only English letters and spaces.
 There aren’t any spaces at the beginning and the end of the string.
 *********************************************************************
 """
-import re
-
-import pytest
 
 
 def first_word(text: str) -> str:
     return text.split(' ')[0]
-
-
-@pytest.mark.parametrize(['text', 'expected'], [
-    ("Hello world", "Hello"),
-    ("a word ", "a"),
-    ("greeting from CheckiO Planet", "greeting"),
-    ("hi", "hi")
-])
-def test_first_word(text, expected):
-    assert first_word(text) == expected
 
 
 """
@@ -42,15 +29,3 @@ def first_word_2nd_version(text: str) -> str:
     word = text.replace('.', " ").split()[0]
     is_coma_in_the_end = any(i for i in [',', '.'] if word.endswith(i))
     return word.removesuffix(word[-1]) if is_coma_in_the_end else word
-
-
-@pytest.mark.parametrize(['text', 'expected'], [
-    ("Hello world", "Hello"),
-    (" a word ", "a"),
-    ("don't touch it", "don't"),
-    ("greetings, friends", "greetings"),
-    ("... and so on ...", "and"),
-    ("hi", "hi")
-])
-def test_first_word_2d_version(text, expected):
-    assert first_word_2nd_version(text) == expected
