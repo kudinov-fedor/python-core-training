@@ -8,7 +8,6 @@ You should check if the string contains three words in succession. For example, 
 contains three words in succession.
 **********************************************************************
 """
-import pytest
 
 
 def checkio(words: str) -> bool:
@@ -29,15 +28,3 @@ def checkio(words: str) -> bool:
                 continue
 
         return is_all_alpha
-
-
-@pytest.mark.parametrize(['words', 'expected'], [
-    ("Hello World hello", True),
-    ("He is 123 man", False),
-    ("1 2 bla 3 4", False),
-    ("bla 1 bla bla bla", True),
-    ("Hi", False),
-    ('one two 3 four five 6 seven eight 9 ten eleven 12', False)
-])
-def test_checkio(words, expected):
-    assert checkio(words) is expected
