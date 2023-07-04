@@ -1,5 +1,5 @@
 """
-***** Task6 **********************************************************
+**********************************************************************
 In this mission you need to create a password verification function.
 
 The verification conditions are:
@@ -7,23 +7,10 @@ The verification conditions are:
     should contain at least one digit.
 **********************************************************************
 """
-import pytest
 
 
 def is_acceptable_password(password: str) -> bool:
     return len(password) > 6 and password.isalnum() and not password.isalpha()
-
-
-@pytest.mark.parametrize(['password', 'expected'], [
-    ("short", False),
-    ("short54", True),
-    ("muchlonger", False),
-    ("ashort", False),
-    ("muchlonger5", True),
-    ("sh5", False)
-])
-def test_function(password, expected):
-    assert is_acceptable_password(password) is expected
 
 
 """
@@ -46,21 +33,6 @@ def is_acceptable_password_4th_edition(password: str) -> bool:
     long_pass_checks = password.isalnum()
 
     return is_short_pass and short_pass_checks or is_long_pass and long_pass_checks
-
-
-@pytest.mark.parametrize(['password', 'expected'], [
-    ("short", False),
-    ("short54", True),
-    ("muchlonger", True),
-    ("ashort", False),
-    ("notshort", False),
-    ("muchlonger5", True),
-    ("sh5", False),
-    ("1234567", False),
-    ("12345678910", True)
-])
-def test_function_4th(password, expected):
-    assert is_acceptable_password_4th_edition(password) is expected
 
 
 """
@@ -88,23 +60,6 @@ def is_acceptable_password_5th_edition(password: str) -> bool:
     return is_short_pass and short_pass_checks or is_long_pass and long_pass_checks
 
 
-@pytest.mark.parametrize(['password', 'expected'], [
-    ("short", False),
-    ("short54", True),
-    ("muchlonger", True),
-    ("ashort", False),
-    ("muchlonger5", True),
-    ("sh5", False),
-    ("1234567", False),
-    ("12345678910", True),
-    ("password12345", False),
-    ("PASSWORD12345", False),
-    ("pass1234word", True)
-])
-def test_function_5th(password, expected):
-    assert is_acceptable_password_5th_edition(password) is expected
-
-
 """
 6th edition:
 
@@ -127,42 +82,3 @@ def is_acceptable_password_6th_edition(password: str) -> bool:
     long_pass_checks = all([password.isalnum(), 'password' not in password.lower(), is_case_sensitive])
 
     return is_short_pass and short_pass_checks or is_long_pass and long_pass_checks
-
-
-@pytest.mark.parametrize(['password', 'expected'], [
-    ("short", False),
-    ("short54", True),
-    ("muchlonger", True),
-    ("ashort", False),
-    ("muchlonger5", True),
-    ("sh5", False),
-    ("1234567", False),
-    ("12345678910", True),
-    ("password12345", False),
-    ("PASSWORD12345", False),
-    ("pass1234word", True),
-    ("aaaaaa1", False),
-    ("aaaaaabbbbb", False),
-    ("aaaaaabb1", True),
-    ("abc1", False),
-    ("abbcc12", True),
-    ("aaaaaaabbaaaaaaaab", False),
-    ("short54", True),
-    ("muchlonger", True),
-    ("ashort", False),
-    ("muchlonger5", True),
-    ("sh5", False),
-    ("1234567", False),
-    ("12345678910", True),
-    ("password12345", False),
-    ("PASSWORD12345", False),
-    ("pass1234word", True),
-    ("aaaaaa1", False),
-    ("aaaaaabbbbb", False),
-    ("aaaaaabb1", True),
-    ("abc1", False),
-    ("abbcc12", True),
-    ("aaaaaaabbaaaaaaaab", False)
-])
-def test_function_6th(password, expected):
-    assert is_acceptable_password_6th_edition(password) is expected

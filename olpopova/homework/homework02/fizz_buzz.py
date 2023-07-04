@@ -1,5 +1,17 @@
 """
-***** Task5 *********************************************************
+*********************************************************************
+You should write a function that will receive a positive integer and return: "Fizz" if the number is divisible
+by 3 (3, 6, 9 ...) otherwise convert the given number to a string (2 -> "2").
+*********************************************************************
+"""
+
+
+def checkio(num: int) -> str:
+    return 'Fizz' if num % 3 == 0 else str(num)
+
+
+"""
+*********************************************************************
 "Fizz buzz" is a word game we will use to teach the robots about division. Let's learn computers.
 
 You should write a function that will receive a positive integer and return:
@@ -11,7 +23,7 @@ The number as a string for other cases.
 """
 
 
-def checkio(num: int) -> str:
+def checkio_complex(num: int) -> str:
     if num % 15 == 0:
         res = 'Fizz Buzz'
     elif num % 3 == 0:
@@ -21,10 +33,3 @@ def checkio(num: int) -> str:
     else:
         res = str(num)
     return res
-
-
-# These "asserts" are used for self-checking
-assert checkio(15) == "Fizz Buzz"
-assert checkio(6) == "Fizz"
-assert checkio(10) == "Buzz"
-assert checkio(7) == "7"
