@@ -19,8 +19,10 @@ def three_words(words: str) -> bool:
 
 
 def three_words02(words: str) -> bool:
-    spl_words = [i for i in words.split()]
-    for word1, word2, word3 in zip(spl_words, spl_words[1:], spl_words[2:]):
+    for word1, word2, word3 in zip(words.split(), words.split()[1:], words.split()[2:]):
         if word1.isalpha() and word2.isalpha() and word3.isalpha():
             return True
     return False
+
+def three_words03(words: str) -> bool:
+    return any([True if (word1.isalpha() and word2.isalpha() and word3.isalpha()) else False for (word1, word2, word3) in zip(words.split(), words.split()[1:], words.split()[2:])])
