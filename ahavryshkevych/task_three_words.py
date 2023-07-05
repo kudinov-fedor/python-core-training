@@ -25,4 +25,7 @@ def three_words02(words: str) -> bool:
     return False
 
 def three_words03(words: str) -> bool:
-    return any([True if (word1.isalpha() and word2.isalpha() and word3.isalpha()) else False for (word1, word2, word3) in zip(words.split(), words.split()[1:], words.split()[2:])])
+    words = words.split()
+    return any([True for words_tuple in zip(words, words[1:], words[2:]) if all(map(str.isalpha, words_tuple))])
+
+
