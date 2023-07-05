@@ -10,15 +10,15 @@ data = [{"age": 16, "name": "John", "sex": "M"},
         {"age": 25, "name": "Mathew", "sex": "M"}]
 
 
-@pytest.mark.parametrize(["par1", "par2"], [
-    ("a", some_str),
-    ("a", some_tuple),
-    ("a", some_list),
-    ("a", some_set),
-    ("a", some_dict)
+@pytest.mark.parametrize("param", [
+    some_str,
+    some_tuple,
+    some_list,
+    some_set,
+    some_dict
 ])
-def test_check_contains(par1, par2):
-    assert par1 in par2
+def test_check_contains(param):
+    assert "a" in param
 
 
 @pytest.mark.parametrize(["par1", "res"], [
@@ -53,7 +53,7 @@ def test_check_collection_modif():
 
 def test_check_unpack():
     some_dict = {"a": 123, "b": 456, "c": 789, "d": 100}
-    some_new_list = list(some_dict)
+    some_new_list = sorted(list(some_dict))
     list_result = ["a", "b", "c", "d"]
     assert some_new_list == list_result, f"New list: {some_new_list}"
 
@@ -67,7 +67,7 @@ def test_check_tuple_unpacking():
 
 def test_check_dic_unpack():
     some_dict = {"a": 123, "b": 456, "c": 789, "d": 100}
-    a, *middle, d = some_dict
+    a, *middle, d = sorted(some_dict)
     assert a == "a"
     assert middle == ["b", "c"]
     assert d == "d"
@@ -75,29 +75,23 @@ def test_check_dic_unpack():
 
 def test_check_str_itter():
     some_str_iter = iter(some_str)
-    assert [
-        next(some_str_iter) == "a",
-        list(some_str_iter) == ["b", "c", "d"],
-        list(some_str_iter) == []
-    ]
+    assert next(some_str_iter) == "a"
+    assert list(some_str_iter) == ["b", "c", "d"]
+    assert list(some_str_iter) == []
 
 
 def test_check_tuple_itter():
     some_tuple_iter = iter(some_tuple)
-    assert [
-        next(some_tuple_iter) == "a",
-        list(some_tuple_iter) == ["b", "c", "d"],
-        list(some_tuple_iter) == []
-    ]
+    assert next(some_tuple_iter) == "a"
+    assert list(some_tuple_iter) == ["b", "c", "d"]
+    assert list(some_tuple_iter) == []
 
 
 def test_check_set_itter():
     some_dict_iter = iter(some_dict)
-    assert [
-        next(some_dict_iter) == "a",
-        list(some_dict_iter) == ["b", "c", "d"],
-        list(some_dict_iter) == []
-    ]
+    assert next(some_dict_iter) == "a"
+    assert list(some_dict_iter) == ["b", "c", "d"]
+    assert list(some_dict_iter) == []
 
 
 def test_sort_by_age():
