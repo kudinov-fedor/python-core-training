@@ -53,9 +53,9 @@ def test_check_collection_modif():
 
 def test_check_unpack():
     some_dict = {"a": 123, "b": 456, "c": 789, "d": 100}
-    some_new_list = list(some_dict)
+    some_new_list = sorted(list(some_dict))
     list_result = ["a", "b", "c", "d"]
-    assert some_new_list == sorted(list_result), f"New list: {some_new_list}"
+    assert some_new_list == list_result, f"New list: {some_new_list}"
 
 
 def test_check_tuple_unpacking():
