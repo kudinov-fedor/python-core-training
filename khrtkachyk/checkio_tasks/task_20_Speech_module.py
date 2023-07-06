@@ -25,7 +25,7 @@ def checkio_1_0(num: int) -> str:
         word += FIRST_TEN[(num // 1000) - 1] + " thousand "
     num %= 1000
     if num >= 100:
-        word += FIRST_TEN[(num // 100) - 1] + " hundred "
+        word += FIRST_TEN[(num // 100) - 1] + " " + HUNDRED + " "
     num = num % 100
     if 10 <= num <= 19:
         word += SECOND_TEN[num - 10] + " "
