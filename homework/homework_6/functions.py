@@ -67,6 +67,24 @@ with_optional_parameters(1, b="23")
 with_optional_parameters(a="23", b="some")
 
 
+# never use mutable as default as it is linked to function and can provide unexpected results
+def optional_with_mutable_default(data=[]):
+    data.append(1)
+    return data
+
+
+a = [1, 2, 3]
+optional_with_mutable_default(a)
+optional_with_mutable_default(a)
+optional_with_mutable_default()
+optional_with_mutable_default()
+optional_with_mutable_default(a)
+optional_with_mutable_default()
+optional_with_mutable_default.__defaults__[0]
+optional_with_mutable_default()
+optional_with_mutable_default.__defaults__[0]
+
+
 # unlimited positional parameters
 def unlimited_positional(a, *args, some="val"):
     """
