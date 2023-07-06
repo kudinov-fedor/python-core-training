@@ -109,7 +109,7 @@ named_only(1, b=2, c=3)
 named_only(b=2, a=1, c=3)
 
 
-def postional_only(a, /, b, c=123):
+def positional_only(a, /, b, c=123):
     """
     Receives 2 required parameters, where 1st is positional only parameter,
     And one optional parameter
@@ -117,21 +117,21 @@ def postional_only(a, /, b, c=123):
     return a, b, c
 
 
-postional_only(1, 2)
-postional_only(1, 2, 3)
-postional_only(1, b=2)
-postional_only(1, 2, c=3)
-postional_only(1, b=2, c=3)
+positional_only(1, 2)
+positional_only(1, 2, 3)
+positional_only(1, b=2)
+positional_only(1, 2, c=3)
+positional_only(1, b=2, c=3)
 
 
-def postional_only_2(a=1, /, b=2):
+def positional_only_2(a=1, /, b=2):
     """
     Receives 2 optional parameters, where 1st is positional only parameter
     """
     return a, b
 
 
-postional_only_2()
-postional_only_2(1)
-postional_only_2(1, 2)
-postional_only_2(1, b=2)
+positional_only_2()
+positional_only_2(1)
+positional_only_2(1, 2)
+positional_only_2(1, b=2)
