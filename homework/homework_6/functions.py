@@ -89,6 +89,7 @@ def unlimited_named(a, some="val", **kwargs):
 
 
 unlimited_named(1)
+unlimited_named(a=1)
 unlimited_named(1, val1=3, val2=4)
 unlimited_named(some="123", a=456)
 unlimited_named(1, some="val")
