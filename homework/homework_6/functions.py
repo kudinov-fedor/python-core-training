@@ -94,3 +94,44 @@ unlimited_named(1, val1=3, val2=4)
 unlimited_named(some="123", a=456)
 unlimited_named(1, some="val")
 unlimited_named(1, param1="ad", some="val", param3="any")
+
+
+def named_only(a, *, b, c=123):
+    """
+    Receives 2 required parameters, where 2nd is named only parameter,
+    And one optional named only parameter
+    """
+    return a, b, c
+
+
+named_only(1, b=2)
+named_only(1, b=2, c=3)
+named_only(b=2, a=1, c=3)
+
+
+def postional_only(a, /, b, c=123):
+    """
+    Receives 2 required parameters, where 1st is positional only parameter,
+    And one optional parameter
+    """
+    return a, b, c
+
+
+postional_only(1, 2)
+postional_only(1, 2, 3)
+postional_only(1, b=2)
+postional_only(1, 2, c=3)
+postional_only(1, b=2, c=3)
+
+
+def postional_only_2(a=1, /, b=2):
+    """
+    Receives 2 optional parameters, where 1st is positional only parameter
+    """
+    return a, b
+
+
+postional_only_2()
+postional_only_2(1)
+postional_only_2(1, 2)
+postional_only_2(1, b=2)
