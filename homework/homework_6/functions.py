@@ -38,6 +38,11 @@ with_required_params(*args, **kwargs)  # unpacking
 with_required_params(2, **kwargs)  # unpacking
 with_required_params(*args, b=32)  # unpacking
 
+# you can unpack even empty collections
+args = ()
+kwargs = {}
+with_required_params(*args, *args, **kwargs, **kwargs, a=1, b=2)  # unpacking
+
 
 def with_optional_parameters(a, b="hi"):
     """
