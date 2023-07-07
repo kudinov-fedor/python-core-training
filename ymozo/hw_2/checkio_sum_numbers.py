@@ -1,10 +1,10 @@
 def sum_numbers(text: str) -> int:
-    empty_list = [0]
+    words_list = [0]
     splitted_string = text.split()
     for i in splitted_string:
         if i.isnumeric():
-            empty_list.append(int(i))
-    return sum(empty_list)
+            words_list.append(int(i))
+    return sum(words_list)
 
 
 if __name__ == '__main__':
