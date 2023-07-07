@@ -52,29 +52,29 @@ THOUSAND2 = "thousand"
 
 
 def checkio_2_0(num: int) -> str:
-    hundreds = num // 100
-    resulting = []
+    hundreds, before_hundred = divmod(num, 100)
+    tens, ones = divmod(before_hundred, 10)
 
+    resulting = []
     if num == 0:
         resulting.append("zero")
+        return ' '.join(resulting)
     if num == 1000:
         resulting.append(THOUSAND2)
+        return ' '.join(resulting)
 
-    if num >= 100:
-        num = num % 100
-        resulting.append(FIRST_TEN2[hundreds])
-        resulting.append(HUNDRED2)
+    if hundreds:
+        resulting.extend([FIRST_TEN2[hundreds], HUNDRED2])
+        num = before_hundred
 
-    if num >= 20:
-        tens = num // 10
-        num = num % 10
+    if before_hundred >= 20:
         resulting.append(OTHER_TENS2[tens - 2])
+        num = ones
 
     if num >= 10:
         teens = num - 10
         resulting.append(SECOND_TEN2[teens])
 
-    elif num > 0:
-        ones = num
+    elif ones > 0:
         resulting.append(FIRST_TEN2[ones])
     return ' '.join(resulting)
