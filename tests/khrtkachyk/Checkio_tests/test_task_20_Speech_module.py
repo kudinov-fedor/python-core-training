@@ -1,5 +1,5 @@
 import pytest
-from checkio_tasks.task_20_Speech_module import checkio_1_0
+from checkio_tasks.task_20_Speech_module import checkio_1_0, checkio_2_0
 """
 Stephen's speech module is broken. This module is responsible for his number pronunciation.
 He has to click to input all the numerical digits in a figure, so when there are big
@@ -14,6 +14,7 @@ Precondition:0 < number < 1000
 """
 
 
+@pytest.mark.parametrize("func", [checkio_1_0, checkio_2_0])
 @pytest.mark.parametrize("num, res", [
     (1, "one"),
     (2, "two"),
@@ -43,19 +44,20 @@ Precondition:0 < number < 1000
     (50, "fifty"),
     (80, "eighty"),
     (90, "ninety"),
-    (100, "one hundred"  ),
-    (200, "two hundred"  ),
+    (100, "one hundred"),
+    (200, "two hundred"),
     (300, "three hundred"),
-    (600, "six hundred"  ),
+    (600, "six hundred"),
     (700, "seven hundred"),
-    (900, "nine hundred" ),
+    (900, "nine hundred"),
     (21, "twenty one"),
     (312, "three hundred twelve"),
+    (315, "three hundred fifteen"),
     (302, "three hundred two"),
     (509, "five hundred nine"),
     (753, "seven hundred fifty three"),
     (940, "nine hundred forty"),
     (999, "nine hundred ninety nine")
 ])
-def test_speech_module(num, res):
-    assert checkio_1_0(num) == res
+def test_speech_module(func, num, res):
+    assert func(num) == res
