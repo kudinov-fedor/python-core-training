@@ -11,48 +11,29 @@ spaces instead one.
 """
 
 FIRST_TEN = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-SECOND_TEN = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+SECOND_TEN = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+              "nineteen"]
 OTHER_TENS = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 HUNDRED = "hundred"
 
 
 def checkio(num: int) -> str:
+    # edge case
+    if num == 0:
+        return "zero"
+
     length = len(str(num))
 
-    if length == 1:
-        robot_speech = FIRST_TEN[num - 1]
+    #  find hundred
+    hundred = FIRST_TEN[num // 100 - 1] + " " + HUNDRED if length == 3 else ''
 
-    elif length == 2:
-        first_int = int(str(num)[0])
-        second_int = int(str(num)[1])
-        robot_speech = find_speech_for_double_num(num, first_int, second_int)
+    # find dozen word for '3-' or '2-' digit number
+    dozen_number = num % 100 if length == 3 else num
+    temp_dozen = SECOND_TEN[num % 10] if dozen_number // 10 == 1 else OTHER_TENS[dozen_number // 10 - 2]
+    dozen = temp_dozen if len(str(dozen_number).lstrip('0')) == 2 else ''
 
-    else:
-        first_int = int(str(num)[0])
-        second_int = int(str(num)[1])
-        third_int = int(str(num)[2])
-        robot_speech = find_speech_for_triple_num(num, first_int, second_int, third_int)
+    # find unit
+    unit_number = num if length == 1 else dozen_number % 10
+    unit = FIRST_TEN[unit_number - 1] if not unit_number == 0 and not 10 < dozen_number < 20 else ''
 
-    return robot_speech
-
-
-def find_speech_for_double_num(num: int, first_int: int, second_int: int) -> str:
-    is_num_before_twenty = num < 20
-    is_zero_div_by_10 = num % 10 == 0
-    num_after_twenty_condition = OTHER_TENS[num // 10 - 2] if is_zero_div_by_10 else \
-        OTHER_TENS[first_int - 2] + " " + FIRST_TEN[second_int - 1]
-
-    return SECOND_TEN[num % 10] if is_num_before_twenty else num_after_twenty_condition
-
-
-def find_speech_for_triple_num(num: int, first_int: int, second_int: int, third_int: int):
-    robot_speech = FIRST_TEN[first_int - 1] + " " + HUNDRED
-
-    if num % 100 == 0:
-        return robot_speech
-    elif second_int == 0:
-        robot_speech += " " + FIRST_TEN[third_int - 1]
-    else:
-        robot_speech += " " + find_speech_for_double_num(num % 100, second_int, third_int)
-
-    return robot_speech
+    return (hundred + " " + dozen + " " + unit).strip().replace("  ", " ")

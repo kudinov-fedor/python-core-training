@@ -4,6 +4,7 @@ from olpopova.homework.homework04.speech_module import checkio
 
 
 @pytest.mark.parametrize(['number', 'expected'], [
+    (0, "zero"),
     (1, "one"),
     (2, "two"),
     (310, "three hundred ten"),
