@@ -11,7 +11,8 @@ def test_check_converting_to_list():
 
 
 def test_subset_1():
-    assert {"a", "c"}.issubset({"a", "c", "b"}) == True
+    assert {"a", "c"}.issubset({"a", "c", "b"})
+    assert not some_set.issuperset(["ac"])
 
 
 def test_subset_2():

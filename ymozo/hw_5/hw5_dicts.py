@@ -24,13 +24,14 @@ def test_copy_method():
     some = {"a": 1, "b": 2}
     copy_of_some = some.copy()
     assert some == copy_of_some
+    assert some is not copy_of_some
 
 
 def test_setdefault():
     some = {"a": 1, "b": 2}
     item = some.setdefault("a", "default_for_a")
     assert item == 1
-    assert some["a"] is not "default_for_a"
+    assert some["a"] != "default_for_a"
 
 
 def test_dict_comprehension():
@@ -87,8 +88,10 @@ def test_group_by():
         if i["name"] not in by_name:
             by_name[i["name"]] = []
         by_name[i["name"]].append(i)
+
     expected_dict = {"John": [{"age": 16, "name": "John", "second_name": "Parris", "sex": "M"},
                               {"age": 25, "name": "John", "second_name": "Maton", "sex": "M"}],
+
                      "Marry": [{"age": 34, "name": "Marry", "second_name": "Atkinson", "sex": "F"},
                                {"age": 15, "name": "Marry", "second_name": "Katon", "sex": "F"}]}
     assert by_name == expected_dict
