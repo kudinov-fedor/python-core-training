@@ -75,6 +75,6 @@ def checkio_2_0(num: int) -> str:
         teens = num - 10
         resulting.append(SECOND_TEN2[teens])
 
-    elif ones > 0:
+    elif ones:
         resulting.append(FIRST_TEN2[ones])
     return ' '.join(resulting)
