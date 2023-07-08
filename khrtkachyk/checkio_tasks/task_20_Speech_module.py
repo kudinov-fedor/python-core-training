@@ -43,7 +43,7 @@ def checkio_1_0(num: int) -> str:
     return word.strip()
 
 
-FIRST_TEN2 = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+FIRST_TEN2 = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 SECOND_TEN2 = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
                "nineteen"]
 OTHER_TENS2 = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
@@ -64,17 +64,15 @@ def checkio_2_0(num: int) -> str:
         return ' '.join(resulting)
 
     if hundreds:
-        resulting.extend([FIRST_TEN2[hundreds], HUNDRED2])
-        num = before_hundred
+        resulting.extend([FIRST_TEN2[hundreds - 1], HUNDRED2])
 
-    if before_hundred >= 20:
+    if tens == 1:
+        resulting.append(SECOND_TEN2[ones])
+
+    elif tens:
         resulting.append(OTHER_TENS2[tens - 2])
-        num = ones
 
-    if num >= 10:
-        teens = num - 10
-        resulting.append(SECOND_TEN2[teens])
+    if ones and tens != 1:
+        resulting.append(FIRST_TEN2[ones - 1])
 
-    elif ones:
-        resulting.append(FIRST_TEN2[ones])
     return ' '.join(resulting)
