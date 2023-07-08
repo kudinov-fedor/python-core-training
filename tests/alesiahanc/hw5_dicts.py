@@ -27,7 +27,7 @@ def test_get_element_dict():
     ("invalid", None, None),
     ("invalid", "default", "default")
 ])
-def test_get_invalid_param(value, expected, second_value):  # was it possible here to mark second value as optional?
+def test_get_invalid_param(value, expected, second_value):
     result = some_dict.get(value, second_value)
     assert result == expected
 
@@ -35,15 +35,16 @@ def test_get_invalid_param(value, expected, second_value):  # was it possible he
 def test_copy_dictionaries():
     copied_dict = some_dict.copy()
     assert copied_dict == some_dict
+    assert copied_dict is not some_dict
 
 # comprehension explanation
-# newlist = [expression for item in iterable if condition == True]
+# newlist = [expression for item in iterable if bool(condition) == True]
 
 
 @pytest.mark.parametrize(["arg", "expected"], [
-    ("John", "{'age': 16, 'second_name': 'Parris', 'name': 'John', 'sex': 'M'}"),
-    ("Marry", "{'age': 15, 'second_name': 'Katon', 'name': 'Marry', 'sex': 'F'}")
+    ("John", {'age': 16, 'second_name': 'Parris', 'name': 'John', 'sex': 'M'}),
+    ("Marry", {'age': 15, 'second_name': 'Katon', 'name': 'Marry', 'sex': 'F'})
 ])
 def test_search_by_name(arg, expected):
     by_name = {i["name"]: i for i in data}
-    assert by_name[arg] == expected  # this test is false failed as dictionaries have different order. Is it possible to compare them without additional tools?
+    assert by_name[arg] == expected
