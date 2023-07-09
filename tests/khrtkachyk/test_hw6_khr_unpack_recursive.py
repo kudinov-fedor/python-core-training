@@ -2,11 +2,11 @@ from typing import List, Any, Iterable
 
 
 def unpack_recursive(lst: List[Any]) -> Iterable[Any]:
-    for sublist in lst:
-        if isinstance(sublist, list):
-            yield from unpack_recursive(sublist)
+    for item in lst:
+        if isinstance(item, list):
+            yield from unpack_recursive(item)
         else:
-            yield sublist
+            yield item
 
 
 def test_unpack_recursive():
