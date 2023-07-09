@@ -15,16 +15,11 @@ def reduce(*args, key: callable, default):
         result, *args = args
         for i in args:
             result = key(result, i)
-            #print(result)
         return result
 
 
 def sum(*args):
-    result = 0
-    for i in args:
-        result += i
-        # print(result)
-    return result
+    return reduce(*args, key=add, default=0)
 
 
 if __name__ == "__main__":
