@@ -3,12 +3,26 @@ def unpack_while_loop(item):
 
     bunch = list(item)
     while bunch:
-        item = bunch.pop()
-        if isinstance(item, list):
-            bunch.extend(item)
+        par = bunch.pop()
+        if isinstance(par, list):
+            bunch.extend(par)
         else:
-            result.append(item)
+            result.append(par)
     return result[::-1]
+
+    # result = []
+    # bunch = list(item)
+    # while bunch:
+    #     par = bunch.pop()
+    #     if isinstance(par, list):
+    #         bunch.extend(par)
+    #     else:
+    #         result.append(par)
+    # yield from result[::-1]
+    #
+    # generator = unpack_while_loop(item)
+    # for i in generator:
+    #     return i
 
 
 def unpack_recursive(item):
@@ -16,7 +30,7 @@ def unpack_recursive(item):
 
     for i in item:
         if isinstance(i, list):
-            item.extend(i)
+            item.extend(unpack_recursive(list(i)))
         else:
             result.append(i)
     return result
