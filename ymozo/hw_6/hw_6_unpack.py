@@ -43,3 +43,4 @@ def test_my_gen():
     gen_stack = []
     for i in my_gen:
         gen_stack.append(i)
+    assert gen_stack == [123, "234", None, 1, 23, 123, 123, "sdf", True]
