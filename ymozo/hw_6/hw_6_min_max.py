@@ -1,26 +1,20 @@
 
 def min(*args, key=None):
-    value_list = args
-    min_value = value_list[0]
-    for i in value_list:
-        if key is not None:
-            if key(i) < key(min_value):
-                min_value = i
-        elif i < min_value:
-            min_value = i
-    return min_value
+    result, *args = args
+    key = key or (lambda i: i)
+    for i in args:
+        if key(i) < key(result):
+            result = i
+    return result
 
 
 def max(*args, key=None):
-    value_list = args
-    max_value = value_list[0]
-    for i in value_list:
-        if key is not None:
-            if key(i) > key(max_value):
-                max_value = i
-        elif i > max_value:
-            max_value = i
-    return max_value
+    result, *args = args
+    key = key or (lambda i: i)
+    for i in args:
+        if key(i) > key(result):
+            result = i
+    return result
 
 
 def sorted(*args, key=None, reverse=False):
