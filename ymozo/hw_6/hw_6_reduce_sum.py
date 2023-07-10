@@ -9,28 +9,17 @@ def reduce(*args, key: callable, default):
     :param default: return value if no args are passed
     :return:
     """
-    key = key or (lambda i: i)
-    arg_list = list(args)
+    if not args:
+        return default
 
-    if key == mul:
-        result = 1
-        for i in arg_list:
-            result *= i
-        return result
-
-    elif key == add:
-        result = 0
-        for i in arg_list:
-            result += i
-        return result
+    arguments, *args = args
+    for i in args:
+        arguments = key(arguments, i)
+    return arguments
 
 
 def sum(*args):
-    arg_list = list(args)
-    result = 0
-    for i in arg_list:
-        result += i
-    return result
+    return reduce(*args, key=add, default=0)
 
 
 if __name__ == "__main__":
