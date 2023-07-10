@@ -25,17 +25,17 @@ def checkio(num: int) -> str:
         return "zero"
 
     hundred, other = divmod(num, 100)
-    hundred_word = FIRST_TEN[hundred - 1] + " " + HUNDRED
     if hundred:
+        hundred_word = FIRST_TEN[hundred - 1] + " " + HUNDRED
         res.append(hundred_word)
 
     dozen, unit = divmod(other, 10)
-    dozen_word = SECOND_TEN[unit] if other in range(10, 20) else OTHER_TENS[dozen - 2]
     if dozen:
+        dozen_word = SECOND_TEN[unit] if other in range(10, 20) else OTHER_TENS[dozen - 2]
         res.append(dozen_word)
 
-    unit_word = FIRST_TEN[unit - 1]
     if unit and not other in range(10, 20):
+        unit_word = FIRST_TEN[unit - 1]
         res.append(unit_word)
 
     return " ".join(res)
