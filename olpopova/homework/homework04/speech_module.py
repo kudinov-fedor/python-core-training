@@ -18,22 +18,24 @@ HUNDRED = "hundred"
 
 
 def checkio(num: int) -> str:
+    res = []
+
     # edge case
     if num == 0:
         return "zero"
 
-    length = len(str(num))
+    hundred, other = divmod(num, 100)
+    hundred_word = FIRST_TEN[hundred - 1] + " " + HUNDRED
+    if hundred:
+        res.append(hundred_word)
 
-    #  find hundred
-    hundred = FIRST_TEN[num // 100 - 1] + " " + HUNDRED if length == 3 else ''
+    dozen, unit = divmod(other, 10)
+    dozen_word = SECOND_TEN[unit] if other in range(10, 20) else OTHER_TENS[dozen - 2]
+    if dozen:
+        res.append(dozen_word)
 
-    # find dozen word for '3-' or '2-' digit number
-    dozen_number = num % 100 if length == 3 else num
-    temp_dozen = SECOND_TEN[num % 10] if dozen_number // 10 == 1 else OTHER_TENS[dozen_number // 10 - 2]
-    dozen = temp_dozen if len(str(dozen_number).lstrip('0')) == 2 else ''
+    unit_word = FIRST_TEN[unit - 1]
+    if unit and not other in range(10, 20):
+        res.append(unit_word)
 
-    # find unit
-    unit_number = num if length == 1 else dozen_number % 10
-    unit = FIRST_TEN[unit_number - 1] if not unit_number == 0 and not 10 < dozen_number < 20 else ''
-
-    return (hundred + " " + dozen + " " + unit).strip().replace("  ", " ")
+    return " ".join(res)
