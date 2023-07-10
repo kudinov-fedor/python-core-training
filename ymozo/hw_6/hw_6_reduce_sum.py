@@ -12,10 +12,10 @@ def reduce(*args, key: callable, default):
     if not args:
         return default
 
-    arguments, *args = args
+    result, *args = args
     for i in args:
-        arguments = key(arguments, i)
-    return arguments
+        result = key(result, i)
+    return result
 
 
 def sum(*args):
