@@ -11,6 +11,16 @@ def unpack_while_loop(item):
     return result[::-1]
 
 
+def unpack_while_loop_generator(item):
+    bunch = list(item)
+    while bunch:
+        par = bunch.pop()
+        if isinstance(par, list):
+            yield from unpack_while_loop_generator(par)
+        else:
+            yield par
+
+
 def unpack_recursive(item):
     result = []
 
@@ -44,3 +54,12 @@ def test_my_gen():
     for i in my_gen:
         gen_stack.append(i)
     assert gen_stack == [123, "234", None, 1, 23, 123, 123, "sdf", True]
+
+
+def test_unpack_while_gen():
+    target = [123, ["234", None], [[1], [23], [[123], 123, ["sdf", True]]]]
+    my_gen = unpack_while_loop_generator(target)
+    gen_stack = []
+    for i in my_gen:
+        gen_stack.append(i)
+    assert gen_stack[::-1] == [123, "234", None, 1, 23, 123, 123, "sdf", True]
