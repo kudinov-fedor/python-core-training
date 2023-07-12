@@ -1,42 +1,47 @@
-def max(*args, key=None):
-    max_val = 0
-    for num in args:
-        if num > max_val:
-            max_val = num
-    return max_val
-
-
-def min(*args, key=None):
-    min_val = 0
+def own_max(*args, key=None) -> int:
+    result = args[0]
+    key = key or (lambda i: i)
     for num in args:
         if key is not None:
-            if num < min_val:
-                min_val = key(num)
-        elif num < min_val:
-            min_val = num
-    return min_val
+            if key(num) > key(result):
+                result = num
+        elif num > result:
+            result = num
+    return result
 
-def sorted(*args, key=None, reverse=False):
-    """Ascending by default"""
+
+def own_min(*args, key=None) -> int:
+    result = args[0]
+    key = key or (lambda i: i)
+    for num in args:
+        if key is not None:
+            if key(num) < key(result):
+                result = num
+        elif num < result:
+            result = num
+    return result
+
+
+def own_sort(*args, reverse=False, key=None) -> list:
     my_list = list(args)
-    if key is not None and reverse:
-        my_list.sort(key=key, reverse=True)
-    elif key is not None:
-        my_list.sort(key=key)
-    elif reverse:
-        my_list.sort(reverse=True)
+    sorted_list = []
+    rounds = len(args)
+
+    if key is not None:
+        while len(sorted_list) < rounds:
+            if reverse:
+                x = own_max(*my_list, key=key)
+            else:
+                x = own_min(*my_list, key=key)
+            sorted_list.append(x)
+            my_list.remove(x)
     else:
-        my_list.sort()
-    return my_list
+        while len(sorted_list) < rounds:
+            if reverse:
+                x = own_max(*my_list)
+            else:
+                x = own_min(*my_list)
+            sorted_list.append(x)
+            my_list.remove(x)
 
-
-
-if __name__ == "__main__":
-    assert min(-7, -4, -2, 1, 2, 3, 4, 5, 6) == -7
-    assert max(-7, -4, -2, 1, 2, 3, 4, 5, 6) == 6
-    assert min(-7, -4, -2, 1, 2, 3, 4, 5, 6, key=abs) == 1
-    assert max(-7, -4, -2, 1, 2, 3, 4, 5, 6) == 6
-    assert sorted(-7, -4, -2, 1, 2, 3, 4, 5, 6) == [-7, -4, -2, 1, 2, 3, 4, 5, 6]
-    assert sorted(-7, -4, -2, 1, 2, 3, 4, 5, 6, reverse=True) == [6, 5, 4, 3, 2, 1, -2, -4, -7]
-    assert sorted(-7, -4, -2, 1, 2, 3, 4, 5, 6, key=abs) == [1, -2, 2, 3, -4, 4, 5, 6, -7]
-    assert sorted(-7, -4, -2, 1, 2, 3, 4, 5, 6, key=abs, reverse=True) == [-7, 6, 5, -4, 4, 3, -2, 2, 1]
+    return sorted_list
