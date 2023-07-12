@@ -21,19 +21,13 @@ def test_inplace_operation(seq1, seq2, expected):
     assert (a == b, a is b) == expected
 
 
-@pytest.mark.parametrize(['param', 'expected'], [
-    (2, (1, 3, 5, 7, 9)),
-    (-1, (9, 8, 7, 6, 5, 4, 3, 2, 1)),
-    (None, (1, 2, 3, 4, 5, 6, 7, 8, 9))
-])
-def test_string_slicing(param, expected, sequence=(1, 2, 3, 4, 5, 6, 7, 8, 9)):
-    assert (sequence[param:param] if param is None else sequence[::param]) == expected
-
-
 @pytest.mark.parametrize(['start', 'end', 'step', 'expected'], [
     (None, 7, 2, (1, 3, 5, 7)),
     (0, 7, 2, (1, 3, 5, 7)),
-    (1, 7, 2, (2, 4, 6))
+    (1, 7, 2, (2, 4, 6)),
+    (None, None, 2, (1, 3, 5, 7, 9)),
+    (None, None, -1, (9, 8, 7, 6, 5, 4, 3, 2, 1)),
+    (None, None, None, (1, 2, 3, 4, 5, 6, 7, 8, 9))
 ])
 def test_slicing_with_params(start, end, step, expected):
     assert (1, 2, 3, 4, 5, 6, 7, 8, 9)[start:end:step] == expected
