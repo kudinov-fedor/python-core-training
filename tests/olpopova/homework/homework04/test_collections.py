@@ -48,15 +48,15 @@ def test_filter(data, filter_name, expected):
     ({(123, 456): 'kjdgg', (123, 654): 'kjdjd', ('jdjf', 'rrrr'): 1235}, [(123, 456), (123, 654), ('jdjf', 'rrrr')])
 ])
 def test_unpack_dict(collection, expected):
-    assert list(collection) == expected
+    assert sorted(list(collection)) == expected
 
 
 @pytest.mark.parametrize(['collection', 'expected'], [
     ({'key1': 'param', 'key2': 123, 'key3': None}, ('key1', 'key2', 'key3')),
-    ({(123, 456): 'kjdgg', (123, 654): 'kjdjd', ('jdjf', 'rrrr'): 1235}, ((123, 456), (123, 654), ('jdjf', 'rrrr')))
+    ({(123, 456): 'kjdgg', (123, 654): 'kjdjd', (123, 34): 1235}, ((123, 34), (123, 456), (123, 654)))
 ])
 def test_unpack_dict(collection, expected):
-    assert tuple(collection) == expected
+    assert tuple(sorted(collection)) == expected
 
 
 def test_mult_assignment(collection="flgo"):
