@@ -30,20 +30,20 @@ def test_string_slicing(param, expected, sequence=(1, 2, 3, 4, 5, 6, 7, 8, 9)):
     assert (sequence[param:param] if param is None else sequence[::param]) == expected
 
 
-@pytest.mark.parametrize(['param1', 'param2', 'param3', 'expected'], [
+@pytest.mark.parametrize(['start', 'end', 'step', 'expected'], [
     (None, 7, 2, (1, 3, 5, 7)),
     (0, 7, 2, (1, 3, 5, 7)),
     (1, 7, 2, (2, 4, 6))
 ])
-def test_slicing_with_params(param1, param2, param3, expected, sequence=(1, 2, 3, 4, 5, 6, 7, 8, 9)):
-    assert sequence[param1:param2:param3] == expected
+def test_slicing_with_params(start, end, step, expected):
+    assert (1, 2, 3, 4, 5, 6, 7, 8, 9)[start:end:step] == expected
 
 
 @pytest.mark.parametrize(['data', 'index', 'new_index_value', 'expected'], [
-    ([1, 2, 3, 4, 5, 6, 7, 8, 9], 4, ('sdf', 'isn'), [1, 2, 3, 4, 'sdf', 'isn', 5, 6, 7, 8, 9]),
-    ([1, 2, 3, 4, 5, 6, 7, 8, 9], 4, ['sdf', 'isn'], [1, 2, 3, 4, 'sdf', 'isn', 5, 6, 7, 8, 9]),
-    ([1, 2, 3, 4, 5, 6, 7, 8, 9], 4, [('sdf', 'isn')], [1, 2, 3, 4, ('sdf', 'isn'), 5, 6, 7, 8, 9]),
-    ([1, 2, 3, 4, 5, 6, 7, 8, 9], 0, [('sdf', 'isn')], [('sdf', 'isn'), 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+    ([1, 2, 3, 4], 2, ('sdf', 'isn'), [1, 2, 'sdf', 'isn', 3, 4]),
+    ([1, 2, 3, 4], 2, ['sdf', 'isn'], [1, 2, 'sdf', 'isn', 3, 4]),
+    ([1, 2, 3, 4], 2, [('sdf', 'isn')], [1, 2, ('sdf', 'isn'), 3, 4]),
+    ([1, 2, 3, 4], 0, [('sdf', 'isn')], [('sdf', 'isn'), 1, 2, 3, 4]),
 ])
 def test_input_new_index(data, index, new_index_value, expected):
     data[index:index] = new_index_value
