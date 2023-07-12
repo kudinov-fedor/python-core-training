@@ -51,16 +51,12 @@ if __name__ == "__main__":
 def test_my_gen():
     target = [123, ["234", None], [[1], [23], [[123], 123, ["sdf", True]]]]
     my_gen = unpack_recursive_1(target)
-    gen_stack = []
-    for i in my_gen:
-        gen_stack.append(i)
+    gen_stack = list(my_gen)
     assert gen_stack == [123, "234", None, 1, 23, 123, 123, "sdf", True]
 
 
 def test_unpack_while_gen():
     target = [123, ["234", None], [[1], [23], [[123], 123, ["sdf", True]]]]
     my_gen = unpack_while_loop_generator(target)
-    gen_stack = []
-    for i in my_gen:
-        gen_stack.append(i)
+    gen_stack = list(my_gen)
     assert gen_stack == [123, "234", None, 1, 23, 123, 123, "sdf", True]
