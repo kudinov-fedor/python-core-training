@@ -1,12 +1,3 @@
-
-def unpack_dict_to_list(collection):
-    return list(collection)
-
-
-def unpack_dict_to_tuple(collection):
-    return tuple(collection)
-
-
 # multiple assignment
 def multiple_assignment(collection):
     a, b, c, d = collection

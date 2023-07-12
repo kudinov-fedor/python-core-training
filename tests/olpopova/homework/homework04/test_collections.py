@@ -1,5 +1,6 @@
-from olpopova.homework.homework04.collections import *
 import pytest
+
+from olpopova.homework.homework04 import collections
 
 
 data = [{"age": 16, "name": "John", "sex": "M"},
@@ -31,7 +32,7 @@ data = [{"age": 16, "name": "John", "sex": "M"},
                                         {"age": 25, "name": "Mathew", "sex": "M"}])
 ])
 def test_sort(data, sort_params, reverse, expected):
-    assert sort(data, sort_params, reverse) == expected
+    assert collections.sort(data, sort_params, reverse) == expected
 
 
 @pytest.mark.parametrize(['data', 'filter_name', 'expected'], [
@@ -39,7 +40,7 @@ def test_sort(data, sort_params, reverse, expected):
     (data, "age", [16, 25, 34])
 ])
 def test_filter(data, filter_name, expected):
-    assert filter_data(data, filter_name) == expected
+    assert collections.filter_data(data, filter_name) == expected
 
 
 @pytest.mark.parametrize(['collection', 'expected'], [
@@ -47,7 +48,7 @@ def test_filter(data, filter_name, expected):
     ({(123, 456): 'kjdgg', (123, 654): 'kjdjd', ('jdjf', 'rrrr'): 1235}, [(123, 456), (123, 654), ('jdjf', 'rrrr')])
 ])
 def test_unpack_dict(collection, expected):
-    assert unpack_dict_to_list(collection) == expected
+    assert list(collection) == expected
 
 
 @pytest.mark.parametrize(['collection', 'expected'], [
@@ -55,16 +56,16 @@ def test_unpack_dict(collection, expected):
     ({(123, 456): 'kjdgg', (123, 654): 'kjdjd', ('jdjf', 'rrrr'): 1235}, ((123, 456), (123, 654), ('jdjf', 'rrrr')))
 ])
 def test_unpack_dict(collection, expected):
-    assert unpack_dict_to_tuple(collection) == expected
+    assert tuple(collection) == expected
 
 
 def test_mult_assignment(collection="flgo"):
-    assert multiple_assignment(collection) == "First will be f, then - l, then - g and in the end - o"
+    assert collections.multiple_assignment(collection) == "First will be f, then - l, then - g and in the end - o"
 
 
 def test_mult_assignment_tail(collection="flgo"):
-    assert mult_assignment_tail(collection) == ('f', ['l', 'g', 'o'])
+    assert collections.mult_assignment_tail(collection) == ('f', ['l', 'g', 'o'])
 
 
-def test_mult_assignment_tail(collection="flgo"):
-    assert mult_assignment_head(collection) == (['f', 'l', 'g'], 'o')
+def test_mult_assignment_head(collection="flgo"):
+    assert collections.mult_assignment_head(collection) == (['f', 'l', 'g'], 'o')
