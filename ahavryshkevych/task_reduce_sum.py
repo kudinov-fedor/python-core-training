@@ -18,15 +18,10 @@ def own_reduce(*args, key: callable, default):
     """
     if not args:
         return default
-    else:
-        result = args[0]
-        for i in args[1:]:
-            if key is add:
-                result = add(result, i)
-            if key is mul:
-                result = mul(result, i)
+    result = args[0]
+    for i in args[1:]:
+        result = key(result, i)
     return result
-
 
 assert own_reduce(-7, -4, -2, 1, 2, 3, 4, 5, 6, key=mul, default=1) == -40320
 assert own_reduce(key=mul, default=1) == 1
