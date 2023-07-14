@@ -10,9 +10,10 @@ def my_decor(original_func):
 
     def wrapper(n: int):
         if n in cached:
-            return original_func
-        elif n not in cached:
+            return cached[n]
+        else:
             res = original_func(n)
+            cached[n] = res
             return res
     return wrapper
 
