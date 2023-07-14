@@ -2,7 +2,7 @@ from operator import mul, add
 
 import pytest
 
-from ahavryshkevych.task_reduce_sum import own_reduce, own_sum
+from ahavryshkevych.task_reduce_sum import own_reduce, own_sum, own_sum2
 
 
 @pytest.mark.parametrize("some_list, key, default, result", [
@@ -18,3 +18,4 @@ def test_reduce_func(some_list, key, default, result):
 
 def test_sum_func():
     assert own_sum(-7, -4, -2, 1, 2, 3, 4, 5, 6) == 8
+    assert own_sum2(-7, -4, -2, 1, 2, 3, 4, 5, 6) == 8

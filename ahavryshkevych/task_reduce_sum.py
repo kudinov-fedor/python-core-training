@@ -8,6 +8,10 @@ def own_sum(*args):
     return result
 
 
+def own_sum2(*args):
+    return own_reduce(*args, key=add, default="There is no value to process")
+
+
 def own_reduce(*args, key: callable, default):
     """
     Aggregates values based on key
@@ -22,6 +26,7 @@ def own_reduce(*args, key: callable, default):
     for i in args[1:]:
         result = key(result, i)
     return result
+
 
 assert own_reduce(-7, -4, -2, 1, 2, 3, 4, 5, 6, key=mul, default=1) == -40320
 assert own_reduce(key=mul, default=1) == 1
