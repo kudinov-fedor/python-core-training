@@ -1,5 +1,8 @@
 import pytest
-from mizo.task_collections import data
+
+data = [{"age": 16, "name": "John", "sex": "M"},
+        {"age": 34, "name": "Marry", "sex": "F"},
+        {"age": 25, "name": "Mathew", "sex": "M"}]
 
 
 @pytest.mark.parametrize("data, sorting_by, reverse, expected", [
@@ -12,7 +15,9 @@ from mizo.task_collections import data
     (data, lambda i: i["name"], False, [{"age": 16, "name": "John", "sex": "M"},
                                         {"age": 34, "name": "Marry", "sex": "F"},
                                         {"age": 25, "name": "Mathew", "sex": "M"}]),
-    (data, lambda i: i["name"], True, [{"age": 25, "name": "Mathew", "sex": "M"}])
+    (data, lambda i: i["name"], True, [{"age": 25, "name": "Mathew", "sex": "M"},
+                                       {"age": 34, "name": "Marry", "sex": "F"},
+                                       {"age": 16, "name": "John", "sex": "M"}])
 
 ])
 def test_sorting(data, sorting_by, reverse, expected):
