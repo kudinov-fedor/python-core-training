@@ -19,6 +19,9 @@ def test_dict_comprehension():
 
 
 def test_collect_data():
+    """
+    the sorted list of ages is converted back to a set using set(ages)
+    """
     data = [{"age": 16, "name": "John", "sex": "M"},
             {"age": 34, "name": "Marry", "sex": "F"},
             {"age": 25, "name": "Mathew", "sex": "M"}]
@@ -26,6 +29,4 @@ def test_collect_data():
     ages = sorted({i["age"] for i in data}, reverse=True)
     expected = {34, 25, 16}
     assert set(ages) == expected
-    """
-    the sorted list of ages ages is converted back to a set using set(ages) 
-    """
+

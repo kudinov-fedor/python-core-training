@@ -17,5 +17,4 @@ sorted(data, key=lambda i: i["name"], reverse=True)
 # Output [{"age": 25, "name": "Mathew", "sex": "M"}])
 #         {"age": 34, "name": "Marry", "sex": "F"},
 #          [{"age": 16, "name": "John", "sex": "M"}])
-list(map(lambda i: i["name"], data))
-# retrieves the "name" attribute from each dictionary, returns a list of those names
+
