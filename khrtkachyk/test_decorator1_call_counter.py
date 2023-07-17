@@ -22,5 +22,4 @@ def test_counted():
     wrapper(2)
     wrapper(4)
     assert call_count == 5
-    assert call_count
-    assert callable(wrapper) is True
+    assert callable(wrapper)
