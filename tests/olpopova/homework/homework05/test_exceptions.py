@@ -1,19 +1,24 @@
 import pytest
 
-from olpopova.homework.homework05 import exceptions
+
+def test_zero_error():
+    with pytest.raises(ZeroDivisionError):
+        5 / 0
 
 
-@pytest.mark.parametrize(['first_value', 'invalid_value'], [
-    (6, 0),
-    (6, 'f')
-])
-def test_zero_division_error(first_value, invalid_value):
-    exceptions.division_error(first_value, invalid_value)
+def test_type_error():
+    with pytest.raises(TypeError):
+        6 / "gh"
 
 
-@pytest.mark.parametrize(['first_value', 'second_value'], [
-    (6, 0),
-    (6, 'f')
-])
-def test_raise_error(first_value, second_value):
-    exceptions.raise_error(first_value, second_value)
+def test_index_out_error():
+    with pytest.raises(IndexError):
+        [][1]
+
+
+def test_stop_iter_error():
+    with pytest.raises(StopIteration):
+        sequence = 'jghfy'
+        my_iterator = iter(sequence)
+        while next(my_iterator):
+            print(next(my_iterator))
