@@ -4,27 +4,35 @@ Create decorator, which will retry inner function multiple times until it passes
 import random
 
 
-def retry_func(func, retries=1):
-    def wrapper(*args, **kwargs):
-        for _ in range(retries):
-            while func:
+def parametrised_decorator(max_retries):
+    retries = 1
+
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            nonlocal retries, max_retries
+            while True:
                 try:
-                    func(*args, **kwargs)
-                    return
-                except ValueError as error:
-                    print(error)
-                    continue
+                    res = func(*args, **kwargs)
+                    print(f'Retry No.{retries}')
+                    return res
+                except Exception as error:
+                    if retries > max_retries:
+                        print(f'Retry No.{retries}')
+                        print(f'{error}: Maximum of retries has been reached')
+                        break
+                    else:
+                        print(f'Retry No.{retries}')
+                        retries += 1
+        return wrapper
+    return decorator
 
-    return wrapper
 
-
-@retry_func
+@parametrised_decorator(max_retries=3)
 def unstable_function():
     res = random.random()
     if res < 0.5:
         raise ValueError("Unpredictable Error")
-    print(res)
-    return
+    return res
 
 
 if __name__ == '__main__':
