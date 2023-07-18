@@ -17,8 +17,7 @@ def test_index_out_error():
 
 
 def test_stop_iter_error():
+    sequence = ''
+    my_iterator = iter(sequence)
     with pytest.raises(StopIteration):
-        sequence = 'jghfy'
-        my_iterator = iter(sequence)
-        while next(my_iterator):
-            print(next(my_iterator))
+        next(my_iterator)
