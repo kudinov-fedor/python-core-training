@@ -17,7 +17,7 @@ def time_is(func):
         results = func(*args, **kwargs)
         end = time.time()
 
-        print(func.__name__, end-start)
+        print(func.__name__, end - start)
         return results
 
     return wrapper
