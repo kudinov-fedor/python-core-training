@@ -1,7 +1,7 @@
-def group_dictionary(data_input):
-    by_sex = {}
+def group_dictionary(data_input, key):
+    by_res = {}
     for i in data_input:
-        if i["sex"] not in by_sex:
-            by_sex[i["sex"]] = []
-        by_sex[i["sex"]].append(i)
-    return by_sex
+        if i[key] not in by_res:
+            by_res[i[key]] = []
+        by_res[i[key]].append(i)
+    return by_res

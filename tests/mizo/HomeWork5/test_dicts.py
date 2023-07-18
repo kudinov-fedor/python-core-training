@@ -23,29 +23,24 @@ def test_dict_comprehension():
     assert {k * 2: str(v) for k, v in some_dict.items()} == {"aa": "123", "bb": "456", "cc": "789"}
 
 
-data = [
-    {"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
-    {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
-    {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"},
-    {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}
-]
+def test_group_dictionary():
+    data_input = [
+        {"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
+        {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
+        {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"},
+        {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}
+    ]
 
+    expected_output = {
+        "M": [
+            {"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
+            {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}
+        ],
+        "F": [
+            {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
+            {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"}
+        ]
+    }
 
-@pytest.mark.parametrize("data_input, expected_output", [
-    (
-            data,
-            {
-                "M": [
-                    {"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
-                    {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}
-                ],
-                "F": [
-                    {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
-                    {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"}
-                ]
-            }
-    )
-])
-def test_group_dictionary(data_input, expected_output):
-    result = group_dictionary(data_input)
-    assert result == expected_output
+    result_by_sex = group_dictionary(data_input, key="sex")
+    assert result_by_sex == expected_output
