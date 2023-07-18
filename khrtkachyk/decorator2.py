@@ -5,18 +5,16 @@ import random
 
 
 def parametrised_decorator(max_retries):
-    retries = 1
-
     def decorator(func):
         def wrapper(*args, **kwargs):
-            nonlocal retries, max_retries
+            retries = 1
             while True:
                 try:
                     res = func(*args, **kwargs)
                     print(f'Retry No.{retries}')
                     return res
                 except Exception as error:
-                    if retries > max_retries:
+                    if retries >= max_retries:
                         print(f'Retry No.{retries}')
                         print(f'{error}: Maximum of retries has been reached')
                         break
@@ -27,7 +25,7 @@ def parametrised_decorator(max_retries):
     return decorator
 
 
-@parametrised_decorator(max_retries=3)
+@parametrised_decorator(max_retries=5)
 def unstable_function():
     res = random.random()
     if res < 0.5:
