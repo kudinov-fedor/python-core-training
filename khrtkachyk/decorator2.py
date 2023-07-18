@@ -4,7 +4,7 @@ Create decorator, which will retry inner function multiple times until it passes
 import random
 
 
-def parametrised_decorator(max_retries):
+def parametrised_decorator(max_retries=None):
     def decorator(func):
         def wrapper(*args, **kwargs):
             retries = 1
