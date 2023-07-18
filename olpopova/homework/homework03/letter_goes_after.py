@@ -10,3 +10,7 @@ If one of the symbols is not in the given word - your function should return Fal
 
 def goes_after(word: str, first: str, second: str) -> bool:
     return any(word[i : i + 2] == first + second for i in range(0, len(word)))      # or   first + second in word
+
+
+def goes_after_2nd(word: str, first: str, second: str) -> bool:
+    return first in word and word.find(second) - word.find(first) == 1
