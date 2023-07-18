@@ -25,7 +25,7 @@ def parametrised_decorator(max_retries=None):
     return decorator
 
 
-@parametrised_decorator(max_retries=None)
+@parametrised_decorator(max_retries=3)
 def unstable_function():
     res = random.random()
     if res < 0.5:
