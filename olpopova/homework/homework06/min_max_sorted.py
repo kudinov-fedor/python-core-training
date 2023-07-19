@@ -10,31 +10,38 @@ def max(*args, key=None):
 
 
 def sorted(*args, key=None, reverse=False):
-    """Ascending by default"""
-    # intermediate steps
+    """
+    Function sorts data in ASC/DESC order.
+    Ascending by default
+    """
     key = key or (lambda i: i)
-    actual_list = list(args)
-    sorted_list = [actual_list[0]]
-
-    sorted_list.insert(0, actual_list[1]) if key(actual_list[1]) < key(sorted_list[0]) else sorted_list.append(actual_list[1])
 
     # final steps
-    for i in range(2, len(actual_list)):
-        sorted_len = len(sorted_list)
-        last_sorted_item = key(sorted_list[sorted_len - 1])
-        first_sorted_item = key(sorted_list[0])
-
-        less_then_first_index = first_sorted_item >= key(actual_list[i])
-        more_then_last_index = key(actual_list[i]) >= last_sorted_item
-
-        if less_then_first_index:
-            sorted_list.insert(0, actual_list[i])
-
-        elif more_then_last_index:
-            sorted_list.insert(sorted_len - 1, actual_list[i]) if actual_list[key(i)] in sorted_list else sorted_list.append(actual_list[i])
-
-        else:
-            insert_index = list(j + 1 for j in range(0, sorted_len) if key(sorted_list[j]) <= actual_list[i] < key(sorted_list[j+1]))[0]
-            sorted_list.insert(insert_index, key(actual_list[i]))
+    sorted_list = []
+    for i in range(0, len(args)):
+        insert_index = identify_insert_index(sorted_list, args[i], key=key)
+        sorted_list.insert(insert_index, args[i])
 
     return sorted_list[::-1] if reverse else sorted_list
+
+
+def identify_insert_index(collection, item, key=None) -> int:
+    """
+    Method returns corrected insert index for given item that will be inserted in list
+    """
+    insert_index = 0
+
+    # edge cases
+    if len(collection) == 0 or key(item) < key(collection[0]):
+        return insert_index
+    elif key(item) > key(collection[-1]):
+        insert_index = len(collection)
+        return insert_index
+
+    # final steps
+    for j in range(0, len(collection)):
+        if key(collection[j]) <= key(item) < key(collection[j + 1]):
+            insert_index = j + 1
+            break
+
+    return insert_index
