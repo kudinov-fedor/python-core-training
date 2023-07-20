@@ -14,7 +14,6 @@ def sorted(*args, key=None, reverse=False):
     Function sorts data in ASC/DESC order.
     Ascending by default
     """
-    key = key or (lambda i: i)
 
     # final steps
     sorted_list = []
@@ -30,6 +29,7 @@ def identify_insert_index(collection, item, key=None) -> int:
     Method returns corrected insert index for given item that will be inserted in list
     """
     insert_index = 0
+    key = key or (lambda i: i)
 
     # edge cases
     if len(collection) == 0 or key(item) < key(collection[0]):
