@@ -26,8 +26,7 @@ class Person:
         """
         Returns the person’s age - the number of fully lived years, based on current date.
         """
-        days_in_year = 365.2425
-        age = int((date.today() - self.birth_date).days / days_in_year)
+        age = TODAY.year - self.birth_date.year - ((TODAY.month, TODAY.day) < (self.birth_date.month, self.birth_date.day))
         return age
 
     def work(self):
@@ -46,8 +45,7 @@ class Person:
         """
         Returns an amount of money, earned during the working years. Returned in format 'xx xxx'.
         """
-        locale.setlocale(locale.LC_ALL, '')
-        return "{0:n}".format(self.salary * self.working_years * 12).replace(",", " ")
+        return "{:,}".format(self.salary * self.working_years * 12).replace(",", " ")
 
     def home(self):
         """
