@@ -8,10 +8,10 @@ class Warrior:
         return self.health > 0
 
     def perform_attack(self, warrior: "Warrior"):
-        warrior.damage(self.attack)
+        warrior.received_damage(self.attack)
 
-    def damage(self, damage):
-        self.health = self.health - damage
+    def received_damage(self, damage):
+        self.health = max(0, self.health - damage)
 
 
 class Knight(Warrior):
