@@ -29,3 +29,7 @@ def test_unlimited_named():
     assert res_unlimited_named1 == (1, "val", {})
     res_unlimited_named2 = unlimited_named(some="123", a=456)
     assert res_unlimited_named2 == (456, "123", {})
+    res_unlimited_named3 = unlimited_named(a=100, b=200, c=300, some="Testing", x="abc")
+    assert res_unlimited_named3 == (100, "Testing", {"b": 200, "c": 300, "x": "abc"})
+    res_unlimited_named4 = unlimited_named(a=1, some="Hello", x=10, y=20)
+    assert res_unlimited_named4 != (42, "Hello", {"x": 10, "y": 20})

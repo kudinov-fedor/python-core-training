@@ -1,48 +1,46 @@
-def test_minimum_custom(*args, key=None):
-    if key is None:
-        key = lambda a: a
-    if not args:
-        return None
+def minimum_custom(*args, key=None):
+    key = key or (lambda a: a)
+    if len(args) == 0:
+        raise ValueError("empty list")
     minimum = args[0]
-    for i in args:
-        if key(i) < key(minimum):
-            minimum = i
-        return minimum
-
-
-def test_maximum_custom(*args, key=None):
-    if key is None:
-        key = lambda a: a
-
-    if not args:
-        return None
-
-    maximum = args[0]
-    for i in args:
-        if key(i) > key(maximum):
-            maximum = i
-
-    return maximum
-
-
-def test_minimum_absolute_custom(*args, key=abs):
-    if key is None:
-        key = lambda a: a
-    if not args:
-        return None
-    minimum = args[0]
-    for i in args:
+    for i in args[1:]:
         if key(i) < key(minimum):
             minimum = i
     return minimum
 
 
-def test_sorted_function(*args, key=None, reverse=False):
-    if key is None:
-        key = lambda a: a
+def maximum_custom(*args, key=None):
+    key = key or (lambda a: a)
 
-    if not args:
-        return None
+    if len(args) == 0:
+        raise ValueError("empty list")
+    maximum = args[0]
+    for i in args[1:]:
+        if key(i) > key(maximum):
+            maximum = i
+    return maximum
 
-    sorted_list = sorted(args, key=key, reverse=False)
+
+def my_sorted(*args, key=None, reverse=False):
+    """
+    Function sorts data in ASC/DESC order.
+    Ascending by default
+    """
+
+    if len(args) == 0:
+        raise ValueError("empty list")
+
+    my_list = list(args)
+    sorted_list = []
+    num_items = len(args)
+
+    if reverse:
+        sort_function = maximum_custom
+    else:
+        sort_function = minimum_custom
+
+    while len(sorted_list) < num_items:
+        item = sort_function(*my_list, key=key)
+        sorted_list.append(item)
+        my_list.remove(item)
     return sorted_list
