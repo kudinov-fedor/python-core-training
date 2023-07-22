@@ -1,5 +1,5 @@
-from mizo.task_functions import my_simple_function_with_required_params, with_optional_parameters, unlimited_positional, \
-    unlimited_named
+from mizo.task_functions import (my_simple_function_with_required_params, with_optional_parameters,
+                                 unlimited_positional, unlimited_named)
 
 
 def test_my_simple_function():
