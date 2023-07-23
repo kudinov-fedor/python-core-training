@@ -29,16 +29,10 @@ def translate(text: str) -> str:
 def translate_with_table(text: str) -> str:
     vowels = ['a', 'o', 'e', 'i', 'u', 'y']
     translated_phrase = []
-    translation_table = {vowels[0] * 3: vowels[0],
-                         vowels[1] * 3: vowels[1],
-                         vowels[2] * 3: vowels[2],
-                         vowels[3] * 3: vowels[3],
-                         vowels[4] * 3: vowels[4],
-                         vowels[5] * 3: vowels[5],
-                         }
-    translated_with_table = custom_make_translation(text, translation_table)
+    for i in vowels:
+        text = text.replace(i * 3, i)
 
-    for word in translated_with_table.split():
+    for word in text.split():
         translated_phrase.append(word)
 
         for index in range(0, len(word)):
@@ -52,11 +46,6 @@ def translate_with_table(text: str) -> str:
                 break
 
     return ' '.join(translated_phrase)
-
-
-def custom_make_translation(text, translation):
-    regex = re.compile('|'.join(map(re.escape, translation)))
-    return regex.sub(lambda match: translation[match.group(0)], text)
 
 
 def translate_simplified(text: str) -> str:
