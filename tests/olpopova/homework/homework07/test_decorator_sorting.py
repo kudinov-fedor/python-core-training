@@ -8,21 +8,22 @@ print(time.time_ns() - start)
 
 
 import datetime
+import time
 from operator import gt, lt, le, ge
 
 
 def my_parametrised_decorator(method_name):
     def decorator(function):
         def wrapper(*args, **kwargs):
-            start = datetime.datetime.now()
+            start = time.time()
             function(*args, **kwargs)
-            print(f'Method \"{method_name}\" was running', (datetime.datetime.now() - start).total_seconds(), 'seconds')
+            print(f'Method \"{method_name}\" was running', (time.time() - start), 'seconds')
 
         return wrapper
     return decorator
 
 
-@my_parametrised_decorator('bubble_sort')
+@my_parametrised_decorator()
 def bubble_sort(iterable, reverse: bool = True, key: callable = None) -> list:
     """
     go item by item and swap them if left is bigger than right
