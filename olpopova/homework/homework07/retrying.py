@@ -15,12 +15,12 @@ def unstable_function():
 
 def retry_func():
     res = None
-    while isinstance(res, int) is False:
+    while res is None:
         try:
             res = unstable_function()
             return res
-        except ValueError:
-            isinstance(res, int)
+        except ValueError as e:
+            print(e)
 
 
 def test_retry_func():
