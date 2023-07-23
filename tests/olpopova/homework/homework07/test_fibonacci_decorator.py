@@ -4,11 +4,11 @@ and if answer was given, do not make a call to a function
 """
 
 
-def my_decorator_name(function):
+def memorise_solutions(function):
     answers = {}
 
     def wrapper(param):
-        if param not in answers.keys():
+        if param not in answers:
             print("function is called with '{}'".format(param))
             answers[param] = function(param)
         return answers[param]
@@ -16,7 +16,7 @@ def my_decorator_name(function):
     return wrapper
 
 
-@my_decorator_name
+@memorise_solutions
 def fibo(n: int):
     """
     Count fibonache numbers, where next is sum of 2 prior
@@ -29,7 +29,4 @@ def fibo(n: int):
 
 if __name__ == "__main__":
     for i in range(10):
-        print(fibo(i))
-
-    for i in [1, 8, 9]:
         print(fibo(i))
