@@ -1,6 +1,6 @@
 import pytest
 
-from olpopova.homework.homework08.bird_translation_phrase import translate, translate_with_table
+from olpopova.homework.homework08.bird_translation_phrase import translate, translate_with_table, translate_simplified
 
 
 @pytest.mark.parametrize(['text', 'expected'], [
@@ -13,4 +13,4 @@ from olpopova.homework.homework08.bird_translation_phrase import translate, tran
     ('doooo yyyooouuu sapieeeaaaky eeenugaleiiisyhy', 'do you speak english')
 ])
 def test_translate(text, expected):
-    assert translate(text) == translate_with_table(text) == expected
+    assert translate(text) == translate_with_table(text) == translate_simplified(text) == expected

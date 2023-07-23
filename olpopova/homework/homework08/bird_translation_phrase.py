@@ -57,3 +57,21 @@ def translate_with_table(text: str) -> str:
 def custom_make_translation(text, translation):
     regex = re.compile('|'.join(map(re.escape, translation)))
     return regex.sub(lambda match: translation[match.group(0)], text)
+
+
+def translate_simplified(text: str) -> str:
+    vowels = ['a', 'o', 'e', 'i', 'u', 'y']
+    result = []
+    i = 0
+
+    while i < len(text):
+        if text[i] not in vowels and text[i] != ' ':
+            result.append(text[i])
+            i += 2
+        elif text[i] in vowels:
+            result.append(text[i])
+            i += 3
+        else:
+            result.append(text[i])
+            i += 1
+    return ''.join(result)
