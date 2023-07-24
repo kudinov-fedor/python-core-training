@@ -44,4 +44,7 @@ def test_cart_mark_fight(carl, mark):
     assert carl.is_alive == True
 
 
-
+def test_dave_mark_fight(dave, mark):
+    assert hw8_warior.fight(dave, mark) == True
+    assert dave.is_alive == True
+    assert mark.is_alive == False
