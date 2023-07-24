@@ -1,0 +1,183 @@
+from math import gcd
+
+
+class Fraction:
+
+    def __init__(self, num: int, denom: int = 1):
+
+        if denom == 0:
+            raise ZeroDivisionError
+
+        _gcd = gcd(num, denom)
+        self.num = num // _gcd
+        self.denom = denom // _gcd
+
+        if self.denom < 0:
+            self.num *= -1
+            self.denom *= -1
+
+    def __repr__(self):
+        rep = "Fraction(" + f'{self.num}, {self.denom}' + ")"
+        return rep
+
+    def __str__(self):
+        st = f"'{self.num} / {self.denom}'"
+        return st
+
+    def __format__(self, format_spec):
+        if format_spec == "dec":
+            decim = str(f'{float(self.num) / float(self.denom)}')
+            return decim
+        return Fraction.__str__(self)
+
+    def __bool__(self):
+        return bool(self.num and self.denom)
+
+    def __eq__(self, other):
+        if isinstance(other, Fraction):
+            return self.num == other.num and self.denom == other.denom
+        return False
+
+    def __gt__(self, other):
+        if isinstance(other, Fraction):
+            return (self.num / self.denom) > (other.num / other.denom)
+        return False
+
+    def __ge__(self, other):
+        if isinstance(other, Fraction):
+            return (self.num / self.denom) >= (other.num / other.denom)
+        return False
+
+    def __add__(self, other):
+        if isinstance(other, int):
+            return Fraction(self.num, self.denom) + Fraction(other)
+        if self.denom == other.denom:
+            self.sumnum = self.num + other.num
+            return self.sumnum / self.denom
+        elif self.denom != other.denom:
+            res = (self.num * other.denom) + (other.num * self.denom)
+            return Fraction(res, (self.denom * other.denom))
+
+    def __radd__(self, other):
+        if isinstance(other, int):
+            return Fraction(other) + Fraction(self.num, self.denom)
+
+    def __sub__(self, other):
+        if isinstance(other, int):
+            return Fraction(self.num, self.denom) - Fraction(other)
+        if self.denom == other.denom:
+            self.diffnum = self.num - other.num
+            return self.sumnum / self.denom
+        elif self.denom != other.denom:
+            res = (self.num * other.denom) - (other.num * self.denom)
+            return Fraction(res, (self.denom * other.denom))
+
+    def __rsub__(self, other):
+        if isinstance(other, int):
+            return Fraction(other) - Fraction(self.num, self.denom)
+
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return Fraction(self.num, self.denom) * Fraction(other)
+        else:
+            mulnum, muldenom = (self.num * other.num), (self.denom * other.denom)
+            return mulnum/muldenom
+
+    def __rmul__(self, other):
+        if isinstance(other, int):
+            return Fraction(self.num, self.denom) * Fraction(other)
+
+    def __truediv__(self, other):
+        if isinstance(other, int):
+            return Fraction(self.num, self.denom) / Fraction(other)
+        elif Fraction(self.num, self.denom) == Fraction(other.num, other.denom):
+            return 1
+        else:
+            divnum, divdenom = (self.num * other.denom), (self.denom * other.num)
+            return Fraction(divnum, divdenom)
+
+    def __rtruediv__(self, other):
+        if isinstance(other, int):
+            res = Fraction(other) / Fraction(self.num, self.denom)
+            return res
+
+    def __neg__(self):
+        return Fraction(-self.num, self.denom)
+
+    def __abs__(self):
+        return Fraction(abs(self.num), abs(self.denom))
+
+
+if __name__ == "__main__":
+
+    a = Fraction(2, 4)
+    assert (a.num, a.denom) == (1, 2)
+
+    z = Fraction(2, -4)
+    assert (z.num, z.denom) == (-1, 2)
+
+    # str repr
+    assert repr(a) == "Fraction(1, 2)"
+    assert str(a) == "'1 / 2'"
+    assert "val: {:dec}".format(a) == "val: 0.5"
+    assert "val: {}".format(a) == "val: '1 / 2'"
+
+    # bool assert
+    assert Fraction(1, 2)
+    assert not Fraction(0)
+
+    # logic operators
+    assert Fraction(2, 4) == Fraction(5, 10)
+    assert not (Fraction(1, 2) != Fraction(1, 2))
+    assert Fraction(1, 2) > Fraction(1, 3)
+    assert Fraction(1, 3) < Fraction(1, 2)
+    assert Fraction(1, 2) >= Fraction(1, 3)
+    assert Fraction(1, 3) <= Fraction(1, 2)
+    assert Fraction(1, 2) <= Fraction(1, 2)
+    assert Fraction(1, 2) >= Fraction(1, 2)
+
+    # add
+    assert Fraction(2, 4) + Fraction(1, 3) == Fraction(5, 6)
+    assert Fraction(1, 2) + 2 == Fraction(5, 2)
+    assert 2 + Fraction(1, 2) == Fraction(5, 2)
+
+    # in place add
+    b = a
+    b += 2
+    assert b is not a
+    assert b == Fraction(5, 2)
+
+    # sub
+    assert Fraction(2, 4) - Fraction(1, 3) == Fraction(1, 6)
+    assert Fraction(5, 2) - 2 == Fraction(1, 2)
+    assert 2 - Fraction(3, 2) == Fraction(1, 2)
+
+    # in place sub
+    b = a
+    b -= 2
+    assert b is not a
+    assert b == Fraction(-3, 2)
+
+    # mul
+    assert Fraction(1, 3) * 3 == 1
+    assert Fraction(2, 3) * Fraction(12, 4) == 2
+    assert 2 * Fraction(3, 2) == 3
+
+    # in place mul
+    b = a
+    b *= 2
+    assert b is not a
+    assert b == 1
+
+    # div
+    assert Fraction(2, 3) / Fraction(2, 3) == 1
+    assert Fraction(2, 3) / Fraction(4, 3) == Fraction(1, 2)
+    assert 2 / Fraction(4, 3) == Fraction(3, 2)
+
+    # in place div
+    b = a
+    b /= 2
+    assert b is not a
+    assert b == Fraction(1, 4)
+    assert -Fraction(1, 2) == Fraction(-1, 2)
+    assert abs(Fraction(-1, 2)) == Fraction(1, 2)
