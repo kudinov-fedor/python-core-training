@@ -1,5 +1,7 @@
 from datetime import datetime
 
+DATE = datetime(2018, 1, 1)
+
 
 class Person:
     def __init__(self, first_name, last_name, birth_date, job, working_years, salary, country, city, gender='unknown'):
@@ -17,11 +19,11 @@ class Person:
         return f"{self.first_name} {self.last_name}"
 
     def age(self):
-        current_date = datetime.strptime("01.01.2018", "%d.%m.%Y")
-        birthdate = datetime.strptime(self.birth_date, "%d.%m.%Y")
-        difference = current_date - birthdate
-        full_years = difference.days // 365
-        return full_years
+        birth_date = datetime.strptime(self.birth_date, "%d.%m.%Y")
+        years_diff = DATE.year - birth_date.year
+        if (DATE.month, DATE.day) < (birth_date.month, birth_date.day):
+            years_diff -= 1
+        return years_diff
 
     def work(self):
         if self.gender == "male":
@@ -32,18 +34,8 @@ class Person:
             return f"Is a {self.job}"
 
     def money(self):
-        total_amount = str(self.working_years * 12 * self.salary)
-        count = 0
-        tem_list = []
-        result = ""
-        for i in str(total_amount):
-            count += 1
-            tem_list.append(i)
-            if count % 3 == 0:
-                tem_list.append(" ")
-        for el in tem_list:
-            result += el
-        return result.rstrip(" ")
+        total_amount = self.working_years * 12 * self.salary
+        return f"{total_amount:,}".replace(",", " ")
 
     def home(self):
         return f"Lives in {self.city}, {self.country}"
