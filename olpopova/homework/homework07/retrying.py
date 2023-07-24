@@ -7,14 +7,14 @@ import random
 
 
 def retry_decorator(function):
-    def wrapper():
-        res = None
-        while res is None:
+    def wrapper(*args, **kwargs):
+        while True:
             try:
-                res = function()
-            except ValueError as e:
+                return function(*args, **kwargs)
+            except Exception as e:
                 print(e)
-        return res
+                continue
+
     return wrapper
 
 
@@ -27,4 +27,4 @@ def unstable_function():
 
 
 def test_retry_func():
-    unstable_function()
+    print(unstable_function())
