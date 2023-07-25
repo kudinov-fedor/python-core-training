@@ -59,13 +59,12 @@ def translate_simplified(text: str) -> str:
     i = 0
 
     while i < len(text):
+        result.append(text[i])
         if text[i] not in string.ascii_letters:
-            result.append(text[i])
             i += 1
         elif text[i] in vowels:
-            result.append(text[i])
             i += 3
-        elif text[i] not in vowels:
-            result.append(text[i])
+        else:
             i += 2
+
     return ''.join(result)
