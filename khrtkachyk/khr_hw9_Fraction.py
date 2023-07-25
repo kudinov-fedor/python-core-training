@@ -21,56 +21,47 @@ class Fraction:
         return rep
 
     def __str__(self):
-        st = f"'{self.num} / {self.denom}'"
-        return st
+        return f"'{self.num} / {self.denom}'"
 
     def __format__(self, format_spec):
         if format_spec == "dec":
-            decim = str(f'{float(self.num) / float(self.denom)}')
-            return decim
-        return Fraction.__str__(self)
+            return str(f'{float(self.num) / float(self.denom)}')
+        return str(self)
 
     def __bool__(self):
-        return bool(self.num and self.denom)
+        return bool(self.num)
 
     def __eq__(self, other):
         if isinstance(other, Fraction):
             return self.num == other.num and self.denom == other.denom
-        return False
-
-    def __gt__(self, other):
-        if isinstance(other, Fraction):
-            return (self.num / self.denom) > (other.num / other.denom)
-        return False
+        return NotImplemented
 
     def __ge__(self, other):
         if isinstance(other, Fraction):
             return (self.num / self.denom) >= (other.num / other.denom)
-        return False
+        return NotImplemented
+
+    def __lt__(self, other):
+        if isinstance(other, Fraction):
+            return (self.num / self.denom) < (other.num / other.denom)
+        return NotImplemented
 
     def __add__(self, other):
-        if isinstance(other, int):
-            return Fraction(self.num, self.denom) + Fraction(other)
-        if self.denom == other.denom:
-            self.sumnum = self.num + other.num
-            return self.sumnum / self.denom
-        elif self.denom != other.denom:
+        if isinstance(other, Fraction):
             res = (self.num * other.denom) + (other.num * self.denom)
             return Fraction(res, (self.denom * other.denom))
-
-    def __radd__(self, other):
-        if isinstance(other, int):
-            return Fraction(other) + Fraction(self.num, self.denom)
+        elif isinstance(other, int):
+            return Fraction(self.num, self.denom) + Fraction(other)
+        return NotImplemented
+    __radd__ = __add__
 
     def __sub__(self, other):
-        if isinstance(other, int):
-            return Fraction(self.num, self.denom) - Fraction(other)
-        if self.denom == other.denom:
-            self.diffnum = self.num - other.num
-            return self.sumnum / self.denom
-        elif self.denom != other.denom:
+        if isinstance(other, Fraction):
             res = (self.num * other.denom) - (other.num * self.denom)
             return Fraction(res, (self.denom * other.denom))
+        if isinstance(other, int):
+            return Fraction(self.num, self.denom) - Fraction(other)
+        return NotImplemented
 
     def __rsub__(self, other):
         if isinstance(other, int):
@@ -78,27 +69,24 @@ class Fraction:
 
     def __mul__(self, other):
         if isinstance(other, int):
-            return Fraction(self.num, self.denom) * Fraction(other)
-        else:
+            return self * Fraction(other)
+        elif isinstance(other, Fraction):
             mulnum, muldenom = (self.num * other.num), (self.denom * other.denom)
             return mulnum/muldenom
-
-    def __rmul__(self, other):
-        if isinstance(other, int):
-            return Fraction(self.num, self.denom) * Fraction(other)
+        return NotImplemented
+    __rmul__ = __mul__
 
     def __truediv__(self, other):
         if isinstance(other, int):
-            return Fraction(self.num, self.denom) / Fraction(other)
+            return self / Fraction(other)
         elif Fraction(self.num, self.denom) == Fraction(other.num, other.denom):
             return 1
-        else:
-            divnum, divdenom = (self.num * other.denom), (self.denom * other.num)
-            return Fraction(divnum, divdenom)
+        elif isinstance(other, Fraction):
+            return Fraction(self.num * other.denom, self.denom * other.num)
 
     def __rtruediv__(self, other):
         if isinstance(other, int):
-            res = Fraction(other) / Fraction(self.num, self.denom)
+            res = Fraction(other) / self
             return res
 
     def __neg__(self):
@@ -140,6 +128,7 @@ if __name__ == "__main__":
     assert Fraction(2, 4) + Fraction(1, 3) == Fraction(5, 6)
     assert Fraction(1, 2) + 2 == Fraction(5, 2)
     assert 2 + Fraction(1, 2) == Fraction(5, 2)
+    assert Fraction(2, 4) + Fraction(1, 4) == Fraction(3, 4)
 
     # in place add
     b = a
