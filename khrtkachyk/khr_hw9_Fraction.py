@@ -17,8 +17,7 @@ class Fraction:
             self.denom *= -1
 
     def __repr__(self):
-        rep = "Fraction(" + f'{self.num}, {self.denom}' + ")"
-        return rep
+        return f'Fraction({self.num}, {self.denom})'
 
     def __str__(self):
         return f"'{self.num} / {self.denom}'"
