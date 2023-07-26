@@ -12,9 +12,10 @@ from operator import gt, lt, le, ge
 def timer(func):
     def inner(*args, **kwargs):
         start_time = time.process_time()
-        func(*args, **kwargs)
+        result = func(*args, **kwargs)
         time.process_time()
         print(time.process_time() - start_time)
+        return result
     return inner
 
 
@@ -120,3 +121,5 @@ if __name__ == "__main__":
     for f in [bubble_sort, gnome_sort, insert_sort, select_sort]:
         for rev in [True, False]:
             print(f(rand_range, reverse=rev) == sorted(rand_range, reverse=rev))
+
+    assert bubble_sort([4,5,6,7,1]) == [7,6,5,4,1]
