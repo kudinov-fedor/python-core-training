@@ -10,13 +10,11 @@ class Knight(Warrior):
 
 
 def fight(unit_1, unit_2):
-    while True:
+    while unit_1.is_alive:
         unit_2.__setattr__('health', unit_2.health - unit_1.attack)
         unit_2.__setattr__('is_alive', unit_2.health > 0)
         if not unit_2.is_alive:
             break
         unit_1.__setattr__('health', unit_1.health - unit_2.attack)
         unit_1.__setattr__('is_alive', unit_1.health > 0)
-        if not unit_1.is_alive:
-            break
     return unit_1.is_alive
