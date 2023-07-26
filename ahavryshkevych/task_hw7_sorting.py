@@ -13,7 +13,6 @@ def timer(func):
     def inner(*args, **kwargs):
         start_time = time.process_time()
         result = func(*args, **kwargs)
-        time.process_time()
         print(time.process_time() - start_time)
         return result
     return inner
