@@ -3,8 +3,8 @@ class AbstractCook:
 
     food = 0
     drinks = 0
-    food_name = ''
-    drink_name = ''
+    food_name = 'Food'
+    drink_name = 'Drink'
 
     def add_food(self, food, price):
         self.food += food * price
