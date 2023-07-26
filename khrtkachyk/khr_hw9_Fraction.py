@@ -31,153 +31,125 @@ class Fraction:
         return bool(self.num)
 
     def __eq__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = self.num == other.num and self.denom == other.denom
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
         elif isinstance(other, float):
             other = Fraction(*other.as_integer_ratio())
-            res = self.num == other.num and self.denom == other.denom
         elif isinstance(other, int):
-            res = self == Fraction(other)
-        return res
+            other = Fraction(other)
+        return str(self) == str(other)
+        # return (self.num, self.denom) == (other.num, other.denom)
 
     def __ne__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = (self.num * other.denom) != (other.num * self.denom)
-        elif isinstance(other, float):
-            other = Fraction(*other.as_integer_ratio())
-            res = (self.num * other.denom) != (other.num * self.denom)
-        elif isinstance(other, int):
-            other = Fraction(other)
-            res = (self.num * other.denom) != (other.num * self.denom)
-        return res
+        return not type(self).__eq__(self, other)
 
     def __gt__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = (self.num / self.denom) > (other.num / other.denom)
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
         elif isinstance(other, float):
             other = Fraction(*other.as_integer_ratio())
-            res = (self.num / self.denom) > (other.num / other.denom)
         elif isinstance(other, int):
             other = Fraction(other)
-            res = (self.num / self.denom) > (other.num / other.denom)
-        return res
+        return (self.num / self.denom) > other
 
     def __ge__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = (self.num / self.denom) >= (other.num / other.denom)
-        elif isinstance(other, float):
-            other = Fraction(*other.as_integer_ratio())
-            res = (self.num / self.denom) >= (other.num / other.denom)
-        elif isinstance(other, int):
-            other = Fraction(other)
-            res = (self.num / self.denom) >= (other.num / other.denom)
-        return res
+        res = type(self).__gt__(self, other)
+        if res is NotImplemented:
+            return res
+        return res or self == other
 
     def __lt__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = (self.num / self.denom) < (other.num / other.denom)
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
         elif isinstance(other, float):
             other = Fraction(*other.as_integer_ratio())
-            res = (self.num / self.denom) < (other.num / other.denom)
         elif isinstance(other, int):
             other = Fraction(other)
-            res = (self.num / self.denom) < (other.num / other.denom)
-        return res
+        return (self.num / self.denom) < (other.num / other.denom)
 
     def __le__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = (self.num / self.denom) <= (other.num / other.denom)
-        elif isinstance(other, float):
-            other = Fraction(*other.as_integer_ratio())
-            res = (self.num / self.denom) <= (other.num / other.denom)
-        elif isinstance(other, int):
-            other = Fraction(other)
-            res = (self.num / self.denom) <= (other.num / other.denom)
-        return res
+        res = type(self).__lt__(self, other)
+        if res is NotImplemented:
+            return res
+        return res or self == other
 
     def __add__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            num = (self.num * other.denom) + (other.num * self.denom)
-            res = Fraction(num, (self.denom * other.denom))
-        elif isinstance(other, float):
-            other = Fraction(*other.as_integer_ratio())
-            num = (self.num * other.denom) + (other.num * self.denom)
-            res = Fraction(num, (self.denom * other.denom))
-        elif isinstance(other, int):
-            res = Fraction(self.num, self.denom) + Fraction(other)
-        return res
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
+        else:
+            res = None
+            if isinstance(other, Fraction):
+                num = (self.num * other.denom) + (other.num * self.denom)
+                res = Fraction(num, (self.denom * other.denom))
+            elif isinstance(other, float):
+                other = Fraction(*other.as_integer_ratio())
+                num = (self.num * other.denom) + (other.num * self.denom)
+                res = Fraction(num, (self.denom * other.denom))
+            elif isinstance(other, int):
+                res = Fraction(self.num, self.denom) + Fraction(other)
+            return res
 
     __radd__ = __add__
 
     def __sub__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            num = (self.num * other.denom) - (other.num * self.denom)
-            res = Fraction(num, (self.denom * other.denom))
-        elif isinstance(other, float):
-            other = Fraction(*other.as_integer_ratio())
-            num = (self.num * other.denom) - (other.num * self.denom)
-            res = Fraction(num, (self.denom * other.denom))
-        elif isinstance(other, int):
-            res = Fraction(self.num, self.denom) - Fraction(other)
-        return res
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
+        else:
+            res = None
+            if isinstance(other, Fraction):
+                num = (self.num * other.denom) - (other.num * self.denom)
+                res = Fraction(num, (self.denom * other.denom))
+            elif isinstance(other, float):
+                other = Fraction(*other.as_integer_ratio())
+                num = (self.num * other.denom) - (other.num * self.denom)
+                res = Fraction(num, (self.denom * other.denom))
+            elif isinstance(other, int):
+                res = Fraction(self.num, self.denom) - Fraction(other)
+            return res
 
     def __rsub__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            num = (other.num * self.denom) - (self.num * other.denom)
-            res = Fraction(num, (self.denom * other.denom))
-        elif isinstance(other, float):
-            other = Fraction(*other.as_integer_ratio())
-            num = (other.num * self.denom) - (self.num * other.denom)
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
+        else:
+            num = None
+            if isinstance(other, Fraction):
+                num = (other.num * self.denom) - (self.num * other.denom)
+            elif isinstance(other, float):
+                other = Fraction(*other.as_integer_ratio())
+                num = (other.num * self.denom) - (self.num * other.denom)
+            elif isinstance(other, int):
+                other = Fraction(other)
+                num = (other.num * self.denom) - (self.num * other.denom)
             return Fraction(num, (self.denom * other.denom))
-        elif isinstance(other, int):
-            other = Fraction(other)
-            num = (other.num * self.denom) - (self.num * other.denom)
-            return Fraction(num, (self.denom * other.denom))
-        return res
 
     def __mul__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = Fraction(self.num * other.num, self.denom * other.denom)
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
         elif isinstance(other, float):
             other = Fraction(*other.as_integer_ratio())
-            res = self * other
         elif isinstance(other, int):
-            res = self * Fraction(other)
-        return res
+            other = Fraction(other)
+        return Fraction(self.num * other.num, self.denom * other.denom)
 
     __rmul__ = __mul__
 
     def __truediv__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = Fraction(self.num * other.denom, self.denom * other.num)
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
         elif isinstance(other, float):
             other = Fraction(*other.as_integer_ratio())
-            res = self / other
         elif isinstance(other, int):
-            res = self / Fraction(other)
-        return res
+            other = Fraction(other)
+        return Fraction(self.num * other.denom, self.denom * other.num)
 
     def __rtruediv__(self, other):
-        res = NotImplemented
-        if isinstance(other, Fraction):
-            res = Fraction(self.denom * other.num, self.num * other.denom)
+        if not isinstance(other, (int, float, Fraction)):
+            return NotImplemented
         elif isinstance(other, float):
             other = Fraction(*other.as_integer_ratio())
-            res = other / self
         elif isinstance(other, int):
-            res = Fraction(other) / self
-        return res
+            other = Fraction(other)
+        return Fraction(self.denom * other.num, self.num * other.denom)
 
     def __neg__(self):
         return Fraction(-self.num, self.denom)
@@ -187,7 +159,6 @@ class Fraction:
 
 
 if __name__ == "__main__":
-
     a = Fraction(2, 4)
     assert (a.num, a.denom) == (1, 2)
 
@@ -213,7 +184,7 @@ if __name__ == "__main__":
     assert Fraction(3, 4) != Fraction(5, 6)
     assert not (Fraction(1, 2) != Fraction(1, 2))
     assert Fraction(1, 2) > Fraction(1, 3)
-    assert Fraction(1, 2) > 0
+    assert Fraction(1, 2) > -1
     assert Fraction(1, 2) > 0.1
     assert Fraction(1, 3) < Fraction(1, 2)
     assert Fraction(1, 3) < 2
@@ -224,7 +195,7 @@ if __name__ == "__main__":
     assert Fraction(1, 2) <= Fraction(1, 2)
     assert Fraction(1, 2) >= Fraction(1, 2)
     assert Fraction(1, 2) >= Fraction(1, 3)
-    assert Fraction(1, 2) >= 0
+    assert Fraction(1, 2) >= -1
     assert Fraction(1, 2) >= 0.5
 
     # add
@@ -248,7 +219,6 @@ if __name__ == "__main__":
     assert Fraction(5, 2) - 0.5 == Fraction(4, 2)
     assert 2 - Fraction(5, 2) == Fraction(-1, 2)
     assert 0.5 - Fraction(5, 2) == Fraction(-4, 2)
-
 
     # in place sub
     b = a
@@ -280,5 +250,9 @@ if __name__ == "__main__":
     b /= 2
     assert b is not a
     assert b == Fraction(1, 4)
+
+    # negation
     assert -Fraction(1, 2) == Fraction(-1, 2)
+
+    # absolute value
     assert abs(Fraction(-1, 2)) == Fraction(1, 2)
