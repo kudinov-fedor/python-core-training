@@ -21,7 +21,7 @@ class Building:
         return self.width_NS * self.width_WE
 
     def volume(self):
-        return Building.area(self) * self.height
+        return self.area() * self.height
 
     def __repr__(self):
         return f'{Building.__name__}{self.x1, self.y1, self.width_WE, self.width_NS, self.height}'
