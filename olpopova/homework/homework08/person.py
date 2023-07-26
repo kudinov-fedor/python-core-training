@@ -6,7 +6,7 @@ class Person:
     def __init__(self, first_name, last_name, birth_date, job, working_years, salary, country, city, gender='unknown'):
         self.fn = first_name
         self.ln = last_name
-        self.birth = datetime.strptime(birth_date, f'%d.%m.%Y')
+        self.birth = birth_date
         self.job = job
         self.work_years = working_years
         self.salary = salary

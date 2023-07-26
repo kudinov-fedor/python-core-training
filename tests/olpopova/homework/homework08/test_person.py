@@ -1,3 +1,5 @@
+import datetime
+
 import pytest
 
 from olpopova.homework.homework08.person import Person
@@ -7,7 +9,7 @@ from olpopova.homework.homework08.person import Person
 def john():
     return {'first_name': 'John',
             'last_name': 'Smith',
-            'birth_date': '19.09.1979',
+            'birth_date': datetime.date(1979, 9, 19),
             'job': 'welder',
             'working_years': 15,
             'salary': 3600,
@@ -20,7 +22,7 @@ def john():
 def perceval():
     return {'first_name': 'Perceval',
             'last_name': 'Leclerk',
-            'birth_date': '6.1.1997',
+            'birth_date': datetime.date(1997, 10, 16),
             'job': 'F1 Driver',
             'working_years': 10,
             'salary': 1500000,
