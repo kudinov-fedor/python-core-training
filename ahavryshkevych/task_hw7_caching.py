@@ -2,21 +2,24 @@
 Create decorator which would remember answers,
 and if answer was given, do not make a call to a function
 """
-new_dict = {}
 
 
-def decorator(func):
+def caching_fibo_numbers(func):
+    new_dict = {}
+
     def inner(*args):
+        nonlocal new_dict
         if args in new_dict:
             return new_dict[args]
         else:
             result = func(*args)
-            new_dict.update({args: result})
+            new_dict[args] = result
             return result
+
     return inner
 
 
-@decorator
+@caching_fibo_numbers
 def fibo(n: int):
     """
     Count fibonache numbers, where next is sum of 2 prior
