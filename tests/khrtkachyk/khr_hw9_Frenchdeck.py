@@ -42,18 +42,22 @@ def test_iterable():
 
 
 def test_reverse_deck():
+    print(id(deck))
     assert next(reversed(deck)) == Card(rank='A', suit='hearts')
 
 
 @pytest.fixture
 def update_deck():
-    deck[0] = deck[0]._replace(rank="new_rank")
-    return deck[0]
+    from khr_hw9_Frenchdeck import FrenchDeck
+    new_deck = FrenchDeck()
+    print(id(new_deck))
+    new_deck[0] = new_deck[0]._replace(rank="new_rank")
+    return new_deck
 
 
 def test_set_item(update_deck):
-    new_deck = update_deck
-    assert new_deck == Card(rank='new_rank', suit='spades')
+    deck = update_deck
+    assert deck[0] == Card(rank='new_rank', suit='spades')
 
 
 def test_update_item_by_param():
