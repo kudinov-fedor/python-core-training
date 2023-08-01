@@ -7,4 +7,15 @@ class MyClass:
         return item
 
     def __init__(self):
-        a = 'ghj'
+        self.a = 'ghj'
+
+
+class Other:
+    objects = []
+
+    def __new__(cls):
+        cls.objects.append(123)
+        return 123
+
+    def __init__(self):
+        self.a = 'ghj'
