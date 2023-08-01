@@ -26,7 +26,7 @@ class Fraction:
         if format_spec == "dec":
             return "{:.1f}".format(self.num/self.denom)
         else:
-            return "'{} / {}'".format(self.num, self.denom)
+            return str(self)
 
     def __bool__(self):
         return self.num != 0
@@ -39,13 +39,13 @@ class Fraction:
         return NotImplemented
 
     def __ne__(self, other):
-        if isinstance(other, Fraction):
-            return (self.num, self.denom) != (other.num, other.denom)
+        if isinstance(other, (Fraction, int)):
+            return not self == other
         return NotImplemented
 
     def __gt__(self, other):
         if isinstance(other, Fraction):
-            return (self.num / self.denom) > (other.num / other.denom)
+            return (self.num * other.denom) > (other.num * self.denom)
         return NotImplemented
 
     def __lt__(self, other):
@@ -69,14 +69,12 @@ class Fraction:
             new_denom = self.denom * other.denom
             return Fraction(new_num, new_denom)
         elif isinstance(other, int):
-            return self + Fraction(other)
+            new_num = self.num + other * self.denom
+            return Fraction(new_num, self.denom)
 
         return NotImplemented
 
-    def __radd__(self, other):
-        if isinstance(other, int):
-            return Fraction(other) + self
-        return NotImplemented
+    __radd__ = __add__
 
     def __sub__(self, other):
         if isinstance(other, Fraction):
@@ -84,7 +82,8 @@ class Fraction:
             new_denom = self.denom * other.denom
             return Fraction(new_num, new_denom)
         elif isinstance(other, int):
-            return self - Fraction(other)
+            new_num = self.num - other * self.denom
+            return Fraction(new_num, self.denom)
 
         return NotImplemented
 
