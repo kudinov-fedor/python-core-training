@@ -47,12 +47,7 @@ class PingPongIterator(MainIterator):
 
     def __init__(self, iterable):
         super().__init__(iterable)
-        self.iterable = iterable
         self.forward = True
-        self.position = 0
-
-    def __iter__(self):
-        return self
 
     def __next__(self):
         if 0 <= self.position < len(self.iterable):
