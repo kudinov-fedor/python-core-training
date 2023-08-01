@@ -19,19 +19,17 @@ class SimpleIterator(MainIterator):
 
 
 class ReversedIterator(MainIterator):
-
     def __init__(self, iterable):
         super().__init__(iterable)
-        self.iterable = list(iterable)[::-1]
-        self.position = 0
+        self.position = len(self.iterable) - 1
 
     def __next__(self):
-        if self.position < len(self.iterable):
-            item = self.iterable[self.position]
-            self.position += 1
-            return item
+        if self.position < 0:
+            raise StopIteration
 
-        raise StopIteration
+        item = self.iterable[self.position]
+        self.position -= 1
+        return item
 
 
 class CycleIterator(MainIterator):
