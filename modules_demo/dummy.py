@@ -1,5 +1,10 @@
 
+try:
+    while True:
+        item = input()
+        print(item)
+except (KeyboardInterrupt, EOFError):
+    print("gracefull stop")
 
-while True:
-    item = input()
-    print(item)
+
+print("exit")
