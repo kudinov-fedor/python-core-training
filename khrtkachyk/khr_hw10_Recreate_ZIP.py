@@ -11,9 +11,8 @@ def my_zip(*iterable):
 
     while True:
         try:
-            next_iterator = [next(j) for j in new_iterators]
-            final_tuple = tuple(next_iterator)
-            yield final_tuple
+            next_iterator = tuple([next(j) for j in new_iterators])
+            yield next_iterator
         except StopIteration:
             return
 
@@ -23,6 +22,7 @@ if __name__ == "__main__":
     a = ["a", "b", "c"]
     b = ["x", "y", "z"]
     print(list(my_zip(a, b)))
+    print(list(my_zip(a)))
 
     assert list(zip(a, b)) == [("a", "x"), ("b", "y"), ("c", "z")]
     assert list(zip(a)) == [("a",), ("b",), ("c",)]

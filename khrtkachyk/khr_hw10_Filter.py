@@ -7,11 +7,9 @@ def my_filter(key, iterable):
     """
 
     key = key or (lambda i: i)
-    result = []
-    for x in iterable:
-        if key(x):
-            result.append(x)
-    return result
+    for item in iterable:
+        if key(item):
+            yield item
 
 
 if __name__ == "__main__":
@@ -19,5 +17,5 @@ if __name__ == "__main__":
 
     assert list(filter(None, a)) == [1, 2, 2, 3]
     assert list(filter(lambda i: i < 2, a)) == [0, 1, 0]
-    assert my_filter(None, a) == [1, 2, 2, 3]
-    assert my_filter(lambda i: i < 2, a) == [0, 1, 0]
+    assert list(my_filter(None, a)) == [1, 2, 2, 3]
+    assert list(my_filter(lambda i: i < 2, a)) == [0, 1, 0]
