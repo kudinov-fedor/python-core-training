@@ -1,3 +1,9 @@
+import sys
+
+# sys.path.append("/Users/fkudi/PycharmProjects/python-core-training/modules_demo/executable_module")
+
+
+
 from executable_module.some_other_module import a
 from executable_module.some_other_module import a
 from executable_module.some_other_module import a

@@ -3,17 +3,17 @@ from sys import argv
 
 path, operator, value = argv
 
-value = float(value)
-received = float(input())
+while True:
+    value = float(value)
+    received = float(input())
 
-if operator == "+":
-    res = received + value
-elif operator == "-":
-    res = received - value
-elif operator == "*":
-    res = received * value
-elif operator == "/":
-    res = received / value
+    if operator == "+":
+        res = received + value
+    elif operator == "-":
+        res = received - value
+    elif operator == "*":
+        res = received * value
+    elif operator == "/":
+        res = received / value
 
-
-print(res)
+    print(res)
