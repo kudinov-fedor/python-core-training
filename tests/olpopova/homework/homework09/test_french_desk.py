@@ -14,4 +14,4 @@ def test_french_desk(card, position_in_deck):
 
     card_in_deck = deck[position_in_deck]
     shuffle(deck)
-    assert (deck[position_in_deck] != card_in_deck) is True
+    assert deck[position_in_deck] != card_in_deck
