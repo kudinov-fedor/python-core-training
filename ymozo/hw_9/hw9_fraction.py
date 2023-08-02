@@ -49,18 +49,16 @@ class Fraction:
         return NotImplemented
 
     def __lt__(self, other):
-        if isinstance(other, Fraction):
-            return (self.num / self.denom) < (other.num / other.denom)
-        return NotImplemented
+        return not (self > other) and not (self == other)
 
     def __ge__(self, other):
         if isinstance(other, Fraction):
-            return (self.num / self.denom) >= (other.num / other.denom)
+            return (self.num * other.denom) >= (other.num * self.denom)
         return NotImplemented
 
     def __le__(self, other):
         if isinstance(other, Fraction):
-            return (self.num / self.denom) <= (other.num / other.denom)
+            return (self.num * other.denom) <= (other.num * self.denom)
         return NotImplemented
 
     def __add__(self, other):
@@ -102,9 +100,7 @@ class Fraction:
         return NotImplemented
 
     def __rmul__(self, other):
-        if isinstance(other, int):
-            return self * other
-        return NotImplemented
+        return self.__mul__(other)
 
     def __truediv__(self, other):
         if isinstance(other, Fraction):
@@ -113,11 +109,10 @@ class Fraction:
             return Fraction(new_num, new_denom)
         elif isinstance(other, int):
             return Fraction(self.num, self.denom * other)
+        return NotImplemented
 
     def __rtruediv__(self, other):
-        if isinstance(other, int):
-            return Fraction(other * self.denom, self.num)
-        return NotImplemented
+        return Fraction(other) / self
 
 
 if __name__ == "__main__":
