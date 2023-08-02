@@ -49,16 +49,18 @@ class Fraction:
         return NotImplemented
 
     def __lt__(self, other):
+        if isinstance(other, (Fraction, int)):
+            return not (self > other) and not (self == other)
         return NotImplemented
 
     def __ge__(self, other):
         if isinstance(other, (Fraction, int)):
-            return (self.num * other.denom) >= (other.num * self.denom)
+            return not (self < other)
         return NotImplemented
 
     def __le__(self, other):
         if isinstance(other, (Fraction, int)):
-            return (self.num * other.denom) <= (other.num * self.denom)
+            return not (self > other)
         return NotImplemented
 
     def __add__(self, other):
