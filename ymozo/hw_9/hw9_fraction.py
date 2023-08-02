@@ -44,20 +44,20 @@ class Fraction:
         return NotImplemented
 
     def __gt__(self, other):
-        if isinstance(other, Fraction):
+        if isinstance(other, (Fraction, int)):
             return (self.num * other.denom) > (other.num * self.denom)
         return NotImplemented
 
     def __lt__(self, other):
-        return not (self > other) and not (self == other)
+        return NotImplemented
 
     def __ge__(self, other):
-        if isinstance(other, Fraction):
+        if isinstance(other, (Fraction, int)):
             return (self.num * other.denom) >= (other.num * self.denom)
         return NotImplemented
 
     def __le__(self, other):
-        if isinstance(other, Fraction):
+        if isinstance(other, (Fraction, int)):
             return (self.num * other.denom) <= (other.num * self.denom)
         return NotImplemented
 
@@ -99,8 +99,7 @@ class Fraction:
             return Fraction(self.num * other, self.denom)
         return NotImplemented
 
-    def __rmul__(self, other):
-        return self.__mul__(other)
+    __rmul__ = __mul__
 
     def __truediv__(self, other):
         if isinstance(other, Fraction):
