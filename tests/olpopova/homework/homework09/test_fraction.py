@@ -23,12 +23,15 @@ def test_logic_operators():
     assert Fraction(1, 3) <= Fraction(1, 2)
     assert Fraction(1, 2) <= Fraction(1, 2)
     assert Fraction(1, 2) >= Fraction(1, 2)
+    assert Fraction(2, 4) == 0.5
+    assert 0.5 == Fraction(2, 4)
 
 
 def test_add():
     a = Fraction(2, 4)
     assert Fraction(2, 4) + Fraction(1, 3) == Fraction(5, 6)
     assert Fraction(1, 2) + 2 == Fraction(5, 2)
+    assert Fraction(1, 2) + 2.5 == Fraction(3, 1)
     assert 2 + Fraction(1, 2) == Fraction(5, 2)
 
     # in place add
@@ -43,6 +46,7 @@ def test_subtraction():
     assert Fraction(2, 4) - Fraction(1, 3) == Fraction(1, 6)
     assert Fraction(5, 2) - 2 == Fraction(1, 2)
     assert 2 - Fraction(3, 2) == Fraction(1, 2)
+    assert 3.5 - Fraction(3, 2) == Fraction(2, 1)
 
     # in place sub
     b = a
