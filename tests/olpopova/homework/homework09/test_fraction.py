@@ -1,3 +1,5 @@
+import pytest
+
 from olpopova.homework.homework09.fraction import Fraction
 
 
@@ -25,6 +27,9 @@ def test_logic_operators():
     assert Fraction(1, 2) >= Fraction(1, 2)
     assert Fraction(2, 4) == 0.5
     assert 0.5 == Fraction(2, 4)
+    with pytest.raises(AttributeError):
+        assert 'dfhf' == Fraction(2, 4)
+        assert Fraction(2, 4) == 'dfhf'
 
 
 def test_add():
@@ -33,6 +38,9 @@ def test_add():
     assert Fraction(1, 2) + 2 == Fraction(5, 2)
     assert Fraction(1, 2) + 2.5 == Fraction(3, 1)
     assert 2 + Fraction(1, 2) == Fraction(5, 2)
+    with pytest.raises(AttributeError):
+        assert 'dfhf' + Fraction(2, 4)
+        assert Fraction(2, 4) + 'dfhf'
 
     # in place add
     b = a
@@ -47,6 +55,8 @@ def test_subtraction():
     assert Fraction(5, 2) - 2 == Fraction(1, 2)
     assert 2 - Fraction(3, 2) == Fraction(1, 2)
     assert 3.5 - Fraction(3, 2) == Fraction(2, 1)
+    with pytest.raises(AttributeError):
+        assert Fraction(5, 2) - 'dfhf'
 
     # in place sub
     b = a
@@ -60,6 +70,8 @@ def multiplication():
     assert Fraction(1, 3) * 3 == 1
     assert Fraction(2, 3) * Fraction(12, 4) == 2
     assert 2 * Fraction(3, 2) == 3
+    with pytest.raises(AttributeError):
+        assert Fraction(5, 2) * 'dfhf'
 
     # in place mul
     b = a
@@ -73,6 +85,8 @@ def test_division():
     assert Fraction(2, 3) / Fraction(2, 3) == 1
     assert Fraction(2, 3) / Fraction(4, 3) == Fraction(1, 2)
     assert 2 / Fraction(4, 3) == Fraction(3, 2)
+    with pytest.raises(AttributeError):
+        assert Fraction(5, 2) / 'dfhf'
 
     # in place div
     b = a
@@ -84,3 +98,5 @@ def test_division():
 def test_negative_int():
     assert -Fraction(1, 2) == Fraction(-1, 2)
     assert abs(Fraction(-1, 2)) == Fraction(1, 2)
+    with pytest.raises(TypeError):
+        assert -Fraction('f', 'f') == Fraction('f', 'f')
