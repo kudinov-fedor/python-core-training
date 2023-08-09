@@ -45,7 +45,8 @@ class CycleIterator(Iterator):
 class PingPongIterator(Iterator):
 
     def __next__(self):
-        pingpong_row = self.iterable + list(reversed(self.iterable[1:-1]))
+        reverse_order = [self.iterable[i] for i in range(len(self.iterable) -2, 0, -1)]
+        pingpong_row = self.iterable + reverse_order
         while True:
             if self.position == len(pingpong_row):
                 self.position = 0
