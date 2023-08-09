@@ -27,6 +27,8 @@ def test_logic_operators():
     assert Fraction(1, 2) >= Fraction(1, 2)
     assert Fraction(2, 4) == 0.5
     assert 0.5 == Fraction(2, 4)
+    assert 6 > Fraction(1, 3)
+    assert Fraction(1, 3) < 6.5
     with pytest.raises(AttributeError):
         assert 'dfhf' == Fraction(2, 4)
         assert Fraction(2, 4) == 'dfhf'

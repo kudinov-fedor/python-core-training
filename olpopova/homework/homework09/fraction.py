@@ -49,16 +49,20 @@ class Fraction:
         return self.num == other.num and self.denom == other.denom
 
     def __gt__(self, other):
+        self, other = self.convert_to_int(self), self.convert_to_int(other)
         return self.num * other.denom > other.num * self.denom
 
     def __ge__(self, other):
-        return self > other or self == other
+        self, other = self.convert_to_int(self), self.convert_to_int(other)
+        return self == other or self > other
 
     def __lt__(self, other):
+        self, other = self.convert_to_int(self), self.convert_to_int(other)
         return not self > other
 
     def __le__(self, other):
-        return not self > other or self == other
+        self, other = self.convert_to_int(self), self.convert_to_int(other)
+        return self == other or not self >= other
 
     def __add__(self, other):
         self, other = self.convert_to_int(self), self.convert_to_int(other)
