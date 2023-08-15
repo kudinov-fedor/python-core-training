@@ -1,7 +1,6 @@
 def beginning_zeros(a: str) -> int:
-    converted_a = list(a)
     zero_count = 0
-    for num in converted_a:
+    for index, num in enumerate(a):
         if int(num) == 0:
             zero_count += 1
         else:

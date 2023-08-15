@@ -5,11 +5,10 @@ def is_acceptable_password(password: str) -> bool:
     not_only_digits = not password.isnumeric()
     pass_word = "password" not in password.lower()
 
-    pass_list = list(password)
+    pass_list = set(password)
     char_count = []
     for char in pass_list:
-        if char not in char_count:
-            char_count.append(char)
+        char_count.append(char)
 
     unique_char_count = len(char_count)
 

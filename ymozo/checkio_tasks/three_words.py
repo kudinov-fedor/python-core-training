@@ -1,8 +1,8 @@
 def checkio(words: str) -> bool:
     sentences = words.split()
     words_count = 0
-    for word in sentences:
-        if word.isalpha():
+    for index in range(len(sentences)):
+        if sentences[index].isalpha():
             words_count += 1
             if words_count >= 3:
                 return True
