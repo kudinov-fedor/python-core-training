@@ -1,11 +1,10 @@
 def beginning_zeros(a: str) -> int:
-    zero_count = 0
     for index, num in enumerate(a):
         if int(num) == 0:
-            zero_count += 1
+            index += 1
         else:
             break
-    return zero_count
+    return index
 
 
 if __name__ == "__main__":
