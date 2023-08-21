@@ -1,9 +1,9 @@
 def beginning_zeros(a: str) -> int:
     for index, num in enumerate(a):
-        if int(num) == 0:
-            index += 1
-        else:
+        if num != '0':
             break
+    else:
+        index = len(a)
     return index
 
 
