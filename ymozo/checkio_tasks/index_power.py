@@ -2,7 +2,7 @@ from typing import List
 
 
 def index_power(ar: List[int], n: int) -> int:
-    return ar[n]**n if 0 <= n < len(ar) else -1
+    return ar[n]**n if n in range(len(ar)) else -1
 
 
 if __name__ == "__main__":
