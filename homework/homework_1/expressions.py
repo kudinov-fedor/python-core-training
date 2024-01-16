@@ -70,6 +70,9 @@ set()
 str.join
 "".join
 
+id(str.join)
+id("".join)
+
 str.join("|", "abc")
 "|".join("abc")
 
