@@ -19,6 +19,11 @@ False
 
 """abc"""
 
+'''abc'''
+
+("abc"
+"def")
+
 "abc\ndef"
 
 """abc
