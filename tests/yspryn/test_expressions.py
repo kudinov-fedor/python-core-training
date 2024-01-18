@@ -1,4 +1,4 @@
-def test_list_check():
+def test_tuple_check():
     a1 = 12,
     a2 = (12)
     a3 = (12,)
