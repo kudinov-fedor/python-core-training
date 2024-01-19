@@ -12,11 +12,11 @@ def test_double_comparison():
 
 def test_true_or_false():
     # Check one line expression <True Statement> if <Conditional Expression> else <False Statement>
-    assert "it is true" == "it is true" if True else "it is false"
-    assert "it is false" == "it is true" if False else "it is false"
-    assert "it is false" == "it is true" if "" else "it is false"
-    assert "it is true" == "it is true" if "abc" else "it is false"
-    assert "it is true" != "it is true" if 0 else "it is false"
-    assert "it is false" != "it is true" if 1 else "it is false"
-    assert "it is true" == "it is true" if [] else "it is false"
-    assert "it is true" == "it is true" if [None] else "it is false"
+    assert "it is true" == ("it is true" if True else "it is false")
+    assert "it is false" == ("it is true" if False else "it is false")
+    assert "it is false" == ("it is true" if "" else "it is false")
+    assert "it is true" == ("it is true" if "abc" else "it is false")
+    assert "it is true" != ("it is true" if 0 else "it is false")
+    assert "it is false" != ("it is true" if 1 else "it is false")
+    assert "it is true" != ("it is true" if [] else "it is false")
+    assert "it is true" == ("it is true" if [None] else "it is false")
