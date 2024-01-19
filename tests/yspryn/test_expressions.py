@@ -20,6 +20,8 @@ def test_create_dict():
     assert dict_var1 == dict
     assert id(dict_var1) == id(dict)
     assert dict_var2 == dict_var3
+    assert dict_var1 is dict
+    assert type({}) is dict
 
 
 def test_create_str():
