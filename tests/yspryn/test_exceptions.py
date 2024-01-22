@@ -1,15 +1,11 @@
 import pytest
+import sys
+sys.path.append('./tests/yspryn')
 
 
 def test_index_error():
     a = list()
     b = [1, 23, 'no']
-    # try:
-    #     b[1]
-    # except IndexError:
-    #     pass
-    # else:
-    #     raise AssertionError
 
     with pytest.raises(IndexError):
         a[12]
@@ -23,8 +19,8 @@ def test_zero_division():
 
 
 def test_attribute_error():
+    a = "hello world"
     with pytest.raises(AttributeError):
-        a = "hello world"
         a.lengh()
 
 
@@ -38,14 +34,14 @@ def test_name_error():
     my_list = [1, 2, 3, 55]
     a1 = 10
     with pytest.raises(NameError):
-        var = my_lists[1]
+        my_lists[1]
     with pytest.raises(NameError):
-        var = a11 + 6
+        a11 + 6
 
 
-    def test_syntax_error():
-        with pytest.raises(SyntaxError):
-            import my_test_module
+def test_syntax_error():
+    with pytest.raises(SyntaxError):
+        import my_test_module
 
 def test_type_error():
     with pytest.raises(TypeError):
