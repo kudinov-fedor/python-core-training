@@ -1,7 +1,4 @@
 import pytest
-import sys
-sys.path.append('./tests/yspryn')
-
 
 def test_index_error():
     a = list()
@@ -41,7 +38,7 @@ def test_name_error():
 
 def test_syntax_error():
     with pytest.raises(SyntaxError):
-        import my_test_module
+        from tests.yspryn import my_test_module
 
 def test_type_error():
     with pytest.raises(TypeError):
