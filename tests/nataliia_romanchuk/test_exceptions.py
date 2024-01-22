@@ -26,7 +26,12 @@ def test_assertion_error():
 
 def test_zero_division_error():
     with pytest.raises(ZeroDivisionError):
-        5 / 0
+        1 / 0
+
+
+def test_arithmetic_error():
+    with pytest.raises(ArithmeticError):
+        1 / 0
 
 
 def test_file_not_found_error():
@@ -70,12 +75,7 @@ def test_type_error():
         "5" + 2
 
 
-def test_arithmetic_error():
-    with pytest.raises(ArithmeticError):
-        1 / 0
-
-
 def test_key_error():
     my_dict = {"key": "value"}
     with pytest.raises(KeyError):
-        my_dict["nonexistent_key"]
+        my_dict["a_key"]
