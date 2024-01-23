@@ -20,7 +20,7 @@ import pytest
 
 def test_exception_zero_division():
     with pytest.raises(ZeroDivisionError):
-        res = 999/0
+        999/0
 
 
 def test_exception_assert():
@@ -29,28 +29,29 @@ def test_exception_assert():
 
 
 def test_exception_index():
+    # code created in this way to practice more with comprehension
+    example = [item * 3 for item in range(16)]
     with pytest.raises(IndexError):
-        example = [_*3 for _ in range(16)]
-        _ = example[20]
+        example[20]
 
 
 def test_exception_key():
+    example = {"first": 1, "second": 2}
     with pytest.raises(KeyError):
-        example = {"first": 1, "second": 2}
-        _ = example["third"]
+        example["third"]
 
 
 def test_exception_attribute():
     with pytest.raises(AttributeError):
-        _ = int.foo
+        int.foo
 
 
 def test_if_else_while():
     list_object = [1, 2, 3, 4, "qwe", [1, 4, 5]]
-    while list_object:
-        if list_object:
-            list_object.pop(-1)
+    while len(list_object) != 0:
+        list_object.pop()
+        if not list_object:
+            assert list_object == []
         else:
-            assert list_object is False
-
+            assert len(list_object) > 0
     assert len(list_object) == 0
