@@ -21,18 +21,33 @@ import pytest
 
 def test_zero_division_exception():
     with pytest.raises(ZeroDivisionError):
-        res = 0 / 0
+        0 / 0
 
 
 def test_types_exception():
     i = (1, 1)
     with pytest.raises(IndexError):
-        print(i[2])
+        i[2]
 
 
 def test_assertion_error():
     with pytest.raises(AssertionError):
-        assert True == False is False
+        assert False
+
+
+def test_assertion_error1():
+    with pytest.raises(AssertionError):
+        assert 0
+
+
+def test_assertion_error2():
+    with pytest.raises(AssertionError):
+        assert []
+
+
+def test_assertion_error3():
+    with pytest.raises(AssertionError):
+        assert {}
 
 
 def test_key_error():
@@ -72,7 +87,7 @@ def test_not_true():
 
 def test_if():
     if True:
-        assert True
+        pass
     else:
         raise AssertionError("else should not be reachable")
 
@@ -81,15 +96,15 @@ def test_if_2():
     if False:
         raise AssertionError("If should not be reachable")
     else:
-        assert True
+        pass
 
 
 def test_for_for():
     fibo = [0, 1, 1, 2, "Some text", -3, 5, 8, 13]
     first = fibo[0]
     second = fibo[1]
-    for i in range(1, len(fibo)):
-        if isinstance(fibo[i], int):
-            assert first + second == abs(fibo[i])
+    for item in enumerate(fibo[1:], start=1):
+        if isinstance(item, int):
+            assert first + second == abs(item)
             second = abs(first)
-            first = abs(fibo[i])
+            first = abs(item)
