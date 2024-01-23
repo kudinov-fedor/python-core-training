@@ -25,7 +25,7 @@ def test_zero_division_error_in_list_compr():
 
 
 def test_value_error_in__list_compr():
-    a = [1, 2.3, 16.333, 'aaa', 12, 1]
+    a = [1, 2.3, 16.33, 'aaa', 12, 1]
     with pytest.raises(ValueError):
         [int(x) for x in a]
 
