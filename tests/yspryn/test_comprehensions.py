@@ -21,7 +21,7 @@ def test_two_conditions_in_list_compr():
 def test_zero_division_error_in_list_compr():
     a = [1, 3, 0, 44, 12]
     with pytest.raises(ZeroDivisionError):
-        [1/x for x in a]
+        [1 / x for x in a]
 
 
 def test_value_error_in__list_compr():
@@ -33,7 +33,7 @@ def test_value_error_in__list_compr():
 def test_name_error_in_list_compr():
     a = [1, 2, 3, 4, 5]
     with pytest.raises(NameError):
-        [x+1 for y in a]
+        [x + 1 for y in a]
 
 
 def test_if_condition_in_list_compr():
