@@ -25,7 +25,7 @@ def test_zero_division_error_in_list_compr():
 
 
 def test_value_error_in__list_compr():
-    a = [1, 2.3, 16.333, 'aaa', 12, 1]
+    a = [1, 2.3, 16.33, 'aaa', 12, 1]
     with pytest.raises(ValueError):
         [int(x) for x in a]
 
@@ -48,7 +48,7 @@ def test_empty_result_for_list_compr():
 
 
 def test_iteration_with_zero_elements_in_list_compr():
-    new_list = [x+1 for x in range(0)]
+    new_list = [x + 1 for x in range(0)]
     assert new_list == []
 
 
@@ -64,7 +64,7 @@ def test_convert_types_in__list_compr():
 
 
 def test_set_with_comprehensions():
-    new_set = {x**2 for x in range(2, 5)}
+    new_set = {x ** 2 for x in range(2, 5)}
     assert new_set == {16, 9, 4}
 
 
