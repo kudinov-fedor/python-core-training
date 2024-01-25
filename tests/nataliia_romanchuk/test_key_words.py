@@ -67,4 +67,4 @@ def test_while():
 def test_list_comprehension():
     numbers = [1, 11, 111]
     squares = [x ** 2 for x in numbers]
-    assert squares == [1, 11**2, 111**2]
+    assert squares == [1, 11 ** 2, 111 ** 2]
