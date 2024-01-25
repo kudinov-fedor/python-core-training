@@ -16,6 +16,8 @@ def test_and():
 def test_or():
     assert (1 == 1) or (1 == '1')
     assert not (1 == 1) or ('1' == '1')
+    assert ("abc" and "def") == "def"
+    assert ("" and "def") == ""
 
 
 def test_in():
