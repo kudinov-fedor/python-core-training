@@ -38,19 +38,13 @@ def test_arithmetic_error():
 
 
 def test_file_not_found_error():
-    package_name = "nataliia_romanchuk"
     with pytest.raises(FileNotFoundError):
-        with importlib.resources.open_text(package_name, "Teext.txt") as file:
-            content = file.read()
-            print(content)
+        importlib.resources.open_text("nataliia_romanchuk", "Teext.txt")
 
 
 def test_module_not_found_error():
-    package_name = "nataliia_romanchukkkkkkk"
     with pytest.raises(ModuleNotFoundError):
-        with importlib.resources.open_text(package_name, "Text.txt") as file:
-            content = file.read()
-            print(content)
+        importlib.resources.open_text("nataliia_romanchukkkkkkk", "Text.txt")
 
 
 def test_import_error():
