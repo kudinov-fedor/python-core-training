@@ -43,10 +43,10 @@ def test_not_in():
 def test_if_else():
     x = 1
     if x > 0:
-        result = True
+        pass
     else:
-        result = False
-    assert result == True
+        raise AssertionError
+    assert x > 0
 
 
 def test_for_in():
