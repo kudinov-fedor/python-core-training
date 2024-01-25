@@ -2,16 +2,19 @@ import importlib
 
 import pytest
 
-from nataliia_romanchuk.Classes import Cats
+from nataliia_romanchuk.Cats import Cats
 
 
 def test_attribute_error():
-    cat = Cats('Pushok', 10)
-    print(cat.meow())
-    print(cat.sleep())
+    cat_name = 'Pushok'
+    cat_age = 10
+    cat = Cats(cat_name, cat_age)
+    expected_meow_output = f"Cat {cat.name} says Meow for {cat.age} years!"
+    assert cat.meow() == expected_meow_output
+    expected_sleep_output = f"Cat {cat.name} is sleeping. Shhhhhhhh!"
+    assert cat.sleep() == expected_sleep_output
     with pytest.raises(AttributeError):
         cat.woof()
-
 
 def test_index_error():
     list = [1, 2]
