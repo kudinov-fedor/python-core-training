@@ -27,15 +27,10 @@ def test_assertion_error():
         assert False, "Expected AssertionError"
 
 
-def test_zero_division_error():
-    with pytest.raises(ZeroDivisionError):
+@pytest.mark.parametrize("error_type", [ZeroDivisionError, ArithmeticError])
+def test_error_handling(error_type):
+    with pytest.raises(error_type):
         1 / 0
-
-
-def test_arithmetic_error():
-    with pytest.raises(ArithmeticError):
-        1 / 0
-
 
 def test_file_not_found_error():
     with pytest.raises(FileNotFoundError):
