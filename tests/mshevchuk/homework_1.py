@@ -5,20 +5,16 @@ def test_max():
     assert max((2, 3, 1, -2, -5, -8, -12), key=abs) == -12
 
 
-def test_max1():
-    assert max((2, 3, 1, -2, -5, -8, -12), key=abs) is not -12
-
-
 def test_abs():
     assert abs(-12) != -12
 
 
 def test_compare_tuples1():
-    assert ((1, 2 + 2, 3) == (1, 4, 3)) is True
+    assert (1, 2 + 2, 3) == (1, 4, 3)
 
 
 def test_compare_tuples2():
-    assert ((1, 2) > (1, 1, 1, 1)) is True
+    assert ((1, 2) > (1, 1, 1, 1))
 
 
 def test_sets_comparison():
@@ -46,8 +42,4 @@ def test_sum():
 
 
 def test_sum1():
-    assert sum({0, 0, }) == False
-
-
-def test_sum2():
-    assert sum({0, 0, }) is not False
+    assert sum({0, 0, }) == 0
