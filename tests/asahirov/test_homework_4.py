@@ -8,10 +8,10 @@ def test_collections_sort():
             {"age": 25, "name": "Mathew", "sex": "M"}]
 
     sorted_list = sorted(data, key=lambda i: i["age"])
-    assert sorted_list[-1]["age"] == 34
+    assert [i["age"] for i in sorted_list] == [16, 25, 34]
 
     sorted_list_reverse = sorted(data, key=lambda i: i["age"], reverse=True)
-    assert sorted_list_reverse[-1]["age"] == 16
+    assert [i["age"] for i in sorted_list_reverse] == [34, 25, 16]
 
 
 def test_collections_sort_multiple():
@@ -27,8 +27,8 @@ def test_collections_sort_multiple():
 def test_comprehensions_dict():
     some_dict = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5}
 
-    updated_dict = [i[0] for i in some_dict.items() if i[1] % 2 != 0]
-    assert sorted(list("cea")) == sorted(updated_dict)
+    filtered_dict_keys = [i[0] for i in some_dict.items() if i[1] % 2 != 0]
+    assert sorted(list("cea")) == sorted(filtered_dict_keys)
 
 
 @pytest.mark.parametrize("password", ["some base password",
