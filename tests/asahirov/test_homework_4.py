@@ -27,7 +27,7 @@ def test_collections_sort_multiple():
 def test_comprehensions_dict():
     some_dict = {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5}
 
-    filtered_dict_keys = [i[0] for i in some_dict.items() if i[1] % 2 != 0]
+    filtered_dict_keys = [k for (k, v) in some_dict.items() if v % 2 != 0]
     assert sorted(list("cea")) == sorted(filtered_dict_keys)
 
 
