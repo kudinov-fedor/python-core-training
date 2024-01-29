@@ -66,6 +66,19 @@ def test_while():
     assert x == 5
 
 
+def test_ternary_operator():
+    x = 1
+    y = 11
+    result = x if x > y else y
+    assert result == y
+
+
+def test_simple_condition():
+    value = 11
+    result = "Even" if value % 2 == 0 else "Odd"
+    assert result == "Odd"
+
+
 def test_list_comprehension():
     numbers = [1, 11, 111]
     squares = [x ** 2 for x in numbers]
