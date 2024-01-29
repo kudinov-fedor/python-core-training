@@ -15,9 +15,7 @@ def test_empty():
 
 
 def test_is():
-    a = (1, 2, 3)
-    b = (1, 2, 3)
+    a = ([1, 2, 3],)
+    b = ([1, 2, 3],)
     assert a == b
-    assert a is b
-    hash(a) == hash(b)
-    id(a) == id(b)
+    assert a is not b
