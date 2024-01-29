@@ -70,3 +70,24 @@ def test_list_comprehension():
     numbers = [1, 11, 111]
     squares = [x ** 2 for x in numbers]
     assert squares == [1, 11 ** 2, 111 ** 2]
+
+
+def test_dict_comprehension():
+    keys = range(1, 4)
+    values = [1, 11, 111]
+    my_dict = {key: value for key, value in zip(keys, values)}
+    square_dict = {key: value ** 2 for key, value in my_dict.items()}
+    expected_square_dict = {1: 1, 2: 11 ** 2, 3: 111 ** 2}
+    assert square_dict == expected_square_dict
+
+
+def test_set_comprehension():
+    numbers = [1, 11, 111]
+    squares_set = {num ** 2 for num in numbers}
+    assert squares_set == {1, 121, 12321}
+
+
+def test_generator_expression():
+    numbers = [1, 2, 3]
+    square_generator = (num ** 2 for num in numbers)
+    assert list(square_generator) == [1, 4, 9]
