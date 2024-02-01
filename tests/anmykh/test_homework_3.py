@@ -10,7 +10,7 @@ def test_empty():
     assert tuple() == ()
     assert list() == []
     assert range(10) == range(0, 10, 1)
-    assert set() is not ()
+    assert set() != ()
     assert dict() == {}
 
 
