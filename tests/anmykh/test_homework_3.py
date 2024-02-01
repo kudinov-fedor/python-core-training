@@ -1,5 +1,10 @@
-def test_list():
-    assert list("abc") == ["a", "b", "c"]
+import pytest
+
+
+@pytest.mark.parametrize(["item", "output"],
+                         [("abc", ["a", "b", "c"])])
+def test_list(item, output):
+    assert list(item) == output
 
 
 def test_empty():
@@ -14,8 +19,8 @@ def test_empty():
     assert dict() == {}
 
 
-def test_is():
-    a = ([1, 2, 3],)
-    b = ([1, 2, 3],)
-    assert a == b
-    assert a is not b
+@pytest.mark.parametrize(["item1", "item2"],
+                         [([1, 2, 3], [1, 2, 3])])
+def test_is(item1, item2):
+    assert item1 == item2
+    assert item1 is not item2
