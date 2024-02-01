@@ -16,7 +16,7 @@ def test_and():
 def test_or():
     assert (1 == 1) or (1 == '1')
     assert not (1 == 1) or ('1' == '1')
-    assert "abc" and "def" == "def"
+    assert "abc" and ("def" == "def")
     assert ("" and "def") == ""
 
 
@@ -90,8 +90,10 @@ def test_dict_comprehension():
     values = [1, 11, 111]
     my_dict = {key: value for key, value in zip(keys, values)}
     square_dict = {key: value ** 2 for key, value in my_dict.items()}
+    expected_dict = {1: 1, 2: 11, 3: 111}
     expected_square_dict = {1: 1, 2: 11 ** 2, 3: 111 ** 2}
     assert square_dict == expected_square_dict
+    assert my_dict == expected_dict
 
 
 def test_set_comprehension():
