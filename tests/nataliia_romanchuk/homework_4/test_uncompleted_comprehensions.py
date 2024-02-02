@@ -25,18 +25,18 @@ def test_comprehensions():
 
 """create generator object using generator expression and unpack items form it into list, set, dict, tuple"""
 def test_generator_expression_unpacking():
-    generator_object, generator_object1, generator_object2, generator_object3 = tee((i for i in some_list), 4)
+    generator, generator1, generator2, generator3 = tee((i for i in some_list), 4)
 
-    list_result = list(generator_object1)
+    list_result = list(generator1)
     assert list_result == some_list
 
-    set_result = set(generator_object2)
+    set_result = set(generator2)
     assert set_result == set(some_list)
 
-    dict_result = dict((i, i * 2) for i in generator_object3)
+    dict_result = dict((i, i * 2) for i in generator3)
     assert dict_result == {1: 2, 2: 4, 3: 6, 4: 8, 5: 10}
 
-    tuple_result = tuple(generator_object)
+    tuple_result = tuple(generator)
     assert tuple_result == tuple(some_list)
 
 
