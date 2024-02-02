@@ -276,17 +276,34 @@ def test_iterator_for_string():
     assert exhausted_items == []
 
 
-def test_iterator_for_tuple():
+@pytest.mark.parametrize("expected_first, expected_rest, expected_exhausted", [
+    ('a', ['b', 'c', 'd'], [])])
+def test_iterator_for_tuple(expected_first, expected_rest, expected_exhausted):
     some_tuple_iter = iter(some_tuple)
 
     first_item = next(some_tuple_iter)
-    assert first_item == 'a'
+    assert first_item == expected_first
 
     rest_items = list(some_tuple_iter)
-    assert rest_items == ['b', 'c', 'd']
+    assert rest_items == expected_rest
 
     exhausted_items = list(some_tuple_iter)
-    assert exhausted_items == []
+    assert exhausted_items == expected_exhausted
+
+
+@pytest.mark.parametrize("expected_first, expected_rest, expected_exhausted", [
+    ('a', ['b', 'c', 'd'], [])])
+def test_iterator_for_list(expected_first, expected_rest, expected_exhausted):
+    some_list_iter = iter(some_list)
+
+    first_item = next(some_list_iter)
+    assert first_item == expected_first
+
+    rest_items = list(some_list_iter)
+    assert rest_items == expected_rest
+
+    exhausted_items = list(some_list_iter)
+    assert exhausted_items == expected_exhausted
 
 
 def test_iterator_for_list():
