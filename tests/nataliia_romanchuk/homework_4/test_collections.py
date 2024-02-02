@@ -85,8 +85,6 @@ def test_last_item_list():
 
 
 # modify
-
-
 def test_modify_and_delete_list():
     a = [1, 2, 3, 4]
     a[3] = "abc"
@@ -196,11 +194,6 @@ def test_unpacking_sets_head_d():
     assert d == 'd'
 
 
-def test_unpacking_sets_head():
-    *head, d = sorted(some_set)
-    assert set(head) == {'a', 'b', 'c'} and d == 'd'
-
-
 def test_unpacking_dicts_head():
     *head, d = some_dict
     assert set(head) == {'a', 'b', 'c'}
@@ -233,9 +226,8 @@ def test_unpacking_sets_a_middle_d():
 def test_unpacking_dicts_a_middle_d():
     a, *middle, d = sorted(some_dict)
     assert a == 'a'
-    assert set(middle) == {'b', 'c'}
+    assert middle == ['b', 'c']
     assert d == 'd'
-    assert a == 'a' and set(middle) == {'b', 'c'} and d == 'd'
 
 
 def test_unpacking_strings_a_b_c_d_tail():
@@ -268,7 +260,7 @@ def test_unpacking_dicts_a_b_c_d_tail():
     assert b == 'b'
     assert c == 'c'
     assert d == 'd'
-    assert set(tail) == set()
+    assert tail == []
 
 
 # iterate protocol
@@ -325,7 +317,7 @@ def test_iterator_for_set():
 
 
 def test_iterator_for_dict():
-    some_dict_iter = iter(some_dict)
+    some_dict_iter = iter(sorted(some_dict))
 
     first_key = next(some_dict_iter)
     assert first_key in {'a', 'b', 'c', 'd'}
