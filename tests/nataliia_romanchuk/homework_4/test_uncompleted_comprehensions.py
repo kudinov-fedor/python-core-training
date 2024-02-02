@@ -7,7 +7,7 @@ some_dict = {"a": 1, "b": 2, "c": 3}
 
 def test_comprehensions():
     # generator expression
-    generator_result = list((i for i in some_list))
+    generator_result = list(i for i in some_list)
     assert generator_result == some_list
 
     # list comprehension
@@ -23,8 +23,7 @@ def test_comprehensions():
     assert dict_result == {1: 2, 2: 4, 3: 6, 4: 8, 5: 10}
 
 
-# create generator object using generator expression
-# and unpack items form it into list, set, dict, tuple
+"""create generator object using generator expression and unpack items form it into list, set, dict, tuple"""
 def test_generator_expression_unpacking():
     generator_object, generator_object1, generator_object2, generator_object3 = tee((i for i in some_list), 4)
 
