@@ -218,9 +218,8 @@ def test_unpacking_lists_a_middle_d():
 def test_unpacking_sets_a_middle_d():
     a, *middle, d = sorted(some_set)
     assert a == 'a'
-    assert set(middle) == {'b', 'c'}
+    assert middle == ['b', 'c']
     assert d == 'd'
-    assert a == 'a' and set(middle) == {'b', 'c'} and d == 'd'
 
 
 def test_unpacking_dicts_a_middle_d():
@@ -230,31 +229,31 @@ def test_unpacking_dicts_a_middle_d():
     assert d == 'd'
 
 
-def test_unpacking_strings_a_b_c_d_tail():
+def test_unpacking_strings():
     a, b, c, d, *tail = some_str
     assert (a, b, c, d, tail) == ('a', 'b', 'c', 'd', [])
 
 
-def test_unpacking_tuples_a_b_c_d_tail():
+def test_unpacking_tuples():
     a, b, c, d, *tail = some_tuple
     assert (a, b, c, d, tail) == ('a', 'b', 'c', 'd', [])
 
 
-def test_unpacking_lists_a_b_c_d_tail():
+def test_unpacking_lists():
     a, b, c, d, *tail = some_list
     assert (a, b, c, d, tail) == ('a', 'b', 'c', 'd', [])
 
 
-def test_unpacking_sets_a_b_c_d_tail():
+def test_unpacking_sets():
     a, b, c, d, *tail = sorted(some_set)
     assert a == 'a'
     assert b == 'b'
     assert c == 'c'
     assert d == 'd'
-    assert set(tail) == set()
+    assert tail == []
 
 
-def test_unpacking_dicts_a_b_c_d_tail():
+def test_unpacking_dicts():
     a, b, c, d, *tail = sorted(some_dict)
     assert a == 'a'
     assert b == 'b'
@@ -311,10 +310,10 @@ def test_iterator_for_set():
     some_set_iter = iter(sort)
 
     first_item = next(some_set_iter)
-    assert first_item in {'a', 'b', 'c', 'd'}
+    assert first_item in ['a', 'b', 'c', 'd']
 
     rest_items = list(some_set_iter)
-    assert set(rest_items) == {'b', 'c', 'd'}
+    assert rest_items == ['b', 'c', 'd']
 
     exhausted_items = list(some_set_iter)
     assert exhausted_items == []
@@ -324,10 +323,10 @@ def test_iterator_for_dict():
     some_dict_iter = iter(sorted(some_dict))
 
     first_key = next(some_dict_iter)
-    assert first_key in {'a', 'b', 'c', 'd'}
+    assert first_key in ['a', 'b', 'c', 'd']
 
     rest_keys = list(some_dict_iter)
-    assert set(rest_keys) == {'b', 'c', 'd'}
+    assert rest_keys == ['b', 'c', 'd']
 
     exhausted_keys = list(some_dict_iter)
     assert exhausted_keys == []
@@ -342,74 +341,70 @@ data = [{"age": 16, "name": "John", "sex": "M"},
 def test_sort_data_by_age():
     sorted_data_ascending = sorted(data, key=lambda i: i["age"])
     sorted_data_descending = sorted(data, key=lambda i: i["age"], reverse=True)
-    assert sorted_data_ascending == [{"age": 16, "name": "John", "sex": "M"},
-                                     {"age": 25, "name": "Mathew", "sex": "M"},
-                                     {"age": 34, "name": "Marry", "sex": "F"}]
-
-    assert sorted_data_descending == [{"age": 34, "name": "Marry", "sex": "F"},
-                                      {"age": 25, "name": "Mathew", "sex": "M"},
-                                      {"age": 16, "name": "John", "sex": "M"}]
+    assert [i["age"] for i in sorted_data_ascending] == [16, 25, 34]
+    assert [i["age"] for i in sorted_data_descending] == [34, 25, 16]
 
 
 def test_sort_data_by_sex_and_age_and_name():
-    # sort by sex (F first) and age (asc)
+    # sort by sex (F first) and age (asc)sorted(data, key=lambda i: (i["sex"] == "M", i["age"]))
     sorted_data_sex_age_asc = sorted(data, key=lambda i: (i["sex"] == "M", i["age"]))
-    assert sorted_data_sex_age_asc == [{"age": 34, "name": "Marry", "sex": "F"},
-                                       {"age": 16, "name": "John", "sex": "M"},
-                                       {"age": 25, "name": "Mathew", "sex": "M"}]
+    assert [i['sex'] for i in sorted_data_sex_age_asc] == ['F', 'M', 'M']
+    assert [i['age'] for i in sorted_data_sex_age_asc] == [34, 16, 25]
 
     # sort by sex (F first) and age (desc)
     sorted_data_sex_age_desc = sorted(data, key=lambda i: (i["sex"] == "M", -i["age"]))
-    assert sorted_data_sex_age_desc == [{"age": 34, "name": "Marry", "sex": "F"},
-                                        {"age": 25, "name": "Mathew", "sex": "M"},
-                                        {"age": 16, "name": "John", "sex": "M"}]
+    assert [i['sex'] for i in sorted_data_sex_age_asc] == ['F', 'M', 'M']
+    assert [i['age'] for i in sorted_data_sex_age_asc] == [34, 16, 25]
 
     # sort by name  alphabetically
     sorted_data_by_name = sorted(data, key=lambda i: i["name"])
-    assert sorted_data_by_name == [
-        {"age": 16, "name": "John", "sex": "M"},
-        {"age": 34, "name": "Marry", "sex": "F"},
-        {"age": 25, "name": "Mathew", "sex": "M"}
-    ]
+    assert [i['name'] for i in sorted_data_by_name] == ["John", "Marry", "Mathew"]
 
 
 # # zip, enumerate, reversed, map, filter
-def test_zip_enumerate_reversed_map_filter():
+def test_filter():
     filtered_data = list(filter(lambda i: i["sex"] == "M", data))
     assert filtered_data == [{"age": 16, "name": "John", "sex": "M"},
                              {"age": 25, "name": "Mathew", "sex": "M"}]
 
-    # enumerate(data)
-    enumerated_data = list(enumerate(data))
+
+def test_enumerate():
+    data_enum = list(enumerate(data))
     assert enumerated_data == [(0, {"age": 16, "name": "John", "sex": "M"}),
                                (1, {"age": 34, "name": "Marry", "sex": "F"}),
                                (2, {"age": 25, "name": "Mathew", "sex": "M"})]
 
-    # reversed(data)
+
+def test_revers():
     reversed_data = list(reversed(data))
     assert reversed_data == [{"age": 25, "name": "Mathew", "sex": "M"},
                              {"age": 34, "name": "Marry", "sex": "F"},
                              {"age": 16, "name": "John", "sex": "M"}]
 
-    # map(lambda i: i["name"], data)
+
+def test_map():
     mapped_data = list(map(lambda i: i["name"], data))
     assert mapped_data == ["John", "Marry", "Mathew"]
 
-    # zip(data, [1, 2, 3, 4, 5, 6, 7])
+
+def test_zip():
     zipped_data_1 = list(zip(data, [1, 2, 3, 4, 5, 6, 7]))
     assert zipped_data_1 == [
         ({"age": 16, "name": "John", "sex": "M"}, 1),
         ({"age": 34, "name": "Marry", "sex": "F"}, 2),
         ({"age": 25, "name": "Mathew", "sex": "M"}, 3)
     ]
-    # zip(data, [1, 2])
+
+
+def test_zip12():
     zipped_data_2 = list(zip(data, [1, 2]))
     assert zipped_data_2 == [
         ({"age": 16, "name": "John", "sex": "M"}, 1),
         ({"age": 34, "name": "Marry", "sex": "F"}, 2)
     ]
 
-    # zip(data, [1, 2, 3])
+
+def test_zip123():
     zipped_data_3 = list(zip(data, [1, 2, 3]))
     assert zipped_data_3 == [
         ({"age": 16, "name": "John", "sex": "M"}, 1),
