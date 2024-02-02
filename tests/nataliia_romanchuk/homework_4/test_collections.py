@@ -306,19 +306,6 @@ def test_iterator_for_list(expected_first, expected_rest, expected_exhausted):
     assert exhausted_items == expected_exhausted
 
 
-def test_iterator_for_list():
-    some_list_iter = iter(some_list)
-
-    first_item = next(some_list_iter)
-    assert first_item == 'a'
-
-    rest_items = list(some_list_iter)
-    assert rest_items == ['b', 'c', 'd']
-
-    exhausted_items = list(some_list_iter)
-    assert exhausted_items == []
-
-
 def test_iterator_for_set():
     sort = sorted(some_set)
     some_set_iter = iter(sort)
