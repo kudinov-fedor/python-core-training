@@ -1,3 +1,5 @@
+import pytest
+
 some_str = "abcd"
 some_tuple = "a", "b", "c", "d"
 some_list = ["a", "b", "c", "d"]
@@ -120,7 +122,7 @@ def test_list_conversion():
     assert list(some_str) == ['a', 'b', 'c', 'd']
     assert list(some_tuple) == ['a', 'b', 'c', 'd']
     assert list(some_list) == ['a', 'b', 'c', 'd']
-    assert sorted(list(some_set)) == ['a', 'b', 'c', 'd']
+    assert sorted(some_set) == ['a', 'b', 'c', 'd']
     assert list(some_dict) == ['a', 'b', 'c', 'd']
 
 
@@ -128,8 +130,8 @@ def test_tuple_conversion():
     assert tuple(some_str) == ('a', 'b', 'c', 'd')
     assert tuple(some_tuple) == ('a', 'b', 'c', 'd')
     assert tuple(some_list) == ('a', 'b', 'c', 'd')
-    assert tuple(some_set) == ('a', 'b', 'c', 'd')
-    assert tuple(some_dict) == ('a', 'b', 'c', 'd')
+    assert tuple(sorted(some_set)) == ('a', 'b', 'c', 'd')
+    assert tuple(sorted(some_dict)) == ('a', 'b', 'c', 'd')
 
 
 # multiple assignment
@@ -143,7 +145,7 @@ def test_multiple_assignment():
     sorted_set = sorted(some_set)
     assert sorted_set == ['a', 'b', 'c', 'd']
 
-    a, b, c, d = some_dict
+    a, b, c, d = sorted(some_dict)
     assert (a, b, c, d) == ('a', 'b', 'c', 'd')
 
     sorted_set = sorted(some_set)
@@ -151,19 +153,14 @@ def test_multiple_assignment():
     assert (a, b, c, d) == ('a', 'b', 'c', 'd')
 
 
-def test_unpacking_strings():
-    a, *tail = some_str
-    assert (a, tail) == ('a', ['b', 'c', 'd'])
-
-
-def test_unpacking_tuples():
-    a, *tail = some_tuple
-    assert (a, tail) == ('a', ['b', 'c', 'd'])
-
-
-def test_unpacking_lists():
-    a, *tail = some_list
-    assert (a, tail) == ('a', ['b', 'c', 'd'])
+@pytest.mark.parametrize("input_data, expected", [
+    (some_str, ('a', ['b', 'c', 'd'])),
+    (some_tuple, ('a', ['b', 'c', 'd'])),
+    (some_list, ('a', ['b', 'c', 'd'])),
+])
+def test_unpacking(input_data, expected):
+    a, *tail = input_data
+    assert (a, tail) == expected
 
 
 def test_unpacking_sets():
@@ -173,7 +170,7 @@ def test_unpacking_sets():
 
 
 def test_unpacking_dicts():
-    a, *tail = some_dict
+    a, *tail = sorted(some_dict)
     assert a == 'a'
     assert set(tail) == {'b', 'c', 'd'}
 
@@ -379,6 +376,7 @@ def test_sort_data_by_sex_and_age_and_name():
         {"age": 25, "name": "Mathew", "sex": "M"}
     ]
 
+
 # # zip, enumerate, reversed, map, filter
 def test_zip_enumerate_reversed_map_filter():
     filtered_data = list(filter(lambda i: i["sex"] == "M", data))
@@ -388,8 +386,8 @@ def test_zip_enumerate_reversed_map_filter():
     # enumerate(data)
     enumerated_data = list(enumerate(data))
     assert enumerated_data == [(0, {"age": 16, "name": "John", "sex": "M"}),
-                                (1, {"age": 34, "name": "Marry", "sex": "F"}),
-                                (2, {"age": 25, "name": "Mathew", "sex": "M"})]
+                               (1, {"age": 34, "name": "Marry", "sex": "F"}),
+                               (2, {"age": 25, "name": "Mathew", "sex": "M"})]
 
     # reversed(data)
     reversed_data = list(reversed(data))
