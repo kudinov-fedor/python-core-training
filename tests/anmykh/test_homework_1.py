@@ -1,8 +1,9 @@
 import pytest
 
 
-@pytest.mark.parametrize(["item", "data_type"],
-                         [("sad", str)])
+@pytest.mark.parametrize(["item", "data_type"], [
+    ("sad", str)
+])
 def test_is_string(item, data_type):
     assert isinstance(item, data_type)
 

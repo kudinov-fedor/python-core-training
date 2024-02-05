@@ -19,8 +19,6 @@ def test_empty():
     assert dict() == {}
 
 
-@pytest.mark.parametrize(["item1", "item2"],
-                         [([1, 2, 3], [1, 2, 3])])
-def test_is(item1, item2):
-    assert item1 == item2
-    assert item1 is not item2
+def test_is():
+    assert [1, 2, 3] == [1, 2, 3]
+    assert [1, 2, 3] is not [1, 2, 3]
