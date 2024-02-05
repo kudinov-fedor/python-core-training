@@ -27,8 +27,8 @@ def test_dict_methods():
     assert some_dict.get("invalid", "default_val") == 'default_val'
 
 
-@pytest.mark.parametrize("some", [{"a": 1, "b": 2}])
-def test_dict_update(some):
+def test_dict_update():
+    some = {"a": 1, "b": 2}
     some.update({"b": "b", "c": "c"})
     assert some['a'] == 1
     assert some['b'] != 2
@@ -56,6 +56,9 @@ def test_dict_methods(some):
     item = some.pop("invalid", "default_val")
     assert item == "default_val"
 
+
+def test_default():
+    some = {"b": 2}
     item = some.setdefault("a", "default_for_a")
     assert "a" in some
     assert item == some['a']
@@ -90,13 +93,28 @@ def test_index_by_name():
             {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
             {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"},
             {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}]
+
     by_name = {i["name"]: i for i in data}
     assert by_name["John"] == {'age': 16, 'second_name': 'Parris', 'name': 'John', 'sex': 'M'}
     assert by_name["Marry"] == {'age': 15, 'second_name': 'Katon', 'name': 'Marry', 'sex': 'F'}
 
+
+def test_index_by_second_name():
+    data = [{"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
+            {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
+            {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"},
+            {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}]
+
     by_name = {(i["name"], i["second_name"]): i for i in data}
     assert by_name["John", "Parris"] == {'age': 16, 'second_name': 'Parris', 'name': 'John', 'sex': 'M'}
     assert by_name["Marry", "Katon"] == {'age': 15, 'second_name': 'Katon', 'name': 'Marry', 'sex': 'F'}
+
+
+def test_index_by_sex():
+    data = [{"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
+            {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
+            {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"},
+            {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}]
 
     by_sex = {}
     for i in data:
@@ -106,11 +124,25 @@ def test_index_by_name():
     assert len(by_sex["M"]) == 2
     assert len(by_sex["F"]) == 2
 
+
+def test_index_by_sex2():
+    data = [{"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
+            {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
+            {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"},
+            {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}]
+
     by_sex = {}
     for i in data:
         by_sex.setdefault(i["sex"], []).append(i)
     assert len(by_sex["M"]) == 2
     assert len(by_sex["F"]) == 2
+
+
+def test_index_by_sex3():
+    data = [{"age": 16, "second_name": "Parris", "name": "John", "sex": "M"},
+            {"age": 34, "second_name": "Atkinson", "name": "Marry", "sex": "F"},
+            {"age": 15, "second_name": "Katon", "name": "Marry", "sex": "F"},
+            {"age": 25, "second_name": "Maton", "name": "Mathew", "sex": "M"}]
 
     from collections import defaultdict
     by_sex = defaultdict(list)
