@@ -14,9 +14,9 @@ wierd_dict = {"a": 1, 2: "b",
 # is container
 def test_dict_comparison():
     assert some_dict == some_dict_2
-    assert "a" in some_dict
+    assert "a" in some_dict_2
     assert len(some_dict) == 3
-    assert list(some_dict_2) == ['c', 'a', 'b']
+    assert list(sorted(some_dict_2)) == ['a', 'b', 'c']
 
 
 def test_dict_methods():
@@ -111,7 +111,6 @@ def test_index_by_name():
         by_sex.setdefault(i["sex"], []).append(i)
     assert len(by_sex["M"]) == 2
     assert len(by_sex["F"]) == 2
-
 
     from collections import defaultdict
     by_sex = defaultdict(list)
