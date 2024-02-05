@@ -12,5 +12,13 @@ def even_the_last(array: list[int]) -> int:
     if res:
         res *= array[-1]
     print(res)
-    # your code here
+    return res
+
+
+def even_the_last2(array: list[int]) -> int:
+    res = 0
+    for i in array[::2]:
+        res += i
+    if res:
+        res *= array[-1]
     return res

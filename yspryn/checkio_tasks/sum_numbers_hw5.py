@@ -7,3 +7,7 @@ def sum_numbers(text: str) -> int:
         if i.isnumeric():
             res += int(i)
     return res
+
+
+def sum_numbers2(text: str) -> int:
+    return sum(int(i) for i in text.split() if i.isnumeric())
