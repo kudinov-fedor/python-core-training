@@ -1,5 +1,3 @@
-from itertools import tee
-
 # comprehensions
 some_list = [1, 2, 3, 4, 5]
 some_dict = {"a": 1, "b": 2, "c": 3}
