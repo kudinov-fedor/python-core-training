@@ -36,7 +36,9 @@ def test_dict_update():
     assert some['c'] == 'c'
 
 
-@pytest.mark.parametrize("some", [{"a": 1, "b": 2}])
+@pytest.mark.parametrize("some",[
+    {"a": 1, "b": 2}
+])
 def test_dict_copy(some):
     sopy_of_some = some.copy()
     assert sopy_of_some == some
@@ -47,7 +49,9 @@ def test_dict_copy(some):
     assert some == {}
 
 
-@pytest.mark.parametrize("some", [{"a": 1, "b": 2}])
+@pytest.mark.parametrize("some", [
+    {"a": 1, "b": 2}
+])
 def test_dict_methods(some):
     item = some.pop("a")
     assert item == 1
