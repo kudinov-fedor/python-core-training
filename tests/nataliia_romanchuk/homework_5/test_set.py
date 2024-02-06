@@ -16,7 +16,11 @@ def test_is_subset1():
     assert sorted(some_set_2) <= sorted(some_set)
 
     assert {"a"} < some_set
-    # assert {"f"} < some_set           ##don't know how to test it
+    assert not {"f"} < some_set
+    assert not {"f", "a"} < some_set
+    assert not {"a", "b", "c"} < some_set
+    assert {"a", "b"} < some_set
+    assert {"a", "b", "c"} == some_set
     assert {"a", "c"} < some_set
     assert some_set > {"a", "c"}
 
@@ -30,7 +34,12 @@ def test_is_subset2():
 def test_superset():
     assert some_set.issuperset({"a", "c"})
     assert some_set.issuperset(["a", "c"])
-    # assert some_set.issuperset(["ac"])  ##don't know how to test it
+    assert not some_set.issuperset(["ac"])
+    assert not set(["a", "b"]).issuperset({"ac"})
+    assert not set(("a", "b")).issuperset({"ac"})
+    assert not {"a", "b"}.issuperset({"ac"})
+    assert not set({"a": 1, "b": 1}).issuperset({"ac"})
+    assert not set("ab").issuperset({"ac"})
 
 
 def test_union():
