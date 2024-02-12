@@ -1,94 +1,46 @@
+from operator import lt, gt
+
+
 def min_ysp(*args, key=None):
+    key = key or (lambda i: i)
     res = args[0]
-    if key:
-        for i in args:
-            if key(i) < key(res):
-                res = i
-    else:
-        for i in args:
-            if i < res:
-                res = i
+    for i in args:
+        if key(i) < key(res):
+            res = i
     return res
 
 
 def max_ysp(*args, key=None):
+    key = key or (lambda i: i)
     res = args[0]
-    if key:
-        for i in args:
-            if key(i) > abs(res):
-                res = i
-    else:
-        for i in args:
-            if i > res:
-                res = i
+    for i in args:
+        if key(i) > key(res):
+            res = i
     return res
 
 
 def sorted_bubbles_method(*args, key=None, reverse=False):
-    list_to_sort = list(args)
+    key = key or (lambda i: i)
+    compare = lt if reverse else gt
+    sorted_list = list(args)
     stop_mark = True
-    if key:
-        while stop_mark:
-            stop_mark = False
-            for i in range(len(list_to_sort) - 1):
-                if reverse:
-                    temp_var = (list_to_sort[i] if key(list_to_sort[i]) < key(list_to_sort[i + 1]) else None)
-                else:
-                    temp_var = (list_to_sort[i] if key(list_to_sort[i]) > key(list_to_sort[i + 1]) else None)
-                if temp_var is not None:
-                    list_to_sort[i] = list_to_sort[i + 1]
-                    list_to_sort[i + 1] = temp_var
-                    stop_mark = True
-    else:
-        while stop_mark:
-            stop_mark = False
-            for i in range(len(list_to_sort) - 1):
-                if reverse:
-                    temp_var = (list_to_sort[i] if list_to_sort[i] < list_to_sort[i + 1] else None)
-                else:
-                    temp_var = (list_to_sort[i] if list_to_sort[i] > list_to_sort[i + 1] else None)
-                if temp_var is not None:
-                    list_to_sort[i] = list_to_sort[i + 1]
-                    list_to_sort[i + 1] = temp_var
-                    stop_mark = True
-    return list_to_sort
+    while stop_mark:
+        stop_mark = False
+        for i in range(len(sorted_list) - 1):
+            temp_var = (sorted_list[i] if compare(key(sorted_list[i]), key(sorted_list[i + 1])) else None)
+            if temp_var is not None:
+                sorted_list[i], sorted_list[i + 1] = sorted_list[i + 1], temp_var
+                stop_mark = True
+    return sorted_list
 
 
-def sorted_mim_max_method1(*args, key=None, reverse=False):
-    list_to_sort = list(args)
-    if reverse:
-        if key is None:
-            j = 0
-            for i in range(j, len(list_to_sort)-1):
-                temp_var = max_ysp(*list_to_sort[j:])
-                if list_to_sort[j] != temp_var:
-                    list_to_sort[list_to_sort.index(temp_var)] = list_to_sort[j]
-                    list_to_sort[j] = temp_var
-                j += 1
-        else:
-            j = 0
-            for i in range(j, len(list_to_sort) - 1):
-                temp_var = (max_ysp(*list_to_sort[j:], key=abs))
-                if key(list_to_sort[j]) != temp_var:
-                    list_to_sort[list_to_sort.index(temp_var)] = list_to_sort[j]
-                    list_to_sort[j] = temp_var
-                j += 1
-    else:
-        if key is None:
-            j = 0
-            for i in range(j, len(list_to_sort) - 1):
-                temp_var = min_ysp(*list_to_sort[j:])
-                if list_to_sort[j] != temp_var:
-                    list_to_sort[list_to_sort.index(temp_var)] = list_to_sort[j]
-                    list_to_sort[j] = temp_var
-                j += 1
-        else:
-            j = 0
-            for i in range(j, len(list_to_sort) - 1):
-                temp_var = (min_ysp(*list_to_sort[j:], key=abs))
-                if key(list_to_sort[j]) != temp_var:
-                    list_to_sort[list_to_sort.index(temp_var)] = list_to_sort[j]
-                    list_to_sort[j] = temp_var
-                j += 1
-    print(list_to_sort)
-    return list_to_sort
+def sorted_mim_max_method(*args, key=None, reverse=False):
+    key = key or (lambda i: i)
+    input_list = list(args)
+    sorted_list = []
+    min_or_max = max_ysp if reverse else min_ysp
+    while input_list:
+        var = min_or_max(*input_list, key=key)
+        input_list.remove(var)
+        sorted_list.append(var)
+    return sorted_list
