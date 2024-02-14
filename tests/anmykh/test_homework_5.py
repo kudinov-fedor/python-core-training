@@ -1,8 +1,8 @@
 import pytest
 
 
-@pytest.mark.parametrize(["param", "data_type"], [(
-        {"a": 123, "b": 456, "c": 789}, dict),
+@pytest.mark.parametrize(["param", "data_type"], [
+    ({"a": 123, "b": 456, "c": 789}, dict),
     ({"a": 123, "b": 456, "c": 789}, dict),
     ({"c": 789, "a": 123, "b": 456}, dict),
     ({"a": 1, 2: "b",
@@ -25,15 +25,15 @@ def test_update_dict(dict_collection, key, result):
 
 def error_func():
     with pytest.raises(ArithmeticError):
-        a = 5 / 0
+       5 / 0
 
 
 def error_func_2():
+    a = []
     with pytest.raises(TypeError):
-        a = []
         a[0]
 
 
 def error_func_3():
     with pytest.raises(NameError):
-    x
+        x
