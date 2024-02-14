@@ -15,10 +15,11 @@ def test_is_dict(param, data_type):
     assert isinstance(param, data_type)
 
 
-@pytest.mark.parametrize(["dict_collection", "key", "result"], [(
-        {"a": "1", "b": "2"}, "a", '1'),
-        ({"c": "a", "a": "b"}, "c", 'a'),
-        ({"m": None, "v": None}, "m", None)])
+@pytest.mark.parametrize(["dict_collection", "key", "result"], [
+    ({"a": "1", "b": "2"}, "a", '1'),
+    ({"c": "a", "a": "b"}, "c", 'a'),
+    ({"m": None, "v": None}, "m", None)
+])
 def test_update_dict(dict_collection, key, result):
     assert dict_collection.get(key) == result
 
