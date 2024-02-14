@@ -23,17 +23,23 @@ def test_update_dict(dict_collection, key, result):
     assert dict_collection.get(key) == result
 
 
-def error_func():
+def test_error_func():
     with pytest.raises(ArithmeticError):
        5 / 0
 
 
-def error_func_2():
+def test_error_func_2():
     a = []
-    with pytest.raises(TypeError):
+    with pytest.raises(IndexError):
         a[0]
 
 
-def error_func_3():
+def test_error_func_3():
     with pytest.raises(NameError):
         x
+
+
+def test_error_func_24():
+    a = []
+    with pytest.raises(LookupError):
+        a[0]
