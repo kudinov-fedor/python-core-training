@@ -29,10 +29,14 @@ def test_error_func():
        5 / 0
 
 
-def test_error_func_2():
-    a = []
-    with pytest.raises(IndexError):
-        a[0]
+@pytest.mark.parametrize(["param", "error"], [
+    (["a", "b", "c"], IndexError),
+    ([1, 3, 5], LookupError),
+    (["v", "s", "c"], Exception)
+])
+def test_error_func_2(param, error):
+    with pytest.raises(error):
+        param[7]
 
 
 def test_error_func_3():
