@@ -39,8 +39,3 @@ def test_error_func_3():
     with pytest.raises(NameError):
         x
 
-
-def test_error_func_24():
-    a = []
-    with pytest.raises(LookupError):
-        a[0]
