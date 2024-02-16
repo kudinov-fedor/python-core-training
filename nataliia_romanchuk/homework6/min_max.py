@@ -23,12 +23,9 @@ def sorted_list(*args, reverse=False, key=None):
     while arg_list:
         if key:
             value = sort_type(*arg_list, key=key)
-            if value in arg_list:
-                arg_list.pop(arg_list.index(value))
-                sorted_values.append(value)
         else:
             value = sort_type(*arg_list)
-            if value in arg_list:
-                arg_list.pop(arg_list.index(value))
-                sorted_values.append(value)
+        if value in arg_list:
+            arg_list.pop(arg_list.index(value))
+            sorted_values.append(value)
     return list(sorted_values)
