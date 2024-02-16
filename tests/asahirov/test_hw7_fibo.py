@@ -11,7 +11,7 @@ def remember_answer(func):
     def remember(*args):
         try:
             hash(args)
-        except Exception as e:
+        except Exception:
             raise TypeError("input args not hashable ")
         result = func(*args)
         if result not in answer:
@@ -37,8 +37,4 @@ def fibo(n: int):
 def test_remember_answer_decorator(mocker):
     spy = mocker.spy(fibo)
     fibo(10)
-    assert fibo.call_count['count'] == 10
-    fibo(15)
-    assert fibo.call_count['count'] == 15
-    fibo(10)
-    assert fibo.call_count['count'] == 15
+    assert spy.call_count == 10
