@@ -16,30 +16,19 @@ def maxxx(*args, key=None):
     return res
 
 
-def min_list(*args):
-    min_value = None
-    for number in args:
-        if number is not None:
-            if min_value is None or number < min_value:
-                min_value = number
-    return min_value
-
-
-def max_list(*args):
-    max_value = None
-    for number in args:
-        if number is not None:
-            if max_value is None or number > max_value:
-                max_value = number
-    return max_value
-
-
-def sorted_list(*args, reverse=False):
+def sorted_list(*args, reverse=False, key=None):
     sorted_values = []
     arg_list = list(args)
-    sort_type = min if reverse == False else max
+    sort_type = maxxx if reverse else minnn
     while arg_list:
-        value = sort_type(arg_list)
-        sorted_values.append(value)
-        arg_list.remove(value)
+        if key:
+            value = sort_type(*arg_list, key=key)
+            if value in arg_list:
+                arg_list.pop(arg_list.index(value))
+                sorted_values.append(value)
+        else:
+            value = sort_type(*arg_list)
+            if value in arg_list:
+                arg_list.pop(arg_list.index(value))
+                sorted_values.append(value)
     return list(sorted_values)
