@@ -7,6 +7,15 @@ def minnn(*args, key=None):
     return res
 
 
+def maxxx(*args, key=None):
+    key = key or (lambda i: i)
+    res = args[0]
+    for i in args:
+        if key(i) > key(res):
+            res = i
+    return res
+
+
 def min_list(*args):
     min_value = None
     for number in args:
