@@ -1,15 +1,7 @@
 import pytest
 
 import homework.homework_6.functions
-from homework.homework_6 import functions
-
-
-def test_simple():
-    return
-
-
-assert test_simple() == None
-
+from anmykh.homework.homework_6 import max_function
 
 @pytest.mark.parametrize(["param1", "param2", "output"], [
     ["a", "b", ('a', 'b')],
@@ -20,19 +12,10 @@ def test_with_required_params(param1, param2, output):
     assert homework.homework_6.functions.with_required_params(param1, param2) == output
 
 
-def max_function(*items):
-    minimum_value = 0
-    for item in list(items):
-        for number in item:
-            if number > minimum_value:
-                minimum_value = number
-            else:
-                pass
-        yield minimum_value
-
-
-max_function(
-    (1, 5, 6, 30, 32, 5, 6, 56),
-    (-7, -4, -2, 1, 2, 3, 4, 5, 6),
-    (-7, -4, -2, 1, 2, 3, 4, 5, 6),
-)
+@pytest.mark.parametrize(["param", "output"], [
+    [(-7, -4, -2, 1, 2, 3, 4, 5, 6), 6],
+    [(2, 4, 9, 11, 100), 100],
+    [(0, 0, 3, 89, 10, 11), 89]
+])
+def test_max_function(param, output):
+    assert max_function(param) == output

@@ -1,5 +1,5 @@
 import pytest
-from anmykh.checkio import checkio_7
+from anmykh.checkio.checkio_7 import is_even
 
 
 @pytest.mark.parametrize(["param", "result"], [
@@ -8,4 +8,4 @@ from anmykh.checkio import checkio_7
     [0, True]
 ])
 def test_is_even(param, result):
-    assert checkio_7.is_even(param) == result
+    assert is_even(param) == result
