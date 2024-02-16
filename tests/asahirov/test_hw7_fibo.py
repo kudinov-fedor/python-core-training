@@ -34,7 +34,8 @@ def fibo(n: int):
     return fibo(n - 1) + fibo(n - 2)
 
 
-def test_remember_answer_decorator():
+def test_remember_answer_decorator(mocker):
+    spy = mocker.spy(fibo)
     fibo(10)
     assert fibo.call_count['count'] == 10
     fibo(15)
