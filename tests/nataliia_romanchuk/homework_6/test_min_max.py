@@ -1,6 +1,6 @@
 import pytest
 
-from nataliia_romanchuk.homework6.min_max import minnn, min_list, max_list, sorted_list
+from nataliia_romanchuk.homework6.min_max import minnn, min_list, max_list, sorted_list, maxxx
 
 numbers = [0, 1, 2, 3, 4, 5]
 numbers1 = [1, -2, 3, -4, 5]
@@ -21,6 +21,22 @@ def test_min():
     assert minnn(*numbers2) == min(*numbers2)
     assert minnn(*numbers2) == -8
     assert minnn(*numbers2, key=abs) == 0
+
+
+def test_max():
+    assert maxxx(0, 1, 2, 3, 4, 5) == max(0, 1, 2, 3, 4, 5)
+    assert maxxx(0, 1, 2, 3, 4, 5) == 5
+    assert maxxx(*numbers) == max(*numbers)
+    assert maxxx(*numbers) == 5
+
+    assert maxxx(*numbers1) == max(*numbers1)
+    assert maxxx(*numbers1, key=abs) == 5
+
+    assert maxxx(-8, 0, 1, 2, 3, 4, 5) == max(-8, 0, 1, 2, 3, 4, 5)
+    assert maxxx(-8, 0, 1, 2, 3, 4, 5) == 5
+    assert maxxx(*numbers2) == max(*numbers2)
+    assert maxxx(*numbers2) == 5
+    assert maxxx(*numbers2, key=abs) == -8
 
 
 def test_min_list():
