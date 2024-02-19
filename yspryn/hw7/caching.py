@@ -8,12 +8,11 @@ def decorator_answers(func):
     remember_result = {}
 
     def wrapper(n: int):
-        if n not in remember_result:
-            res = func(n)
-            remember_result[n] = res
-        else:
+        if n in remember_result:
             return remember_result[n]
-        return remember_result
+        res = func(n)
+        remember_result[n] = res
+        return res
     return wrapper
 
 
@@ -29,5 +28,5 @@ def fibo(n: int):
 
 
 if __name__ == "__main__":
-    for i in range(6):
+    for i in range(10):
         print(fibo(i))

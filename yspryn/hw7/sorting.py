@@ -12,9 +12,9 @@ from operator import gt, lt, le, ge
 
 
 def time_of_func_execution(func):
-    def wrapper(iterable, reverse: bool = True, key: callable = None):
+    def wrapper(*args, **kwargs):
         start = time.time_ns()
-        res = func(iterable, reverse, key)
+        res = func(*args, **kwargs)
         print(f' function {func.__name__} was executed for {(time.time_ns() - start)/1000000} milliseconds')
         return res
     return wrapper
