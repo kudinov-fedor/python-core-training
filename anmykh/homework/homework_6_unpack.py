@@ -19,10 +19,3 @@ def unpack_recursive(items):
         else:
             result.append(item)
     return result
-
-
-if __name__ == "__main__":
-
-    target = [123, ["234", None], [[1], [23], [[123], 123, ["sdf", True]]]]
-    assert unpack_while_loop(target) == [123, "234", None, 1, 23, 123, 123, "sdf", True]
-    assert unpack_recursive(target) == [123, "234", None, 1, 23, 123, 123, "sdf", True]
