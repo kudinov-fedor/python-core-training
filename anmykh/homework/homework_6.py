@@ -1,39 +1,40 @@
-def max_function(*items, key=None):
-    if len(items) == 0:
-        return ValueError
+def max_function(*items, key=lambda i: i):
     if len(items) == 1:
-        items = tuple(items[0])
+        items = items[0]
     if len(items) == 0:
-        return ValueError
+        raise ValueError
     max_value = items[0]
     for item in items[1:]:
-        if item > max_value:
+        if key(item) > key(max_value):
             max_value = item
     return max_value
 
 
-def min_function(*items, key=None):
+def min_function(*items, key=lambda i: i):
     if len(items) == 0:
-        return ValueError
+        raise ValueError
     if len(items) == 1:
-        items = tuple(items[0])
+        items = items[0]
     if len(items) == 0:
-        return ValueError
+        raise ValueError
     min_value = items[0]
     for item in items[1:]:
-        if item < min_value:
+        if key(item) < key(min_value):
             min_value = item
     return min_value
 
 
-def sort_function(items):
+def sort_function(*items, key=lambda i: i, reverse=False):
     length = len(items)
     if length == 0:
         return []
-    if type(items) is not list:
-        items = list(items)
-    for i in range(length - 1):
-        for j in range(0, length - i - 1):
-            if items[j] > items[j + 1]:
-                items[j], items[j + 1] = items[j + 1], items[j]
-    return items
+    if len(items) == 1:
+        items = items[0]
+    sorted_list = []
+    func = max if reverse else min
+    items_list = list(items)
+    while items_list:
+        item = func(items_list, key=key)
+        items_list.remove(item)
+        sorted_list.append(item)
+    return sorted_list
