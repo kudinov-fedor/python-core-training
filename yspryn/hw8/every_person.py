@@ -1,6 +1,7 @@
-from datetime import date
+from datetime import date, datetime
 
-Today = date(2018, 1, 1)
+
+TODAY = date(2018, 1, 1)
 
 
 class Person:
@@ -19,19 +20,17 @@ class Person:
         return f"{self.first_name} {self.last_name}"
 
     def age(self):
-        # today = date(2018, 1, 1)
-        birth_date = date(int(self.birth_date.split('.')[2]), int(self.birth_date.split('.')[1]),
-                          int(self.birth_date.split('.')[0]))
-        age = Today.year - birth_date.year - ((Today.month, Today.day) < (birth_date.month, birth_date.day))
+        birth_date = datetime.strptime(self.birth_date, '%d.%m.%Y').date()
+        age = TODAY.year - birth_date.year - ((TODAY.month, TODAY.day) < (birth_date.month, birth_date.day))
         return age
 
     def work(self):
+        prefix = "Is"
         if self.gender is "male":
-            return f"He is a {self.job}"
+            prefix = "He is"
         elif self.gender is "female":
-            return f"She is a {self.job}"
-        else:
-            return f"Is a {self.job}"
+            prefix = "She is"
+        return f"{prefix} a {self.job}"
 
     def money(self):
         money = (self.working_years * 12) * self.salary

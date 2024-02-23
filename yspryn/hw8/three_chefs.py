@@ -22,21 +22,12 @@ class JapaneseCook(AbstractCook):
     food = "Sushi"
     drink = "Tea"
 
-    def __init__(self):
-        super().__init__()
-
 
 class UkrainianCook(AbstractCook):
-    drink = "Compote"
     food = "Dumplings"
-
-    def __init__(self):
-        super().__init__()
+    drink = "Compote"
 
 
 class ItalianCook(AbstractCook):
     drink = "Juice"
     food = "Pizza"
-
-    def __init__(self):
-        super().__init__()
