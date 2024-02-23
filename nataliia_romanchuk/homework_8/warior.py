@@ -1,47 +1,29 @@
 class Warrior:
-    def __init__(self, name, body=1, resilience=1, speed=1, arsenal=1):
-        self.name = name
-        self.body = body
-        self.resilience = resilience
-        self.speed = speed
-        self.arsenal = arsenal
-
-    def name(self):
-        return self.name
+    health = 50
+    attack = 5
 
     @property
-    def base_oppos(self):
-        arts = [self.body, self.resilience, self.speed, self.arsenal]
-        return arts
+    def is_alive(self):
+        if self.health > 0:
+            return True
+        else:
+            return False
 
-    @property
-    def all(self):
-        return self.base_oppos
+    def perform_attack(self, warrior: "Warrior"):
+        warrior.receive_dmg(self.attack)
+
+    def receive_dmg(self, damage: int):
+        self.health = max(0, self.health - damage)
 
 
 class Knight(Warrior):
-    def __init__(self, name, armor=1):
-        super().__init__(name)
-        self.armor = armor
-
-    def resiliense(self):
-        self.resilience += 1
-
-    @property
-    def specialties(self):
-        return [self.armor]
-
-    @property
-    def all(self):
-        all = self.base_oppos + self.specialties
-        return all
+    attack = 7
 
 
-def fight(unit1, unit2):
-    unit1_sum = unit1.all
-    unit2_sum = unit2.all
-    winner = max(unit1_sum, unit2_sum)
-    if winner == unit1_sum:
-        return unit1
-    else:
-        return unit2
+def fight(unit_1, unit_2):
+    while unit_1.is_alive:
+        unit_1.perform_attack(unit_2)
+        if not unit_2.is_alive:
+            break
+        unit_2.perform_attack(unit_1)
+    return unit_1.is_alive
