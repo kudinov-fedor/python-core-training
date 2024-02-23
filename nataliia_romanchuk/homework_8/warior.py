@@ -20,7 +20,7 @@ class Knight(Warrior):
     attack = 7
 
 
-def fight(unit_1, unit_2):
+def fight(unit_1: Warrior, unit_2: Warrior):
     while unit_1.is_alive:
         unit_1.perform_attack(unit_2)
         if not unit_2.is_alive:
