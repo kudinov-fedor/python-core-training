@@ -29,7 +29,7 @@ class Person:
         return f"{self.PREFIX[self.gender]} a {self.job}"
 
     def money(self):
-        return f"{self.salary * self.working_years * 12:_}".replace("_", " ")
+        return f"{int(self.salary * self.working_years * 12):_}".replace("_", " ")
 
     def home(self):
         return f"Lives in {self.city}, {self.country}"
