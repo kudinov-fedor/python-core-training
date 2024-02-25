@@ -4,10 +4,7 @@ class Warrior:
 
     @property
     def is_alive(self):
-        if self.health > 0:
-            return True
-        else:
-            return False
+        return self.health > 0
 
     def perform_attack(self, warrior: "Warrior"):
         warrior.receive_dmg(self.attack)
