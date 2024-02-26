@@ -37,6 +37,8 @@ def test_unstable_function_success(mocker):
 
 def test_unstable_function_failed(mocker):
     failed_value = 0.49
-    mocker.patch('random.random', return_value=failed_value)
+    mock = mocker.patch('random.random', return_value=failed_value)
     with pytest.raises(ValueError):
         unstable_function()
+
+    assert mock.call_count == 10

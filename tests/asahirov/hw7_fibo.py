@@ -15,9 +15,8 @@ def remember_answer(func):
         if args in answer:
             return answer[args]
         else:
-            result = func(*args)
-            answer[args] = result
-            return result
+            answer[args] = func(*args)
+            return answer[args]
 
     return remember
 
