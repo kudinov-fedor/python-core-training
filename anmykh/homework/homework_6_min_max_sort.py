@@ -11,8 +11,6 @@ def max_function(*items, key=lambda i: i):
 
 
 def min_function(*items, key=lambda i: i):
-    if len(items) == 0:
-        raise ValueError
     if len(items) == 1:
         items = items[0]
     if len(items) == 0:
@@ -25,11 +23,10 @@ def min_function(*items, key=lambda i: i):
 
 
 def sort_function(*items, key=lambda i: i, reverse=False):
-    length = len(items)
-    if length == 0:
+    if not items:
         return []
     if len(items) == 1:
-        items = items[0]
+        items = list(items[0])
     sorted_list = []
     func = max if reverse else min
     items_list = list(items)

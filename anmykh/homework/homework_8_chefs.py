@@ -5,10 +5,10 @@ class AbstractCook:
     drink_total = 0
 
     def add_food(self, count: int, price: int):
-        self.food_total += count*price
+        self.food_total += count * price
 
     def add_drink(self, count: int, price: int):
-        self.drink_total += count*price
+        self.drink_total += count * price
 
     def total(self):
         return (f"{self.food_name}: {self.food_total}, {self.drink_name}: {self.drink_total}, "
