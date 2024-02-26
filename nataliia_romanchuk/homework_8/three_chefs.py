@@ -14,7 +14,6 @@ class AbstractCook:
 
     def total(self):
         total = self.food_total +self.drink_total
-        print( f"{self.menu['food']}: {self.food_total}, {self.menu['drink']}: {self.drink_total}, Total: {total}")
         return f"{self.menu['food']}: {self.food_total}, {self.menu['drink']}: {self.drink_total}, Total: {total}"
 
 
