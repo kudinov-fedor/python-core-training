@@ -1,10 +1,8 @@
-
 class AbstractCook:
+    food = "Food"
+    drink = "Drink"
     food_total = 0
     drink_total = 0
-
-    def __init__(self, food_name: str, drink_name: str):
-        self.menu = {'food': food_name, 'drink': drink_name}
 
     def add_food(self, food_amount: int, food_price: int):
         self.food_total += food_amount * food_price
@@ -13,20 +11,20 @@ class AbstractCook:
         self.drink_total += portion_number * drink_price
 
     def total(self):
-        total = self.food_total +self.drink_total
-        return f"{self.menu['food']}: {self.food_total}, {self.menu['drink']}: {self.drink_total}, Total: {total}"
+        total = self.food_total + self.drink_total
+        return f"{self.food}: {self.food_total}, {self.drink}: {self.drink_total}, Total: {total}"
 
 
 class JapaneseCook(AbstractCook):
-    def __init__(self):
-        super().__init__('Sushi', 'Tea')
+    food = "Sushi"
+    drink = "Tea"
 
 
 class UkrainianCook(AbstractCook):
-    def __init__(self):
-        super().__init__('Pampushky', 'Uzvar')
+    food = "Pampushky"
+    drink = "Uzvar"
 
 
 class ItalianCook(AbstractCook):
-    def __init__(self):
-        super().__init__('Pizza', 'Juice')
+    food = "Pizza"
+    drink = "Juice"
