@@ -7,7 +7,7 @@ dave = Warrior()
 mark = Warrior()
 
 
-def test_warior():
+def test_warrior():
     assert fight(chuck, bruce) == True
     assert fight(dave, carl) == False
     assert chuck.is_alive == True

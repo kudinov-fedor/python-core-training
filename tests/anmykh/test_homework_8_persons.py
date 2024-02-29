@@ -1,6 +1,10 @@
 from anmykh.homework.homework_8_persons import Person
+import pytest
 
-p = Person("John",
+
+@pytest.fixture
+def first_person():
+    return Person("John",
            "Smith",
            "19.09.1979",
            "welder",
@@ -11,7 +15,9 @@ p = Person("John",
            "male")
 
 
-p2 = Person("Ana",
+@pytest.fixture
+def second_person():
+    return Person("Ana Maria",
             "Sad",
             "28.01.2000",
             "designer",
@@ -22,17 +28,26 @@ p2 = Person("Ana",
             "female")
 
 
-def test_person():
-    assert p.name() == "John Smith", "Name"
-    assert p.age() == 44, "Age"
-    assert p.work() == "He is a welder", "Job"
-    assert p.money() == "648 000", "Money"
-    assert p.home() == "Lives in Vancouver, Canada", "Home"
+def test_name_function(first_person, second_person):
+    assert first_person.name() == "John Smith"
+    assert second_person.name() == "Ana Maria Sad"
 
 
-def test_person2():
-    assert p2.name() == "Ana Sad", "Name"
-    assert p2.age() == 24, "Age"
-    assert p2.work() == "She is a designer", "Job"
-    assert p2.money() == "86 400", "Money"
-    assert p2.home() == "Lives in Kyiv, Ukraine", "Home"
+def test_age_function(first_person, second_person):
+    assert first_person.age() == 44
+    assert second_person.age() == 24
+
+
+def test_work_function(first_person, second_person):
+    assert first_person.work() == "He is a welder"
+    assert second_person.work() == "She is a designer"
+
+
+def test_money_function(first_person, second_person):
+    assert first_person.money() == '648 000'
+    assert second_person.money() == '86 400'
+
+
+def test_home_function(first_person, second_person):
+    assert first_person.home() == 'Lives in Vancouver, Canada'
+    assert second_person.home() == 'Lives in Kyiv, Ukraine'
