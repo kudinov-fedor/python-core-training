@@ -22,6 +22,8 @@ class Fraction:
             return cls(item, 1)
         elif isinstance(item, cls):
             return item
+        else:
+            raise NotImplemented
 
     def __repr__(self):
         return f"Fraction({self.num}, {self.denom})"
@@ -31,29 +33,18 @@ class Fraction:
 
     # division
     def __truediv__(self, other):
-        value1 = Fraction.convert(self)
-        value2 = Fraction.convert(other)
-        if (value1.num * value2.denom) % (value1.denom * value2.num) == 0:
-            return (value1.num * value2.denom) / (value1.denom * value2.num)
-        else:
-            return Fraction(value1.num*value2.denom, value1.denom*value2.num)
+        other = Fraction.convert(other)
+        return Fraction(self.num*other.denom, self.denom*other.num)
 
     def __rtruediv__(self, other):
-        value1 = Fraction.convert(other)
-        value2 = Fraction.convert(self)
-        if (value1.num * value2.denom) % (value1.denom * value2.num) == 0:
-            return (value1.num * value2.denom) / (value1.denom * value2.num)
-        else:
-            return Fraction(value1.num * value2.denom, value1.denom * value2.num)
+        other = Fraction.convert(other)
+        return Fraction(other.num * self.denom, other.denom * self.num)
 
     # add
     def __add__(self, other):
-        value1 = Fraction.convert(self)
-        value2 = Fraction.convert(other)
-        denominator = value1.denom * value2.denom
-        numerator = value1.num * value2.denom + value2.num * value1.denom
-        if numerator % denominator == 0:
-            return numerator / denominator
+        other = Fraction.convert(other)
+        denominator = self.denom * other.denom
+        numerator = self.num * other.denom + other.num * self.denom
         return Fraction(numerator, denominator)
 
     def __radd__(self, other):
@@ -61,59 +52,52 @@ class Fraction:
 
     # subtraction
     def __sub__(self, other):
-        value1 = Fraction.convert(self)
-        value2 = Fraction.convert(other)
-        denominator = value1.denom * value2.denom
-        numerator = value1.num * value2.denom - value2.num * value1.denom
-        if numerator % denominator == 0:
-            return numerator / denominator
+        other = Fraction.convert(other)
+        denominator = self.denom * other.denom
+        numerator = self.num * other.denom - other.num * self.denom
         return Fraction(numerator, denominator)
 
     def __rsub__(self, other):
-        value1 = Fraction.convert(other)
-        value2 = Fraction.convert(self)
-        denominator = value1.denom * value2.denom
-        numerator = value1.num * value2.denom - value2.num * value1.denom
-        if numerator % denominator == 0:
-            return numerator / denominator
+        other = Fraction.convert(other)
+        denominator = other.denom * self.denom
+        numerator = other.num * self.denom - self.num * other.denom
         return Fraction(numerator, denominator)
 
     # multiplication
     def __mul__(self, other):
-        value1 = Fraction.convert(self)
-        value2 = Fraction.convert(other)
-        denominator = value1.denom * value2.denom
-        numerator = value1.num * value2.num
-        if numerator % denominator == 0:
-            return numerator / denominator
+        other = Fraction.convert(other)
+        denominator = self.denom * other.denom
+        numerator = self.num * other.num
         return Fraction(numerator, denominator)
 
     def __rmul__(self, other):
         return self.__mul__(other)
 
     def __bool__(self):
-        if self.denom and self.num:
-            return True
-        else:
-            return False
+       return bool(self.num)
 
     # >=
     def __ge__(self, other):
-        return self.num/self.denom >= other.num/other.denom
+        other = Fraction.convert(other)
+        return self.num * other.denom >= other.num * self.denom
 
     # >
     def __gt__(self, other):
-        return self.num / self.denom > other.num / other.denom
+        other = Fraction.convert(other)
+        return self.num * other.denom > other.num * self.denom
 
     # <
     def __lt__(self, other):
-        return self.num / self.denom < other.num / other.denom
+        other = Fraction.convert(other)
+        return self.num * other.denom < other.num * self.denom
 
     # <=
     def __le__(self, other):
-        return self.num / self.denom <= other.num / other.denom
+        other = Fraction.convert(other)
+        return self.num * other.denom <= other.num * self.denom
 
     def __eq__(self, other):
+        other = Fraction.convert(other)
         if self.denom == other.denom and self.num == other.num:
             return True
         else:
@@ -121,11 +105,7 @@ class Fraction:
 
     # absolute value
     def __abs__(self):
-        if self.denom < 0:
-            self.denom *= -1
-        elif self.num < 0:
-            self.num *= -1
-        return Fraction(self.num, self.denom)
+        return Fraction(abs(self.num), self.denom)
 
     # negative value
     def __neg__(self):
