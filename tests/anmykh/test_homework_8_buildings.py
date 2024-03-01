@@ -20,4 +20,4 @@ def test_buildings_area():
 
 def test_buildings_str():
     building = Building(3, 6, 4, 2, 10)
-    assert building.__str__() == "Building(3, 6, 4, 2, 10)", "String"
+    assert str(building) == "Building(3, 6, 4, 2, 10)", "String"
