@@ -1,4 +1,5 @@
 from yspryn.hw9.fraction import Fraction
+import pytest
 
 
 def test_fractions():
@@ -31,7 +32,6 @@ def test_fractions():
     # # add
     assert Fraction(2, 4) + Fraction(1, 3) == Fraction(5, 6)
     assert Fraction(1, 2) + 2 == Fraction(5, 2)
-    assert 2 + Fraction(1, 2) == Fraction(5, 2)
     assert Fraction(1, 2) + Fraction(1, 2) == 1
     #
     # # in place add
@@ -75,3 +75,18 @@ def test_fractions():
     # #
     assert -Fraction(1, 2) == Fraction(-1, 2)
     assert abs(Fraction(-1, 2)) == Fraction(1, 2)
+
+    # not implemented
+    assert Fraction(1, 2).__add__("abc") is NotImplemented
+    assert Fraction(2, 4).__sub__('test') is NotImplemented
+    assert Fraction(2, 4).__mul__('test') is NotImplemented
+    assert Fraction(2, 4).__truediv__('test') is NotImplemented
+    assert Fraction(1, 2).__eq__("abc") is NotImplemented
+    assert Fraction(1, 2).__le__("abc") is NotImplemented
+    assert Fraction(1, 2).__lt__("abc") is NotImplemented
+    assert Fraction(1, 2).__gt__("abc") is NotImplemented
+
+
+def test_add_notimplemented():
+    with pytest.raises(TypeError):
+        Fraction(1, 2) + "abc"

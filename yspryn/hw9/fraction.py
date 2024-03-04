@@ -22,8 +22,10 @@ class Fraction:
             return cls(item, 1)
         elif isinstance(item, cls):
             return item
-        else:
-            raise NotImplemented
+
+    @classmethod
+    def can_be_converted(cls, other):
+        return isinstance(other, (cls, int))
 
     def __repr__(self):
         return f"Fraction({self.num}, {self.denom})"
@@ -33,15 +35,21 @@ class Fraction:
 
     # division
     def __truediv__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
-        return Fraction(self.num*other.denom, self.denom*other.num)
+        return Fraction(self.num * other.denom, self.denom * other.num)
 
     def __rtruediv__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         return Fraction(other.num * self.denom, other.denom * self.num)
 
     # add
     def __add__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         denominator = self.denom * other.denom
         numerator = self.num * other.denom + other.num * self.denom
@@ -52,12 +60,16 @@ class Fraction:
 
     # subtraction
     def __sub__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         denominator = self.denom * other.denom
         numerator = self.num * other.denom - other.num * self.denom
         return Fraction(numerator, denominator)
 
     def __rsub__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         denominator = other.denom * self.denom
         numerator = other.num * self.denom - self.num * other.denom
@@ -65,6 +77,8 @@ class Fraction:
 
     # multiplication
     def __mul__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         denominator = self.denom * other.denom
         numerator = self.num * other.num
@@ -74,34 +88,41 @@ class Fraction:
         return self.__mul__(other)
 
     def __bool__(self):
-       return bool(self.num)
+        return bool(self.num)
 
     # >=
     def __ge__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         return self.num * other.denom >= other.num * self.denom
 
     # >
     def __gt__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         return self.num * other.denom > other.num * self.denom
 
     # <
     def __lt__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         return self.num * other.denom < other.num * self.denom
 
     # <=
     def __le__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
         return self.num * other.denom <= other.num * self.denom
 
     def __eq__(self, other):
+        if not Fraction.can_be_converted(other):
+            return NotImplemented
         other = Fraction.convert(other)
-        if self.denom == other.denom and self.num == other.num:
-            return True
-        else:
-            return False
+        return self.denom == other.denom and self.num == other.num
 
     # absolute value
     def __abs__(self):
