@@ -1,7 +1,5 @@
 from datetime import datetime
 
-CURRENT_DATE = datetime(2018, 1, 1)
-
 
 class Person:
 
@@ -24,15 +22,19 @@ class Person:
         return f"{self.first_name} {self.last_name}"
 
     def age(self):
-        not_full_year = (self.birth_date.month, self.birth_date.day) > (CURRENT_DATE.month, CURRENT_DATE.day)
-        return (CURRENT_DATE.year - self.birth_date.year) - not_full_year
+        current_date = datetime.now()
+        year_diff = 1
+        if (self.birth_date.month < current_date.month or (self.birth_date.month == current_date.month
+                                                           and self.birth_date.day <= current_date.day)):
+            year_diff = 0
+        return current_date.year - self.birth_date.year - year_diff
 
     def work(self):
         prefix = self.PREFIX[self.gender]
         return f"{prefix} a {self.job}"
 
     def money(self):
-        return f"{self.salary * self.working_years * 12:_}".replace("_", " ")
+        return f"{self.salary * self.working_years * 12:,}".replace(",", " ")
 
     def home(self):
         return f"Lives in {self.city}, {self.country}"
