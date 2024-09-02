@@ -2,6 +2,15 @@
 # Try to run them in python console, experiment 
 # Collect questions related to pieces you did not understand
 
+# Also try to write several pytest tests e.g.:
+
+# You have line:   max([2, 3, 1, -2, -5, -8, 12], key=abs)
+# And you can write test:
+
+# def test_max_abs():
+#     res = max([2, 3, 1, -2, -5, -8, -12], key=abs)
+#     assert res == -12
+
 
 # homework covers:
 # math operations for numbers and sequences
