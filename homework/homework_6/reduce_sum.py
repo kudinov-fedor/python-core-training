@@ -12,6 +12,7 @@ def reduce(*args, key: callable, default):
     return 0
 
 
+# reuse 'reduce' for 'sum' function
 def sum(*args):
     return 0
 
