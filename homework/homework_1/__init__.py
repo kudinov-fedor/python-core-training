@@ -1,5 +1,9 @@
-# homework covers:
+# In this homework you need to look through different code examples
+# Try to run them in python console, experiment 
+# Collect questions related to pieces you did not understand
 
+
+# homework covers:
 # math operations for numbers and sequences
 # comparison, equality, identity, contains check
 # conversion to bool, conditional expression
