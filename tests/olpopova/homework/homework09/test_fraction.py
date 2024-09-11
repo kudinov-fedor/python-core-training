@@ -30,7 +30,7 @@ def test_logic_operators():
     assert 0.5 == Fraction(2, 4)
     assert 6 > Fraction(1, 3)
     assert Fraction(1, 3) < 6.5
-    with pytest.raises(AttributeError):
+    with pytest.raises(AssertionError):
         assert 'dfhf' == Fraction(2, 4)
         assert Fraction(2, 4) == 'dfhf'
 
@@ -41,7 +41,7 @@ def test_add():
     assert Fraction(1, 2) + 2 == Fraction(5, 2)
     assert Fraction(1, 2) + 2.5 == Fraction(3, 1)
     assert 2 + Fraction(1, 2) == Fraction(5, 2)
-    with pytest.raises(AttributeError):
+    with pytest.raises(AssertionError):
         assert 'dfhf' + Fraction(2, 4)
         assert Fraction(2, 4) + 'dfhf'
         assert Warrior() + Fraction(1, 2)
@@ -59,7 +59,7 @@ def test_subtraction():
     assert Fraction(5, 2) - 2 == Fraction(1, 2)
     assert 2 - Fraction(3, 2) == Fraction(1, 2)
     assert 3.5 - Fraction(3, 2) == Fraction(2, 1)
-    with pytest.raises(AttributeError):
+    with pytest.raises(AssertionError):
         assert Fraction(5, 2) - 'dfhf'
 
     # in place sub
@@ -74,7 +74,7 @@ def multiplication():
     assert Fraction(1, 3) * 3 == 1
     assert Fraction(2, 3) * Fraction(12, 4) == 2
     assert 2 * Fraction(3, 2) == 3
-    with pytest.raises(AttributeError):
+    with pytest.raises(AssertionError):
         assert Fraction(5, 2) * 'dfhf'
 
     # in place mul
@@ -89,7 +89,7 @@ def test_division():
     assert Fraction(2, 3) / Fraction(2, 3) == 1
     assert Fraction(2, 3) / Fraction(4, 3) == Fraction(1, 2)
     assert 2 / Fraction(4, 3) == Fraction(3, 2)
-    with pytest.raises(AttributeError):
+    with pytest.raises(AssertionError):
         assert Fraction(5, 2) / 'dfhf'
 
     # in place div
