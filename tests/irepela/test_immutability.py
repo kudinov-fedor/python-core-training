@@ -22,6 +22,7 @@ def test_strs():
     assert a is not b
     assert a != b
 
+
 def test_tuples():
     a = (1, 2, 3)
     b = a
