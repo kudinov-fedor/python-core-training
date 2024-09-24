@@ -7,6 +7,6 @@ def test_joins():
 
 
 def test_split():
-    splitted = "Hello World".split(" ")
-    assert splitted[0] == "Hello"
-    assert splitted[1] == "World"
+    a, b = "Hello World".split(" ")
+    assert a == "Hello"
+    assert b == "World"
