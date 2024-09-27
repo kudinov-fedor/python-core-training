@@ -26,6 +26,4 @@ def sum_numbers_comprehension(text: str) -> int:
         Returns:
             int: Sum of the numbers extracted from the text
     """
-    text_list = text.split()
-    numbers_total = sum([int(item) for item in text_list if item.isnumeric()])
-    return numbers_total
+    return sum(int(item) for item in text.split() if item.isnumeric())
