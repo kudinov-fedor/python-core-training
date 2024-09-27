@@ -42,3 +42,25 @@ def has_three_words_in_sequence_sol_2(text: str) -> bool:
         if has_three_words:
             break
     return has_three_words
+
+
+def has_three_words_in_sequence_sol_3(text: str) -> bool:
+    """
+        Checks if text has 3 words in sequence
+
+        Args:
+            text (str): text to analyze words in sequence
+
+        Returns:
+            bool: True if the text contains 3 words in sequence
+    """
+    word_list = text.split()
+    slice_1 = word_list[::3]
+    slice_2 = word_list[1::3]
+    slice_3 = word_list[2::3]
+    has_three_words = False
+    for words in zip(slice_1, slice_2, slice_3):
+        has_three_words = all(not word.isnumeric() for word in words)
+        if has_three_words:
+            break
+    return has_three_words
