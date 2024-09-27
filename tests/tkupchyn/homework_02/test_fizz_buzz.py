@@ -17,6 +17,7 @@ def fizz_buzz(n):
     (2, '2'),
     (3, 'Fizz'),
     (5, 'Buzz'),
-    (15, 'FizzBuzz')])
+    (15, 'FizzBuzz'),
+    (330, 'FizzBuzz')])
 def test_fizz_buzz(n, expected_result):
     assert fizz_buzz(n) == expected_result
