@@ -1,10 +1,14 @@
-from irepela.homework_2.three_words import checkio
+import pytest
+from irepela.homework_2.three_words import has_three_words_in_sequence
 
 
-def test_three_words():
-    assert checkio("Hello World hello") is True
-    assert checkio("He is 123 man") is False
-    assert checkio("1 2 3 4") is False
-    assert checkio("bla bla bla bla") is True
-    assert checkio("Hi") is False
-    assert checkio('one two 3 four five six 7 eight 9 ten eleven 12') is True
+@pytest.mark.parametrize("arg, expected", [
+    ("Hello World hello", True),
+    ("He is 123 man", False),
+    ("1 2 3 4", False),
+    ("bla bla bla bla", True),
+    ("Hi", False),
+    ("one two 3 four five six 7 eight 9 ten eleven 12", True)
+])
+def test_three_words(arg, expected):
+    assert has_three_words_in_sequence(arg) is expected

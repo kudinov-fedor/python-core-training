@@ -1,8 +1,12 @@
-from irepela.homework_2.fizz_buzz import checkio
+import pytest
+from irepela.homework_2.fizz_buzz import fizz_buzz
 
 
-def test_fizz_buzz():
-    assert checkio(15) == "Fizz Buzz"
-    assert checkio(6) == "Fizz"
-    assert checkio(10) == "Buzz"
-    assert checkio(7) == "7"
+@pytest.mark.parametrize("arg, expected", [
+    (15, "Fizz Buzz"),
+    (6, "Fizz"),
+    (10, "Buzz"),
+    (7, "7"),
+])
+def test_fizz_buzz(arg, expected):
+    assert fizz_buzz(arg) == expected
