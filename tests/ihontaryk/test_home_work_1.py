@@ -52,3 +52,4 @@ def test_different_ids(input1, input2):
 def test_same_ids(input1, input2):
     """verify same ids"""
     assert id(input1) == id(input2)
+
