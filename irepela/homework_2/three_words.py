@@ -38,7 +38,7 @@ def has_three_words_in_sequence_sol_2(text: str) -> bool:
     has_three_words = False
     for index in range(len(word_list) - 2):
         three_words = word_list[index: index + 3]
-        has_three_words = all(not word.isnumeric() for word in three_words)
+        has_three_words = all(word.isalpha() for word in three_words)
         if has_three_words:
             break
     return has_three_words
@@ -60,7 +60,7 @@ def has_three_words_in_sequence_sol_3(text: str) -> bool:
     slice_3 = word_list[2::3]
     has_three_words = False
     for words in zip(slice_1, slice_2, slice_3):
-        has_three_words = all(not word.isnumeric() for word in words)
+        has_three_words = all(word.isalpha() for word in words)
         if has_three_words:
             break
     return has_three_words
