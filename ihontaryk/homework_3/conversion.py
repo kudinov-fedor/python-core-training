@@ -10,10 +10,19 @@ list(zip(["a", "b", "c"], [1, 2, 3]))  # [('a', 1), ('b', 2), ('c', 3)]  -> test
 
 type(range(10))  # <class 'range'>
 str(range(10))  # 'range(0, 10)'
+list(range(10))  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-frozenset({"apple", "banana", "cherry"})  # frozenset({'cherry', 'banana', 'apple'})
-bytearray(5)  # bytearray(b'\x00\x00\x00\x00\x00')
+type(frozenset({"apple", "banana", "cherry"})) # <class 'frozenset'>
+str(frozenset({"apple", "banana", "cherry"})) # "frozenset({'apple', 'banana', 'cherry'})"
+list(frozenset({"apple", "banana", "cherry"}))  # ['apple', 'banana', 'cherry']
+
+type(bytearray(b'\x00\x00\x00\x00\x00')) # <class 'bytearray'>
+str(bytearray(5)) # "bytearray(b'\\x00\\x00\\x00\\x00\\x00')"
+list(bytearray(5))  # [0, 0, 0, 0, 0]
+
 memoryview(bytes(5))  # <memory at 0x0000025C45383640>
+str(memoryview(bytes(5)))  # '<memory at 0x0000021BCCEB3640>'
+list(memoryview(bytes(5)))  # [0, 0, 0, 0, 0]
 
 
 def generate_integer():
