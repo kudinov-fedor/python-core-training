@@ -11,7 +11,10 @@ from ihontaryk.homework_2.three_words import three_words
                           ('Today is 27.09.2024. Yesterday was 26th of September.', False)
                           ])
 def test_three_words_positive(text, expected_result):
-    """verify positive scenarios for three_words function"""
+    """
+    verify positive scenarios for three_words function
+    """
+
     assert three_words(text) == expected_result
 
 
@@ -24,7 +27,10 @@ def test_three_words_positive(text, expected_result):
                           ('', ValueError)
                           ])
 def test_three_words_negative(text, error):
-    """verify negative scenarios for three_words function"""
+    """
+    verify negative scenarios for three_words function
+    """
+
     with pytest.raises(error):
         three_words(text)
 

@@ -15,6 +15,7 @@ def test_multiply_numbers_positive(number1, number2, expected_result):
     """
     verify positive scenarios for multiply_numbers function
     """
+
     assert multiply_numbers(number1, number2) == expected_result
 
 
@@ -28,6 +29,7 @@ def test_multiply_numbers_negative(number1, number2, error):
     """
     verify negative scenarios for multiply_numbers function
     """
+
     with pytest.raises(error):
         multiply_numbers(number1, number2)
 

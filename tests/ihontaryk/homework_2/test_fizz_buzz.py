@@ -13,6 +13,7 @@ def test_fizz_buzz_positive(number, expected_result):
     """
     verify positive scenarios for fizz_buss function
     """
+
     assert fizz_buzz(number) == expected_result
 
 
@@ -28,6 +29,7 @@ def test_fizz_buzz_negative(number, error):
     """
     verify negative scenarios for fizz_buss function
     """
+
     with pytest.raises(error):
         fizz_buzz(number)
 

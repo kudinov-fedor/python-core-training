@@ -9,7 +9,10 @@ from ihontaryk.homework_2.sum_numbers import sum_numbers
                           ('Today is 27.09.2024. Yesterday was 26th of September. 27 is greater than 26', 53)
                           ])
 def test_sum_numbers_positive(text, expected_result):
-    """verify positive scenarios for sum_numbers function"""
+    """
+    verify positive scenarios for sum_numbers function
+    """
+
     assert sum_numbers(text) == expected_result
 
 
@@ -22,6 +25,9 @@ def test_sum_numbers_positive(text, expected_result):
                           ('', ValueError)
                           ])
 def test_sum_numbers_negative(text, error):
-    """verify negative scenarios for sum_numbers function"""
+    """
+    verify negative scenarios for sum_numbers function
+    """
+
     with pytest.raises(error):
         sum_numbers(text)
