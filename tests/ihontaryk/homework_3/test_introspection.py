@@ -70,3 +70,16 @@ def test_subclass(test_object, expected_result):
     """
 
     assert issubclass(test_object, expected_result)
+
+
+@pytest.mark.parametrize("test_object",
+                         [bool, object, int, float, str, tuple,
+                          list, range, set, dict, some_lambda,
+                          some_gen_func, some_func
+                          ])
+def test_callable(test_object):
+    """
+    verify some objects are callable
+    """
+
+    assert callable(test_object)

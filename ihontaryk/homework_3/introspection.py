@@ -89,36 +89,45 @@ len(some_set) # 0
 len(some_range) # 10
 
 # callable
-callable(some_bool)
-callable(bool)
-callable(some_func)
-callable(some_gen_func)
-callable(some_lambda)
-callable(SomeClass)
-callable(some_object)
+callable(some_bool) # False
+callable(bool) # True
+callable(some_func) # True
+callable(some_gen_func) # True
+callable(some_lambda)  # True
+callable(SomeClass) #True
+callable(some_object) # False
 
 a = (1, 2, 3)
 b = (1, 2, 3)
-a == b
-a is b
-hash(a) == hash(b)
-id(a) == id(b)
+a == b # True
+a is b # False
+hash(a) # 529344067295497451
+hash(a) == hash(b) # True
+id(a) # 2367368774976
+id(a) == id(b) # False
 
-dir(list)
-vars(some_object)
-vars(SomeClass)
+dir(list) # ['__add__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__',
+# '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getstate__',
+# '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__',
+# '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__',
+# '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count',
+# 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+vars(some_object) # {'instance_attr': 987}
+vars(SomeClass) # mappingproxy({'__module__': '__main__', '__doc__': '\n    my great docstring\n    ',
+# 'class_atr': 123, '__init__': <function SomeClass.__init__ at 0x00000227322AF380>, '__dict__': <attribute
+# '__dict__' of 'SomeClass' objects>, '__weakref__': <attribute '__weakref__' of 'SomeClass' objects>})
 help(some_object)
-some_object.__doc__
+some_object.__doc__ #'\n    my great docstring\n    '
 
 # has attr
-hasattr(some_list, "append")
-hasattr(some_object, "instance_attr")
-hasattr(some_object, "class_atr")
-hasattr(SomeClass, "class_atr")
-hasattr(SomeClass, "instance_attr")
+hasattr(some_list, "append") # True
+hasattr(some_object, "instance_attr") # True
+hasattr(some_object, "class_atr") # True
+hasattr(SomeClass, "class_atr") # True
+hasattr(SomeClass, "instance_attr") # False
 
 # representation
-str("123")
-str(123)
-repr("123")
-repr(123)
+str("123") # '123'
+str(123) # '123'
+repr("123") # "'123'"
+repr(123) # '123'
