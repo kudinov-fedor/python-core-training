@@ -73,19 +73,20 @@ isinstance(bool, type)  # True
 isinstance(bool, object)  # True
 
 # subclass
-issubclass(bool, bool)
-issubclass(bool, int)
-issubclass(bool, float)
-issubclass(ZeroDivisionError, ArithmeticError)
-issubclass(ZeroDivisionError, Exception)
+issubclass(bool, bool) # True
+issubclass(bool, int) # True
+issubclass(bool, str) # False
+issubclass(bool, float) # False
+issubclass(ZeroDivisionError, ArithmeticError) # True
+issubclass(ZeroDivisionError, Exception) # True
 
 # len
-len(some_str)
-len(some_dict)
-len(some_list)
-len(some_tuple)
-len(some_set)
-len(some_range)
+len(some_str) # 0
+len(some_dict) # 0
+len(some_list) # 0
+len(some_tuple)  # 0
+len(some_set) # 0
+len(some_range) # 10
 
 # callable
 callable(some_bool)

@@ -56,3 +56,17 @@ def test_instance(test_object, expected_result):
     """
 
     assert isinstance(test_object, expected_result)
+
+
+@pytest.mark.parametrize("test_object, expected_result",
+                         [(bool, bool),
+                          (bool, int),
+                          (ZeroDivisionError, ArithmeticError),
+                          (ZeroDivisionError, Exception)
+                          ])
+def test_subclass(test_object, expected_result):
+    """
+    verify subclass belongs to class
+    """
+
+    assert issubclass(test_object, expected_result)
