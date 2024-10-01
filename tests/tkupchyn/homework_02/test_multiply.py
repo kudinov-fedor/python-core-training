@@ -1,8 +1,5 @@
 import pytest
-
-
-def mult_two(a: int, b: int):
-    return a * b
+from tkupchyn.homework_02.multiply_two import multiply_two_ints
 
 
 @pytest.mark.parametrize('a,b, result', [
@@ -11,5 +8,5 @@ def mult_two(a: int, b: int):
     (3, 4, 12),
     (5, 6, 30),
     (7, 8, 56)])
-def test_mult_two(a, b, result):
-    assert mult_two(a, b) == result
+def test_multiply_two(a, b, result):
+    assert multiply_two_ints(a, b) == result

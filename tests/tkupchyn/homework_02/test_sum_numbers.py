@@ -1,8 +1,5 @@
 import pytest
-
-
-def sum_numbers(string):
-    return sum([int(num) for num in string.split() if num.isdigit()])
+from tkupchyn.homework_02.sum_numbers import sum_numbers
 
 
 @pytest.mark.parametrize('string, num_sum', [
