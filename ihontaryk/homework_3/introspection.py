@@ -1,4 +1,5 @@
-# Verify in Pyton console the objects creation
+# Verify in Python Console introspection of objects
+
 some_bool = bool()  # some_bool False
 some_int = int()  # some_int 0
 some_float = float()  # some_float 0.0

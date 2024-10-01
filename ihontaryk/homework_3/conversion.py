@@ -1,4 +1,4 @@
-from random import random
+# Verify in Python Console conversion of objects
 
 type(enumerate(["a", "b", "c"]))  # <class 'enumerate'>
 str(enumerate(["a", "b", "c"]))  # '<enumerate object at 0x0000025C453FAC00>'

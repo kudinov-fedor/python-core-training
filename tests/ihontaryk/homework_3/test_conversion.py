@@ -37,4 +37,3 @@ def test_list_conversion_dict_items(input1, expected_result):
     """
 
     assert list(input1.items()) == expected_result
-
