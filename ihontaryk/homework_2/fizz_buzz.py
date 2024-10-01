@@ -1,9 +1,9 @@
-def fizz_buzz(number):
+def fizz_buzz(number) -> str:
     """
     fizz_buzz function
     """
 
-    if type(number) is not int:
+    if not isinstance(number, int):
         raise TypeError
 
     if number == 0:
@@ -19,4 +19,3 @@ def fizz_buzz(number):
         result = str(number)
 
     return result
-

@@ -21,7 +21,7 @@ def test_fizz_buzz_positive(number, expected_result):
                          [(0, ValueError),
                           (1.5, TypeError),
                           ("abc", TypeError),
-                          (False, TypeError),
+                          (False, ValueError),
                           ([1, 2, 3], TypeError),
                           ({1, 2, 3}, TypeError)
                           ])
@@ -32,4 +32,3 @@ def test_fizz_buzz_negative(number, error):
 
     with pytest.raises(error):
         fizz_buzz(number)
-

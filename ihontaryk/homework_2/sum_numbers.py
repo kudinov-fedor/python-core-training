@@ -1,10 +1,10 @@
-def sum_numbers(text):
+def sum_numbers(text) -> int:
     """
     sum_numbers function
     sums the integer numbers in the text
     """
 
-    if type(text) is not str:
+    if not isinstance(text, str):
         raise TypeError
 
     if text == '':
@@ -15,4 +15,3 @@ def sum_numbers(text):
     total = sum(int(word) for word in words if word.isdecimal())
 
     return total
-

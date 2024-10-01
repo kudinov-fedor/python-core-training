@@ -1,10 +1,10 @@
-def three_words(text):
+def three_words(text) -> bool:
     """
     three_words function
     checks if the string contains three words in succession
     """
 
-    if type(text) is not str:
+    if not isinstance(text, str):
         raise TypeError
 
     if text == '':
@@ -22,8 +22,25 @@ def three_words(text):
 
         if len(result) >= 3:
             return True
-        else:
-            continue
+        continue
 
     return False
 
+
+def three_words_2(text) -> bool:
+    """
+    solution 2
+    three_words function
+    checks if the string contains three words in succession
+    """
+
+    elements = text.split()
+
+    for i in range(len(elements) - 2):
+
+        result = [word for word in elements[i: i + 3] if word.isalpha()]
+
+        if len(result) == 3:
+            return True
+
+    return False

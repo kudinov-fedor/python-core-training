@@ -1,6 +1,6 @@
 import pytest
 
-from ihontaryk.homework_2.three_words import three_words
+from ihontaryk.homework_2.three_words import three_words, three_words_2
 
 
 @pytest.mark.parametrize('text, expected_result',
@@ -34,3 +34,17 @@ def test_three_words_negative(text, error):
     with pytest.raises(error):
         three_words(text)
 
+
+@pytest.mark.parametrize('text, expected_result',
+                         [('Hi', False),
+                          ('1 2 3 4 5', False),
+                          ('This text is without any number', True),
+                          ('27 is greater than 26', True),
+                          ('Today is 27.09.2024. Yesterday was 26th of September.', False)
+                          ])
+def test_three_words_2_positive(text, expected_result):
+    """
+    verify positive scenarios for three_words_2 function
+    """
+
+    assert three_words_2(text) == expected_result

@@ -32,4 +32,3 @@ def test_multiply_numbers_negative(number1, number2, error):
 
     with pytest.raises(error):
         multiply_numbers(number1, number2)
-
