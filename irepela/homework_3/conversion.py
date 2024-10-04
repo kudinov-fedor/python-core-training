@@ -1,6 +1,9 @@
-def convert_binary_to_decimal(binary_str: str) -> int:
+def to_int(binary_str: str) -> int:
     """
-      Converts binary string to decimal number and returns result.
+    Converts binary string to decimal number and returns result.
+
+    Usage Example:
+           convert_binary_to_decimal('1010101') == 181
 
      Args:
          binary_str (str): Binary string.
@@ -24,7 +27,7 @@ def convert_to_list(dict_to_convert: dict) -> list:
     return list(dict_to_convert)
 
 
-def convert_to_tuple(dict_to_convert: dict) -> tuple:
+def as_tuple(dict_to_convert: dict) -> tuple:
     """
       Converts dictionary to a tuple and returns result.
 

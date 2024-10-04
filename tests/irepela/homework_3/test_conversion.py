@@ -1,6 +1,6 @@
 import pytest
-from irepela.homework_3.conversion import (convert_binary_to_decimal, convert_to_list,
-                                           convert_to_tuple, convert_to_set)
+from irepela.homework_3.conversion import (to_int, convert_to_list,
+                                           as_tuple, convert_to_set)
 
 
 @pytest.mark.parametrize("a, expected", [
@@ -8,7 +8,7 @@ from irepela.homework_3.conversion import (convert_binary_to_decimal, convert_to
     ("0b10110101", 181),
 ])
 def test_convert_binary_to_decimal(a, expected):
-    assert convert_binary_to_decimal(a) == expected
+    assert to_int(a) == expected
 
 
 @pytest.mark.parametrize("a, expected", [
@@ -24,7 +24,7 @@ def test_convert_to_list(a, expected):
     ({"a", "b"}, ("a", "b")),
 ])
 def test_convert_to_tuple(a, expected):
-    assert convert_to_tuple(a) == expected
+    assert as_tuple(a) == expected
 
 
 @pytest.mark.parametrize("a, expected", [

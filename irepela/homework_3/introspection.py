@@ -1,4 +1,4 @@
-def check_default_bool() -> bool:
+def get_default_bool() -> bool:
     """
       Check if bool by default is True or false
 
@@ -17,3 +17,13 @@ def check_bool_instance(type_to_check) -> bool:
       """
     some_bool = bool()
     return isinstance(some_bool, type_to_check)
+
+
+def check_bool_subclass(type_to_check) -> bool:
+    """
+      Check if some type is bool subclass
+
+      Returns:
+          bool: result of checking type for bool subclass
+      """
+    return issubclass(bool, type_to_check)
