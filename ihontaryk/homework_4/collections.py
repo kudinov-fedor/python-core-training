@@ -9,7 +9,8 @@ some_str = "abcd"  # 'abcd'
 some_tuple = "a", "b", "c", "d"  # ('a', 'b', 'c', 'd')
 some_list = ["a", "b", "c", "d"]  # ['a', 'b', 'c', 'd']
 some_set = {"a", "b", "c", "d"}  # {'d', 'b', 'c', 'a'}
-some_dict = {"a": 123, "b": 456, "c": 789, "d": 100}  # {'a': 123, 'b': 456, 'c': 789, 'd': 100}
+some_dict = {"a": 123, "b": 456, "c": 789, "d": 100}
+# {'a': 123, 'b': 456, 'c': 789, 'd': 100}
 
 # len
 len(some_str)  # 4
@@ -123,31 +124,51 @@ data = [{"age": 16, "name": "John", "sex": "M"},
 
 # sort by age -- Test --
 sorted(data, key=lambda i: i["age"])
-# [{'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'}, {'age': 34, 'name': 'Marry', 'sex': 'F'}]
+# [{'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'},
+# {'age': 34, 'name': 'Marry', 'sex': 'F'}]
 sorted(data, key=lambda i: i["age"], reverse=True)
-# [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'}, {'age': 16, 'name': 'John', 'sex': 'M'}]
+# [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'},
+# {'age': 16, 'name': 'John', 'sex': 'M'}]
 
 # sort by sex, where F is 0, M is 1 (F goes first - ascending by default)
-sorted(data, key=lambda i: i[
-                               "sex"] == "M")  # [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'}]
-sorted(data, key=lambda i: i["sex"] == "M", reverse=True)  # [{'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'}, {'age': 34, 'name': 'Marry', 'sex': 'F'}]
+sorted(data, key=lambda i: i["sex"] == "M")
+# [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 16, 'name': 'John', 'sex': 'M'},
+# {'age': 25, 'name': 'Mathew', 'sex': 'M'}]
+sorted(data, key=lambda i: i["sex"] == "M", reverse=True)
+# [{'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'},
+# {'age': 34, 'name': 'Marry', 'sex': 'F'}]
 
 # sort by sex (F first) and age (asc)
-sorted(data, key=lambda i: (i["sex"] == "M", i["age"]))  # [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'}]
+sorted(data, key=lambda i: (i["sex"] == "M", i["age"]))
+# [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 16, 'name': 'John', 'sex': 'M'},
+# {'age': 25, 'name': 'Mathew', 'sex': 'M'}]
 # sort by sex (F first) and age (desc)
-sorted(data, key=lambda i: (i["sex"] == "M", -i["age"]))  # [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'}, {'age': 16, 'name': 'John', 'sex': 'M'}]
+sorted(data, key=lambda i: (i["sex"] == "M", -i["age"]))
+# [{'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'},
+# {'age': 16, 'name': 'John', 'sex': 'M'}]
 # sort by name  alphabetically
-sorted(data, key=lambda i: i["name"])  # [{'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 25, 'name': 'Mathew', 'sex': 'M'}]
+sorted(data, key=lambda i: i["name"])
+# [{'age': 16, 'name': 'John', 'sex': 'M'}, {'age': 34, 'name': 'Marry', 'sex': 'F'},
+# {'age': 25, 'name': 'Mathew', 'sex': 'M'}]
 
 # zip, enumerate, reversed, map, filter --Tests--
 list(filter(lambda i: i == "M", data))  # []
-list(enumerate(data))  # [(0, {'age': 16, 'name': 'John', 'sex': 'M'}), (1, {'age': 34, 'name': 'Marry', 'sex': 'F'}), (2, {'age': 25, 'name': 'Mathew', 'sex': 'M'})]
-list(reversed(data))  # [{'age': 25, 'name': 'Mathew', 'sex': 'M'}, {'age': 34, 'name': 'Marry', 'sex': 'F'}, {'age': 16, 'name': 'John', 'sex': 'M'}]
+list(enumerate(data))
+# [(0, {'age': 16, 'name': 'John', 'sex': 'M'}), (1, {'age': 34, 'name': 'Marry', 'sex': 'F'}),
+# (2, {'age': 25, 'name': 'Mathew', 'sex': 'M'})]
+list(reversed(data))
+# [{'age': 25, 'name': 'Mathew', 'sex': 'M'}, {'age': 34, 'name': 'Marry', 'sex': 'F'},
+# {'age': 16, 'name': 'John', 'sex': 'M'}]
 list(map(lambda i: i["name"], data))  # ['John', 'Marry', 'Mathew']
 
-list(zip(data, [1, 2, 3, 4, 5, 6, 7]))  # [({'age': 16, 'name': 'John', 'sex': 'M'}, 1), ({'age': 34, 'name': 'Marry', 'sex': 'F'}, 2), ({'age': 25, 'name': 'Mathew', 'sex': 'M'}, 3)]
-list(zip(data, [1, 2]))  # [({'age': 16, 'name': 'John', 'sex': 'M'}, 1), ({'age': 34, 'name': 'Marry', 'sex': 'F'}, 2)]
-list(zip(data, [1, 2, 3]))  # [({'age': 16, 'name': 'John', 'sex': 'M'}, 1), ({'age': 34, 'name': 'Marry', 'sex': 'F'}, 2), ({'age': 25, 'name': 'Mathew', 'sex': 'M'}, 3)]
+list(zip(data, [1, 2, 3, 4, 5, 6, 7]))
+# [({'age': 16, 'name': 'John', 'sex': 'M'}, 1), ({'age': 34, 'name': 'Marry', 'sex': 'F'}, 2),
+# ({'age': 25, 'name': 'Mathew', 'sex': 'M'}, 3)]
+list(zip(data, [1, 2]))
+# [({'age': 16, 'name': 'John', 'sex': 'M'}, 1), ({'age': 34, 'name': 'Marry', 'sex': 'F'}, 2)]
+list(zip(data, [1, 2, 3]))
+# [({'age': 16, 'name': 'John', 'sex': 'M'}, 1), ({'age': 34, 'name': 'Marry', 'sex': 'F'}, 2),
+# ({'age': 25, 'name': 'Mathew', 'sex': 'M'}, 3)]
 
 
 def sort_users_by_2_parameters(n):
