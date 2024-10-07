@@ -9,8 +9,10 @@ def check_password(password: str) -> bool:
             bool: result if password meets requirements
     """
 
-    is_valid_password = len(password) > 6 and password != "password"
-    if is_valid_password and len(password) < 9:
-        is_valid_password = not password.isalpha() and not password.isnumeric()
+    contains_pass = password == "password"
+    complies_to_digit_policy = any(char.isdigit() for char in password) and not password.isnumeric()
 
-    return is_valid_password
+    is_valid_short = len(password) > 6 and complies_to_digit_policy and not contains_pass
+    is_valid_long = len(password) > 9 and not contains_pass
+
+    return is_valid_short or is_valid_long

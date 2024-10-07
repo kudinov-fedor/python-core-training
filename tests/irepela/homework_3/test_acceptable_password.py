@@ -9,6 +9,7 @@ from irepela.homework_3.acceptable_password import check_password
     ("ashort", False),
     ("password", False),
     ("12345678", False),
+    ("shortand", False),
 ])
 def test_common_words(a, expected):
     assert check_password(a) == expected
