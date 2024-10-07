@@ -8,16 +8,16 @@ def get_most_wanted_letter(text: str) -> str:
         Returns:
             str: letter which is used the most
     """
+    text = text.lower()
     letters_dict = {}
 
     # count letters and store them in dictionary
     for letter in text:
         if letter.isalpha():
-            key = letter.lower()
-            if key in letters_dict:
-                letters_dict[key] += 1
+            if letter in letters_dict:
+                letters_dict[letter] += 1
             else:
-                letters_dict[key] = 1
+                letters_dict[letter] = 1
 
     # calculate letter max occurrence
     max_value = max(letters_dict.values())
