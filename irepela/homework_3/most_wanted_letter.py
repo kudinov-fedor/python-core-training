@@ -1,3 +1,6 @@
+from string import ascii_lowercase
+
+
 def get_most_wanted_letter(text: str) -> str:
     """
         Find most used letter
@@ -9,10 +12,6 @@ def get_most_wanted_letter(text: str) -> str:
             str: letter which is used the most
     """
 
-    # lowercase all text, remove non alpha strings and sort it alphabetically
-    text = "".join(letter for letter in sorted(text.lower()) if letter.isalpha())
+    text = text.lower()
 
-    # calculate letter max occurrence
-    max_value_letter = max(text, key=text.count)
-
-    return max_value_letter
+    return max(ascii_lowercase, key=text.count)
