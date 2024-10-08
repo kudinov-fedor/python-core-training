@@ -110,9 +110,13 @@ r"\n".isprintable()  # True
 
 def find_special_characters(text):
     special = [char for char in text if not (char.isalnum() or char.isspace())]
+    if len(special) > 1:
+        result = f"In this text were found such special characters: {' '.join(sorted(set(special)))}"
+    else:
+        result = f"In this text were not found special characters"
 
-    return f"In this text were found such special characters: {' '.join(set(special))}"
+    return result
 
 
 if __name__ == '__main__':
-    print(find_special_characters("gfdhf8 8 * 99^gg&^ $ gg"))
+    print(find_special_characters("ra()()( cecar"))
