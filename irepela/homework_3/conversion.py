@@ -24,7 +24,7 @@ def convert_to_list(dict_to_convert: dict) -> list:
     Returns:
         list: of dictionary or set.
     """
-    return list(dict_to_convert)
+    return sorted(list(dict_to_convert))
 
 
 def as_tuple(dict_to_convert: dict) -> tuple:
@@ -37,7 +37,7 @@ def as_tuple(dict_to_convert: dict) -> tuple:
      Returns:
          tuple: of dictionary or set.
      """
-    return tuple(dict_to_convert)
+    return tuple(sorted(dict_to_convert))
 
 
 def convert_to_set(collection_to_convert) -> set:
@@ -50,4 +50,4 @@ def convert_to_set(collection_to_convert) -> set:
       Returns:
           set: of converted collection
       """
-    return set(collection_to_convert)
+    return set(sorted(collection_to_convert))
