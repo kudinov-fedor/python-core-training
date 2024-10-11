@@ -27,5 +27,5 @@ def test_longest_word_positive(words, expected_result):
                              ('test', '', 1)
                          ])
 def test_longest_word_negative(words):
-    with pytest.raises(TypeError, ):
+    with pytest.raises(TypeError):
         max(words, key=len)

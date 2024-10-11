@@ -14,7 +14,6 @@ nextHappyYear (7712) ==> return (7801)
 
 
 def next_happy_year(year: int) -> int:
-
     """
     Function finds the closest next happy year.
 
@@ -43,5 +42,20 @@ def next_happy_year(year: int) -> int:
                 continue
             else:
                 is_happy_year = True
+
+    return year
+
+
+def next_happy_year_alternative(year: int) -> int:
+    if year not in range(1000, 9001):
+        raise ValueError(f"Year {year} is out of range")
+
+    happy_year = len(set(str(year))) == 4
+
+    if happy_year:
+        year += 1
+
+    while not len(set(str(year))) == 4:
+        year += 1
 
     return year

@@ -1,4 +1,3 @@
-
 def consecutive_concatenation(strings: list, k: int) -> str:
     """
     Return the first longest string consisting of k consecutive strings taken in the array.
@@ -9,9 +8,5 @@ def consecutive_concatenation(strings: list, k: int) -> str:
     Returns:
         str: longest string consisting of k consecutive strings
     """
-    concatenated_strings = []
 
-    for i in range(0, len(strings) - k + 1):
-        concatenated_strings.append(''.join((strings[i: i + k])))
-
-    return max(concatenated_strings, key=len)
+    return max((''.join((strings[i: i + k])) for i in range(len(strings) - k + 1)), key=len)

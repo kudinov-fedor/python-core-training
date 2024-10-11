@@ -22,3 +22,8 @@ def find_most_frequent_letter(phrase: str) -> str:
             letter_frequency[symbol] = 1
 
     return min([elem for elem in letter_frequency if letter_frequency[elem] == max(letter_frequency.values())])
+
+
+def find_most_frequent_letter_alternative(phrase: str) -> str:
+    phrase = [symbol.lower() for symbol in phrase if symbol.isalpha()]
+    return max([elem for elem in reversed(phrase)], key=phrase.count)

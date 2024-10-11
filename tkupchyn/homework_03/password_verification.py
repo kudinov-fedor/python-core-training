@@ -23,3 +23,21 @@ def is_acceptable_password(password: str) -> bool:
             return False
 
     return True
+
+
+def is_acceptable_password_alternative(password: str) -> bool:
+
+    is_short = len(password) < 7
+    has_pass = 'password' in password
+    has_only_digits = all(symbol.isdigit() for symbol in password)
+    has_digits = any(symbol.isdigit() for symbol in password)
+
+    if len(password) > 9:
+        result = not has_pass
+    else:
+        result = all([not is_short, not has_pass, not has_only_digits, has_digits])
+
+    return result
+
+
+print(is_acceptable_password_alternative('short54'))
