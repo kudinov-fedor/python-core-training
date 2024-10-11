@@ -67,6 +67,7 @@ clothes_shop = [{'name': 'T-shirts', 'availability': t_shirts},
 
 def group_by_size(clothes_shop):
     by_size = {}
+
     for clothes in clothes_shop:
         for item in clothes['availability']:
             if item['size'] not in by_size:
@@ -85,7 +86,7 @@ def group_by_color(clothes_shop):
         for item in clothes['availability']:
             by_color.setdefault(item['color'], []).append(item)
 
-    return list((color, len(by_color[color])) for color in by_color.keys())
+    return tuple((color, len(by_color[color])) for color in by_color.keys())
 
 
 # Other option - use default dict
@@ -96,7 +97,7 @@ def group_by_price(clothes_shop):
         for item in clothes['availability']:
             by_price[item['price']].append(item)
 
-    return list((price, len(by_price[price])) for price in by_price.keys())
+    return tuple((price, len(by_price[price])) for price in by_price.keys())
 
 
 def select_by_name_and_color(clothes_shop, name, color):
@@ -104,8 +105,8 @@ def select_by_name_and_color(clothes_shop, name, color):
                                     (clothes['name'] == name), clothes_shop))
     return tuple(filter(lambda item: (item['color'] == color), selected_by_name[0]['availability']))
 
-
-print(group_by_size(clothes_shop))
-print(group_by_color(clothes_shop))
-print(group_by_price(clothes_shop))
-print(select_by_name_and_color(clothes_shop, 'T-shirts', 'blue'))
+if __name__ == '__main__':
+    print(group_by_size(clothes_shop))
+    print(group_by_color(clothes_shop))
+    print(group_by_price(clothes_shop))
+    print(select_by_name_and_color(clothes_shop, 'T-shirts', 'blue'))
