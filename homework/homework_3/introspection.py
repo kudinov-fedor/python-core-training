@@ -32,9 +32,6 @@ class SomeClass:
     def __init__(self):
         self.instance_attr = 987
 
-    def __call__(self, *args, **kwargs):
-        print('Calable')
-
 
 some_object = SomeClass()
 
