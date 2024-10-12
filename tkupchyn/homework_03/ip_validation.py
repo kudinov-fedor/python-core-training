@@ -18,8 +18,8 @@ def is_valid_ip(ip_address: str) -> bool:
     if len(octets) != 4:
         return False
 
-    for octet in octets:
-        if not octet.isdigit() or int(octet) not in range(0, 256) or re.match(r'^0\d', octet):
-            return False
-
-    return True
+    return not any(
+        not octet.isdigit() or
+        int(octet) not in range(0, 256) or
+        re.match(r'^0\d', octet)
+        for octet in octets)

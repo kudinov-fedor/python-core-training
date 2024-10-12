@@ -46,16 +46,18 @@ def next_happy_year(year: int) -> int:
     return year
 
 
+def is_happy_year(year):
+    return len(set(str(year))) == 4
+
+
 def next_happy_year_alternative(year: int) -> int:
     if year not in range(1000, 9001):
         raise ValueError(f"Year {year} is out of range")
 
-    happy_year = len(set(str(year))) == 4
 
-    if happy_year:
-        year += 1
+    year += 1 if is_happy_year(year) else year
 
-    while not len(set(str(year))) == 4:
+    while not is_happy_year(year):
         year += 1
 
     return year
