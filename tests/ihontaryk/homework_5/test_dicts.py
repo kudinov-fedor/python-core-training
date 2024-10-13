@@ -5,7 +5,7 @@ from ihontaryk.homework_5.dicts import *
 data1 = [{'name': 'Hats', 'availability': [{'size': 'S', 'color': 'white', 'price': 400},
                                            {'size': 'M', 'color': 'pink', 'price': 100},
                                            {'size': 'S', 'color': 'black', 'price': 300},
-                                           {'size': 'L', 'color': 'yellow', 'price': 200},
+                                           {'size': 'M', 'color': 'yellow', 'price': 200},
                                            {'size': 'M', 'color': 'yellow', 'price': 400}]}]
 
 data2 = [{'name': 'Pajamas', 'availability': [{'size': 'S', 'color': 'blue', 'price': 200},
@@ -16,8 +16,8 @@ data2 = [{'name': 'Pajamas', 'availability': [{'size': 'S', 'color': 'blue', 'pr
 
 
 @pytest.mark.parametrize('data, expected_result',
-                         [(data1, ({'S': 2}, {'M': 2}, {'L': 1})),
-                          (data2, ({'S': 2}, {'M': 1}, {'L': 2}))
+                         [(data1, (('S', 2), ('M', 3))),
+                          (data2, (('S', 2), ('M', 1), ('L', 2)))
                           ])
 def test_group_by_size(data, expected_result):
     """
@@ -49,7 +49,7 @@ def test_group_by_price(data, expected_result):
 
 
 @pytest.mark.parametrize('data1, data2, name, color, expected_result',
-                         [(data1, data2, 'Hats', 'yellow', ({'size': 'L', 'color': 'yellow', 'price': 200},
+                         [(data1, data2, 'Hats', 'yellow', ({'size': 'M', 'color': 'yellow', 'price': 200},
                                                             {'size': 'M', 'color': 'yellow', 'price': 400})),
                           (data1, data2, 'Pajamas', 'gray', ({'size': 'L', 'color': 'gray', 'price': 500},))
                           ])

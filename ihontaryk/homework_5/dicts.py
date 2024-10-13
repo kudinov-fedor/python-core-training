@@ -74,7 +74,7 @@ def group_by_size(clothes_shop):
                 by_size[item['size']] = []
             by_size[item['size']].append(item)
 
-    return {'S': len(by_size['S'])}, {'M': len(by_size['M'])}, {'L': len(by_size['L'])}
+    return tuple((size, len(by_size[size])) for size in by_size.keys())
 
 
 # other option - setdefault:
