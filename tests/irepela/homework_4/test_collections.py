@@ -64,5 +64,4 @@ def test_collections_sorting(collection, expected):
 
 def test_collections_zip():
     result = list(zip(some_str, some_tuple, some_list))
-    print(result)
     assert result[0] == ("a", "a", "a")

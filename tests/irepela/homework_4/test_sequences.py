@@ -11,7 +11,8 @@ test_list = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     (2, 5, 1, test_list, [3, 4, 5]),
 ])
 def test_sequence_slice(start, end, step, collection, expected):
-    assert collection[start:end:step] == expected
+    test_slice = slice(start, end, step)
+    assert collection[test_slice] == expected
 
 
 def test_sequence_compare():
