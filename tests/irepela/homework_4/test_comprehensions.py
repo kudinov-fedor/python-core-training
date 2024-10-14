@@ -13,8 +13,8 @@ def test_generator_expression():
     assert next(generator) == 6
     assert next(generator) == 8
     assert next(generator) == 10
-    items_left = [*generator]
-    assert items_left == []
+    items_left = list(generator)
+    assert len(items_left) == 0
 
 
 def test_dict_comprehension():

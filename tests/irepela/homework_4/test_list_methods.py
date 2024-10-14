@@ -24,7 +24,7 @@ def test_list_index(a, b, expected):
 
 
 def test_list_extend():
-    list_copy = some_list.copy()
+    list_copy = list(some_list)
     list_copy.extend([7, 8, 9])
     assert list_copy == [1, 2, 3, 4, 5, 6, 1, 3, 2, 5, 4, 7, 8, 9]
     assert some_list == [1, 2, 3, 4, 5, 6, 1, 3, 2, 5, 4]
