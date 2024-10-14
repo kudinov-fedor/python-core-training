@@ -74,7 +74,7 @@ def group_by_size(clothes_shop):
                 by_size[item['size']] = []
             by_size[item['size']].append(item)
 
-    return tuple((size, len(by_size[size])) for size in by_size.keys())
+    return dict((size, len(by_size[size])) for size in by_size.keys())
 
 
 # other option - setdefault:
@@ -86,7 +86,7 @@ def group_by_color(clothes_shop):
         for item in clothes['availability']:
             by_color.setdefault(item['color'], []).append(item)
 
-    return tuple((color, len(by_color[color])) for color in by_color.keys())
+    return dict((color, len(by_color[color])) for color in by_color.keys())
 
 
 # Other option - use default dict
@@ -97,7 +97,7 @@ def group_by_price(clothes_shop):
         for item in clothes['availability']:
             by_price[item['price']].append(item)
 
-    return tuple((price, len(by_price[price])) for price in by_price.keys())
+    return dict((price, len(by_price[price])) for price in by_price.keys())
 
 
 def select_by_name_and_color(clothes_shop, name, color):

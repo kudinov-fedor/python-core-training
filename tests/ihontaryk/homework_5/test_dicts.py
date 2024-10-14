@@ -16,8 +16,8 @@ data2 = [{'name': 'Pajamas', 'availability': [{'size': 'S', 'color': 'blue', 'pr
 
 
 @pytest.mark.parametrize('data, expected_result',
-                         [(data1, (('S', 2), ('M', 3))),
-                          (data2, (('S', 2), ('M', 1), ('L', 2)))
+                         [(data1, {'S': 2, 'M': 3}),
+                          (data2, {'S': 2, 'M': 1, 'L': 2})
                           ])
 def test_group_by_size(data, expected_result):
     """
@@ -27,8 +27,8 @@ def test_group_by_size(data, expected_result):
 
 
 @pytest.mark.parametrize('data, expected_result',
-                         [(data1, (('white', 1), ('pink', 1), ('black', 1), ('yellow', 2))),
-                          (data2, (('blue', 2), ('black', 1), ('yellow', 1), ('gray', 1)))
+                         [(data1, {'white': 1, 'pink': 1, 'black': 1, 'yellow': 2}),
+                          (data2, {'blue': 2, 'black': 1, 'yellow': 1, 'gray': 1})
                           ])
 def test_group_by_color(data, expected_result):
     """
@@ -38,14 +38,14 @@ def test_group_by_color(data, expected_result):
 
 
 @pytest.mark.parametrize('data, expected_result',
-                         [(data1, [(100, 1), (200, 1), (300, 1), (400, 2)]),
-                          (data2, [(100, 1), (200, 3), (500, 1)])
+                         [(data1, {100: 1, 200: 1, 300: 1, 400: 2}),
+                          (data2, {100: 1, 200: 3, 500: 1})
                           ])
 def test_group_by_price(data, expected_result):
     """
     verify group_by_price function
     """
-    assert sorted(group_by_price(data)) == expected_result
+    assert group_by_price(data) == expected_result
 
 
 @pytest.mark.parametrize('data1, data2, name, color, expected_result',
