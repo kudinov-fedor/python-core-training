@@ -23,6 +23,7 @@ def test_group_by_size(data, expected_result):
     """
     verify group_by_size function
     """
+
     assert group_by_size(data) == expected_result
 
 
@@ -34,6 +35,7 @@ def test_group_by_color(data, expected_result):
     """
     verify group_by_color function
     """
+
     assert group_by_color(data) == expected_result
 
 
@@ -45,6 +47,7 @@ def test_group_by_price(data, expected_result):
     """
     verify group_by_price function
     """
+
     assert group_by_price(data) == expected_result
 
 
@@ -57,5 +60,18 @@ def test_select_by_name_and_color(data1, data2, name, color, expected_result):
     """
     verify select_by_name_and_color function
     """
+
     data = data1 + data2
     assert select_by_name_and_color(data, name, color) == expected_result
+
+
+@pytest.mark.parametrize('data, name, expected_result',
+                         [(data1, 'Hats', {('S', 'white'): 1, ('M', 'pink'): 1, ('S', 'black'): 1, ('M', 'yellow'): 2}),
+                          (data2, 'Pajamas', {('S', 'blue'): 1, ('M', 'blue'): 1, ('L', 'black'): 1, ('S', 'yellow'): 1, ('L', 'gray'): 1})
+                          ])
+def test_group_by_size_and_color(data, name, expected_result):
+    """
+    verify group_by_size_and_color function
+    """
+
+    assert group_by_size_and_color(data, name) == expected_result
