@@ -71,12 +71,14 @@ def unpack_recursive_gen(arguments):
     for arg in arguments:
         if isinstance(arg, (list, tuple)):
             yield from unpack_recursive(arg)
+        elif isinstance(arg, dict):
+            yield from unpack_recursive(arg.items())
         else:
             yield arg
 
 
 if __name__ == "__main__":
-    arguments = [123, ["234", None], [[1], [23], [[123], 123, {"sdf": True, "bb": 44}, ('cat', 'dog'), 'city']]]
+    arguments = [123, ["234", None], {"sdf": True, "bb": 44}, {(1, 2, 3): "abc"}]
     print(unpack_while_loop(arguments))
     print(unpack_recursive(arguments))
     print(list(unpack_while_loop_gen(arguments)))
