@@ -116,7 +116,7 @@ def group_by_size_and_color(clothes_shop, name):
             for item in clothes['availability']:
                 by_size_color[(item['size'], item['color'])].append(item)
 
-        return dict((i, len(by_size_color[i])) for i in by_size_color.keys())
+            return dict((i, len(by_size_color[i])) for i in by_size_color.keys())
 
     return dict()
 
@@ -127,6 +127,7 @@ if __name__ == '__main__':
     print(group_by_price(clothes_shop))
 
     try:
-        print(group_by_size_and_color(clothes_shop, 'T-shirts')[('L', 'blue')])
+        print(group_by_size_and_color(clothes_shop, 'Dresses')[('M', 'pink')])
     except KeyError as e:
         print(e)
+
