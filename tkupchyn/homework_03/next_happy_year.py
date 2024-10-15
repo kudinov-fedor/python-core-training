@@ -54,8 +54,8 @@ def next_happy_year_alternative(year: int) -> int:
     if year not in range(1000, 9001):
         raise ValueError(f"Year {year} is out of range")
 
-
-    year += 1 if is_happy_year(year) else year
+    if is_happy_year(year):
+        year += 1
 
     while not is_happy_year(year):
         year += 1
