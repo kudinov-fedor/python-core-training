@@ -1,37 +1,48 @@
 def custom_min(*args, key=None):
-    key = key or (lambda i: i)
-    res, *args = args
+    """
+    Function to find minimal value
+    """
 
-    for i in args:
-        if key(i) < key(res):
-            res = i
-    return res
+    key = key or (lambda i: i)
+    result, *args = args
+
+    for arg in args:
+        if key(arg) < key(result):
+            result = arg
+
+    return result
 
 
 def custom_max(*args, key=None):
-    key = key or (lambda i: i)
-    res, *args = args
+    """
+    Function to find maximal value
+    """
 
-    for i in args:
-        if key(i) > key(res):
-            res = i
-    return res
+    key = key or (lambda i: i)
+    result, *args = args
+
+    for arg in args:
+        if key(arg) > key(result):
+            result = arg
+    return result
 
 
 def custom_sorted(*args, key=None, reverse=False):
     """
-    min/max sort to reuse min/max function
-    Ascending by default
+    Function to sort in ASC and DESC order
+    ASC by default
     """
+
     sorted_list = []
     func = custom_max if reverse else custom_min
 
     assert args
     args = list(args)
+
     while args:
-        item = func(*args, key=key)
-        args.remove(item)
-        sorted_list.append(item)
+        element = func(*args, key=key)
+        args.remove(element)
+        sorted_list.append(element)
     return sorted_list
 
 
