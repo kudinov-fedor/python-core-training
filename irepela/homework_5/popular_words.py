@@ -10,9 +10,4 @@ def popular_words(text: str, words: list) -> dict:
             dict: result of words occurrence in text
     """
 
-    result = {}
-    splitted_text = text.lower().split()
-    for word in words:
-        result[word] = splitted_text.count(word)
-
-    return result
+    return {k: text.lower().split().count(k) for k in words}
