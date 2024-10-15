@@ -1,4 +1,4 @@
-def non_unique_elements(data: list[int]) ->  list[int]:
+def non_unique_elements(data: list[int]) -> list[int]:
     """
         Filters unique elements
 

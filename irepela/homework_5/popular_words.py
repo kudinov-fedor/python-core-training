@@ -1,4 +1,4 @@
-def popular_words(text: str, words: list) ->  dict:
+def popular_words(text: str, words: list) -> dict:
     """
         Finds words occurrence in text
 
