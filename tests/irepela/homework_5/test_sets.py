@@ -6,9 +6,12 @@ def test_sets_compare():
     assert some_set == some_set_2
     assert some_set is not some_set_2
     assert {"a"} < some_set
+    assert {"a", "b", "c"} <= some_set
+    assert not {"a", "b", "c"} < some_set
 
 
 def test_subset_superset():
+    assert {"a", "b", "c"}.issubset(some_set)
     assert {"a", "c"}.issubset(some_set)
     assert some_set.issuperset({"a", "c"})
 
