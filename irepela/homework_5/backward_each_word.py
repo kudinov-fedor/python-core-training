@@ -9,4 +9,4 @@ def backward_each_word(text: str) -> str:
             str: string with reversed words
     """
 
-    return " ".join([word[::-1] for word in text.split(" ")])
+    return " ".join(word[::-1] for word in text.split(" "))
