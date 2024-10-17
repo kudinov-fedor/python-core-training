@@ -31,7 +31,7 @@ def with_optional_parameters(a, b="hi"):
 # unlimited positional parameters
 def unlimited_positional(a, *args, some="val"):
     """
-    Receives 1 required parameter,
+    Receives 1 required positional parameter,
     Unlimited amount of positional parameters
     Ana 1 optional named parameter
     """
@@ -42,7 +42,7 @@ def unlimited_positional(a, *args, some="val"):
 def unlimited_named(a, some="val", **kwargs):
     """
     Receives 1 required parameter,
-    1 optional named parameter
+    1 optional parameter
     And unlimited amount of named parameters
     """
     return a, some, kwargs
