@@ -16,8 +16,9 @@ def sorted(*args, key=lambda i: i, reverse=False):
     """Ascending by default"""
     items = [*args]
     sorted_list = []
+    func = max if reverse else min
     while len(items) > 0:
-        item = max(*items, key=key) if reverse else min(*items, key=key)
+        item = func(*items, key=key)
         sorted_list.append(item)
         items.remove(item)
     return sorted_list
