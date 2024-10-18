@@ -1,3 +1,6 @@
+# Details: https://py.checkio.org/mission/building-base/share/3de02090eb5fac4f0da0ced85f9f3f61/
+
+
 class Building:
     def __init__(self, south, west, width_WE, width_NS, height=10):
         ...
