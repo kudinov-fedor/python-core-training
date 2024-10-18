@@ -10,8 +10,10 @@ def reduce(*args, key: callable, default):
     :return:
     """
     result = default
+
     for item in args:
         result = key(result, item)
+
     return result
 
 

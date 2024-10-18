@@ -9,14 +9,16 @@ def unpack_while_loop(items: list) -> list:
           list: flattened list
     """
     unpacked = []
-    copied_list = list(reversed(items))
+    copied_list = list(items)
+
     while len(copied_list) > 0:
         next_item = copied_list.pop()
         if isinstance(next_item, list):
-            copied_list.extend(reversed(next_item))
+            copied_list.extend(next_item)
         else:
             unpacked.append(next_item)
-    return unpacked
+
+    return unpacked[::-1]
 
 
 def unpack_recursive(items: list) -> list:
@@ -30,9 +32,11 @@ def unpack_recursive(items: list) -> list:
           list: flattened list
     """
     unpacked = []
+
     for item in items:
         if isinstance(item, list):
             unpacked.extend(unpack_recursive(item))
         else:
             unpacked.append(item)
+
     return unpacked
