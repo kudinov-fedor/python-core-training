@@ -1,3 +1,5 @@
+# Details:  https://py.checkio.org/mission/every-person-is-unique/share/1c6fd4b663f7e40fa15b699f17efab40/
+ 
 
 class Person:
     def __init__(self, first_name, last_name, birth_date, job, working_years, salary, country, city, gender='unknown'):
