@@ -1,24 +1,18 @@
-def min(*args, key=None):
+def min(*args, key=lambda i: i):
     min_item = args[0]
     for item in args:
-        if key:
-            min_item = item if key(item) < key(min_item) else min_item
-        else:
-            min_item = item if item < min_item else min_item
+        min_item = item if key(item) < key(min_item) else min_item
     return min_item
 
 
-def max(*args, key=None):
+def max(*args, key=lambda i: i):
     max_item = args[0]
     for item in args:
-        if key:
-            max_item = item if key(item) > key(max_item) else max_item
-        else:
-            max_item = item if item > max_item else max_item
+        max_item = item if key(item) > key(max_item) else max_item
     return max_item
 
 
-def sorted(*args, key=None, reverse=False):
+def sorted(*args, key=lambda i: i, reverse=False):
     """Ascending by default"""
     items = [*args]
     sorted_list = []
