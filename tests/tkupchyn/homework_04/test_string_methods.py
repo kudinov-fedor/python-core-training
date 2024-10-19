@@ -2,7 +2,7 @@ import pytest
 
 
 def test_format_string():
-    pattern = "{second} {first}".format(first="world", second="hello", other="some")
+    pattern = "{second} {first}"
     attrs = {"first": "world", "second": "hello", "other": "some"}
     assert pattern.format(**attrs) == "hello world"
 
