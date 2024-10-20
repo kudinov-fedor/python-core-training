@@ -51,15 +51,14 @@ class Person:
         return f'Income for {period} months: {self.calculate_income(period)}'
 
 
-person1 = Person('Karen', 'Holms', '10.10.2000', 'USA', 'New York',
-                 '011-222-3333', 'Python developer', '1.5', '2500.0',
-                 'Female')
-
-person2 = Person('David', 'Brown', '10.10.1991', 'USA', 'Chicago',
-                 '011-444-3333', 'Project Manager', '4.25', '2000.0',
-                 'Male')
-
 if __name__ == "__main__":
+    person1 = Person('Karen', 'Holms', '10.10.2000', 'USA', 'New York',
+                     '011-222-3333', 'Python developer', '1.5', '2500.0',
+                     'Female')
+
+    person2 = Person('David', 'Brown', '10.10.1991', 'USA', 'Chicago',
+                     '011-444-3333', 'Project Manager', '4.25', '2000.0',
+                     'Male')
     assert person2.show_personal_info() == 'Full name: David Brown, Age: 33, Gender: Male'
     assert person2.show_job_profile() == 'Job title: Project Manager, Experience: 4.25, Salary: 2000.0 USD'
     assert person2.show_contacts() == 'Country: USA, City: Chicago, Phone: 011-444-3333'
