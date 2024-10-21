@@ -11,12 +11,9 @@ def retry(func):
     def wrapper(*args, **kwargs):
         while True:
             try:
-                res = func(*args, **kwargs)
-                break
+                return func(*args, **kwargs)
             except Exception as e:
                 print(e)
-
-        return res
 
     return wrapper
 
