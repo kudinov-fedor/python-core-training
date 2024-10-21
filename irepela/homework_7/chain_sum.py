@@ -4,7 +4,7 @@ def chain_sum(number=0):
       and returns numbers sum if no arguments are passed
 
       Args:
-          number: int *args
+          number: int number
 
       Returns:
           itself or numbers sum
