@@ -13,3 +13,7 @@ def remove_unique_values(iterable: list) -> Iterable:
     """
     counts = Counter(iterable)
     return (elem for elem in iterable if counts[elem] > 1)
+
+
+def remove_unique_values_alternative(iterable: list) -> Iterable:
+    return (elem for elem in iterable if iterable.count(elem) > 1)

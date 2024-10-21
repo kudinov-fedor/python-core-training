@@ -13,11 +13,4 @@ def popular_words(text: str, words_to_find: list) -> dict:
 
     """
     list_of_words_in_lowercase = text.lower().replace('\n', ' ').split(" ")
-    result = {word: 0 for word in words_to_find}
-
-    for key in result:
-        for word in list_of_words_in_lowercase:
-            if key == word:
-                result[key] += 1
-
-    return result
+    return {word: list_of_words_in_lowercase.count(word) for word in words_to_find}
