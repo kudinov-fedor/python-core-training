@@ -7,24 +7,24 @@ import random
 def retry(retry_count=5):
     def inner(func):
 
-        def wrapper(*args, **kwargs):
-            if retry_count > 0:
-                exception = None
-                for i in range(0, retry_count):
-                    try:
-                        return func(*args, **kwargs)
-                    except Exception as e:
-                        exception = e
-                        print(e)
-                raise exception
-            else:
-                while True:
-                    try:
-                        return func(*args, **kwargs)
-                    except Exception as e:
-                        print(e)
+        def limited_wrapper(*args, **kwargs):
+            exception = None
+            for i in range(0, retry_count):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    exception = e
+                    print(e)
+            raise exception
 
-        return wrapper
+        def unlimited_wrapper(*args, **kwargs):
+            while True:
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    print(e)
+
+        return limited_wrapper if retry_count else unlimited_wrapper
 
     return inner
 
