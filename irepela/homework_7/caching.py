@@ -1,4 +1,4 @@
-def caching(func):
+def cache(func):
     """
         Caching fibonache function results
     """
@@ -13,7 +13,11 @@ def caching(func):
     return wrapper
 
 
-@caching
+def my_func(a):
+    return a * 2
+
+
+@cache
 def fibo(n: int):
     """
     Count fibonache numbers, where next is sum of 2 prior

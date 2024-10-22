@@ -1,8 +1,13 @@
 from irepela.homework_7 import caching
 
 
-def test_caching(mocker):
-    spy = mocker.spy(caching, "fibo")
-    caching.fibo(5)
-    assert spy.call_count == 7
-    assert spy.spy_return == 8
+def test_caching_decorator(mocker):
+    # spy my_func
+    spy = mocker.spy(caching, "my_func")
+    wrapped = caching.cache(caching.my_func)
+    assert wrapped(2) == 4
+    assert wrapped(2) == 4
+    assert wrapped(2) == 4
+    assert wrapped(2) == 4
+    assert wrapped(4) == 8
+    assert spy.call_count == 2
