@@ -23,10 +23,10 @@ class JapaneseCook(AbstractCook):
         return f"Sushi: {self.total_food}, Tea: {self.total_drink}, Total: {self.total_food + self.total_drink}"
 
 
-class RussianCook(AbstractCook):
+class UkrainianCook(AbstractCook):
 
     def total(self):
-        return f"Dumplings: {self.total_food}, Compote: {self.total_drink}, Total: {self.total_food + self.total_drink}"
+        return f"Borsch: {self.total_food}, Compote: {self.total_drink}, Total: {self.total_food + self.total_drink}"
 
 
 class ItalianCook(AbstractCook):

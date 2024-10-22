@@ -1,4 +1,4 @@
-from irepela.homework_8.three_chefs import ItalianCook, RussianCook, JapaneseCook
+from irepela.homework_8.three_chefs import ItalianCook, UkrainianCook, JapaneseCook
 
 
 def test_japanese_cook():
@@ -10,11 +10,11 @@ def test_japanese_cook():
 
 
 def test_russian_cook():
-    client_2 = RussianCook()
+    client_2 = UkrainianCook()
     client_2.add_food(1, 40)
     client_2.add_food(2, 25)
     client_2.add_drink(5, 20)
-    assert client_2.total() == "Dumplings: 90, Compote: 100, Total: 190"
+    assert client_2.total() == "Borsch: 90, Compote: 100, Total: 190"
 
 
 def test_italian_cook():
