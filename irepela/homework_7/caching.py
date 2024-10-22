@@ -13,10 +13,6 @@ def cache(func):
     return wrapper
 
 
-def my_func(a):
-    return a * 2
-
-
 @cache
 def fibo(n: int):
     """
