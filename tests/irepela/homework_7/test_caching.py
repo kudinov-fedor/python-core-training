@@ -1,11 +1,12 @@
 from irepela.homework_7.caching import cache
-from tests.irepela.homework_7 import test_data
 
 
 def test_caching_decorator(mocker):
+    mocker.my_func = lambda a: a * 2
+
     # spy my_func
-    spy = mocker.spy(test_data, "my_func")
-    wrapped = cache(test_data.my_func)
+    spy = mocker.spy(mocker, "my_func")
+    wrapped = cache(mocker.my_func)
     assert wrapped(2) == 4
     assert wrapped(2) == 4
     assert wrapped(2) == 4

@@ -9,12 +9,14 @@ def retry(retry_count=5):
 
         def wrapper(*args, **kwargs):
             if retry_count > 0:
+                exception = None
                 for i in range(0, retry_count):
                     try:
                         return func(*args, **kwargs)
                     except Exception as e:
+                        exception = e
                         print(e)
-                return "Exception"
+                raise exception
             else:
                 while True:
                     try:
