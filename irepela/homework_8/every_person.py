@@ -2,22 +2,22 @@
 from datetime import datetime
 
 
-DATE_FORMAT = "%d.%m.%Y"
-CURRENT_DATE = datetime.strptime("01.01.2018", DATE_FORMAT)
-WORK_PREFIX = {
-    "male": "He is a",
-    "female": "She is a",
-    "unknown": "Is a"
-}
+CURRENT_DATE = datetime.strptime("01.01.2018", "%d.%m.%Y")
 
 
 class Person:
+
+    WORK_PREFIX = {
+        "male": "He is a",
+        "female": "She is a",
+        "unknown": "Is a"
+    }
 
     def __init__(self, first_name, last_name, birth_date, job, working_years, salary, country, city,
                  gender="unknown"):
         self.first_name = first_name
         self.last_name = last_name
-        self.birth_date = datetime.strptime(birth_date, DATE_FORMAT)
+        self.birth_date = datetime.strptime(birth_date, "%d.%m.%Y")
         self.job = job
         self.working_years = working_years
         self.salary = salary
@@ -35,7 +35,7 @@ class Person:
         return age
 
     def work(self):
-        return f"{WORK_PREFIX[self.gender]} {self.job}"
+        return f"{self.WORK_PREFIX[self.gender]} {self.job}"
 
     def money(self):
         calculated_salary = self.working_years * self.salary * 12
