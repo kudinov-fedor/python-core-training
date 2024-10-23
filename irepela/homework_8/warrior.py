@@ -3,9 +3,8 @@
 
 class Warrior:
 
-    def __init__(self):
-        self.health = 50
-        self.attack = 5
+    health = 50
+    attack = 5
 
     @property
     def is_alive(self):
@@ -20,9 +19,7 @@ class Warrior:
 
 class Knight(Warrior):
 
-    def __init__(self):
-        super().__init__()
-        self.attack = 7
+    attack = 7
 
     def _str_(self):
         return f"Knight ({self.health}, {self.attack}, {self.is_alive})"
