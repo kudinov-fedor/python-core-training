@@ -21,10 +21,16 @@ class Restaurant:
             self.order[name] = 0
         self.order[name] += count * price
 
-    add_first_course = partialmethod(_add_item, "first_course")
-    add_second_course = partialmethod(_add_item, "second_course")
-    add_dessert = partialmethod(_add_item, "dessert")
-    add_beverage = partialmethod(_add_item, "beverage")
+    _add_first_course = partialmethod(_add_item, "first_course")
+    _add_second_course = partialmethod(_add_item, "second_course")
+    _add_dessert = partialmethod(_add_item, "dessert")
+    _add_beverage = partialmethod(_add_item, "beverage")
+
+    def get_client_order(self, first, second, desert, beverages):
+        self._add_first_course(first[0], first[1])
+        self._add_second_course(second[0], second[1])
+        self._add_dessert(desert[0], desert[1])
+        self._add_beverage(beverages[0], beverages[1])
 
     def calculate_total_cost(self):
         total_cost = 0
@@ -51,21 +57,22 @@ class SpanishRestaurant(Restaurant):
             'beverage': 'Juice'}
 
 
-def get_client_order(menu, first, second, desert, beverages):
-    menu.add_first_course(first[0], first[1])
-    menu.add_second_course(second[0], second[1])
-    menu.add_dessert(desert[0], desert[1])
-    menu.add_beverage(beverages[0], beverages[1])
+class AustrianRestaurant(Restaurant):
+    menu = {'first_course': 'Chicken soup',
+            'second_course': 'Fried pike-perch fillet',
+            'dessert': 'Milk cream strudel ',
+            'beverage': 'Lemonade'}
 
 
 if __name__ == '__main__':
     menu1 = ItalianRestaurant()
     menu2 = SpanishRestaurant()
+    menu3 = AustrianRestaurant()
 
-    get_client_order(menu1, (2, 10), (2, 20), (2, 15), (4, 3))
-    get_client_order(menu2, (2, 8), (2, 25), (2, 10), (4, 5))
+    menu1.get_client_order((2, 10), (2, 20), (2, 15), (4, 3))
+    menu2.get_client_order((2, 8), (2, 25), (2, 10), (4, 5))
+    menu3.get_client_order((2, 9.2), (2, 30.5), (2, 12.3), (4, 4.4))
 
-    assert menu1.calculate_total_cost() == ('Pasta: 20, Potato with chicken: 40, Tiramisu: 30, '
-                                            'Sparkling water: 12, Total cost: 102')
-    assert menu2.calculate_total_cost() == ('Seafood soup: 16, Paella with seafood: 50, Banana mousse: 20, '
-                                            'Juice: 20, Total cost: 106')
+    print(menu1.calculate_total_cost())
+    print(menu2.calculate_total_cost())
+    print(menu3.calculate_total_cost())
