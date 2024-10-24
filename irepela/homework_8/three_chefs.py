@@ -3,14 +3,12 @@
 
 class AbstractCook:
 
+    total_food = 0
+    total_drink = 0
     labels = {
         "food": "Food",
         "drink": "Drink"
     }
-
-    def __init__(self):
-        self.total_food = 0
-        self.total_drink = 0
 
     def add_food(self, food_amount: int, food_price: int):
         self.total_food += food_amount * food_price
