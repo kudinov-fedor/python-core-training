@@ -49,7 +49,7 @@ def test_show_contacts(arguments, expected_result):
 
 @pytest.mark.parametrize('period, arguments,  expected_result',
                          [(12, ('Ben', 'Dilan', '10.10.1995', 'USA', 'Phoenix',
-                            '011-4567-5633', 'JavaScript Developer', '4.25', '2000.0'),
+                                '011-4567-5633', 'JavaScript Developer', '4.25', '2000.0'),
                            'Income for 12 months: 31800.0'
                            )])
 def test_show_income(period, arguments, expected_result):
@@ -61,3 +61,10 @@ def test_show_income(period, arguments, expected_result):
 
     assert person.show_income(period) == expected_result
 
+
+def test_persons_count():
+    """
+    verify persons_count
+    """
+
+    assert Person.count == 4

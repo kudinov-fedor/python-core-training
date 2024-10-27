@@ -60,8 +60,8 @@ if __name__ == "__main__":
                      '011-444-3333', 'Project Manager', '4.25', '2000.0',
                      'Male')
 
-    assert person2.show_personal_info() == 'Full name: David Brown, Age: 33, Gender: Male'
-    assert person2.show_job_profile() == 'Job title: Project Manager, Experience: 4.25, Salary: 2000.0 USD'
-    assert person2.show_contacts() == 'Country: USA, City: Chicago, Phone: 011-444-3333'
-    assert person2.show_income(12) == 'Income for 12 months: 31800.0'
-    assert person2.__class__.count == 2
+    print(person2.show_personal_info())
+    print(person2.show_job_profile())
+    print(person2.show_contacts())
+    print(person2.show_income(12))
+    print(person2.__class__.count)
