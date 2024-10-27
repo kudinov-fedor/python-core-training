@@ -40,9 +40,9 @@ class Person:
         return f"Job title: {self.job_title}, Experience: {self.experience}, Salary: {self.salary} USD"
 
     def calculate_bonus(self) -> float:
-        if self.experience < 1:
-            return 1
-        return 1 + 0.1 * (self.experience - 1)
+        index = 0 if self.experience < 1 else 0.1 * (self.experience - 1)
+
+        return 1 + index
 
     def calculate_income(self, period) -> float:
         return self.salary * self.calculate_bonus() * int(period)
