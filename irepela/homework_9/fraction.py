@@ -94,4 +94,4 @@ class Fraction:
         return -1 * self
 
     def __abs__(self):
-        return Fraction(abs(self.num), abs(self.denom))
+        return Fraction(abs(self.num), self.denom)
