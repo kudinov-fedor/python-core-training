@@ -31,7 +31,7 @@ class Building:
         Returns the area of the building.
         """
 
-        return abs((self.north - self.south) * (self.west - self.east))
+        return round(abs((self.north - self.south) * (self.west - self.east)), 2)
 
     @property
     def volume(self):
@@ -39,7 +39,7 @@ class Building:
         Returns the volume of the building.
         """
 
-        return self.area * self.height
+        return round((self.area * self.height), 2)
 
     def __repr__(self):
         """
@@ -49,13 +49,10 @@ class Building:
 
         return f'Building({self.south}, {self.west}, {self.width_we}, {self.width_ns}, {self.height})'
 
-    def show_building(self):
-        return (f'{self}\n'
-                f'Coordinates of corners: {self.corners_coordinates}\n'
-                f'Area: {self.area}\n'
-                f'Volume: {self.volume}')
+    def show_building(self) -> dict:
+        return {'corners_coordinates': self.corners_coordinates, 'area': self.area, 'volume': self.volume}
 
 
 if __name__ == '__main__':
-    b = Building(1, 2.5, 4.2, 1.25, 101)
+    b = Building(0, 0, 10.5, 2.546)
     print(b.show_building())
