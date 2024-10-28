@@ -1,4 +1,3 @@
-import pytest
 from irepela.homework_9.fraction import Fraction
 
 
@@ -27,8 +26,6 @@ def test_fraction_logic_operators():
     assert Fraction(2, 4) == Fraction(5, 10)
     assert Fraction(1, 2) == Fraction(1, 2)
     assert (Fraction(1, 2) != Fraction(1, 2)) is False
-    with pytest.raises(NotImplementedError):
-        assert Fraction(1, 2) != "1/2"
     assert Fraction(1, 2) > Fraction(1, 3)
     assert Fraction(1, 3) < Fraction(1, 2)
     assert Fraction(1, 2) >= Fraction(1, 3)

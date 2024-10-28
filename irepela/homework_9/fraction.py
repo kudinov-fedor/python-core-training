@@ -32,60 +32,52 @@ class Fraction:
     def __bool__(self):
         return bool(self.num)
 
-    def __eq__(self, other):
+    def convert_to_fraction(self, other):
+        result = None
         if isinstance(other, Fraction):
-            return self.num == other.num and self.denom == other.denom
-        elif isinstance(other, int):
-            return self == Fraction(other)
-        else:
-            raise NotImplementedError
+            result = other
+        if isinstance(other, int):
+            result = Fraction(other)
+        return result
+
+    def __eq__(self, other):
+        other_fraction = self.convert_to_fraction(other)
+        if other_fraction:
+            return self.num == other_fraction.num and self.denom == other_fraction.denom
 
     def __lt__(self, other):
-        if isinstance(other, Fraction):
-            return self.num * other.denom < self.denom * other.num
-        else:
-            raise NotImplementedError
+        other_fraction = self.convert_to_fraction(other)
+        if other_fraction:
+            return self.num * other_fraction.denom < self.denom * other_fraction.num
 
     def __add__(self, other):
-        if isinstance(other, Fraction):
-            return Fraction(self.num * other.denom + other.num * self.denom,
-                            self.denom * other.denom)
-        elif isinstance(other, int):
-            return self + Fraction(other)
-        else:
-            raise NotImplementedError
+        other_fraction = self.convert_to_fraction(other)
+        if other_fraction:
+            return Fraction(self.num * other_fraction.denom + other_fraction.num * self.denom,
+                            self.denom * other_fraction.denom)
 
     __radd__ = __add__
 
     def __sub__(self, other):
-        if isinstance(other, Fraction):
-            return Fraction(self.num * other.denom - other.num * self.denom,
-                            self.denom * other.denom)
-        elif isinstance(other, int):
-            return self - Fraction(other)
-        else:
-            raise NotImplementedError
+        other_fraction = self.convert_to_fraction(other)
+        if other_fraction:
+            return Fraction(self.num * other_fraction.denom - other_fraction.num * self.denom,
+                            self.denom * other_fraction.denom)
 
     def __rsub__(self, other):
         return Fraction(other) - self
 
     def __mul__(self, other):
-        if isinstance(other, Fraction):
-            return Fraction(self.num * other.num, self.denom * other.denom)
-        elif isinstance(other, int):
-            return self * Fraction(other)
-        else:
-            raise NotImplementedError
+        other_fraction = self.convert_to_fraction(other)
+        if other_fraction:
+            return Fraction(self.num * other_fraction.num, self.denom * other_fraction.denom)
 
     __rmul__ = __mul__
 
     def __truediv__(self, other):
-        if isinstance(other, Fraction):
-            return Fraction(self.num * other.denom, self.denom * other.num)
-        elif isinstance(other, int):
-            return self / Fraction(other)
-        else:
-            raise NotImplementedError
+        other_fraction = self.convert_to_fraction(other)
+        if other_fraction:
+            return Fraction(self.num * other_fraction.denom, self.denom * other_fraction.num)
 
     def __rtruediv__(self, other):
         return Fraction(other) / self
