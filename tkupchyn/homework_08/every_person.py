@@ -46,7 +46,3 @@ class Person:
     @property
     def home(self) -> str:
         return f'Lives in {self.city}, {self.country}'
-
-
-p1 = Person("John", "Smith", "19.09.1979", "welder", 15, 3600, "Canada", "Vancouver", "male")
-print(p1.age)

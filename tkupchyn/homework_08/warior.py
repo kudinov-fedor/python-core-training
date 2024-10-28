@@ -25,27 +25,3 @@ def fight(unit_1, unit_2):
         else:
             unit_1.health -= unit_2.attack_damage
     return False
-
-
-
-if __name__ == '__main__':
-    # These "asserts" using only for self-checking and not necessary for auto-testing
-
-    chuck = Warrior()
-    bruce = Warrior()
-    carl = Knight()
-    dave = Warrior()
-    mark = Warrior()
-    # print(chuck.is_alive)
-    # print(fight(chuck, bruce))
-    # print(chuck.is_alive)
-    # print(bruce.is_alive)
-    # print(fight(dave, carl))
-    assert fight(chuck, bruce)
-    assert fight(dave, carl) == False
-    assert chuck.is_alive
-    assert bruce.is_alive == False
-    assert carl.is_alive
-    assert not dave.is_alive
-    assert not fight(carl, mark)
-    assert not carl.is_alive
