@@ -102,12 +102,8 @@ class Fraction:
         return Fraction(abs(self.num), self.denom)
 
 
-
-
 if __name__ == "__main__":
     a = Fraction(3, -9)
     b = Fraction(0, 1)
     print(a)
     print(bool(b))
-
-
