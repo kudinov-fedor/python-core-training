@@ -1,5 +1,3 @@
-from operator import lt, le, eq, ne, ge, gt
-
 import pytest
 
 from ihontaryk.homework_9.fraction import Fraction
@@ -41,12 +39,13 @@ def test_dec(num, denom, expected_result):
 
 
 @pytest.mark.parametrize('num1, denom1, num2, denom2, func, expected_result',
-                         [(1, 2, 2, 5, lt, False),
-                          (2, 4, 3, 6, le, True),
-                          (-2, 4, 3, -6, eq, True),
-                          (1, 4, 3, 5, ne, True),
-                          (1, -4, -2, 8, ge, True),
-                          (1, 4, 2, 8, gt, False),
+                         [(1, 2, 2, 5, Fraction.__lt__, False),
+                          (2, 4, 3, 6, Fraction.__le__, True),
+                          (-2, 4, 3, -6, Fraction.__eq__, True),
+                          (-2, 4, 3, -3, Fraction.__eq__, False),
+                          (1, 4, 3, 5, Fraction.__ne__, True),
+                          (1, -4, -2, 8, Fraction.__ge__, True),
+                          (1, 4, 2, 8, Fraction.__gt__, False),
                           ])
 def test_logic_operators(num1, denom1, num2, denom2, func, expected_result):
     """
@@ -54,6 +53,42 @@ def test_logic_operators(num1, denom1, num2, denom2, func, expected_result):
     """
     a = Fraction(num1, denom1)
     b = Fraction(num2, denom2)
+    assert func(a, b) is expected_result
+
+
+@pytest.mark.parametrize('num1, denom1, b, func, expected_result',
+                         [(1, 2, '2', Fraction.__lt__, NotImplemented),
+                          (2, 4, '3', Fraction.__le__, NotImplemented),
+                          (-2, 4, '3', Fraction.__eq__, NotImplemented),
+                          (-2, 4, '3', Fraction.__eq__, NotImplemented),
+                          (1, 4, '3', Fraction.__ne__, NotImplemented),
+                          (1, -4, '-2', Fraction.__ge__, NotImplemented),
+                          (1, 4, '2', Fraction.__gt__, NotImplemented),
+                          ])
+def test_not_implemented(num1, denom1, b, func, expected_result):
+    """
+    verify not_implemented types
+    """
+    a = Fraction(num1, denom1)
+
+    assert func(a, b) is expected_result
+
+
+@pytest.mark.parametrize('num1, denom1, b, func, expected_result',
+                         [(1, 2, 5, Fraction.__lt__, True),
+                          (2, 4, 5, Fraction.__le__, True),
+                          (-2, 4, 5, Fraction.__eq__, False),
+                          (-4, 2, -2, Fraction.__eq__, True),
+                          (1, 4, 5, Fraction.__ne__, True),
+                          (1, -4, 5, Fraction.__ge__, False),
+                          (1, 4, 5, Fraction.__gt__, False),
+                          ])
+def test_int(num1, denom1, b, func, expected_result):
+    """
+    verify int type for other
+    """
+    a = Fraction(num1, denom1)
+
     assert func(a, b) is expected_result
 
 

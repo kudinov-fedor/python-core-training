@@ -37,53 +37,76 @@ class Fraction:
     def __bool__(self):
         return bool(self.num)
 
-    def __eq__(self, other):
-        if isinstance(other, Fraction):
-            return self.num == other.num and self.denom == other.denom
-        elif isinstance(other, int):
-            return self == Fraction(other)
+    @staticmethod
+    def _change_other(other):
+        if isinstance(other, int):
+            return Fraction(other)
+        return other
 
-        return NotImplemented
+    def __eq__(self, other):
+        if not isinstance(other, (Fraction, int)):
+            return NotImplemented
+
+        other = self._change_other(other)
+
+        result = self.num == other.num and self.denom == other.denom
+
+        return result
 
     def __lt__(self, other):
-        if isinstance(other, Fraction):
-            return self.num * other.denom < self.denom * other.num
-        elif isinstance(other, int):
-            return self < Fraction(other)
+        if not isinstance(other, (Fraction, int)):
+            return NotImplemented
 
-        return NotImplemented
+        other = self._change_other(other)
+
+        result = self.num * other.denom < self.denom * other.num
+
+        return result
 
     def __add__(self, other):
-        if isinstance(other, Fraction):
-            return Fraction(self.num * other.denom + other.num * self.denom,
-                            self.denom * other.denom)
-        elif isinstance(other, int):
-            return self + Fraction(other)
+        if not isinstance(other, (Fraction, int)):
+            return NotImplemented
 
-        return NotImplemented
+        other = self._change_other(other)
+
+        result = Fraction(self.num * other.denom + other.num * self.denom,
+                            self.denom * other.denom)
+
+        return result
 
     __radd__ = __add__
     __iadd__ = __add__
 
     def __mul__(self, other):
-        if isinstance(other, Fraction):
-            return Fraction(self.num * other.num, self.denom * other.denom)
-        elif isinstance(other, int):
-            return self * Fraction(other)
+        if not isinstance(other, (Fraction, int)):
+            return NotImplemented
 
-        return NotImplemented
+        other = self._change_other(other)
+        result = Fraction(self.num * other.num, self.denom * other.denom)
+
+        return result
 
     __rmul__ = __mul__
     __imul__ = __mul__
 
     def __truediv__(self, other):
-        if isinstance(other, Fraction):
-            return Fraction(self.num * other.denom, self.denom * other.num)
-        elif isinstance(other, int):
-            return self / Fraction(other)
+        if not isinstance(other, (Fraction, int)):
+            return NotImplemented
+
+        other = self._change_other(other)
+
+        result = Fraction(self.num * other.denom, self.denom * other.num)
+
+        return result
 
     def __rtruediv__(self, other):
-        return Fraction(other) / self
+        if not isinstance(other, (Fraction, int)):
+            return NotImplemented
+
+        other = self._change_other(other)
+        result = other / self
+
+        return result
 
     __itruediv__ = __truediv__
 
@@ -91,7 +114,14 @@ class Fraction:
         return self + (other * (-1))
 
     def __rsub__(self, other):
-        return Fraction(other) - self
+        if not isinstance(other, (Fraction, int)):
+            return NotImplemented
+
+        other = self._change_other(other)
+
+        result = other - self
+
+        return result
 
     __isub__ = __sub__
 
@@ -107,3 +137,4 @@ if __name__ == "__main__":
     b = Fraction(0, 1)
     print(a)
     print(bool(b))
+    print(1/6 == 2/12)
