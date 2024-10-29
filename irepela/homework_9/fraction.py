@@ -41,43 +41,55 @@ class Fraction:
         return result
 
     def __eq__(self, other):
+        result = NotImplemented
         other_fraction = self.convert_to_fraction(other)
         if other_fraction:
-            return self.num == other_fraction.num and self.denom == other_fraction.denom
+            result = self.num == other_fraction.num and self.denom == other_fraction.denom
+        return result
 
     def __lt__(self, other):
+        result = NotImplemented
         other_fraction = self.convert_to_fraction(other)
         if other_fraction:
-            return self.num * other_fraction.denom < self.denom * other_fraction.num
+            result = self.num * other_fraction.denom < self.denom * other_fraction.num
+        return result
 
     def __add__(self, other):
+        result = NotImplemented
         other_fraction = self.convert_to_fraction(other)
         if other_fraction:
-            return Fraction(self.num * other_fraction.denom + other_fraction.num * self.denom,
-                            self.denom * other_fraction.denom)
+            result = Fraction(self.num * other_fraction.denom + other_fraction.num * self.denom,
+                              self.denom * other_fraction.denom)
+        return result
 
     __radd__ = __add__
 
     def __sub__(self, other):
+        result = NotImplemented
         other_fraction = self.convert_to_fraction(other)
         if other_fraction:
-            return Fraction(self.num * other_fraction.denom - other_fraction.num * self.denom,
-                            self.denom * other_fraction.denom)
+            result = Fraction(self.num * other_fraction.denom - other_fraction.num * self.denom,
+                              self.denom * other_fraction.denom)
+        return result
 
     def __rsub__(self, other):
         return Fraction(other) - self
 
     def __mul__(self, other):
+        result = NotImplemented
         other_fraction = self.convert_to_fraction(other)
         if other_fraction:
-            return Fraction(self.num * other_fraction.num, self.denom * other_fraction.denom)
+            result = Fraction(self.num * other_fraction.num, self.denom * other_fraction.denom)
+        return result
 
     __rmul__ = __mul__
 
     def __truediv__(self, other):
+        result = NotImplemented
         other_fraction = self.convert_to_fraction(other)
         if other_fraction:
-            return Fraction(self.num * other_fraction.denom, self.denom * other_fraction.num)
+            result = Fraction(self.num * other_fraction.denom, self.denom * other_fraction.num)
+        return result
 
     def __rtruediv__(self, other):
         return Fraction(other) / self
