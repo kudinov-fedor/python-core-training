@@ -5,12 +5,14 @@ from ihontaryk.homework_9.fraction import Fraction
 
 @pytest.mark.parametrize('num, denom, expected_result',
                          [(1, 2, "Fraction(1, 2)"),
-                          ])
+                          (1, -1, "Fraction(-1, 1)"),
+                          (0, 1, "Fraction(0, 1)"),])
 def test_repr(num, denom, expected_result):
     """
     verify repr function
     """
     a = Fraction(num, denom)
+
     assert repr(a) == expected_result
 
 
@@ -23,6 +25,7 @@ def test_str(num, denom, expected_result):
     verify str function
     """
     a = Fraction(num, denom)
+
     assert str(a) == expected_result
 
 
@@ -35,6 +38,7 @@ def test_dec(num, denom, expected_result):
     verify dec function
     """
     a = Fraction(num, denom)
+
     assert "{:dec}".format(a) == expected_result
 
 
@@ -53,6 +57,7 @@ def test_logic_operators(num1, denom1, num2, denom2, func, expected_result):
     """
     a = Fraction(num1, denom1)
     b = Fraction(num2, denom2)
+
     assert func(a, b) is expected_result
 
 
@@ -83,9 +88,9 @@ def test_not_implemented(num1, denom1, b, func, expected_result):
                           (1, -4, 5, Fraction.__ge__, False),
                           (1, 4, 5, Fraction.__gt__, False),
                           ])
-def test_int(num1, denom1, b, func, expected_result):
+def test_int_logic(num1, denom1, b, func, expected_result):
     """
-    verify int type for other
+    verify int type for second number
     """
     a = Fraction(num1, denom1)
 
@@ -108,6 +113,21 @@ def test_arithmetic_operators(num1, denom1, num2, denom2, func, expected_result)
     assert str(func(a, b)) == expected_result
 
 
+@pytest.mark.parametrize('num1, denom1, b, func, expected_result',
+                         [(1, 2, 5, Fraction.__add__, "'11/2'"),
+                          (2, 4, 5, Fraction.__sub__, "'-9/2'"),
+                          (-2, 4, 5, Fraction.__mul__, "'-5/2'"),
+                          (-4, 2, -2, Fraction.__truediv__, "'1/1'"),
+                          ])
+def test_int_arithmetic(num1, denom1, b, func, expected_result):
+    """
+    verify int type for second number
+    """
+    a = Fraction(num1, denom1)
+
+    assert str(func(a, b)) == expected_result
+
+
 @pytest.mark.parametrize('num, denom, expected_result',
                          [(-1, 2, "'1/2'"),
                           (2, -3, "'2/3'"),
@@ -117,4 +137,5 @@ def test_abs(num, denom, expected_result):
     verify abs function
     """
     a = Fraction(num, denom)
+
     assert str(abs(a)) == expected_result
