@@ -1,5 +1,5 @@
 from audioop import add, mul
-from operator import lt, le, eq, ne, ge, gt, sub, floordiv, truediv, mod, pow
+from operator import lt, le, eq, ne, ge, gt
 
 import pytest
 
