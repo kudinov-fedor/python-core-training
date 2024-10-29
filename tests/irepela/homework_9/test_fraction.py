@@ -1,3 +1,4 @@
+import pytest
 from irepela.homework_9.fraction import Fraction
 
 
@@ -41,6 +42,12 @@ def test_fraction_math_operators():
     assert Fraction(2, 4) + Fraction(1, 3) == Fraction(5, 6)
     assert Fraction(1, 2) + 2 == Fraction(5, 2)
     assert 2 + Fraction(1, 2) == Fraction(5, 2)
+
+    # not valid add
+    with pytest.raises(TypeError):
+        Fraction(1, 2) + "2"
+    with pytest.raises(TypeError):
+        "35" + Fraction(1, 2)
 
     # in place add
     b = a
