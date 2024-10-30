@@ -2,6 +2,10 @@ import pytest
 from irepela.homework_9.fraction import Fraction
 
 
+def custom():
+    return 5
+
+
 def test_fraction_str():
     a = Fraction(2, 4)
     assert (a.num, a.denom) == (1, 2)
@@ -49,6 +53,7 @@ def test_fraction_math_operators():
     with pytest.raises(TypeError):
         "35" + Fraction(1, 2)
 
+    # assert (Fraction(1, 2) + custom()) == NotImplemented
     # in place add
     b = a
     b += 2
