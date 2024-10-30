@@ -15,7 +15,7 @@ class Fraction:
 
         if isinstance(num, Fraction):
             input_num = num.num
-            input_denom = num.denom
+            input_denom = num.denom * denom
 
         _gcd = gcd(input_num, input_denom)
         self.num = input_num // _gcd
