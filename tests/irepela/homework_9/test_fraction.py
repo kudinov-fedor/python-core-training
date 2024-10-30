@@ -30,6 +30,7 @@ def test_fraction_logic_operators():
     # logic operators
     assert Fraction(2, 4) == Fraction(5, 10)
     assert Fraction(1, 2) == Fraction(1, 2)
+    assert Fraction(0, 5) == Fraction(0, 1)
     assert (Fraction(1, 2) != Fraction(1, 2)) is False
     assert Fraction(1, 2) > Fraction(1, 3)
     assert Fraction(1, 3) < Fraction(1, 2)
