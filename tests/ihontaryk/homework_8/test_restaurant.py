@@ -33,5 +33,5 @@ def test_calculate_total_cost(menu, order, expected_result):
     verify calculate_total_cost function
     """
 
-    menu.get_client_order(order)
+    menu.get_client_order(*order)
     assert menu.calculate_total_cost() == expected_result
