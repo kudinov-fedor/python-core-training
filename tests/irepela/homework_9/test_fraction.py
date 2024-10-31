@@ -4,8 +4,9 @@ from irepela.homework_9.fraction import Fraction
 
 class Custom:
 
-    def __new__(cls):
-        return 5
+    # always adds 5 to fraction
+    def __radd__(self, other):
+        return Fraction(5 * other.denom + other.num, other.denom)
 
 
 def test_fraction_str():
