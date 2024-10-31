@@ -2,7 +2,6 @@ from logging import getLogger
 import logging
 
 
-
 class Player:
     health = 50
     attack = 5
@@ -22,14 +21,13 @@ class Warrior(Player):
     pass
 
 
-
 class Knight(Player):
     attack = 7
 
 
 def fight(player1: Player, player2: Player) -> bool:
     round = 1
-    logger = getLogger(__name__)
+    logger = getLogger(Player.__name__)
     logger.info((f'round: {round}', f'player1: health {player1.health}', f'player2: health {player2.health}'))
 
     while player1.is_alive:
@@ -46,6 +44,7 @@ def fight(player1: Player, player2: Player) -> bool:
         logger.info((f'round: {round}', f'player1: health {player1.health}', f'player2: health {player2.health}'))
 
     return player1.is_alive
+
 
 logging.basicConfig(filename='warrior.log', encoding='utf-8', level=logging.INFO)
 
