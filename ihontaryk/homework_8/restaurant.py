@@ -21,8 +21,8 @@ class Restaurant:
             self.order[name] = 0
         self.order[name] += count * price
 
-    def get_client_order(self, *orders: tuple):
-        for item in orders:
+    def get_client_order(self, *order: tuple):
+        for item in order:
             self._add_item(item.kind, item.count, item.price)
 
     def calculate_total_cost(self):
@@ -57,27 +57,27 @@ class AustrianRestaurant(Restaurant):
             'beverage': 'Lemonade'}
 
 
-Order = namedtuple("Order", ["kind", "count", "price"])
+OrderItem = namedtuple("OrderItem", ["kind", "count", "price"])
 
 if __name__ == '__main__':
     menu1 = ItalianRestaurant()
     menu2 = SpanishRestaurant()
     menu3 = AustrianRestaurant()
 
-    menu1.get_client_order(Order('first_course', 2, 21),
-                            Order('second_course', 2, 35),
-                            Order('dessert', 2, 18),
-                            Order('beverage', 2, 4))
+    menu1.get_client_order(OrderItem('first_course', 2, 21),
+                            OrderItem('second_course', 2, 35),
+                            OrderItem('dessert', 2, 18),
+                            OrderItem('beverage', 2, 4))
 
-    menu2.get_client_order(Order('first_course', 2, 18),
-                            Order('second_course', 2, 33),
-                            Order('dessert', 2, 20.5),
-                            Order('beverage', 2, 4.5))
+    menu2.get_client_order(OrderItem('first_course', 2, 18),
+                            OrderItem('second_course', 2, 33),
+                            OrderItem('dessert', 2, 20.5),
+                            OrderItem('beverage', 2, 4.5))
 
-    menu3.get_client_order(Order('first_course', 2, 23.5),
-                            Order('second_course', 2, 36),
-                            Order('dessert', 2, 18.5),
-                            Order('beverage', 2, 5.25))
+    menu3.get_client_order(OrderItem('first_course', 2, 23.5),
+                            OrderItem('second_course', 2, 36),
+                            OrderItem('dessert', 2, 18.5),
+                            OrderItem('beverage', 2, 5.25))
 
     print(menu1.calculate_total_cost())
     print(menu2.calculate_total_cost())
