@@ -27,21 +27,21 @@ def test_getitem(deck, index, expected_result):
 
     assert deck[index] == expected_result
 
-    @pytest.mark.parametrize('index, new_value, expected_result',
-                             [(0, ('K', 'hearts'),
-                               ('K', 'hearts')),
-                              (slice(1, 3), [('5', 'hearts'),
-                                             ('7', 'hearts'),
-                                             ('9', 'hearts')],
-                               [('5', 'hearts'),
-                                ('7', 'hearts'),
-                                ('9', 'hearts')
-                                ])
-                              ])
-    def test_setitem(deck, index, new_value, expected_result):
-        """
-        verify setitem function
-        """
 
-        deck[index] = new_value
-        assert deck[index] == expected_result
+@pytest.mark.parametrize('index, new_value, expected_result',
+                         [(0, ('K', 'hearts'),
+                           ('K', 'hearts')),
+                          (slice(1, 4), [('3', 'diamonds'),
+                                         ('4', 'clubs'),
+                                         ('5', 'hearts')],
+                           [('3', 'diamonds'),
+                            ('4', 'clubs'),
+                            ('5', 'hearts')])
+                          ])
+def test_setitem(deck, index, new_value, expected_result):
+    """
+    verify setitem function
+    """
+
+    deck[index] = new_value
+    assert deck[index] == expected_result
