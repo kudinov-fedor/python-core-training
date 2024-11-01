@@ -109,8 +109,12 @@ r"\n".isprintable()  # True
 
 
 def find_special_characters(text):
+    """
+    the method does not take into account spaces
+    """
+
     special = [char for char in text if not (char.isalnum() or char.isspace())]
-    if len(special) > 1:
+    if len(special) > 0:
         result = f"In this text were found such special characters: {' '.join(sorted(set(special)))}"
     else:
         result = f"In this text were not found special characters"
