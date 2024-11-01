@@ -4,9 +4,10 @@ from irepela.homework_9.fraction import Fraction
 
 class Custom:
 
-    # always adds 5 to fraction
+    custom_prop = '5'
+
     def __radd__(self, other):
-        return Fraction(5 * other.denom + other.num, other.denom)
+        return f'{self.custom_prop} + {other.num}/{other.denom}'
 
 
 def test_fraction_str():
@@ -50,7 +51,7 @@ def test_fraction_math_operators():
     assert Fraction(2, 4) + Fraction(1, 3) == Fraction(5, 6)
     assert Fraction(1, 2) + 2 == Fraction(5, 2)
     assert 2 + Fraction(1, 2) == Fraction(5, 2)
-    assert (Fraction(1, 2) + Custom()) == Fraction(11, 2)
+    assert (Fraction(1, 2) + Custom()) == '5 + 1/2'
 
     # not valid add
     with pytest.raises(TypeError):
