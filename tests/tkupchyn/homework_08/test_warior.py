@@ -2,34 +2,26 @@ import pytest
 from tkupchyn.homework_08.warior import (Warrior, Knight, fight)
 
 
-@pytest.mark.parametrize('unit1, unit2, expected_result',
-                         (
-                                 (Warrior(), Warrior(), True),
-                                 (Warrior(), Knight(), False),
-                                 (Warrior(), Warrior(), True),
-                                 (Knight(), Knight(), True),
-
-                         ))
-def test_fight(unit1, unit2, expected_result):
-    assert fight(unit1, unit2) == expected_result
+@pytest.fixture()
+def duel_pairs():
+    return [(Warrior(), Warrior()),
+            (Warrior(), Knight()),
+            (Warrior(), Warrior()),
+            (Knight(), Knight())]
 
 
-@pytest.mark.parametrize('unit1, unit2, expected_result',
-                         (
-                                 (Warrior(), Warrior(),
-                                  {'before_fight': True, 'after_fight': True}),
+def test_fight(duel_pairs):
+    expected_result = [True, False, True, True]
+    for i in range(len(duel_pairs)):
+        assert fight(duel_pairs[i][0], duel_pairs[i][1]) == expected_result[i]
 
-                                 (Warrior(), Knight(),
-                                  {'before_fight': True, 'after_fight': False}),
 
-                                 (Warrior(), Warrior(),
-                                  {'before_fight': True, 'after_fight': True}),
-
-                                 (Knight(), Knight(),
-                                  {'before_fight': True, 'after_fight': True})
-
-                         ))
-def test_is_alive(unit1, unit2, expected_result):
-    assert unit1.is_alive == expected_result['before_fight']
-    fight(unit1, unit2)
-    assert unit1.is_alive == expected_result['after_fight']
+def test_is_alive(duel_pairs):
+    expected_result = [{'before_fight': True, 'after_fight': True},
+                       {'before_fight': True, 'after_fight': False},
+                       {'before_fight': True, 'after_fight': True},
+                       {'before_fight': True, 'after_fight': True}]
+    for i in range(len(duel_pairs)):
+        assert duel_pairs[i][0].is_alive == expected_result[i]['before_fight']
+        fight(duel_pairs[i][0], duel_pairs[i][1])
+        assert duel_pairs[i][0].is_alive == expected_result[i]['after_fight']

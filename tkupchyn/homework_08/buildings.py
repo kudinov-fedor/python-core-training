@@ -12,15 +12,27 @@ class Building:
     def __str__(self):
         return f"Building({self.south}, {self.west}, {self.width_we}, {self.width_ns}, {self.height})"
 
+    @property
+    def ne_corner(self) -> list:
+        return [self.south + self.width_ns, self.west + self.width_we]
+
+    @property
+    def nw_corner(self) -> list:
+        return [self.south + self.width_ns, self.west]
+
+    @property
+    def se_corner(self) -> list:
+        return [self.south, self.west + self.width_we]
+
+    @property
+    def sw_corner(self) -> list:
+        return [self.south, self.west]
+
     def corners(self) -> dict:
-        ne_corner = [self.south + self.width_ns, self.west + self.width_we]
-        nw_corner = [self.south + self.width_ns, self.west]
-        se_corner = [self.south, self.west + self.width_we]
-        sw_corner = [self.south, self.west]
-        return {'north-east': ne_corner,
-                'south-east': se_corner,
-                'south-west': sw_corner,
-                'north-west': nw_corner}
+        return {'north-east': self.ne_corner,
+                'south-east': self.se_corner,
+                'south-west': self.sw_corner,
+                'north-west': self.nw_corner}
 
     @property
     def area(self) -> int:

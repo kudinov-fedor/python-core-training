@@ -1,11 +1,11 @@
 # Details:  https://py.checkio.org/mission/every-person-is-unique/share/1c6fd4b663f7e40fa15b699f17efab40/
 
 
-from datetime import datetime, date
+from datetime import datetime
 
 
 class Person:
-    pronoun = {'male': 'He is a',
+    PRONOUN = {'male': 'He is a',
                'female': 'She is a',
                'unknown': 'Is a'}
 
@@ -37,7 +37,7 @@ class Person:
 
     @property
     def work(self) -> str:
-        return f'{self.__class__.pronoun[self.gender]} {self.job}'
+        return f'{self.PRONOUN[self.gender]} {self.job}'
 
     @property
     def money(self) -> str:

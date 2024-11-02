@@ -2,13 +2,16 @@
 
 
 class Warrior:
-    def __init__(self):
-        self.health = 50
-        self.attack_damage = 5
+
+    health = 50
+    attack_damage = 5
 
     @property
-    def is_alive(self):
+    def is_alive(self) -> bool:
         return self.health > 0
+
+    def attack(self, enemy):
+        enemy.health -= self.attack_damage
 
 
 class Knight(Warrior):
@@ -17,11 +20,20 @@ class Knight(Warrior):
         self.attack_damage = 7
 
 
-def fight(unit_1, unit_2):
+def fight(unit_1: Warrior, unit_2: Warrior) -> bool:
+    """
+    Returns the result of fight between two units. True if the first unit wins, else False
+    """
+
+    fight_result = False
+
     while unit_1.is_alive and unit_2.is_alive:
-        unit_2.health -= unit_1.attack_damage
+        unit_1.attack(unit_2)
+
         if not unit_2.is_alive:
-            return True
+            fight_result = True
+            break
         else:
-            unit_1.health -= unit_2.attack_damage
-    return False
+            unit_2.attack(unit_1)
+
+    return fight_result

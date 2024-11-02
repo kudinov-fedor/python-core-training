@@ -1,41 +1,29 @@
 import pytest
 from tkupchyn.homework_08.every_person import Person
 
-p1 = Person("John", "Smith", "19.09.1979", "welder", 15, 3600, "Canada", "Vancouver", "male")
-p2 = Person("Hanna Rose", "May", "05.12.1995", "designer", 2.2, 2150, "Austria", "Vienna")
+
+@pytest.fixture
+def create_pesrons():
+    p1 = Person("John", "Smith", "19.09.1979", "welder", 15, 3600, "Canada", "Vancouver", "male")
+    p2 = Person("Hanna Rose", "May", "05.12.1995", "designer", 2.2, 2150, "Austria", "Vienna")
+    return p1, p2
 
 
-@pytest.mark.parametrize('person, expecte_age',
-                         (
-                                 (p1, 45),
-                                 (p2, 28)
-                         ))
-def test_person_age(person, expecte_age):
-    assert person.age == expecte_age
+def test_person_age(create_pesrons):
+    assert create_pesrons[0].age == 45
+    assert create_pesrons[1].age == 28
 
 
-@pytest.mark.parametrize('person, expected_home_address',
-                         (
-                                 (p1, 'Lives in Vancouver, Canada'),
-                                 (p2, 'Lives in Vienna, Austria')
-                         ))
-def test_person_home(person, expected_home_address):
-    assert person.home == expected_home_address
+def test_person_home(create_pesrons):
+    assert create_pesrons[0].home == 'Lives in Vancouver, Canada'
+    assert create_pesrons[1].home == 'Lives in Vienna, Austria'
 
 
-@pytest.mark.parametrize('person, expected_work',
-                         (
-                                 (p1, 'He is a welder'),
-                                 (p2, 'Is a designer')
-                         ))
-def test_person_work(person, expected_work):
-    assert person.work == expected_work
+def test_person_work(create_pesrons):
+    assert create_pesrons[0].work == 'He is a welder'
+    assert create_pesrons[1].work == 'Is a designer'
 
 
-@pytest.mark.parametrize('person, expected_money',
-                         (
-                                 (p1, '648 000'),
-                                 (p2, '56 760')
-                         ))
-def test_person_work(person, expected_money):
-    assert person.money == expected_money
+def test_person_money(create_pesrons):
+    assert create_pesrons[0].money == '648 000'
+    assert create_pesrons[1].money == '56 760'

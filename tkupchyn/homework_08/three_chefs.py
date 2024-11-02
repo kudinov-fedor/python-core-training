@@ -2,13 +2,10 @@
 
 
 class AbstractCook:
-
-    def __init__(self):
-
-        self.total_food = 0
-        self.total_drinks = 0
-        self.food_name = 'Food'
-        self.drink_name = 'Drinks'
+    total_food = 0
+    total_drinks = 0
+    food_name = 'Food'
+    drink_name = 'Drinks'
 
     def total(self):
         return (f'{self.food_name}: {self.total_food},'
