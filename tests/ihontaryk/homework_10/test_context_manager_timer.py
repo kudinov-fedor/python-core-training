@@ -11,7 +11,7 @@ from ihontaryk.homework_10.context_manager_timer import Timer
                           ])
 def test_timer(delay, test_time, expected_result):
     """
-    verify timer contex manager
+    verify timer context manager
     """
 
     with Timer() as timer:
