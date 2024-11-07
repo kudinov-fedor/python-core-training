@@ -37,7 +37,6 @@ def ping_pong_generator(iterable):
             is_ascending = True
 
         try:
-            print(f'{index}: {iterable[index]}')
             yield iterable[index]
             index = (index + 1) if is_ascending else (index - 1)
         except IndexError:
