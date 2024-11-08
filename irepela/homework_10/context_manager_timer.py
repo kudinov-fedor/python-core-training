@@ -7,6 +7,7 @@ class Timer:
         self.total = 0
 
     def __enter__(self):
+        self.total = 0
         self.start = time.time()
         return self
 

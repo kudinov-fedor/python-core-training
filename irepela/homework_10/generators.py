@@ -19,11 +19,8 @@ def cycle_generator(iterable):
         if index >= len(iterable):
             index = 0
 
-        try:
-            yield iterable[index]
-            index += 1
-        except IndexError:
-            break
+        yield iterable[index]
+        index += 1
 
 
 def ping_pong_generator(iterable):
@@ -36,8 +33,6 @@ def ping_pong_generator(iterable):
         if not is_ascending and index == 0:
             is_ascending = True
 
-        try:
-            yield iterable[index]
-            index = (index + 1) if is_ascending else (index - 1)
-        except IndexError:
-            break
+        yield iterable[index]
+        increment = 1 if is_ascending else -1
+        index += increment
