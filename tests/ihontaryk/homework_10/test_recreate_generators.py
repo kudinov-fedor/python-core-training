@@ -1,7 +1,7 @@
 import pytest
 
 from ihontaryk.homework_10.recreate_generators import (custom_zip, custom_enumerate,
-                                                       custom_filter, custom_map)
+                                                       custom_filter, custom_map, filter_int)
 
 
 @pytest.mark.parametrize('test_iterable1, test_iterable2, test_iterable3, expected_result',
@@ -31,4 +31,34 @@ def test_custom_enumerate(test_iterable, start, expected_result):
     """
 
     generator = custom_enumerate(test_iterable, start=start)
+    assert list(generator) == expected_result
+
+
+@pytest.mark.parametrize('test_iterable, key, expected_result',
+                         [([0, 1, 2, 0, 2, 3], None,
+                           [1, 2, 2, 3]),
+                          ([0.5, 1, 2.4, 0.8, 2, 3, 9], filter_int,
+                           [1, 2, 3, 9]),
+                          ])
+def test_custom_filter(test_iterable, key, expected_result):
+    """
+    verify custom_filter function
+    """
+
+    generator = custom_filter(key, test_iterable)
+    assert list(generator) == expected_result
+
+
+@pytest.mark.parametrize('test_iterable, func, expected_result',
+                         [([0, 1, 2, 0, 2, 3], str,
+                           ['0', '1', '2', '0', '2', '3']),
+                          ([0, 1, 2, 0, 2, 3], bool,
+                           [False, True, True, False, True, True]),
+                          ])
+def test_custom_map(test_iterable, func, expected_result):
+    """
+    verify custom_map function
+    """
+
+    generator = custom_map(func, test_iterable)
     assert list(generator) == expected_result
