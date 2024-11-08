@@ -10,3 +10,6 @@ def test_try_except():
 
     with Catcher(TypeError, ZeroDivisionError):
         5 / 0
+
+    with Catcher(None):
+        5 / 5
