@@ -34,7 +34,6 @@ class ReversedOperator(Iterator):
 
 
 class CycleIterator(Iterator):
-
     def __next__(self):
         if self.index >= len(self.iterable):
             self.index = 0
