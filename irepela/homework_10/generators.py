@@ -25,13 +25,12 @@ def cycle_generator(iterable):
 
 def ping_pong_generator(iterable):
     index = 0
-    is_ascending = True
+    change_order = False
     while True:
-        if is_ascending and index == len(iterable) - 1:
-            is_ascending = False
-        if not is_ascending and index == 0:
-            is_ascending = True
-
+        if index == len(iterable) - 1:
+            change_order = True
+        if index == 0:
+            change_order = False
         yield iterable[index]
-        increment = 1 if is_ascending else -1
+        increment = -1 if change_order else 1
         index += increment

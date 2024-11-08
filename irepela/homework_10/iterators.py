@@ -48,16 +48,16 @@ class PingPongIterator(Iterator):
 
     def __init__(self, iterable):
         self.iterable = iterable
-        self.is_ascending = True
+        self.change_order = False
         self.index = 0
 
     def __next__(self):
-        if self.is_ascending and self.index == len(self.iterable) - 1:
-            self.is_ascending = False
-        if not self.is_ascending and self.index == 0:
-            self.is_ascending = True
+        if self.index == len(self.iterable) - 1:
+            self.change_order = True
+        if self.index == 0:
+            self.change_order = False
 
         next_item = self.iterable[self.index]
-        increment = 1 if self.is_ascending else -1
+        increment = -1 if self.change_order else 1
         self.index += increment
         return next_item
