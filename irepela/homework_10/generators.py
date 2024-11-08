@@ -29,7 +29,6 @@ def ping_pong_generator(iterable):
     while True:
         if is_ascending and index == len(iterable) - 1:
             is_ascending = False
-            index = len(iterable) - 1
         if not is_ascending and index == 0:
             is_ascending = True
 
