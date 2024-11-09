@@ -7,8 +7,8 @@ from ihontaryk.homework_10.recreate_generators import (custom_zip, custom_enumer
 @pytest.mark.parametrize('test_iterable1, test_iterable2, test_iterable3, expected_result',
                          [(["a", "b", "c"], ["x", "y", "z"], [1, 2, 4],
                            [("a", "x", 1), ("b", "y", 2), ("c", "z", 4)]),
-                          (["a", "b", "c"], [0, 3, 6], ["x", "y", "z"],
-                           [("a", 0, "x"), ("b", 3, "y"), ("c", 6, "z")])
+                          (["a", "b", "c"], [0, 3, 6], [True, False, None],
+                           [("a", 0, True), ("b", 3, False), ("c", 6, None)])
                           ])
 def test_custom_zip(test_iterable1, test_iterable2, test_iterable3, expected_result):
     """

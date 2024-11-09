@@ -1,10 +1,7 @@
-import pytest
-
 from ihontaryk.homework_10.simple_callable import SimpleCallable
 
 
-@pytest.mark.parametrize('callable_class, calls', [(SimpleCallable, 5)])
-def test_callable(callable_class, calls):
+def test_callable(callable_class=SimpleCallable, calls=5):
     """
     verify simple callable class
     """
