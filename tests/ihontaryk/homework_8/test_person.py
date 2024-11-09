@@ -1,4 +1,5 @@
 import pytest
+
 from ihontaryk.homework_8.person import Person
 
 
@@ -11,8 +12,8 @@ def test_show_personal_info(arguments, expected_result):
     """
     verify show_personal_info function
     """
-    first_name, last_name, dob, country, city, phone, job_title, experience, salary, *gender = arguments
-    person = Person(first_name, last_name, dob, country, city, phone, job_title, experience, salary, *gender)
+    first_name, last_name, dob, country, city, phone, job_title, experience, salary, gender = arguments
+    person = Person(first_name, last_name, dob, country, city, phone, job_title, experience, salary, gender)
 
     assert person.show_personal_info() == expected_result
 
