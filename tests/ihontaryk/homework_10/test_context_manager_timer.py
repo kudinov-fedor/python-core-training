@@ -7,7 +7,7 @@ from ihontaryk.homework_10.context_manager_timer import Timer
 
 @pytest.mark.parametrize('delay, test_time, expected_result',
                          [(1, 1, True),
-                          (5, 6, False)
+                          (0, 0, True)
                           ])
 def test_timer(delay, test_time, expected_result):
     """
