@@ -23,8 +23,3 @@ def custom_filter(key, iterable):
 def custom_map(func, *iterables):
     for args in custom_zip(*iterables):
         yield func(*args)
-
-
-def filter_int(num):
-    if isinstance(num, int):
-        return num
