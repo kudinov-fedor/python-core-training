@@ -4,8 +4,12 @@ from ihontaryk.homework_6.unpack import unpack_while_loop, unpack_recursive, unp
 
 
 @pytest.mark.parametrize('arguments, expected_result',
-                         [([123, ["234", None], {"sdf": True, "bb": 44}, {(1, 2, 3): "abc"}],
-                           [123, '234', None, 'sdf', True, 'bb', 44, 1, 2, 3, 'abc'])
+                         [([123, '234', ['adc', None]],
+                           [123, '234', 'adc', None]),
+                          ([123, {"sdf": True, "bb": 44}],
+                           [123, 'sdf', True, 'bb', 44]),
+                          ([123, {(1, 2, 3): 'abc'}],
+                           [123, 1, 2, 3, 'abc'])
                           ])
 def test_unpack_while_loop(arguments, expected_result):
     """
@@ -16,8 +20,12 @@ def test_unpack_while_loop(arguments, expected_result):
 
 
 @pytest.mark.parametrize('arguments, expected_result',
-                         [([123, ["234", None], {"sdf": True, "bb": 44}, {(1, 2, 3): "abc"}],
-                           [123, '234', None, 'sdf', True, 'bb', 44, 1, 2, 3, 'abc'])
+                         [([123, '234', ['adc', None]],
+                           [123, '234', 'adc', None]),
+                          ([123, {"sdf": True, "bb": 44}],
+                           [123, 'sdf', True, 'bb', 44]),
+                          ([123, {(1, 2, 3): 'abc'}],
+                           [123, 1, 2, 3, 'abc'])
                           ])
 def test_unpack_recursive(arguments, expected_result):
     """
@@ -28,8 +36,12 @@ def test_unpack_recursive(arguments, expected_result):
 
 
 @pytest.mark.parametrize('arguments, expected_result',
-                         [([123, ["234", None], {"sdf": True, "bb": 44}, {(1, 2, 3): "abc"}],
-                           [123, '234', None, 'sdf', True, 'bb', 44, 1, 2, 3, 'abc'])
+                         [([123, '234', ['adc', None]],
+                           [123, '234', 'adc', None]),
+                          ([123, {"sdf": True, "bb": 44}],
+                           [123, 'sdf', True, 'bb', 44]),
+                          ([123, {(1, 2, 3): 'abc'}],
+                           [123, 1, 2, 3, 'abc'])
                           ])
 def test_unpack_while_loop_gen(arguments, expected_result):
     """
@@ -40,8 +52,12 @@ def test_unpack_while_loop_gen(arguments, expected_result):
 
 
 @pytest.mark.parametrize('arguments, expected_result',
-                         [([123, ["234", None], {"sdf": True, "bb": 44}, {(1, 2, 3): "abc"}],
-                           [123, '234', None, 'sdf', True, 'bb', 44, 1, 2, 3, 'abc'])
+                         [([123, '234', ['adc', None]],
+                           [123, '234', 'adc', None]),
+                          ([123, {"sdf": True, "bb": 44}],
+                           [123, 'sdf', True, 'bb', 44]),
+                          ([123, {(1, 2, 3): 'abc'}],
+                           [123, 1, 2, 3, 'abc'])
                           ])
 def test_unpack_recursive_gen(arguments, expected_result):
     """
