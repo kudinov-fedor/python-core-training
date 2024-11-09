@@ -31,7 +31,7 @@ class Building:
         Returns the area of the building.
         """
 
-        return round(abs((self.north - self.south) * (self.west - self.east)), 2)
+        return round(self.width_we * self.width_ns, 2)
 
     @property
     def volume(self):
