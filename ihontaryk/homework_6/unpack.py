@@ -1,3 +1,6 @@
+from itertools import chain
+
+
 def unpack_while_loop(arguments):
     """
     Function converts the arguments
@@ -7,14 +10,12 @@ def unpack_while_loop(arguments):
     arg_list = list(arguments)
     result = list()
 
-    assert arg_list
-
     while arg_list:
         element = arg_list.pop()
         if isinstance(element, (list, tuple)):
             arg_list.extend(element)
         elif isinstance(element, dict):
-            arg_list.extend(element.items())
+            arg_list.extend(chain.from_iterable(element.items()))
         else:
             result.append(element)
 
