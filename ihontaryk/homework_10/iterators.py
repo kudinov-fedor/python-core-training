@@ -47,15 +47,15 @@ class CycleIterator(Iterator):
 class PingPongIterator(Iterator):
     def __init__(self, iterable):
         super().__init__(iterable)
-        self.asc = True
+        self.move_back = False
 
     def __next__(self):
         element = self.iterable[self.index]
-        if self.asc and self.index == len(self.iterable) - 1:
-            self.asc = False
-        elif self.asc is False and self.index == 0:
-            self.asc = True
+        if self.index == len(self.iterable) - 1:
+            self.move_back = True
+        elif self.index == 0:
+            self.move_back = False
 
-        self.index = self.index + 1 if self.asc else self.index - 1
+        self.index = self.index + 1 if not self.move_back else self.index - 1
 
         return element

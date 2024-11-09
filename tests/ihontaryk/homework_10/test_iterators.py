@@ -21,7 +21,7 @@ def test_iterators(test_class, test_iterable, expected_result):
                          [(CycleIterator, (0, 1, 2), 3, [0, 1, 2]),
                           (CycleIterator, (0, 1, 2), 6, [0, 1, 2, 0, 1, 2]),
                           (PingPongIterator, (0, 1, 2), 3, [0, 1, 2]),
-                          (PingPongIterator, (0, 1, 2), 5, [0, 1, 2, 1, 0]),
+                          (PingPongIterator, (0, 1, 2), 14, [0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1]),
                           ])
 def test_iterators_repeating(test_class, test_iterable, r, expected_result):
     """
