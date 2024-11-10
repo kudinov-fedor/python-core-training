@@ -49,12 +49,12 @@ t_shirts = [{'size': 'S', 'color': 'blue', 'price': 100},
             {'size': 'M', 'color': 'black', 'price': 200},
             {'size': 'L', 'color': 'red', 'price': 300},
             {'size': 'L', 'color': 'blue', 'price': 500},
-            {'size': 'L', 'color': 'blue', 'price': 550},
-            {'size': 'L', 'color': 'blue', 'price': 600},]
+            {'size': 'M', 'color': 'pink', 'price': 550},
+            {'size': 'L', 'color': 'blue', 'price': 600}, ]
 
 dresses = [{'size': 'S', 'color': 'white', 'price': 400},
            {'size': 'M', 'color': 'pink', 'price': 500},
-           {'size': 'M', 'color': 'black', 'price': 700},
+           {'size': 'M', 'color': 'pink', 'price': 700},
            {'size': 'L', 'color': 'yellow', 'price': 600}]
 
 skirts = [{'size': 'S', 'color': 'black', 'price': 300},
@@ -108,17 +108,14 @@ def select_by_name_and_color(clothes_shop, name, color):
     return tuple(filter(lambda item: (item['color'] == color), selected_by_name[0]['availability']))
 
 
-def group_by_size_and_color(clothes_shop, name):
+def group_by_size_and_color(clothes_shop):
     by_size_color = defaultdict(list)
 
     for clothes in clothes_shop:
-        if clothes['name'] == name:
-            for item in clothes['availability']:
-                by_size_color[(item['size'], item['color'])].append(item)
+        for item in clothes['availability']:
+            by_size_color[(item['size'], item['color'])].append(item)
 
-            return dict((i, len(by_size_color[i])) for i in by_size_color.keys())
-
-    return dict()
+    return dict((i, len(by_size_color[i])) for i in by_size_color.keys())
 
 
 if __name__ == '__main__':
@@ -127,7 +124,6 @@ if __name__ == '__main__':
     print(group_by_price(clothes_shop))
 
     try:
-        print(group_by_size_and_color(clothes_shop, 'Dresses')[('M', 'pink')])
+        print(group_by_size_and_color(clothes_shop)[('M', 'pink')])
     except KeyError as e:
         print(e)
-
