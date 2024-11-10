@@ -100,6 +100,7 @@ def test_int_logic(num1, denom1, b, func, expected_result):
 @pytest.mark.parametrize('num1, denom1, num2, denom2, func, expected_result',
                          [(1, 2, 2, 5, Fraction.__add__, "'9/10'"),
                           (2, 5, 3, 7, Fraction.__sub__, "'-1/35'"),
+                          (2, 5, 3, 7, Fraction.__rsub__, "'1/35'"),
                           (-2, 4, 3, -6, Fraction.__mul__, "'1/4'"),
                           (3, 4, 3, 5, Fraction.__truediv__, "'5/4'"),
                           (3, 4, 3, 5, Fraction.__rtruediv__, "'4/5'")
@@ -117,8 +118,10 @@ def test_arithmetic_operators(num1, denom1, num2, denom2, func, expected_result)
 @pytest.mark.parametrize('num1, denom1, b, func, expected_result',
                          [(1, 2, 5, Fraction.__add__, "'11/2'"),
                           (2, 4, 5, Fraction.__sub__, "'-9/2'"),
+                          (2, 4, 5, Fraction.__rsub__, "'9/2'"),
                           (-2, 4, 5, Fraction.__mul__, "'-5/2'"),
-                          (-4, 2, -2, Fraction.__truediv__, "'1/1'")
+                          (-4, 2, -2, Fraction.__truediv__, "'1/1'"),
+                          (-8, 2, -2, Fraction.__rtruediv__, "'1/2'")
                           ])
 def test_int_arithmetic(num1, denom1, b, func, expected_result):
     """

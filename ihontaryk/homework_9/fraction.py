@@ -111,7 +111,7 @@ class Fraction:
     __itruediv__ = __truediv__
 
     def __sub__(self, other):
-        return self + (other * (-1))
+        return self.__add__(other.__mul__(-1))
 
     def __rsub__(self, other):
         if not isinstance(other, (Fraction, int)):
@@ -119,20 +119,23 @@ class Fraction:
 
         other = self._change_other(other)
 
-        result = other - self
+        result = other.__sub__(self)
 
         return result
 
     __isub__ = __sub__
 
     def __neg__(self):
-        return self * (-1)
+        return self.__mul__(-1)
 
     def __abs__(self):
         return Fraction(abs(self.num), self.denom)
 
 
 if __name__ == "__main__":
-    a = Fraction(6, 2)
+    a = Fraction(8, 2)
     b = Fraction(2, 1)
+    print(a.__truediv__(b))
     print(b.__rtruediv__(a))
+    print(a.__sub__(b))
+    print(b.__rsub__(a))
