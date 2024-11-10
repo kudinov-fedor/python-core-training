@@ -104,7 +104,7 @@ class Fraction:
             return NotImplemented
 
         other = self._change_other(other)
-        result = other / self
+        result = other.__truediv__(self)
 
         return result
 
@@ -133,8 +133,6 @@ class Fraction:
 
 
 if __name__ == "__main__":
-    a = Fraction(3, -9)
-    b = Fraction(0, 1)
-    print(a)
-    print(bool(b))
-    print(1/6 == 2/12)
+    a = Fraction(6, 2)
+    b = Fraction(2, 1)
+    print(b.__rtruediv__(a))
