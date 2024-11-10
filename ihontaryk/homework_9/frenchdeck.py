@@ -33,4 +33,3 @@ if __name__ == "__main__":
     print(len(deck))
     print(deck[::])
     print(deck1)
-    print(Card('A', 'spades') in deck)
