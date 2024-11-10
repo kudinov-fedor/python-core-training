@@ -6,7 +6,7 @@ class Custom:
 
     custom_prop = '5'
 
-    def __radd__(self, other) -> str:
+    def __radd__(self, other: Fraction) -> str:
         return f'{self.custom_prop} + {other.num}/{other.denom}'
 
 
