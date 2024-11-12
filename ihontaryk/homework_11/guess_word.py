@@ -62,7 +62,6 @@ class ScreenView:
 
 
 class GameSession:
-
     ALLOWED_CHARS = r"[a-zA-Z]"
 
     def __init__(self, task: str, desc: str):
