@@ -3,3 +3,5 @@ pytest-mock
 flake8
 requests
 selenium
+randomuser~=1.6
+emoji~=2.14.0
