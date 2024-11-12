@@ -59,7 +59,7 @@ class ScreenView:
         print(message)
 
     def show_current_state(self):
-        print(["_" if l not in self.session.tries else l for l in self.session.task])
+        print(["_" if letter not in self.session.tries else letter for letter in self.session.task])
 
 
 class GameSession:
