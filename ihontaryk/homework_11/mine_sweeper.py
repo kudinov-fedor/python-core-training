@@ -29,7 +29,7 @@ class ScreenView:
         self.session = session
 
     def update_screen(self, show_mines: bool = False):
-        table = [[emoji.emojize(':white_large_square:') for _ in range(self.session.width)]
+        table = [['--' for _ in range(self.session.width)]
                  for _ in range(self.session.height)]
 
         if show_mines:
@@ -39,13 +39,16 @@ class ScreenView:
         for x, y in self.session.guesses:
             table[y][x] = self.session.guesses[x, y]
 
-        format_int = lambda i: format(str(i).zfill(2), "^4")
+        format_int = lambda i: format(str(i).zfill(2), "^3")
 
-        print("      " + "".join(map(format_int, range(self.session.width))))
+
+        print("   " + "".join(map(format_int, range(self.session.width))))
+
         for i, row in enumerate(table):
-            print(format_int(i) + "  " + ".".join(map(lambda i: format(str(i), "^3"), row)))
+            print(format_int(i) + "".join(map(lambda i: format(str(i), "^3"), row)))
 
-    def show_alert(self, message: str):
+    @staticmethod
+    def show_alert(message: str):
         print(message)
 
 
@@ -58,8 +61,8 @@ class GameSession:
         self.height = height
         self.width = width
 
-        self.guesses = {}  # key coord, value - mines around
-        self.mines = []  # list of coordinates
+        self.guesses = {}
+        self.mines = []
 
         self.mines = self.prepare_mines(mine_count)
         self.screen = ScreenView(self)
@@ -68,24 +71,24 @@ class GameSession:
         """
         Prepare list of mines coordinates based on config
         """
+
         cells = self.empty_cells()
         random.shuffle(cells)
         return cells[:mine_count]
 
-    def receive_user_input(self) -> str:
+    @staticmethod
+    def receive_user_input() -> str:
         """
         Receive coordinates as input from user
         """
+
         return input("Make a move in format 'x y': ")
 
     def normalize_user_input(self, data: str) -> tuple:
         """
         Receive input from user, normalize, validate, convert to ints
-
-        Raise errors if required
-        - Raise ValueError
-        - Raise OutOfBounds error
         """
+
         data = tuple(map(int, data.strip().split()))
         assert len(data) == 2
         assert data in self.empty_cells() + self.mines
@@ -102,18 +105,21 @@ class GameSession:
         """
         Check that coord is in field
         """
+
         return coord in self.empty_cells()
 
     def is_mine(self, coord: tuple) -> bool:
         """
         Check if there is a mine under coord
         """
+
         return coord in self.mines
 
     def mines_around(self, coord: tuple) -> int:
         """
         Calculate, how many mines are in neighbouring cells
         """
+
         x, y = coord
         return sum((x + dx, y + dy) in self.mines
                    for (dx, dy) in self.NEIGHBOURS)
@@ -123,6 +129,7 @@ class GameSession:
         Save user input,
         in case if cell is 0, recursively open neighbour cells
         """
+
         queue = [coord]
         while queue:
             x, y = queue.pop()
@@ -131,14 +138,15 @@ class GameSession:
 
             # recursively open all neighbour cells if current cell == 0
             if mines_around == 0:
-                neigbout_cells = {(dx + x, dy + y) for dx, dy in self.NEIGHBOURS}
-                cells_to_check = neigbout_cells.intersection(self.empty_cells())
+                neighbour_cells = {(dx + x, dy + y) for dx, dy in self.NEIGHBOURS}
+                cells_to_check = neighbour_cells.intersection(self.empty_cells())
                 queue.extend(cells_to_check)
 
     def win(self):
         """
         Check if user wins the game
         """
+
         return not self.empty_cells()
 
     def main(self):
@@ -174,5 +182,5 @@ class GameSession:
 
 if __name__ == "__main__":
     args = parse_args()
-    height, width, mine_count = CONFIG.get(args.difficulty) or CONFIG["easy"]
+    height, width, mine_count = CONFIG.get(args.difficulty) or CONFIG["hard"]
     GameSession(height, width, mine_count).main()
