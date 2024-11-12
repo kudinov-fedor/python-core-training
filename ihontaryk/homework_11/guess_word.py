@@ -54,7 +54,8 @@ class ScreenView:
         print(self.session.desc)
         print(["_" for _ in self.session.task])
 
-    def fire_alert(self, message: str):
+    @staticmethod
+    def fire_alert(message: str):
         print(message)
 
     def show_current_state(self):
@@ -70,7 +71,8 @@ class GameSession:
         self.tries = []
         self.screen = ScreenView(self)
 
-    def user_make_guess(self) -> str:
+    @staticmethod
+    def user_make_guess() -> str:
         """
         Receive input from user, normalize
         """
@@ -122,6 +124,6 @@ class GameSession:
 
 if __name__ == "__main__":
     file_words = CsvFileReader(csv_file="words.csv", directory="homework_11")
-    task = random.choice(file_words.data)
-    GameSession(task, 'You need to guess all letters in the random word.').main()
-    print(task)
+    random_word = random.choice(file_words.data)
+    GameSession(random_word, 'You need to guess all letters in the random word.').main()
+    print(random_word)
