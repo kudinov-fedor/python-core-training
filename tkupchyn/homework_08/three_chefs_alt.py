@@ -1,10 +1,13 @@
 # Details:  https://py.checkio.org/mission/3-chefs/share/33d5c11b5ff002a1645a6ee3b93ce00a/
 from collections import defaultdict
 
+FOOD_PRICE = 25
+DRINK_PRICE = 31
+
 
 class AbstractCook:
-    menu = {'food': 25,
-            'drink': 31}
+    menu = {'food': FOOD_PRICE,
+            'drink': DRINK_PRICE}
 
     def __init__(self):
         self.order = defaultdict(int)
@@ -28,22 +31,12 @@ class AbstractCook:
 
 
 class JapaneseCook(AbstractCook):
-    def __init__(self):
-        super().__init__()
-        self.menu = {'sushi': 56,
-                     'tea': 20}
+    menu = {'sushi': 56, 'tea': 20}
 
 
 class UkrainianCook(AbstractCook):
-    def __init__(self):
-        super().__init__()
-        self.menu = {'varenyky': 70,
-                     'borsch': 65,
-                     'uzvar': 15}
+    menu = {'varenyky': 70, 'borsch': 65, 'uzvar': 15}
 
 
 class ItalianCook(AbstractCook):
-    def __init__(self):
-        super().__init__()
-        self.menu = {'pizza': 30,
-                     'juice': 10}
+    menu = {'pizza': 30, 'juice': 10}

@@ -20,21 +20,15 @@ class AbstractCook:
 
 
 class JapaneseCook(AbstractCook):
-    def __init__(self):
-        super().__init__()
-        self.food_name = 'Sushi'
-        self.drink_name = 'Tea'
+    food_name = 'Sushi'
+    drink_name = 'Tea'
 
 
 class UkrainianCook(AbstractCook):
-    def __init__(self):
-        super().__init__()
-        self.food_name = 'Varenyky'
-        self.drink_name = 'Uzvar'
+    food_name = 'Varenyky'
+    drink_name = 'Uzvar'
 
 
 class ItalianCook(AbstractCook):
-    def __init__(self):
-        super().__init__()
-        self.food_name = 'Pizza'
-        self.drink_name = 'Juice'
+    food_name = 'Pizza'
+    drink_name = 'Juice'

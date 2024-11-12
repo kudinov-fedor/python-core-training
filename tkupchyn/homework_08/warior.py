@@ -15,9 +15,7 @@ class Warrior:
 
 
 class Knight(Warrior):
-    def __init__(self):
-        super().__init__()
-        self.attack_damage = 7
+    attack_damage = 7
 
 
 def fight(unit_1: Warrior, unit_2: Warrior) -> bool:
@@ -25,15 +23,11 @@ def fight(unit_1: Warrior, unit_2: Warrior) -> bool:
     Returns the result of fight between two units. True if the first unit wins, else False
     """
 
-    fight_result = False
-
     while unit_1.is_alive and unit_2.is_alive:
         unit_1.attack(unit_2)
-
         if not unit_2.is_alive:
-            fight_result = True
             break
         else:
             unit_2.attack(unit_1)
 
-    return fight_result
+    return unit_1.is_alive
