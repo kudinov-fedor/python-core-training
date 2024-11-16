@@ -49,6 +49,8 @@ class ScreenView:
 
 
 class GuessProcessing:
+    ALLOWED_CHARS = r"[a-zA-Z]"
+
     def __init__(self, session: "GameSession"):
         self.session = session
 
@@ -60,9 +62,15 @@ class GuessProcessing:
 
         return input(Message.INPUT_REQUEST.value).strip().lower()
 
+    def guess_is_valid(self, guess: str) -> bool:
+        """
+        Check if input from user is valid
+        """
+
+        return len(guess) == 1 and re.match(self.ALLOWED_CHARS, guess)
+
 
 class GameSession:
-    ALLOWED_CHARS = r"[a-zA-Z]"
 
     def __init__(self, task: str, desc: str):
         self.task = task
@@ -71,20 +79,12 @@ class GameSession:
         self.screen = ScreenView(self)
         self.guess = GuessProcessing(self)
 
-
     def win(self) -> bool:
         """
         Check if all letters are guessed
         """
 
         return set(self.task).issubset(self.tries)
-
-    def guess_is_valid(self, guess: str) -> bool:
-        """
-        Check if input from user is valid
-        """
-
-        return len(guess) == 1 and re.match(self.ALLOWED_CHARS, guess)
 
     def save_guess(self, guess: str):
         """
@@ -98,7 +98,7 @@ class GameSession:
 
         while not self.win():
             guess = self.guess.user_make_guess()
-            if not self.guess_is_valid(guess):
+            if not self.guess.guess_is_valid(guess):
                 self.screen.fire_alert(message=Message.INVALID.value)
 
                 continue
