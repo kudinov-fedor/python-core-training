@@ -48,14 +48,9 @@ class ScreenView:
         print(["_" if letter not in self.session.tries else letter for letter in self.session.task])
 
 
-class GameSession:
-    ALLOWED_CHARS = r"[a-zA-Z]"
-
-    def __init__(self, task: str, desc: str):
-        self.task = task
-        self.desc = desc
-        self.tries = []
-        self.screen = ScreenView(self)
+class GuessProcessing:
+    def __init__(self, session: "GameSession"):
+        self.session = session
 
     @staticmethod
     def user_make_guess() -> str:
@@ -64,6 +59,18 @@ class GameSession:
         """
 
         return input(Message.INPUT_REQUEST.value).strip().lower()
+
+
+class GameSession:
+    ALLOWED_CHARS = r"[a-zA-Z]"
+
+    def __init__(self, task: str, desc: str):
+        self.task = task
+        self.desc = desc
+        self.tries = []
+        self.screen = ScreenView(self)
+        self.guess = GuessProcessing(self)
+
 
     def win(self) -> bool:
         """
@@ -90,7 +97,7 @@ class GameSession:
         self.screen.show_start_screen()
 
         while not self.win():
-            guess = self.user_make_guess()
+            guess = self.guess.user_make_guess()
             if not self.guess_is_valid(guess):
                 self.screen.fire_alert(message=Message.INVALID.value)
 
