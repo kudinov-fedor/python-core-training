@@ -5,32 +5,18 @@ from pathlib import Path
 import re
 
 
-class CsvFileReader:
+def get_data_from_file(csv_file, directory=None):
     """
-    Class for reading and modifying CSV file
+    function for reading data from CSV file
     """
+    base_dir = Path(__file__).resolve().parent.parent
+    data_file = base_dir.joinpath(directory).joinpath(csv_file)
 
-    def __init__(self, csv_file, directory="homework_11"):
-        """
-        Constructor for CSV file
-        """
-        self.csv_file = csv_file
-        self.directory = directory
-        base_dir = Path(__file__).resolve().parent.parent
-        self.data_file = base_dir.joinpath(directory).joinpath(csv_file)
-        self.data = self.get_data
+    with open(data_file) as file:
+        reader = csv.reader(file)
+        data = [','.join(row) for row in reader]
 
-    @property
-    def get_data(self):
-        """
-        function for reading data from CSV file
-        """
-
-        with open(self.data_file) as file:
-            reader = csv.reader(file)
-            data = [','.join(row) for row in reader]
-
-        return data
+    return data
 
 
 class Message(Enum):
@@ -123,7 +109,7 @@ class GameSession:
 
 
 if __name__ == "__main__":
-    file_words = CsvFileReader(csv_file="words.csv", directory="homework_11")
-    random_word = random.choice(file_words.data)
+    words = get_data_from_file(csv_file="words.csv", directory="homework_11")
+    random_word = random.choice(words)
     GameSession(random_word, 'You need to guess all letters in the random word.').main()
     print(random_word)
