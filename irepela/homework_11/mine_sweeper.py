@@ -44,10 +44,7 @@ class GameSession:
     def __init__(self, height: int, width: int, mine_count: int):
         self.height = height
         self.width = width
-
         self.guesses = {}  # key coord, value - mines around
-        self.mines = []    # list of coords
-
         self.mines = self.prepare_mines(mine_count)
         self.screen = ScreenView(self)
 
