@@ -21,7 +21,6 @@ def caching(fn):
     return inner
 
 
-@caching
 def fibo(n: int):
     """
     Count fibonache numbers, where next is sum of 2 prior
@@ -30,8 +29,3 @@ def fibo(n: int):
     if n < 3:
         return [0, 1, 1][n]
     return fibo(n - 1) + fibo(n - 2)
-
-
-if __name__ == "__main__":
-    for i in range(10):
-        print(fibo(i))

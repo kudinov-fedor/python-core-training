@@ -24,7 +24,3 @@ def unstable_function():
     if res < 0.5:
         raise ValueError("Unpredictable Error")
     return res
-
-
-for i in range(100):
-    print(unstable_function())
