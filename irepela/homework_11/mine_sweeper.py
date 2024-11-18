@@ -45,6 +45,8 @@ class GameSession:
         self.height = height
         self.width = width
         self.guesses = {}  # key coord, value - mines around
+        # need to initialize as self.mines is used inside prepare_mines
+        self.mines = []
         self.mines = self.prepare_mines(mine_count)
         self.screen = ScreenView(self)
 
@@ -52,7 +54,7 @@ class GameSession:
         """
         Prepare list of mines coordinates based on config
         """
-        cells = [(x, y) for x in list(range(self.width)) for y in list(range(self.height))]
+        cells = self.empty_cells()
         random.shuffle(cells)
         return cells[:mine_count]
 
@@ -64,8 +66,7 @@ class GameSession:
         data = input(Message.INPUT_MOVE_REQUEST).strip()
         return tuple(map(int, data.split()))
 
-    @staticmethod
-    def validate_user_input(data: tuple[int, ...]):
+    def validate_user_input(self, data: tuple[int, ...]):
         """
         Receive input from user, normalize, validate, convert to ints
 
@@ -75,19 +76,15 @@ class GameSession:
         """
         if len(data) != 2:
             raise ValueError
-        less_than_zero = data[0] < 0 or data[1] < 0
-        more_than_range = data[0] >= width or data[1] >= height
-        if less_than_zero or more_than_range:
+        if data[0] not in range(self.width) or data[1] not in range(self.height):
             raise IndexError
 
     def empty_cells(self) -> list:
         """
         Return cells, which are yet not opened and do not contain mines
         """
-        return [(x, y)
-                for x in list(range(self.width))
-                for y in list(range(self.height))
-                if (x, y) not in self.mines and (x, y) not in self.guesses]
+        return [(x, y) for x in range(self.width) for y in range(self.height)
+                if not self.is_mine((x, y)) and (x, y) not in self.guesses]
 
     def in_field(self, coord: tuple) -> bool:
         """

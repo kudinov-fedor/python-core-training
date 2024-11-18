@@ -82,7 +82,7 @@ class GameSession:
         """
         Check if all letters are guessed
         """
-        return self.task == "".join(self.tries)
+        return set(self.task).issubset(self.tries)
 
     def guess_is_valid(self, guess: str) -> bool:
         """
