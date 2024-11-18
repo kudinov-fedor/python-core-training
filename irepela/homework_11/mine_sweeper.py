@@ -1,11 +1,16 @@
 import random
 
 
+CONFIG = {
+    "easy": (10, 10, 10),
+    "medium": (20, 30, 25),
+    "hard": (30, 40, 100)
+}
+
+
 class Message:
-    INPUT_COLUMNS_REQUEST = "Please enter number of columns: "
-    INPUT_ROWS_REQUEST = "Please enter number of rows: "
-    INPUT_MINES_REQUEST = "Please enter number mines: "
     INPUT_MOVE_REQUEST = "Please put your move in format 'x y': "
+    INPUT_LEVEL_REQUEST = "Please select difficulty ('easy', 'medium' or 'hard'): "
 
 
 class ScreenView:
@@ -41,13 +46,13 @@ class GameSession:
                   (1, 1), (1, 0), (1, -1),
                   (-1, -1), (-1, 0), (-1, 1)]
 
-    def __init__(self, height: int, width: int, mine_count: int):
-        self.height = height
-        self.width = width
+    def __init__(self, config: tuple[int, int, int]):
+        self.height = config[0]
+        self.width = config[1]
         self.guesses = {}  # key coord, value - mines around
         # need to initialize as self.mines is used inside prepare_mines
         self.mines = []
-        self.mines = self.prepare_mines(mine_count)
+        self.mines = self.prepare_mines(config[2])
         self.screen = ScreenView(self)
 
     def prepare_mines(self, mine_count: int) -> list:
@@ -143,7 +148,7 @@ class GameSession:
                 self.screen.show_alert(f"There should be only two int numbers x y: {data}")
                 continue
             except IndexError:
-                self.screen.show_alert(f"Entered numbers: {data} are not in range: {width, height}")
+                self.screen.show_alert(f"Entered numbers: {data} are not in range: {self.width, self.height}")
                 continue
 
             # if mine - end game
@@ -163,10 +168,9 @@ class GameSession:
 
 
 if __name__ == "__main__":
+    level = input(Message.INPUT_LEVEL_REQUEST).strip()
     try:
-        width = int(input(Message.INPUT_ROWS_REQUEST).strip())
-        height = int(input(Message.INPUT_COLUMNS_REQUEST).strip())
-        mine_count = int(input(Message.INPUT_MINES_REQUEST).strip())
-        GameSession(height, width, mine_count).main()
-    except ValueError:
-        print("Please enter one int value for each input!")
+        difficulty = CONFIG[level]
+        GameSession(difficulty).main()
+    except KeyError:
+        print("Please enter one word: 'easy', 'medium' or 'hard'")
