@@ -8,6 +8,30 @@ CONFIG = {
 }
 
 
+class GameException(Exception):
+    def __init__(self, data):
+        self.message = f"Invalid input data: {data}"
+
+    def __str__(self):
+        return self.message
+
+
+class OutOfFieldException(GameException):
+    def __init__(self, data, width, height):
+        self.message = f"Entered numbers: {data} are not in range: {width, height}"
+
+    def __str__(self):
+        return self.message
+
+
+class InvalidInputException(GameException):
+    def __init__(self, data):
+        self.message = f"There should be only two int numbers x y: {data}"
+
+    def __str__(self):
+        return self.message
+
+
 class Message:
     INPUT_MOVE_REQUEST = "Please put your move in format 'x y': "
     INPUT_LEVEL_REQUEST = "Please select difficulty ('easy', 'medium' or 'hard'): "
@@ -80,9 +104,9 @@ class GameSession:
         - Raise OutOfBounds error
         """
         if len(data) != 2:
-            raise ValueError
+            raise InvalidInputException(data)
         if data[0] not in range(self.width) or data[1] not in range(self.height):
-            raise IndexError
+            raise OutOfFieldException(data, self.width, self.height)
 
     def empty_cells(self) -> list:
         """
@@ -144,11 +168,8 @@ class GameSession:
             # if error - catch, inform user and return to start
             try:
                 self.validate_user_input(data)
-            except ValueError:
-                self.screen.show_alert(f"There should be only two int numbers x y: {data}")
-                continue
-            except IndexError:
-                self.screen.show_alert(f"Entered numbers: {data} are not in range: {self.width, self.height}")
+            except GameException as err:
+                self.screen.show_alert(err.__str__())
                 continue
 
             # if mine - end game
