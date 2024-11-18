@@ -11,27 +11,21 @@ CONFIG = {
 
 
 class GameException(Exception):
-    def __init__(self, data):
-        self.message = f"Invalid input data: {data}"
+    def __init__(self, coords: tuple[int, int]):
+        self.message = f"Invalid input data: {coords}"
 
     def __str__(self):
         return self.message
 
 
 class OutOfFieldException(GameException):
-    def __init__(self, data, width, height):
-        self.message = f"Entered numbers: {data} are not in range: {width, height}"
-
-    def __str__(self):
-        return self.message
+    def __init__(self, coords: tuple[int, int], num_columns: int, num_rows: int):
+        self.message = f"Entered numbers: {coords} are not in range: {num_columns, num_rows}"
 
 
 class InvalidInputException(GameException):
     def __init__(self, data):
         self.message = f"There should be only two int numbers x y: {data}"
-
-    def __str__(self):
-        return self.message
 
 
 class Message:
@@ -171,7 +165,7 @@ class GameSession:
             try:
                 self.validate_user_input(data)
             except GameException as err:
-                self.screen.show_alert(err.__str__())
+                self.screen.show_alert(str(err))
                 continue
 
             # if mine - end game
