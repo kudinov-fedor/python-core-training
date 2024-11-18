@@ -1,7 +1,5 @@
 import random
 import argparse
-from typing import Tuple
-
 import emoji
 
 CONFIG = {
@@ -79,6 +77,7 @@ class GameSession:
         """
         Receive coordinates as input from user
         """
+
         data = input("Make a move in format 'x, y': ")
         normalized_data = tuple(map(int, data.strip().split(',')))
         if len(normalized_data) != 2:
