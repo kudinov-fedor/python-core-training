@@ -1,10 +1,12 @@
+from collections import namedtuple
 import random
 
+Settings = namedtuple('Settings', 'width height mine_count')
 
 CONFIG = {
-    "easy": (10, 10, 10),
-    "medium": (20, 30, 25),
-    "hard": (30, 40, 100)
+    "easy": Settings(10, 10, 10),
+    "medium": Settings(20, 30, 25),
+    "hard": Settings(30, 40, 100)
 }
 
 
@@ -70,13 +72,13 @@ class GameSession:
                   (1, 1), (1, 0), (1, -1),
                   (-1, -1), (-1, 0), (-1, 1)]
 
-    def __init__(self, config: tuple[int, int, int]):
-        self.height = config[0]
-        self.width = config[1]
+    def __init__(self, config: Settings):
+        self.height = config.height
+        self.width = config.width
         self.guesses = {}  # key coord, value - mines around
         # need to initialize as self.mines is used inside prepare_mines
         self.mines = []
-        self.mines = self.prepare_mines(config[2])
+        self.mines = self.prepare_mines(config.mine_count)
         self.screen = ScreenView(self)
 
     def prepare_mines(self, mine_count: int) -> list:
