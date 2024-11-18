@@ -62,7 +62,6 @@ class GameSession:
         self.width = width
 
         self.guesses = {}
-        self.mines = []
 
         self.mines = self.prepare_mines(mine_count)
         self.screen = ScreenView(self)
@@ -91,15 +90,13 @@ class GameSession:
 
         data = tuple(map(int, data.strip().split()))
         assert len(data) == 2
-        assert data in self.empty_cells() + self.mines
         return data
 
     def empty_cells(self) -> list:
         return [(x, y)
                 for x in list(range(self.width))
                 for y in list(range(self.height))
-                if (x, y) not in self.mines
-                and (x, y) not in self.guesses]
+                ]
 
     def in_field(self, coord: tuple) -> bool:
         """
