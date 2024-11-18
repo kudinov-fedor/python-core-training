@@ -1,5 +1,6 @@
 import random
 import argparse
+from typing import Tuple
 
 import emoji
 
@@ -41,7 +42,6 @@ class ScreenView:
 
         format_int = lambda i: format(str(i).zfill(2), "^3")
 
-
         print("   " + "".join(map(format_int, range(self.session.width))))
 
         for i, row in enumerate(table):
@@ -75,22 +75,18 @@ class GameSession:
         random.shuffle(cells)
         return cells[:mine_count]
 
-    @staticmethod
-    def receive_user_input() -> str:
+    def receive_user_input(self) -> tuple[int, ...]:
         """
         Receive coordinates as input from user
         """
+        data = input("Make a move in format 'x, y': ")
+        normalized_data = tuple(map(int, data.strip().split(',')))
+        if len(normalized_data) != 2:
+            raise ValueError
+        elif normalized_data[0] >= self.width and normalized_data[1] >= self.height:
+            raise IndexError
 
-        return input("Make a move in format 'x y': ")
-
-    def normalize_user_input(self, data: str) -> tuple:
-        """
-        Receive input from user, normalize, validate, convert to ints
-        """
-
-        data = tuple(map(int, data.strip().split()))
-        assert len(data) == 2
-        return data
+        return normalized_data
 
     def empty_cells(self) -> list:
         return [(x, y)
@@ -128,16 +124,14 @@ class GameSession:
         """
 
         queue = [coord]
+
         while queue:
             x, y = queue.pop()
             mines_around = self.mines_around((x, y))
             self.guesses[(x, y)] = mines_around
 
-            # recursively open all neighbour cells if current cell == 0
             if mines_around == 0:
-                neighbour_cells = {(dx + x, dy + y) for dx, dy in self.NEIGHBOURS}
-                cells_to_check = neighbour_cells.intersection(self.empty_cells())
-                queue.extend(cells_to_check)
+                print('No mines around')
 
     def win(self):
         """
@@ -147,18 +141,16 @@ class GameSession:
         return not self.empty_cells()
 
     def main(self):
+
         while not self.win():
             # show screen with current state
             self.screen.update_screen()
-            # input from user
-            data = self.receive_user_input()
 
-            # validate and normalize
             # if error - catch, inform user and return to start
             try:
-                data = self.normalize_user_input(data)
-            except Exception:
-                self.screen.show_alert("Wrong data: {}".format(data))
+                data = self.receive_user_input()
+            except (ValueError, IndexError):
+                self.screen.show_alert('Wrong data')
                 continue
 
             # if mine - end game
@@ -178,6 +170,5 @@ class GameSession:
 
 
 if __name__ == "__main__":
-    args = parse_args()
-    height, width, mine_count = CONFIG.get(args.difficulty) or CONFIG["hard"]
+    height, width, mine_count = CONFIG["easy"]
     GameSession(height, width, mine_count).main()
