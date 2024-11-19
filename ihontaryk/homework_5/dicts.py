@@ -74,7 +74,7 @@ def group_by_size(clothes_shop):
         for item in clothes['availability']:
             by_size[item['size']].append(item)
 
-    return dict((size, len(by_size[size])) for size in by_size.keys())
+    return {k: len(v) for k, v in by_size.items()}
 
 
 def group_by_color(clothes_shop):
@@ -84,7 +84,7 @@ def group_by_color(clothes_shop):
         for item in clothes['availability']:
             by_color[item['color']].append(item)
 
-    return dict((color, len(by_color[color])) for color in by_color.keys())
+    return {k: len(v) for k, v in by_color.items()}
 
 
 def group_by_price(clothes_shop):
@@ -94,7 +94,7 @@ def group_by_price(clothes_shop):
         for item in clothes['availability']:
             by_price[item['price']].append(item)
 
-    return dict((price, len(by_price[price])) for price in by_price.keys())
+    return {k: len(v) for k, v in by_price.items()}
 
 
 def group_by_size_and_color(clothes_shop):
@@ -104,7 +104,7 @@ def group_by_size_and_color(clothes_shop):
         for item in clothes['availability']:
             by_size_color[(item['size'], item['color'])].append(item)
 
-    return dict((i, len(by_size_color[i])) for i in by_size_color.keys())
+    return {k: len(v) for k, v in by_size_color.items()}
 
 
 if __name__ == '__main__':
