@@ -16,12 +16,9 @@ class Fraction:
             self.num *= -1
             self.denom *= -1
 
-    @staticmethod
-    def convert_to_fraction(number):
-        if not isinstance(number, Fraction):
-            return Fraction(number)
-        else:
-            return number
+    @classmethod
+    def convert_to_fraction(cls, number):
+        return cls(number) if not isinstance(number, cls) else number
 
     def __repr__(self):
         return f'{self.__class__.__name__}({self.num}, {self.denom})'
