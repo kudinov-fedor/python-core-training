@@ -53,21 +53,6 @@ def test_group_by_price(data, expected_result):
     assert group_by_price(data) == expected_result
 
 
-@pytest.mark.parametrize('data1, data2, name, color, expected_result',
-                         [(data1, data2, 'Hats', 'yellow', ({'size': 'M', 'color': 'yellow', 'price': 200},
-                                                            {'size': 'M', 'color': 'yellow', 'price': 400})),
-                          (data1, data2, 'Pajamas', 'gray', ({'size': 'L', 'color': 'gray', 'price': 500},))
-                          ])
-def test_select_by_name_and_color(data1, data2, name, color, expected_result):
-    """
-    verify select_by_name_and_color function
-    """
-
-    data = data1 + data2
-
-    assert select_by_name_and_color(data, name, color) == expected_result
-
-
 @pytest.mark.parametrize('data1, data2, count_items, expected_result',
                          [(data1, data2, ('S', 'blue'), 1),
                           (data1, data2, ('M', 'yellow'), 3),

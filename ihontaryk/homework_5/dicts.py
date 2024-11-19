@@ -102,12 +102,6 @@ def group_by_price(clothes_shop):
     return dict((price, len(by_price[price])) for price in by_price.keys())
 
 
-def select_by_name_and_color(clothes_shop, name, color):
-    selected_by_name = tuple(filter(lambda clothes:
-                                    (clothes['name'] == name), clothes_shop))
-    return tuple(filter(lambda item: (item['color'] == color), selected_by_name[0]['availability']))
-
-
 def group_by_size_and_color(clothes_shop):
     by_size_color = defaultdict(list)
 
