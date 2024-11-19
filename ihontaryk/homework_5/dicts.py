@@ -68,32 +68,27 @@ clothes_shop = [{'name': 'T-shirts', 'availability': t_shirts},
 
 
 def group_by_size(clothes_shop):
-    by_size = {}
+    by_size = defaultdict(list)
 
     for clothes in clothes_shop:
         for item in clothes['availability']:
-            if item['size'] not in by_size:
-                by_size[item['size']] = []
             by_size[item['size']].append(item)
 
     return dict((size, len(by_size[size])) for size in by_size.keys())
 
 
-# other option - setdefault:
-# if key is not present, it will be created with default, and returned
 def group_by_color(clothes_shop):
-    by_color = {}
+    by_color = defaultdict(list)
 
     for clothes in clothes_shop:
         for item in clothes['availability']:
-            by_color.setdefault(item['color'], []).append(item)
+            by_color[item['color']].append(item)
 
     return dict((color, len(by_color[color])) for color in by_color.keys())
 
 
-# Other option - use default dict
 def group_by_price(clothes_shop):
-    by_price = defaultdict(list)  # if key is not present, it will be created with value = list()
+    by_price = defaultdict(list)
 
     for clothes in clothes_shop:
         for item in clothes['availability']:

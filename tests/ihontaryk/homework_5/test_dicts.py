@@ -1,6 +1,6 @@
 import pytest
 
-from ihontaryk.homework_5.dicts import *
+from ihontaryk.homework_5.dicts import group_by_size, group_by_color, group_by_price, group_by_size_and_color
 
 data1 = [{'name': 'Hats', 'availability': [{'size': 'S', 'color': 'white', 'price': 400},
                                            {'size': 'M', 'color': 'pink', 'price': 100},
