@@ -49,13 +49,22 @@ a.update(["r", "e" "z"])  # {'d', 'c', 'a', 'r', 'b', 'k', 'z', 'f', 'ez', 's', 
 {"a", "b", "x"}.intersection({"a", "x", "f"})  # {'a', 'x'}
 
 
-def remove_min_max_loop(any_set: set, number: int) -> set:
+def remove_min_loop(any_set: set, number: int) -> set:
+    if number <= 0 or number > (len(any_set) // 2):
+        raise ValueError
+
+    for i in range(number):
+        any_set.remove(min(any_set))
+
+    return any_set
+
+
+def remove_max_loop(any_set: set, number: int) -> set:
     if number <= 0 or number > (len(any_set) // 2):
         raise ValueError
 
     for i in range(number):
         any_set.remove(max(any_set))
-        any_set.remove(min(any_set))
 
     return any_set
 
@@ -63,10 +72,19 @@ def remove_min_max_loop(any_set: set, number: int) -> set:
 set4 = {'a', 'b', 'c', 'd', 'd'}
 
 try:
-    remove_min_max_loop(set4, 8)
+    remove_min_loop(set4, 8)
 except ValueError as e1:
     print(type(e1))
 except TypeError as e2:
     print(type(e2))
 finally:
-    print('Function remove_min_max_loop was executed')
+    print('Function remove_min_loop was executed')
+
+try:
+    remove_max_loop(set4, 8)
+except ValueError as e1:
+    print(type(e1))
+except TypeError as e2:
+    print(type(e2))
+finally:
+    print('Function remove_max_loop was executed')
