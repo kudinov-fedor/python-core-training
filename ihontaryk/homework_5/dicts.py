@@ -68,6 +68,10 @@ clothes_shop = [{'name': 'T-shirts', 'availability': t_shirts},
 
 
 def group_by_size(clothes_shop):
+    """
+    function for grouping clothes_shop dict items by size
+    """
+
     by_size = defaultdict(list)
 
     for clothes in clothes_shop:
@@ -78,6 +82,10 @@ def group_by_size(clothes_shop):
 
 
 def group_by_color(clothes_shop):
+    """
+    function for grouping clothes_shop dict items by color
+    """
+
     by_color = defaultdict(list)
 
     for clothes in clothes_shop:
@@ -88,6 +96,10 @@ def group_by_color(clothes_shop):
 
 
 def group_by_price(clothes_shop):
+    """
+    function for grouping clothes_shop dict items by price
+    """
+
     by_price = defaultdict(list)
 
     for clothes in clothes_shop:
@@ -98,6 +110,10 @@ def group_by_price(clothes_shop):
 
 
 def group_by_size_and_color(clothes_shop):
+    """
+    function for grouping clothes_shop dict items by size and color
+    """
+
     by_size_color = defaultdict(list)
 
     for clothes in clothes_shop:
