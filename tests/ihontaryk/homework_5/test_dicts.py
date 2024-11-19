@@ -1,6 +1,6 @@
 import pytest
 
-from ihontaryk.homework_5.dicts import group_by_size, group_by_color, group_by_price, group_by_size_and_color
+from ihontaryk.homework_5.dicts import group_len_by_size, group_len_by_color, group_len_by_price, group_len_by_size_and_color
 
 data1 = [{'name': 'Hats', 'availability': [{'size': 'S', 'color': 'white', 'price': 400},
                                            {'size': 'M', 'color': 'pink', 'price': 100},
@@ -21,36 +21,36 @@ data2 = [{'name': 'Pajamas', 'availability': [{'size': 'S', 'color': 'blue', 'pr
                          [(data1, {'S': 2, 'M': 3, 'L': 1}),
                           (data2, {'S': 2, 'M': 2, 'L': 2})
                           ])
-def test_group_by_size(data, expected_result):
+def test_group_len_by_size(data, expected_result):
     """
-    verify group_by_size function
+    verify group_len_by_size function
     """
 
-    assert group_by_size(data) == expected_result
+    assert group_len_by_size(data) == expected_result
 
 
 @pytest.mark.parametrize('data, expected_result',
                          [(data1, {'black': 2, 'pink': 1, 'white': 1, 'yellow': 2}),
                           (data2, {'black': 1, 'blue': 2, 'gray': 1, 'yellow': 2})
                           ])
-def test_group_by_color(data, expected_result):
+def test_group_len_by_color(data, expected_result):
     """
-    verify group_by_color function
+    verify group_len_by_color function
     """
 
-    assert group_by_color(data) == expected_result
+    assert group_len_by_color(data) == expected_result
 
 
 @pytest.mark.parametrize('data, expected_result',
                          [(data1, {100: 1, 200: 1, 300: 1, 400: 2, 500: 1}),
                           (data2, {100: 1, 200: 3, 300: 1, 500: 1})
                           ])
-def test_group_by_price(data, expected_result):
+def test_group_len_by_price(data, expected_result):
     """
-    verify group_by_price function
+    verify group_len_by_price function
     """
 
-    assert group_by_price(data) == expected_result
+    assert group_len_by_price(data) == expected_result
 
 
 @pytest.mark.parametrize('data1, data2, count_items, expected_result',
@@ -58,11 +58,11 @@ def test_group_by_price(data, expected_result):
                           (data1, data2, ('M', 'yellow'), 3),
                           (data1, data2, ('L', 'black'), 2),
                           ])
-def test_group_by_size_and_color(data1, data2, count_items, expected_result):
+def test_group_len_by_size_and_color(data1, data2, count_items, expected_result):
     """
-    verify group_by_size_and_color function
+    verify group_len_by_size_and_color function
     """
 
     data = data1 + data2
 
-    assert group_by_size_and_color(data)[count_items] == expected_result
+    assert group_len_by_size_and_color(data)[count_items] == expected_result

@@ -67,7 +67,7 @@ clothes_shop = [{'name': 'T-shirts', 'availability': t_shirts},
                 {'name': 'Skirts', 'availability': skirts}]
 
 
-def group_by_size(clothes_shop):
+def group_len_by_size(clothes_shop):
     """
     function for grouping clothes_shop dict items by size
     """
@@ -81,7 +81,7 @@ def group_by_size(clothes_shop):
     return {k: len(v) for k, v in by_size.items()}
 
 
-def group_by_color(clothes_shop):
+def group_len_by_color(clothes_shop):
     """
     function for grouping clothes_shop dict items by color
     """
@@ -95,7 +95,7 @@ def group_by_color(clothes_shop):
     return {k: len(v) for k, v in by_color.items()}
 
 
-def group_by_price(clothes_shop):
+def group_len_by_price(clothes_shop):
     """
     function for grouping clothes_shop dict items by price
     """
@@ -109,7 +109,7 @@ def group_by_price(clothes_shop):
     return {k: len(v) for k, v in by_price.items()}
 
 
-def group_by_size_and_color(clothes_shop):
+def group_len_by_size_and_color(clothes_shop):
     """
     function for grouping clothes_shop dict items by size and color
     """
@@ -121,14 +121,3 @@ def group_by_size_and_color(clothes_shop):
             by_size_color[(item['size'], item['color'])].append(item)
 
     return {k: len(v) for k, v in by_size_color.items()}
-
-
-if __name__ == '__main__':
-    print(group_by_size(clothes_shop))
-    print(group_by_color(clothes_shop))
-    print(group_by_price(clothes_shop))
-
-    try:
-        print(group_by_size_and_color(clothes_shop)[('M', 'pink')])
-    except KeyError as e:
-        print(e)
