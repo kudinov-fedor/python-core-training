@@ -67,24 +67,3 @@ def remove_max_loop(any_set: set, number: int) -> set:
         any_set.remove(max(any_set))
 
     return any_set
-
-
-set4 = {'a', 'b', 'c', 'd', 'd'}
-
-try:
-    remove_min_loop(set4, 8)
-except ValueError as e1:
-    print(type(e1))
-except TypeError as e2:
-    print(type(e2))
-finally:
-    print('Function remove_min_loop was executed')
-
-try:
-    remove_max_loop(set4, 8)
-except ValueError as e1:
-    print(type(e1))
-except TypeError as e2:
-    print(type(e2))
-finally:
-    print('Function remove_max_loop was executed')
