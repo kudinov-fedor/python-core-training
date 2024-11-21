@@ -3,32 +3,32 @@ from math import gcd
 
 class Fraction:
 
-    def __init__(self, num: (int, str, float), denom: int = 1):
+    def __init__(self, nominator: (int, str, float), denominator: int = 1):
 
-        if isinstance(num, float):
-            num = str(num)
+        if isinstance(nominator, float):
+            nominator = str(nominator)
 
-        if isinstance(num, str):
-            if '.' in num:
-                integer_part, fractional_part = num.split('.')
-                num = int(integer_part + fractional_part)
-                denom = 10 ** len(fractional_part)
+        if isinstance(nominator, str):
+            if '.' in nominator:
+                integer_part, fractional_part = nominator.split('.')
+                nominator = int(integer_part + fractional_part)
+                denominator = 10 ** len(fractional_part)
 
-            elif '/' in num:
-                num, denom = num.split('/')
-                num = int(num)
-                denom = int(denom)
-            elif isinstance(num, int):
+            elif '/' in nominator:
+                nominator, denominator = nominator.split('/')
+                nominator = int(nominator)
+                denominator = int(denominator)
+            elif isinstance(nominator, int):
                 pass
             else:
                 raise ValueError
 
-        if denom == 0:
+        if denominator == 0:
             raise ZeroDivisionError
 
-        _gcd = gcd(num, denom)
-        self.num = num // _gcd
-        self.denom = denom // _gcd
+        _gcd = gcd(nominator, denominator)
+        self.num = nominator // _gcd
+        self.denom = denominator // _gcd
 
         if self.denom < 0:
             self.num *= -1
