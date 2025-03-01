@@ -2,8 +2,8 @@ import pytest
 import requests
 
 from datetime import datetime, timezone, timedelta
-from akaiafiuk.book_store_api.constants import USER
-from akaiafiuk.book_store_api import ApiClient
+from old.akaiafiuk.book_store_api.constants import USER
+from old.akaiafiuk.book_store_api import ApiClient
 
 
 def test_verify_user_created(user):
