@@ -1,3 +1,5 @@
+# Details:  https://py.checkio.org/mission/the-warriors/share/e171c1a99e4e63b4551cfd820252edcd/
+
 
 class Warrior:
     ...

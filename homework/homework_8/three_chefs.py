@@ -1,3 +1,5 @@
+# Details:  https://py.checkio.org/mission/3-chefs/share/33d5c11b5ff002a1645a6ee3b93ce00a/
+
 
 class AbstractCook:
     ...
