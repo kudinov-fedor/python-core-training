@@ -40,7 +40,7 @@ def test_bool_numbers():
     assert 5.2 // 1 == 5.0
 
 
-5.2
+
 -3.4
 
 
