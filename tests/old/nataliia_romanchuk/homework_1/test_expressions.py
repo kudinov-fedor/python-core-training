@@ -1,0 +1,123 @@
+# None True False
+def test_1():
+    assert int(bool(None)) == int(bool(False))
+    assert int(bool(None)) == 0
+    assert bool(None) == False
+    assert None!=False
+
+    assert bool(True) == True
+    assert int(bool(True))==1
+    assert int(bool(True))>0
+
+    assert int(bool(False))==0
+
+    assert True==1
+    assert False==0
+    assert True is not 1
+    assert False is not 0
+    assert None != False
+    assert None != 0
+
+    assert True+True==2
+    assert True*'ab'=='ab'
+    assert False*10==0
+
+
+
+def test_bool_numbers():
+    assert bool(10) is True
+    assert bool(-2) is True
+    assert bool(0) is False
+
+    assert 0==0.0
+    assert 0 is not 0.0
+    assert bool(-3.4) is True
+    assert bool(-3.4) ==1
+    assert bool(-3.4) >0
+
+    assert 5.2/1==5.2
+    assert 5.2//1!=5.2
+    assert 5.2 // 1 == 5.0
+
+
+5.2
+-3.4
+
+
+"abc"
+
+'abc'
+
+"""abc"""
+
+'''abc'''
+
+("abc"
+"def")
+
+"abc\ndef"
+
+"""abc
+def"""
+
+
+()
+12,5
+(12)
+(12,)
+
+
+[]
+[12]
+[12,]
+["abc", 12.4, (), None, True]
+
+
+{}
+{"abc": 123}
+
+{}
+{1, 2, 3}
+
+# ========================
+
+bool
+int
+float
+str
+list
+dict
+set
+
+bool()
+int()
+float()
+str()
+list()
+dict()
+set()
+
+
+str.join
+"".join
+
+id(str.join)
+id("".join)
+
+str.join("|", "abc")
+"|".join("abc")
+
+str.join("|", ["a", "b", "c"])
+"|".join(["a", "b", "c"])
+
+
+# --------------------------
+
+"Hello World".split(" ")[0]
+
+a = "Hello World"
+b = a.split
+c = " "
+d = b(c)
+e = 0
+f = d[e]
