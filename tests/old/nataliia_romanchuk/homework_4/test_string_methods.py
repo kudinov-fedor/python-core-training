@@ -10,6 +10,25 @@
 #
 # 'isalnum', 'isalpha', 'isascii', 'isdecimal', 'isdigit', 'isidentifier', 'islower',
 #  'isnumeric', 'isprintable', 'isspace', 'istitle', 'isupper', 'startswith', 'endswith'
+import pytest
+
+
+def test_string_is_ip():
+    s='192.168.0.255'
+    def is_ip(s):
+        if s.count('.') != 3:
+            return False
+
+        iplist=s.split('.')
+        if len(iplist) != 4:
+            return False
+        for ip in iplist:
+            if not ip.isdigit() or int(ip) not in range(256):
+                    return False
+
+        return True
+
+    assert is_ip(s) is True
 
 
 # search substring
